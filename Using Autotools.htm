@@ -1,0 +1,924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:set="http://exslt.org/sets" xmlns:str="http://exslt.org/strings"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Using Autotools</title>
+<link rel="previous" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en" title="Using Autotools">
+<link rel="next" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-anjuta.html.en" title="Using Anjuta">
+<link rel="top" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/index.html.en" title="Anjuta build tutorial">
+<style type="text/css">
+
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  margin-left left: 1.72em;
+  margin-: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  margin-left: 2.4em;
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 6px 0.5em 6px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+}
+div.caution-inner, div.important-inner, div.note-inner, div.tip-inner, div.warning-inner {
+  padding-left: 60px;
+  background-position: left top;
+  background-repeat: no-repeat;
+  min-height: 48px;
+}
+div.caution-inner { background-image: url("/skin/admon-caution.png"); }
+div.important-inner { background-image: url("/skin/admon-important.png"); }
+div.note-inner { background-image: url("/skin/admon-note.png"); }
+div.note-bug div.note-inner { background-image: url("/skin/admon-bug.png"); }
+div.tip-inner { background-image: url("/skin/admon-tip.png"); }
+div.warning-inner { background-image: url("/skin/admon-warning.png"); }
+div.blockquote {
+  
+  background-image: url('watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 0.5em;
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  text-align: right;
+  margin-left: 20%;
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.programlisting .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  padding-right: 1em;
+  float: left;
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  padding-left: 0;
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+div.cmdsynopsis { font-family: monospace; }
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.package { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
+div.footnotes { font-style: italic; font-size: 0.8em; }
+div.footnote { margin-top: 1.44em; }
+span.footnote-number { display: inline; padding-right: 0.83em; }
+span.footnote-number + p { display: inline; }
+a.footnote { text-decoration: none; font-size: 0.8em; }
+a.footnote-ref { text-decoration: none; }
+
+span.co {
+  margin-left: 0.2em; margin-right: 0.2em;
+  padding-left: 0.4em; padding-right: 0.4em;
+  border: solid 1px #000000;
+  -moz-border-radius: 8px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 8px;
+}
+span.co:hover {
+  border-color: #333333;
+  background-color: #333333;
+  color: #FFFFFF;
+}
+span.co a { text-decoration: none; }
+span.co a:hover { text-decoration: none; }
+
+dt.question { margin-left: 0em; }
+dt.question div.label { float: left; }
+dd + dt.question { margin-top: 1em; }
+dd.answer {
+  margin-top: 1em;
+  margin-left: 2em;
+  margin-right: 1em;
+}
+dd.answer div.label { float: left; }
+</style>
+<link rel="stylesheet" type="text/css" media="all" href="Using%20Autotools_files/grass-theme-style.css">
+<link rel="stylesheet" type="text/css" media="all" href="Using%20Autotools_files/lgo2010.css">
+<link rel="icon" type="image/png" href="https://developer-old.gnome.org/skin/gnome-16.png">
+<link rel="SHORTCUT ICON" type="image/png" href="https://developer-old.gnome.org/skin/gnome-16.png">
+<link rel="search" type="application/opensearchdescription+xml" href="https://developer-old.gnome.org/gnome-library-search.xml" title="GNOME Library Search">
+<link rel="stylesheet" type="text/css" href="Using%20Autotools_files/jquery.css">
+<script type="text/javascript" defer="defer" async="" src="Using%20Autotools_files/piwik.js"></script><script type="text/javascript" src="Using%20Autotools_files/jquery_002.js"></script><script type="text/javascript" src="Using%20Autotools_files/jquery.js"></script><script type="text/javascript" src="Using%20Autotools_files/jquery_002.js"></script>
+</head>
+<body class="mozilla win">
+<div id="accessibility_access"><ul>
+<li><a href="#container">Go to page content</a></li>
+<li><a href="#top_bar">Go to main menu</a></li>
+<li><a href="#s" onclick="$('#s').focus(); return false;">Go to the search field</a></li>
+</ul></div>
+<div id="global_domain_bar"><div class="maxwidth"><div class="tab"><a class="root" href="https://www.gnome.org/">GNOME.org</a></div></div></div>
+<div id="header" class="container_12">
+<div id="logo" class="grid_3"><a title="Go to home page" href="https://developer-old.gnome.org/"><img alt="GNOME: The Free Software Desktop Project" src="Using%20Autotools_files/gnome-logo-devcenter.png"></a></div>
+<div id="top_bar" class="grid_9">
+<div class="left"><div class="menu-globalnav-container"><ul id="menu-globalnav" class="menu">
+<li class="menu-item menu-item-type-post_type menu-item-6"><a href="https://developer-old.gnome.org/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-23"><a href="https://help.gnome.org/users/">Users</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-40"><a href="https://help.gnome.org/admin/">Administrators</a></li>
+<li class="current-menu-item"><a href="https://developer.gnome.org/">Developers</a></li>
+</ul></div></div>
+<div class="right">
+<form role="search" method="get" id="searchform" action="/symbols/"><div>
+<label class="hidden" for="q">Search:
+                        </label><input type="text" name="q" id="s" placeholder="Search">
+</div></form>
+<script type="text/javascript">
+$('#s').autocomplete('/symbols/lookup/',
+        { minChars:3, matchSubset:1, matchContains:1, cacheLength:10,
+          selectOnly:1, rowsLimit:25 });
+              </script>
+</div>
+</div>
+</div>
+<div class="clearfix"></div>
+<div id="container" class="two_columns">
+<div class="content">
+<div class="division sect1">
+<a name="create-autotools"><!--create-autotools--></a><div class="header"><h1 class="sect1 title"><span class="title">Using <span class="application">Autotools</span></span></h1></div>
+<ul class="linktrail">
+<li class="linktrail linktrail-first"><a class="linktrail" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/index.html.en" title="Anjuta build tutorial">Anjuta build tutorial</a></li>
+<li class="linktrail linktrail-last"><a class="linktrail" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create.html.en" title="Creating a project">Creating a project</a></li>
+</ul>
+<p class="para block block-first">
+			In the first chapter, we have not really used the <span class="application">Autotools</span>.
+			It is not need to compile a project from the sources. But all files in the build process
+			are not written by hand but generated from templates using <span class="application">Autotools</span>.
+		</p>
+<p class="para block">
+			<span class="application">Autotools</span> is composed of 
+			several tools: <span class="filename" dir="ltr">aclocal</span>, <span class="filename" dir="ltr">autoconf</span>,
+			<span class="filename" dir="ltr">automake</span> and other that we will not see here,
+			belonging to two packages: <span class="application">Automake</span> and
+			<span class="application">Autoconf</span>.
+		</p>
+<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first">
+			<span class="para"><span class="application">Autoconf</span> is used to generate the configure script, from
+			a template named <span class="filename" dir="ltr">configure.ac</span>. The configure script
+			will check all characteristics of the host system and generate the makefiles from
+			Makefile.in templates.</span>
+			</li>
+<li>
+			<span class="para"><span class="application">Automake</span> is used to generate complete Makefile.in
+			templates, following GNU standards from very simple Makefile.am templates.</span>
+			</li>
+</ul></div>
+<div class=" block figure block-indent">
+<div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 3-1</span> </span><span class="application">Autotools</span> process</span></div>
+<div class="figure-inner">
+			
+			<div class="mediaobject"><img src="Using%20Autotools_files/autotools-process.png"></div>
+		</div>
+</div>
+<p class="para block">
+			Now let's see a minimal example to start grasping the relationships between the various
+			files.
+		</p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">3.1.1. </span><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en#create-autotools-source" title="Write sources">Write sources</a>
+</li>
+<li>
+<span class="label">3.1.2. </span><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en#create-autotools-autoconf" title="Run Autoconf">Run <span class="application">Autoconf</span></a>
+</li>
+<li>
+<span class="label">3.1.3. </span><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en#create-autotools-automake" title="Run Automake">Run <span class="application">Automake</span></a>
+</li>
+<li>
+<span class="label">3.1.4. </span><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en#create-autotools-build" title="Build project">Build project</a>
+</li>
+<li>
+<span class="label">3.1.5. </span><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en#create-autotools-clean" title="Clean project">Clean project</a>
+</li>
+<li>
+<span class="label">3.1.6. </span><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en#create-autotools-generate" title="Generate project">Generate project</a>
+</li>
+</ul></div>
+<div class="division sect2">
+<a name="create-autotools-source"><!--create-autotools-source--></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">3.1.1. </span>Write sources</span></h2></div>
+<div class="block list orderedlist"><ol class="orderedlist">
+<li class="li-first">	
+				<span class="para">Create an empty directory called <span class="filename" dir="ltr">tut_prog</span> and enter in it.</span>
+			</li>
+<li>
+				<span class="para">In this new directory, create a new file named <span class="filename" dir="ltr">main.c</span> 
+				containing:</span>
+			</li>
+</ol></div>
+<div class=" block example block-indent">
+<div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Example 3-1</span> </span>main.c:</span></div>
+<div class="example-inner">
+				
+				<div dir="ltr" class=" block programlisting block-indent block-first"><pre class="programlisting">#include &lt;stdio.h&gt; 
+	
+int main()
+{
+	printf("Hello world!\n");
+	return 0;
+}</pre></div>
+			</div>
+</div>
+</div>
+<div class="division sect2">
+<a name="create-autotools-autoconf"><!--create-autotools-autoconf--></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">3.1.2. </span>Run <span class="application">Autoconf</span></span></h2></div>
+<div class="block list orderedlist"><ol class="orderedlist" start="3"><li class="li-first">
+				<span class="para">Write the following in a file named <span class="filename" dir="ltr">configure.ac</span>:</span>
+			</li></ol></div>
+<div class=" block example block-indent">
+<div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Example 3-2</span> </span>minimal configure.ac:</span></div>
+<div class="example-inner">
+				
+				<div dir="ltr" class=" block programlisting block-indent block-first"><pre class="programlisting">AC_INIT([Tutorial Program], 1.0)
+AM_INIT_AUTOMAKE
+AC_PROG_CC
+AC_CONFIG_FILES(Makefile)
+AC_OUTPUT</pre></div>
+			</div>
+</div>
+<div class="admonition block note block-indent"><div class="note-inner">
+				<p class="para block block-first">The configure template script could be named <span class="filename" dir="ltr">configure.in</span>.
+				It is the name used in older version (before 2001) of <span class="application">Autoconf</span>.
+				Nevertheless, it is recommended to use <span class="filename" dir="ltr">configure.ac</span> because the 
+				<span class="filename" dir="ltr">.in</span> extension
+				is already used by files processed by <span class="application">configure</span> and
+				generated by <span class="application">Automake</span>: 
+				<span class="filename" dir="ltr">Makefile.in</span> and <span class="application">autoheader</span>:
+				<span class="filename" dir="ltr">config.h.in</span>.</p>
+			</div></div>
+<p class="para block">
+				AC_INIT, AM_INIT_AUTOMAKE, etc... are <span class="application">M4</span> macros. 
+				<span class="application">M4</span> is a macro expanding software
+				used by <span class="application">Autotools</span>; we don't need to know about it. When 
+				<span class="application">Autoconf</span> will process
+				this configure.in, the macros will be expanded and we will get a fresh huge configure script.
+			</p>
+<div class="block list variablelist"><dl class="variablelist">
+<dt class="term dt-first">AC_INIT</dt>
+<dd>
+				<p class="para block block-first">
+					Is the first mandatory macro. We need to indicate
+					the name of the project and its version.
+				</p>
+				</dd>
+<dt class="term">AM_INIT_AUTOMAKE</dt>
+<dd>
+				<p class="para block block-first">
+					Initialize environment for <span class="application">Automake</span>.
+					It is needed in all projects using <span class="application">Automake</span>.
+				</p>
+				</dd>
+<dt class="term">AC_PROG_CC</dt>
+<dd>
+				<p class="para block block-first">
+					Determine the C compiler to use.
+				</p>
+				</dd>
+<dt class="term">AC_CONFIG_FILES</dt>
+<dd>
+				<p class="para block block-first">
+					Create each file by copying the corresponding template file (with .in extension)
+					and substituting the output variable values.
+				</p>
+				</dd>
+<dt class="term">AC_OUTPUT</dt>
+<dd>
+				<p class="para block block-first">
+					Marks the end of the configure template.
+				</p>
+				</dd>
+</dl></div>
+<div class="admonition block note block-indent"><div class="note-inner">
+				<p class="para block block-first">The use of some macros has changed between different versions of <span class="application">Autoconf</span>:</p>
+				<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first">
+						<span class="para">The package name and version was defined as arguments of 
+						AM_INIT_AUTOMAKE instead of AC_INIT.</span>
+					</li>
+<li>
+						<span class="para">AC_OUTPUT was getting the list of generated files instead of
+						using the additional macro AC_CONFIG_FILES.</span>
+					</li>
+</ul></div>
+			</div></div>
+<p class="para block">
+				<span class="application">Autoconf</span> only knows its own macros but read additional
+				ones in a file named <span class="filename" dir="ltr">aclocal.m4</span>. These macros are used to
+				extend <span class="application">Autoconf</span>, it includes <span class="application">Automake</span>
+				macro (starting with AM_) and other third party macros.
+				For instance, if you develop a library called foo, you might want to write an AC_CHECK_FOR_FOO
+				macro so that developers using your library can check for its presence using
+				<span class="application">Autoconf</span>.
+			</p>
+<p class="para block">
+				<span class="application">aclocal</span> scans <span class="filename" dir="ltr">configure.ac</span> and 
+				create an <span class="filename" dir="ltr">aclocal.m4</span> file which contains the macros mentioned
+				in <span class="filename" dir="ltr">configure.ac</span>.
+				<span class="application">aclocal</span> is part of the <span class="application">Automake</span>
+				package and search by default in <span class="application">Automake</span> macros and
+				in a system path typically <span class="filename" dir="ltr">/usr/share/aclocal</span>.
+			</p>
+<div class="block list orderedlist"><ol class="orderedlist" start="4">
+<li class="li-first">	
+				<span class="para">Launch <span class="userinput" dir="ltr">aclocal</span>. It will create a new file named
+				<span class="filename" dir="ltr">aclocal.m4</span> in the current directory.</span>
+			</li>
+<li>	
+				<span class="para">Launch <span class="userinput" dir="ltr">autoconf</span>. It will create the configure
+				script <span class="filename" dir="ltr">configure</span>.</span>
+			</li>
+</ol></div>
+<div class="admonition block tip block-indent"><div class="tip-inner">
+				<p class="para block block-first">On my system, I actually get an extra directory called <span class="filename" dir="ltr">autom4te.cache</span>.
+				That is for <span class="application">Autoconf</span> internal purposes. You do not need
+				to care about it.</p>
+			</div></div>
+</div>
+<div class="division sect2">
+<a name="create-autotools-automake"><!--create-autotools-automake--></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">3.1.3. </span>Run <span class="application">Automake</span></span></h2></div>
+<div class="block list orderedlist"><ol class="orderedlist" start="6"><li class="li-first">	
+				<span class="para">Write the following in a file named <span class="filename" dir="ltr">Makefile.am</span>:</span>
+			</li></ol></div>
+<div class=" block example block-indent">
+<div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Example 3-3</span> </span>minimal Makefile.am:</span></div>
+<div class="example-inner">
+				
+				<div dir="ltr" class=" block programlisting block-indent block-first"><pre class="programlisting">bin_PROGRAMS = tut_prog			
+tut_prog_SOURCES = main.c</pre></div>
+			</div>
+</div>
+<p class="para block">
+				In Makefile.am are the very essential data needed to build the project:
+				the target program, called tut_prog, will be put in a $prefix/bin/ directory;
+				to build it we need main.c. Note that we don't specify <span class="emphasis">how</span>
+				that will be built: <span class="application">Automake</span> will figure it out.
+				We haven't even mentioned the compiler in this pre-makefile.
+			</p>
+<p class="para block">
+				Makefile.am will be processed by <span class="application">Automake</span>;
+				the result will be a Makefile.in.
+				This Makefile.in is close to being a real makefile, but it contains variable names which
+				will be replaced when the configure script will run, resulting in a real makefile
+				(called Makefile). For instance, <span class="filename" dir="ltr">configure</span> will write in the
+				final Makefile what compiler
+				to use (it is the compiler it found using the AC_PROG_CC macro).
+			</p>
+<div class="block list orderedlist"><ol class="orderedlist" start="7"><li class="li-first">	
+				<span class="para">Run the command <span class="userinput" dir="ltr">automake --add-missing --foreign</span>. It will create
+				a new file named <span class="filename" dir="ltr">Makefile.in</span> as expected. Moreover, due to the
+				switch <span class="parameter" dir="ltr">--add-missing</span> you get a few
+				links to scripts necessary for building the project: 
+				<span class="filename" dir="ltr">depcomp</span>, <span class="filename" dir="ltr">install.sh</span> and <span class="filename" dir="ltr">missing</span>.
+				The other option <span class="parameter" dir="ltr">--foreign</span> tells to 
+				<span class="application">Automake</span> that you don't want to follow GNU standard and you
+				don't need mandatory documentation files: <span class="filename" dir="ltr">INSTALL</span>,
+				<span class="filename" dir="ltr">NEWS</span>, <span class="filename" dir="ltr">README</span>, <span class="filename" dir="ltr">AUTHORS</span>,
+				<span class="filename" dir="ltr">ChangeLog</span> and <span class="filename" dir="ltr">COPYING</span>. I have used it here
+				to keep the number of created file to a minimum but else it is a good idea to
+				provide these files, you can start with empty files.</span>
+			</li></ol></div>
+</div>
+<div class="division sect2">
+<a name="create-autotools-build"><!--create-autotools-build--></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">3.1.4. </span>Build project</span></h2></div>
+<div class="block list orderedlist"><ol class="orderedlist" start="8">
+<li class="li-first">	
+				<p class="para block block-first">Run now the new configure script: <span class="userinput" dir="ltr">./configure</span>. You get
+				the following output and it create the makefile for your program.</p>
+			<div dir="ltr" class=" block screen block-indent"><pre class="screen">checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: executing depfiles commands</pre></div>
+			</li>
+<li>
+				<p class="para block block-first">Run now <span class="userinput" dir="ltr">make</span>, to build your program. You get the following
+				output and a new tut_prog executable</p>
+			<div dir="ltr" class=" block screen block-indent"><pre class="screen">gcc -DPACKAGE_NAME=\"Tutorial\ Program\" -DPACKAGE_TARNAME=\"tutorial-program\"   \
+        -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"Tutorial\ Program\ 1.0\"     \
+        -DPACKAGE_BUGREPORT=\"\" -DPACKAGE=\"tutorial-program\" -DVERSION=\"1.0\" \
+        -I.     -g -O2 -MT main.o -MD -MP -MF .deps/main.Tpo -c -o main.o main.c
+main.c: In function ‘main’:
+main.c:5: warning: return type of ‘main’ is not ‘int’
+mv -f .deps/main.Tpo .deps/main.Po
+gcc  -g -O2   -o tut_prog main.o</pre></div>
+			</li>
+<li>
+				<p class="para block block-first">Now, if you can write in <span class="filename" dir="ltr">/usr/local/bin</span>, run
+				<span class="userinput" dir="ltr">make install</span> to install your program. Else you need to
+				log as root before or use <span class="application">sudo</span> and run 
+				<span class="userinput" dir="ltr">sudo make install</span>.
+				You should get.</p>
+			<div dir="ltr" class=" block screen block-indent"><pre class="screen">make[1]: Entering directory `/home/seb/Projects/Tutorial'
+test -z "/usr/local/bin" || /bin/mkdir -p "/usr/local/bin"
+  /usr/bin/install -c 'tut_prog' '/usr/local/bin/tut_prog'
+make[1]: Nothing to be done for `install-data-am'.
+make[1]: Leaving directory `/home/seb/Projects/Tutorial'</pre></div>
+			<p class="para block">
+				Then, if <span class="filename" dir="ltr">/user/local/bin</span> is in your path, you can run
+				your program from everywhere.
+			</p>
+			</li>
+</ol></div>
+</div>
+<div class="division sect2">
+<a name="create-autotools-clean"><!--create-autotools-clean--></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">3.1.5. </span>Clean project</span></h2></div>
+<div class="block list orderedlist"><ol class="orderedlist" start="11">
+<li class="li-first">
+				<p class="para block block-first">The program is installed, so you can clean the build directory running
+				<span class="userinput" dir="ltr">make clean</span>. It removes all object files and the
+				program but not the makefiles.</p>
+				<div dir="ltr" class=" block screen block-indent"><pre class="screen">test -z "tut_prog" || rm -f tut_prog
+rm -f *.o</pre></div>
+				<p class="para block">
+				You can still run the program installed in <span class="filename" dir="ltr">/user/local/bin</span>.
+				</p>
+			</li>
+<li>
+				<p class="para block block-first">To remove the installed program, run <span class="userinput" dir="ltr">make uninstall</span>.
+				Like for the installation, you need to use have the writing right in the
+				directory or use <span class="application">su</span> or <span class="application">sudo</span>.</p>
+				<div dir="ltr" class=" block screen block-indent"><pre class="screen">rm -f '/usr/local/bin/tut_prog'</pre></div>
+			</li>
+</ol></div>
+</div>
+<div class="division sect2">
+<a name="create-autotools-generate"><!--create-autotools-generate--></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">3.1.6. </span>Generate project</span></h2></div>
+<p class="para block block-first">
+				Running <span class="userinput" dir="ltr">aclocal</span>, <span class="userinput" dir="ltr">automake</span> and 
+				<span class="userinput" dir="ltr">autoconf</span> one by one is fine for a tutorial to
+				understand exactly what's happen. But, for a real work, it's a bit tedious
+				especially because there are other tools those could be needed like
+				<span class="userinput" dir="ltr">autoheader</span>, <span class="userinput" dir="ltr">autopoint</span> 
+				or <span class="userinput" dir="ltr">libtoolize</span>. After creating the project, the
+				makefiles generated by <span class="application">configure</span> should take
+				care of regenerating <span class="filename" dir="ltr">configure</span> and all
+				<span class="filename" dir="ltr">Makefile.in</span>. Anyway, this lets a room for improvement
+				and there are even two responses to this:
+			</p>
+<div class="block list variablelist"><dl class="variablelist">
+<dt class="term dt-first">autoreconf</dt>
+<dd>
+					<p class="para block block-first">It is another tool part of the <span class="application">Autoconf</span> package
+					which is running all scripts in the right order. To start a new project, you
+					can just run <span class="userinput" dir="ltr">autoreconf --install</span> and it will call
+					all necessary commands.</p>
+				</dd>
+<dt class="term">autogen.sh</dt>
+<dd>
+					<p class="para block block-first">It is a script not part of <span class="application">Autotools</span>, that it doing
+					the same thing. There is one named <span class="filename" dir="ltr">gnome-autogen.sh</span> which
+					comes with GNOME common development package but other project can write their
+					own ones.</p>
+				</dd>
+</dl></div>
+</div>
+</div>
+<div class="navbar navbar-bottom"><table class="navbar"><tbody><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-autotools.html.en" title="Using Autotools">Using <span class="application">Autotools</span></a></td>
+<td class="navbar-next"><a class="navbar-next" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-anjuta.html.en" title="Using Anjuta">Using <span class="application">Anjuta</span></a></td>
+</tr></tbody></table></div>
+<div class="docbook-legal-stuff">
+<h3 onclick="$(this).next().toggle()">About</h3>
+<div style="display: none;"></div>
+</div>
+</div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/index-info.html.en" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/index.html.en" title="Anjuta build tutorial">Anjuta build tutorial</a><div class="autotoc"><ul>
+<li><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/intro.html.en" title="Introduction">Introduction</a></li>
+<li><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/build.html.en" title="Building a project">Building a project</a></li>
+<li>
+<a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create.html.en" title="Creating a project">Creating a project</a><div class="autotoc"><ul>
+<li>Using <span class="application">Autotools</span>
+</li>
+<li><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/create-anjuta.html.en" title="Using Anjuta">Using <span class="application">Anjuta</span></a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/library.html.en" title="Adding a library">Adding a library</a></li>
+<li><a class="xref" href="https://developer-old.gnome.org/anjuta-build-tutorial/stable/resources.html.en" title="Resources">Resources</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div id="footer_art" class="default">&nbsp;</div>
+</div>
+<div class="clearfix"></div>
+<div id="footer_grass"> &nbsp; </div>
+<div id="footer"><div class="container_12">
+<div class="links grid_9">
+<div class="menu-footer-1-container"><ul id="menu-footer-1" class="menu"><li id="menu-item-88" class="menu-item menu-item-type-custom menu-item-home menu-item-88">
+<a href="https://www.gnome.org/">The GNOME Project</a><ul class="sub-menu">
+<li id="menu-item-89" class="menu-item menu-item-type-post_type menu-item-89"><a href="https://www.gnome.org/about/">About Us</a></li>
+<li id="menu-item-90" class="menu-item menu-item-type-custom menu-item-90"><a href="https://www.gnome.org/get-involved/">Get Involved</a></li>
+<li id="menu-item-91" class="menu-item menu-item-type-custom menu-item-91"><a href="https://www.gnome.org/teams/">Teams</a></li>
+<li id="menu-item-92" class="menu-item menu-item-type-custom menu-item-92"><a href="https://foundation.gnome.org/">The GNOME Foundation</a></li>
+<li><a href="https://www.gnome.org/support-gnome/">Support GNOME</a></li>
+<li><a href="https://www.gnome.org/contact/">Contact</a></li>
+</ul>
+</li></ul></div>
+<div class="menu-footer-2-container"><ul id="menu-footer-2" class="menu"><li id="menu-item-99" class="menu-item menu-item-type-post_type current-menu-item page_item page-item-20 current_page_item menu-item-99">
+<a href="#">Resources</a><ul class="sub-menu">
+<li><a href="https://help.gnome.org/">Documentation</a></li>
+<li><a href="https://wiki.gnome.org/">Wiki</a></li>
+<li><a href="https://mail.gnome.org/mailman/listinfo">Mailing Lists</a></li>
+<li><a href="https://wiki.gnome.org/GnomeIrcChannels">IRC Channels</a></li>
+<li><a href="https://gitlab.gnome.org/">Bug Tracker</a></li>
+<li><a href="https://gitlab.gnome.org/">Development Code</a></li>
+<li><a href="https://wiki.gnome.org/Jhbuild">Build Tool</a></li>
+</ul>
+</li></ul></div>
+<div class="menu-footer-4-container"><ul id="menu-footer-4" class="menu"><li id="menu-item-104" class="menu-item menu-item-type-custom menu-item-104">
+<a href="http://www.gnome.org/news/">News</a><ul class="sub-menu">
+<li><a href="https://www.gnome.org/start/stable">Latest Release</a></li>
+<li><a href="https://planet.gnome.org/">Planet GNOME</a></li>
+<li><a href="https://news.gnome.org/">Development News</a></li>
+<li><a href="https://twitter.com/gnome">Twitter</a></li>
+</ul>
+</li></ul></div>
+</div>
+<div class="links grid_3 right"><div>
+<ul class="menu available_languages"><li>
+<strong>This website is available in many languages</strong><ul class="sub-menu"><li><a href="https://developer-old.gnome.org/languages" title="Switching Language">Switch Language</a></li></ul>
+</li></ul>
+<script type="text/javascript" src="Using%20Autotools_files/language.js"></script>
+</div></div>
+<div id="footnotes" class="grid_9">
+                Copyright © 2005‒2014 <strong class="gnome_logo">The GNOME Project</strong><br><small>Optimised for standards. Hosted by <a href="http://redhat.com/">Red Hat</a>.</small>
+</div>
+<div class="clear"></div>
+</div></div>
+<script type="text/javascript">
+$(document).ready(function() {
+    // Get browser
+    $.each($.browser, function(i) {
+        $('body').addClass(i);
+        return false;
+    });
+
+    // Get OS and add it as class to body tag, this then allows forcing some
+    // customisation in the CSS rules.
+    var match = navigator.userAgent.toLowerCase().match(/(win|mac|linux)/);
+    if (match) {
+        $('body').addClass(match[0]);
+    }
+});
+</script><script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['disableCookies']);
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+
+      (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://webstats.gnome.org/";
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "6"]);
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(t,e) { return this._call('downloadPdfs', [t,e]); },
+  open() { return this._call('open', []); },
+  setLoginToken(t) { return this._call('setLoginToken', [t]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.8728966449784556', methodName, methodArgs }, 'https://developer-old.gnome.org');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>
