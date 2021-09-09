@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"> <title>How to Compile Tcl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./How to Compile Tcl_files/devsite.css" type="text/css" media="all">
+</head>
+<body bgcolor="white" text="black">
+<table border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr>
+<td valign="top" align="left"><a href="https://www.tcl.tk/"><img src="./How to Compile Tcl_files/plume.png" width="60" height="55" border="0" alt="Tcl Home"><img src="./How to Compile Tcl_files/Developer.gif" width="355" height="55" border="0" alt="Tcl Home" title="Tcl Developer Xchange"></a></td>
+<td valign="top" align="right"><a href="https://www.tcl.tk/siteinfo.html"><font size="1">Hosted by</font></a><br><a href="http://www.activestate.com/products/tcl"><img src="./How to Compile Tcl_files/aslogo.gif" border="0" alt="ActiveState" title="This site is hosted by ActiveState"></a></td>
+</tr>
+</tbody></table>
+<div id="globalnav"><ul>
+<li><a href="https://www.tcl.tk/">HOME</a></li>
+<li><a href="https://www.tcl.tk/about/">ABOUT TCL/TK</a></li>
+<li><a href="https://www.tcl.tk/software/tcltk/">SOFTWARE</a></li>
+<li><a href="https://www.tcl.tk/community/coreteam/">CORE DEVELOPMENT</a></li>
+<li><a href="https://www.tcl.tk/community/">COMMUNITY</a></li>
+<li><a href="https://www.tcl.tk/doc/" class="here">DOCUMENTATION</a></li>
+</ul></div>
+<br clear="all">
+<div style="border-top: 2px solid #3163CE; width: 780px"></div>
+<table border="0" cellpadding="2" cellspacing="0" width="780">
+<tbody><tr><td align="left" valign="middle">
+
+<div style="display:table-cell; vertical-align:middle; margin:0px">
+<form method="GET" action="https://www.google.com/search">
+<a href="https://www.google.com/"><img src="./How to Compile Tcl_files/Search.gif" border="0" alt="Google SiteSearch"></a>
+<input type="text" name="q" size="20" maxlength="255" value="">
+<input type="image" value="submit" name="btnG" src="./How to Compile Tcl_files/Go.gif">
+<input type="hidden" name="ie" value="UTF-8">
+<input type="hidden" name="oe" value="UTF-8">
+<input type="hidden" name="domains" value="tcl.tk">
+<input type="hidden" name="sitesearch" value="tcl.tk">
+</form></div>
+
+</td><td align="right"><p class="banner">How to Compile Tcl</p></td></tr></tbody></table>
+<div style="border-top: 1px solid #FFCE00; margin-bottom: 2px; width: 780px"></div><table border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr><td>
+<p>
+
+<a href="https://www.tcl.tk/doc/howto/compile.html#source">Source Organization</a> | <a href="https://www.tcl.tk/doc/howto/compile.html#install">Installed Files</a> | <a href="https://www.tcl.tk/doc/howto/compile.html#unix">Compiling on UNIX</a> | <a href="https://www.tcl.tk/doc/howto/compile.html#win">Compiling on Windows</a> | <a href="https://www.tcl.tk/doc/howto/compile.html#mac">Compiling on Macintosh</a>
+</p>
+<p> This page provides a "how to" guide for compiling Tcl from a
+source distribution. Tcl has been ported to a wide variety of
+platforms, and compilation has been made easier through GNU autoconf
+on UNIX.
+</p><p>Before trying to compile Tcl, you may wish to check if a
+<a href="https://www.tcl.tk/software/tcltk/bindist.html"><b>binary distribution</b></a>
+is already available for your platform.
+</p><h3><a name="source">Source Code Organization</a></h3>
+<p>
+Each Tcl component has its source organized into
+the following structure, which is illustrated in the figure below:
+</p>
+<ul>
+<li><b>doc</b> Contains manual pages in a variety of formats.
+</li><li><b>generic</b> Contains source code that is common for all
+platforms (.c and .h files)
+</li><li><b>library</b> Contains a library of Tcl scripts used by the
+component.
+</li><li><b>macosx</b> Contains Macintosh-specific files and XCode
+project files.
+</li><li><b>tests</b> Contains a test suite.
+</li><li><b>tools</b> Contains a collection of tools used when generating
+Tcl distributions. (Tcl only.)
+</li><li><b>unix</b> Contains UNIX-specific source code and configure and
+Makefiles used for building on UNIX (including Mac OS X). You can create
+subdirectories of the unix directory if you want to build for multiple
+versions of UNIX.
+</li><li><b>win</b> Contains Windows-specific source code and Makefiles
+used for compiling with VC++ or mingw (gcc).
+</li></ul>
+<img src="./How to Compile Tcl_files/srctree.gif">
+<h3><a name="install">Installed Software Organization</a></h3>
+<p>
+When you install Tcl, it ends up in a different organization that
+supports an installation for multiple operating systems and machine
+types. You can define architecture-specific subdirectories (e.g.,
+solaris-sparc) that contain programs and binary object files for that
+platform. The directory structure also supports installation of
+various Tcl extensions so they can be automatically found by the Tcl
+shell programs. For example, any subdirectory of the install/lib
+directory is searched for Tcl script packages, and any shared
+libraries in the architecture-specific lib directory can be
+dynamically loaded into the Tcl shells.
+</p>
+<p> After installation, Tcl files are kept in the following structure:
+</p><ul>
+<li><b>doc</b> Contains manual pages in a variety of formats.
+</li><li><b>lib</b> Contains subdirectories for each Tcl package
+that contain their Tcl script files.
+</li><li><b>lib/tcl8.5</b> The installed Tcl script library
+</li><li><b>linux-ix86</b> Contains compiled shells and libraries for Linux.
+</li><li><b>solaris-sparc</b> Contains compiled shells and libraries for Solaris.
+</li><li><b>solaris-sparc/lib</b> Contains runtime libraries (.so files) for Solaris.
+</li><li><b>solaris-sparc/bin</b> Contains executable shells (tclsh8.5, wish8.5) for Solaris.
+</li></ul>
+<img src="./How to Compile Tcl_files/installtree.gif">
+<h3><a name="unix">Configuring and Compiling on UNIX</a></h3>
+<p>
+Compiling Tcl on UNIX has two steps: configure and make. In the
+simplest case you type the following commands to your shell:
+</p>
+<pre>  cd tcl8.5.0/unix
+  configure <i>options</i>
+  make
+  make test
+  make install</pre>
+<h4>Configure</h4>
+<p>
+The configure script tests your system for different compilation and
+linking options and generates a Makefile. The configure script is
+created by GNU autoconf. There are two commonly-specified configure
+options:
+</p>
+<dl>
+<dt> <code><font face="courier">--prefix=<i>directory</i> </font></code>
+</dt><dd> This flag specifies the installation directory. The default is
+<code><font face="courier">/usr/local</font></code>.
+</dd><dt> <code><font face="courier">--exec-prefix=<i>directory</i> </font></code>
+</dt><dd> This flag specifies the installation directory for
+architecture-specific (i.e., binary) files.
+The default is to install architecture-specific files into
+the location specified by <code><font face="courier">--prefix</font></code>.
+This is typically set to a subdirectory of the main prefix,
+(e.g., <code><font face="courier">/usr/local/solaris-sparc</font></code>)
+for sites that want to maintain
+binaries for multiple architectures. If you just have a single system
+type, then you can ignore this option.
+</dd></dl>
+<p> Note: be sure to use only absolute path names (those starting with "/")
+in the <code><font face="courier">--prefix</font></code> and <code><font face="courier">--exec-prefix</font></code> options.
+</p><p> To install into the directories /home/<i>user</i>/tcl/bin and
+/home/<i>user</i>/tcl/lib, for example, you should configure with:
+</p><pre>  configure --prefix=/home/<i>user</i>/tcl</pre>
+<p> Tcl's configure supports several options in addition to the standard
+ones. Calling <code><font face="courier">configure --help</font></code> will list them all, but common
+options are:
+</p><dl>
+<dt> <code><font face="courier">--enable-threads</font></code>
+</dt><dd> If this switch is set, Tcl will compile itself with multithreading
+support.
+</dd><dt> <code><font face="courier">--enable-shared</font></code>
+</dt><dd> If this switch is specified (the default), Tcl will compile itself as
+a shared library if it can figure out how to do that on this platform. Add
+<code><font face="courier">=no</font></code> will create a static build.
+</dd><dt> <code><font face="courier">--enable-symbols</font></code>
+</dt><dd> If this switch is specified, Tcl will build with debugging symbols.
+</dd></dl>
+<p> If you wish to specify a particular compiler, set the <code><font face="courier">CC</font></code>
+environment variable before calling configure. You can also specify
+<code><font face="courier">CFLAGS</font></code> prior to configure and they will be used during
+compilation.
+</p>
+<h4>Configuring for multiple architectures</h4>
+<p> Suppose you are building for two platforms, Linux and Solaris, and
+your installation will be shared by both kinds of hosts. You'll want
+to use the <code><font face="courier">--exec-prefix</font></code> configure option to specify
+different binary installation directories.
+</p><p> There are two ways you can build for multiple platforms. The
+first way is to build both platforms in the <code><font face="courier">unix</font></code>
+subdirectory. First configure and build for one platform. After you
+install, type <code><font face="courier">make distclean</font></code> and then configure and build
+for the second platorm. Be sure that both the configure and build
+steps are run on the platform for which you are building. For
+example, don't configure under Solaris and then build under HP-UX.
+</p><p> You can also build the different platforms in different
+subdirectories of the <code><font face="courier">unix</font></code> directory. If you do this,
+then you must name the configure script with a full pathname. For
+example:
+</p><pre>  cd /home/<i>user</i>/src/tcl8.5.0/unix
+  mkdir solaris
+  cd solaris
+  /home/<i>user</i>/src/tcl8.5.0/unix/configure \  
+	--prefix=/usr/local \ 
+	--exec-prefix=/usr/local/solaris-sparc</pre>
+<h4>Configuring Tk</h4>
+<p> When you configure Tk you may need to tell it where Tcl was built
+with the <code><font face="courier">--with-tcl</font></code> flag. This is true, for example, if
+you build Tcl in a subdirectory of unix as just described. To
+configure Tk:
+</p><pre>  cd /home/<i>user</i>/src/tk8.5.0/unix
+  mkdir solaris
+  cd solaris
+  /home/<i>user</i>/src/tk8.5.0/unix/configure \ 
+	--with-tcl=/home/<i>user</i>/src/tcl8.5.0/unix/solaris \ 
+	--prefix=/usr/local \ 
+	--exec-prefix=/usr/local/solaris-sparc</pre>
+<h4>Building with Make</h4>
+<p> <a href="https://en.wikipedia.org/wiki/Make_(software)">What is Make?</a>
+</p><p> After you configure your Makefile, type "make". This will create
+a library archive called <code><font face="courier">libtcl.a</font></code> or
+<code><font face="courier">libtcl.so</font></code> and an interpreter application called
+<code><font face="courier">tclsh</font></code> that allows you to type Tcl commands interactively
+or execute script files. When you build Tk, you create
+<code><font face="courier">libtk.a</font></code> or <code><font face="courier">libtk.so</font></code> and the
+<code><font face="courier">wish</font></code> executable.
+</p><p> Type "make test" to run an exhaustive test suite. In most cases
+there should not be test failures. The Tk test suite, however, does
+have some tests that depend on font metrics and the window manger,
+which can vary across platforms. The <code><font face="courier">README</font></code> file in the
+tests subdirectory has documentation about the test suite.
+</p><p> Type "make install" to install Tcl binaries and script files in
+the directories you specified with <code><font face="courier">--prefix</font></code> or
+<code><font face="courier">--exec-prefix</font></code> during the configure step. You'll need
+write permission on the installation directories to do this.
+</p><p> If you have trouble compiling Tcl, check out the
+<a href="https://www.tcl.tk/software/tcltk/platforms.html">platforms list</a>.
+This is an on-line database of porting information. We make no
+guarantees that this information is accurate, complete, or up-to-date,
+but you may find it useful. If you get Tcl running on a new
+configuration, we would be happy to receive new information to add to
+the database. We're also interested in hearing how to change the
+configuration setup so that Tcl compiles out of the box on more
+platforms.
+</p><h3><a name="win">Compiling on Windows</a></h3>
+<p>
+In order to compile Tcl for Windows, you need the following items:
+</p>
+<ul>
+<li> Tcl 8.6.11 source distribution (or the latest patch release)
+</li><li> MS Visual C++ 6.x or greater.
+</li></ul>
+<p>
+In the <code><font face="courier">win</font></code> subdirectory of the source release, you will
+find <code><font face="courier">makefile.vc</font></code>. This is the makefile for the Visual C++
+compiler. You should update the paths at the top of the file as appropriate
+for your environment.
+</p><p> In order to build the executables, type the following commands
+in a command shell.
+</p><pre><font face="courier" size="2">nmake -f makefile.vc INSTALLDIR=path_to_your_install_dir
+nmake -f makefile.vc install INSTALLDIR=path_to_your_install_dir</font></pre>
+<p>
+The built files will be named <code>tclsh86t.exe</code> and you
+may wish to rename them to <code>tclsh.exe</code>.
+</p><p> Compiling Tk for windows follows a similar process. You must
+compile Tcl before you compile Tk and in addition you must set
+the variable <code>TCLDIR</code> to the location of your Tcl
+<em>source</em> directory. Within the <code>win</code> directory
+in your Tk distribution, type the commands
+</p><pre><font face="courier" size="2">nmake -f makefile.vc INSTALLDIR=path_to_your_install_dir TCLDIR=path_to_tcl_source
+nmake -f makefile.vc install INSTALLDIR=path_to_your_install_dir TCLDIR=path_to_tcl_source</font></pre>
+<p>
+This will produce a <code>wish86t.exe</code> executable and place it within
+the Tcl installation direcory.
+</p><p>If you are compiling a Tcl extension for windows, please see the
+<a href="https://www.tcl.tk/doc/tea/">TEA reference</a>.
+</p><h3><a name="mac">Compiling for Macintosh</a></h3>
+<p> Tcl 8.4 was the last version to support Mac Classic (OS &lt;= 9).
+See the READMEs in the sources for Mac Classic build support.
+For Mac OS X, use the unix instructions above, with consideration for the
+following extra options:
+</p><dl>
+<dt> <code><font face="courier">--enable-framework</font></code>
+</dt><dd> Builds the shared libraries as Mac OS X Frameworks.
+</dd><dt> <code><font face="courier">--enable-aqua</font></code>
+</dt><dd> Target the Aqua windowing system instead of X11 on Mac OS X.
+</dd></dl>
+<br clear="all">
+<p align="center" class="footer">
+<small><b>
+This is the main Tcl Developer Xchange site,
+www.tcl-lang.org .
+</b></small>
+&nbsp;&nbsp;
+<a href="https://www.tcl.tk/siteinfo.html">About this Site</a> |
+<a href="mailto:webmaster@tcl-lang.org">webmaster@tcl-lang.org</a>
+<br>
+<a href="https://www.tcl.tk/">Home</a> |
+<a href="https://www.tcl.tk/about/">About Tcl/Tk</a> |
+<a href="https://www.tcl.tk/software/tcltk/">Software</a> |
+<a href="https://www.tcl.tk/community/coreteam/">Core Development</a> |
+<a href="https://www.tcl.tk/community/">Community</a> |
+<a href="https://www.tcl.tk/doc/">Documentation</a>
+</p>
+</td></tr></tbody></table>
+</body></html>
