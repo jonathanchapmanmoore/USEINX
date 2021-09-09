@@ -1,0 +1,2656 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html class="no-js js-focus-visible theme-light" lang="en" xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/QAPage" data-js-focus-visible="" data-authenticated="false" data-auth-status-determined="true"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+   
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues. More info: h5bp.com/i/378 --> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="description" content="Microsoft Q&amp;A is the best place to get answers to all your technical questions on Microsoft products and services. Community. Forum."> 
+  <!-- Mobile viewport optimized: h5bp.com/viewport --> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>        Extended disk diagnosis - Microsoft Q&amp;A
+</title> 
+  <link rel="canonical" href="https://docs.microsoft.com/answers/questions/357539/extended-disk-diagnosis.html"> 
+  <script type="text/javascript">
+    var askFormURL = '/answers/questions/ask.html';
+    var logoutURL = '/answers/users/logout.html';
+    var voteUpJsonURL = '/answers/commands/0/voteup.json';
+    var voteDownJsonURL = '/answers/commands/0/votedown.json';
+    var getVotesJsonUrl = '/answers/%7Bnode%7D/getVotes.json';
+    var related_questions_url = '/answers/search.json';
+    var emailCheckerURL = '/answers/users/temporaryLogin/dupsUserEmailCheck.json';
+
+    var authorizedFileTypes = 'xml,gif,png,jpg,jpeg,pdf,txt,log'.split(",");
+    var authorizedImageTypes = 'gif,png,jpg,jpeg'.split(",");
+
+    var flashMessages = [];
+
+    var pageContext = {
+        currentUser: {
+            id: '',
+            username: 'Anonymous',
+            url: '#',
+            avatar: '',
+            reputation: '',
+            follows: null,
+            canCreateTopics: false,
+            haveAlterEgoRole:false,
+            canHideModeratorEdit:false,
+            canViewUserProfile: true
+        },
+        i18n: {
+            editor: {
+                tabShortcut: "Tab to the formatting toolbar with the Alt or Option key plus F10.",
+                defaultLabel: "Add some details...",
+                usersFound:"$n users found available for tagging. Press up or down to navigate through available users.",
+                userSelected:"User $n selected. Press enter to tag user.",
+                userTagged:"User $n tagged."
+            },
+            wmdPopover: {
+                title: "Markdown Basics",
+                text: '&bull; *italic* or _italic_<br/>&bull; **bold** or __bold__<br/>&bull; <b>link</b>:[text](http://url.com/ "title")<br/>&bull; <b>image</b>?![alt text](/path/img.jpg "title")<br/>&bull; numbered list:  1.  Foo  2.  Bar<br/>&bull; to add a line break simply add two spaces to where you would like the new line to be and hit enter/return.<br/>'.replace(/\n/g, '<br />')
+            },
+            publishSuccess: "This thread was successfully published.",
+            spamSuccess: "This thread has been rejected as spam.",
+            rejectSuccess: "This thread has been rejected.",
+            cancelRejectSuccess: "This thread has been moved to the moderation queue.",
+            cancelReportSuccess: "The report on this thread has been successfully canceled.",
+            userAvatar: "avatar image",
+            userSuspended:"Suspended",
+            userDeactivated:"Deactivated",
+            confirm: "Are you sure?",
+            spaceLabel: 'space',
+            yes: "Yes",
+            no: "No",
+            isDeleted: "This %%postType%% has been deleted.",
+            isUndeleted: "This %%postType%% has been undeleted.",
+            save: "Save Changes",
+            cancel: "Cancel",
+            submit: "Submit",
+            disabled: "Disabled",
+            close: "Close",
+            edit: "Edit",
+            insert: "Insert",
+            upload: "Upload",
+            sticky: "Sticky",
+            redirectSuccess: "This question has been successfully redirected.",
+            redirectMessage: "This question was redirected from <b>%%redirectLink%%</b>",
+            cancelRedirect: "Cancel Redirect",
+            srSticky: "Sticky 0",
+            SiteSticky: "Site Sticky",
+            srSiteSticky: "Site Sticky %%postType%%",
+            isSticky: "This %%postType%% is sticky.",
+            isUnsticky: "This %%postType%% is no longer sticky.",
+            isSiteSticky: "This %%postType%% is site sticky.",
+            isSiteUnsticky: "This %%postType%% is site no longer sticky.",
+            download: "Download",
+            choose: "Choose",
+            replyLinkLocked: "Comments Locked",
+            commentsLocked: "Locked",
+            srCommentsLocked: "Locked %%postType%%",
+            commentsUnlocked: "Unlocked",
+            postLocked: "This %%postType%% has been locked.",
+            postUnlocked: "This %%postType%% has been unlocked.",
+            idea: "Site feedback",
+            kbentry: "article",
+            deleted: "Deleted",
+            srDeleted: "Deleted %%postType%%",
+            deleteAllPosts: "Delete all user's posts",
+            makeSuperUser: "Make super user",
+            undeleted: "Undeleted",
+            srUndeleted: "post undeleted",
+            ok: "Ok",
+            generalError: 'An error occurred',
+            by: "by",
+            ideaStatusLabel: "Microsoft Q&A feedback Status",
+            ideaStatusAlert: "This idea's status has been updated to $n",
+            word: "word",
+            words: "words",
+            character: "character",
+            characters: "characters",
+            login: "Sign in to post",
+            register: "Register",
+            timeAgo: "{0} ago",
+            timeAt: "at",
+            day: "day",
+            days: "days",
+            hour: "hour",
+            hours: "hours",
+            minute: "minute",
+            minutes: "minutes",
+            second: "sec",
+            seconds: "secs",
+            justNow: "just now",
+            retag: "retag",
+            comment: "Comment",
+            comments: "label.comments",
+            showOneComment: "<i class='fa fa-comments-o' aria-hidden='true'></i> Show",
+            hideOneComment: "<i class='fa fa-comments' aria-hidden='true'></i> Hide",
+            showNComments: "<i class='fa fa-comments-o' aria-hidden='true'></i> Show",
+            hideNComments: "<i class='fa fa-comments' aria-hidden='true'></i> Hide",
+            question: "question",
+            questions: "Questions",
+            answerLabel: "Answer",
+            answers: "Answers",
+            posts: "Posts",
+            post: "Post",
+            wiki: "Wiki",
+            srWiki: "Wikified %%postType%%",
+            wikifiedAlert: "This post has been wikified, any user with enough reputation can edit it.",
+            unwikifiedAlert: "This post has been unwikified.",
+            reputation: "Reputation",
+            unlike: "Unvote",
+            srUnlike: "Click to unvote.",
+            like: "Vote",
+            srLike: "Click to like.",
+            likes: "Votes",
+            currentNumberOfLikes: "Current number of votes",
+            cancelVote: "Click to cancel vote",
+            cancelDownVote: "Click to cancel downvote",
+            cancelUpVote: "Click to cancel upvote",
+            voteDown: "Click to down vote",
+            voteUp: "Click to vote",
+            contentDownVoted: "Content downvoted.",
+            contentUpVoted: "Content upvoted.",
+            voteCancelled: "Vote cancelled.",
+            favourite: "Favorite",
+            favourited: "This %%postType%% has been added to bookmarks. Click to remove from bookmarks.",
+            unfavourite: "Favorited",
+            unfavourited: "This %%postType%% has been removed from bookmarks. Click to add to bookmarks.",
+            follow: "Follow",
+            unfollow: "Unfollow",
+            following: "Following",
+            followers: "Followers",
+            awarded: "Awarded",
+            completedBy: "Recently completed by",
+            joined: "Joined",
+            revisionLoaded: "Revision nrevisions has been loaded into the form below.",
+            authorizedTypes: "Allowed Upload Types",
+            uploadDialog: {
+                uploadFile: "Choose a file to upload",
+                selectedFile: "File selected $selectedFile for upload",
+                doUpload: "Upload",
+                fileTooBig: "Your attachment must be $size or smaller.",
+                invalidAttachmentType: "Your attachment must be one of: attachmentTypes",
+                invalidImageType: "Your image must be one of: imageTypes",
+                allowedTypes: "Allowed Upload Types",
+                uploadFromComputer: "Upload from Computer",
+                uploadButtonDescription: "Drop file (or Click) to upload a file from your computer",
+                selectFile: "Select file",
+                uploadFailed: "Upload failed",
+                imageUploadFailed: "Image upload failed"
+            },
+            previewAndCropDialog: {
+                previewAndResize: "Preview",
+                accept: "Accept",
+                croppedSelection: "Cropped Selection"
+            },
+            removeAttachment: "Remove attachment",
+            removeSuspension: "Remove suspension",
+            confirmMakeModerator: "Make moderator",
+            askSimilarQuestionsScreenreader: "questions found that may already have your answer. Press tab or continue editing.",
+            ssoReAuthenticateTitle: "sso.reauth.title",
+            closeQuestionTitle: "Close Question",
+            lockPostModalTitle: "Lock",
+            reportQuestionModalTitle: "Report",
+            confirmModalTitle: "Please confirm",
+            convertToAnswerText: "Are you sure you want to convert this comment to answer?",
+            convertToAnswerLabel: "Convert to answer",
+            unlockPostModalText: "Are you sure you want to allow comments on this thread?",
+            cancelReportModalText: "Are you sure you want to undo reporting this thread?",
+
+            reportSuccessText: "This thread has been successfully reported.",
+            reportCancelText: "Your report on this thread has been sucessfully canceled.",
+
+            commandsMoveToSpace: "Move",
+            commandsGiveReputation: "Reward user",
+            commandsGiveReputationSuccess: "Points awarded successfully",
+            commandsConvertToCommentTitle: "Select comment location",
+            uploadProfilePictureSelectButton: "Select photo from your computer",
+            changeAvatarSelectButton: "Select photo from your computer",
+            changeAvatarSelectNoPhoto: "No photo selected",
+            postControlsRedirectTitle: "Redirect",
+            WMDToolbarLabel: "Formatting Toolbar",
+            WMDEditorTabHint: "Tab to the formatting toolbar with Alt/Option + F10.",
+            WMDEditorSRTabHint: "Tab to the formatting toolbar with the Alt or Option key plus F10.",
+            WMDCodeEditorText: "enter code here",
+            WMDAddCodeText: "Add code to your thread",
+            WMDImageDialogText: "Enter image URL",
+            WMDLinkDialogText: "Enter URL",
+            WMDUploadImage: "Upload image",
+            WMDBold: "Strong - Ctrl+B",
+            WMDSRBold: "Strong",
+            WMDSRBoldDesc: "Add Strong to text by clicking or by using Control plus B inside the text area.",
+            WMDItalic: "Emphasis - Ctrl+I",
+            WMDSRItalic: "Emphasis",
+            WMDSRItalicDesc: "Add Emphasis to text by clicking or by using Control plus I inside the text area.",
+            WMDLink: "Hyperlink - Ctrl+L",
+            WMDSRLink: "Hyperlink",
+            WMDSRLinkDesc: "Add a Hyperlink by clicking or by using Control plus L inside the text area.",
+            WMDQuote: "Blockquote - Ctrl+Q",
+            WMDSRQuote: "Blockquote",
+            WMDSRQuoteDesc: "Add a Blockquote by clicking or by using Control plus Q inside the text area",
+            WMDCode: "Code Sample - Ctrl+K",
+            WMDSRCode: "Code Sample",
+            WMDSRCodeDesc: "Add a Code Sample by clicking or by using Control plus K inside the text area.",
+            WMDImage: "Image - Ctrl+G",
+            WMDSRImage: "Image",
+            WMDSRImageDesc: "Add an Image by clicking or by using Control plus G inside the text area.",
+            WMDAttachment: "Attachment",
+            WMDSRAttachment: "Attachment",
+            WMDSRAttachmentDesc: "Click to add an Attachment.",
+            WMDOrderedList: "Numbered List - Ctrl+O",
+            WMDSROrderedList: "Numbered List",
+            WMDSROrderedListDesc: "Add a Numbered List by clicking or by using Control plus O inside the text area.",
+            WMDUnorderedList: "Bulleted List - Ctrl+U",
+            WMDSRUnorderedList: "Bulleted List",
+            WMDSRUnorderedListDesc: "Add a Bulleted List by clicking or by using Control plus U inside the text area.",
+            WMDHeading: "Heading - Ctrl+H",
+            WMDSRHeading: "Heading",
+            WMDSRHeadingDesc: "Add a Heading to text by clicking or by using Control plus H inside the text area.",
+            WMDHorizontalRule: "Horizontal Rule - Ctrl+R",
+            WMDSRHorizontalRule: "Horizontal Rule",
+            WMDSRHorizontalRuleDesc: "Add a Horizontal Rule to text by clicking or by using Control plus R inside the text area.",
+            WMDUndo: "Undo - Ctrl+Z",
+            WMDSRUndo: "Undo",
+            WMDSRUndoDesc: "Click to Undo or use Control plus Z inside the text area.",
+            WMDRedoWin: "Redo - Ctrl+Y",
+            WMDSRRedoWin: "Redo",
+            WMDSRRedoWinDesc: "Click to Redo or use Control plus Y inside the text area.",
+            WMDRedoOther: "Redo - Ctrl+Shift+Z",
+            WMDSRRedoOther: "Redo",
+            WMDSRRedoOtherDesc: "Click to Redo or use Control plus Shift plus Y inside the text area.",
+            WMDHelp: "Markdown Help",
+            WMDSRHelp: "Markdown Help",
+            WMDSRHelpDesc: "Markdown Help. This will redirect you to a new tab.",
+            WMDPreviewMode: "This content is in preview mode and cannot be edited.",
+            WMDImageUploadOnly: "Only images can be uploaded via copy and paste.",
+
+            draftMessage: "We noticed that you were previously working on TYPO. What would you like to do now?",
+            draftSaveMessage: "Saving Draft...",
+            draftLoadButton: "Load Draft",
+            draftDeleteButton: "Delete Draft",
+
+            linkMenuInsertLink: "Insert link",
+            linkMenuEditLink: "Edit link",
+            linkMenuUnlink: "Remove link",
+            linkMenuAnchor: "Anchor",
+            linkMenuMailto: "Email",
+            inputTextPrompt: "Text",
+            inputWebPrompt: "URL",
+            inputLinkNewTab: "Open link in a new tab",
+            inputImageForm: "Update Image",
+            inputImageTitle: "Title",
+            inputImagePosition: "Position",
+            inputImagePositionNone: "None",
+            inputImagePositionLeft: "Left",
+            inputImagePositionRight: "Right",
+
+            formattingLabel: "Formatting",
+            formattingParagraph: "Normal Text",
+            formattingQuote: "Quote",
+            formattingCode: "Code",
+            formattingHeader: "Header",
+            formattingBold: "Bold",
+            formattingItalic: "Italic",
+            formattingUnderline: "Underline",
+            formattingFontColor: "Font Color",
+            formattingBackColor: "Back Color",
+            formattingIndent: "Indent",
+            formattingOutdent: "Outdent",
+            formattingAlignment: "Alignment",
+            formattingAlignLeft: "Align text to the left",
+            formattingAlignCenter: "Center text",
+            formattingAlignRight: "Align text to the right",
+            formattingAlignJustify: "Justify text",
+            formattingHorizontalRule: "Insert Horizontal Rule",
+
+            toolTipsInsertImage: "Insert Image",
+            toolTipsInsertFile: "Insert File",
+            toolTipsInsertCode: "Insert Code",
+            toolTipsInsertVideo: "Insert Video",
+            toolTipsInsertTable: "Insert Table",
+            toolTipsorderedList: "Ordered List",
+            toolTipsunorderedList: "Unordered List",
+            toolTipLink: "Link",
+
+            tableInsert: "Insert Table",
+            tableRows: "Rows",
+            tableColumns: "Columns",
+            tableInsertRowAbove: "Add Row Above",
+            tableInsertRowBelow: "Add Row Below",
+            tableInsertColumnLeft: "Add Column Left",
+            tableInsertColumnRight: "Add Column Right",
+            tableDelete: "Delete Table",
+            tableDeleteColumn: "Delete Column",
+            tableDeleteRow: "Delete Row",
+            tableAddHead: "Add Header",
+            tableDeleteHead: "Delete Header",
+
+            uploadOrChoose: "Or Choose",
+            uploadDropFileHere: "Drop file here",
+            uploadFilenameOptional: "Name (optional)",
+            emailValidationPrompt: "Resend validation email",
+            emailValidationPromptBody: "Do you want to resend email validation?",
+            invalidReputation: "Error: You must enter a valid Integer without commas.",
+            editorDifferentFromPreference: {
+                msg: "This post was created with LANGUAGE, which is different from your editor language preference.",
+                question: "Do you want to edit the post body in this markup language?",
+                yes: "Edit Post",
+                no: "Cancel"
+            },
+            uploadPhotoError: "There was an error uploading the user photo.",
+            froalaTabHint: "Tab to the formatting toolbar with Alt/Option + F10. If inside toolbar, press ESC to return to editor.",
+            froalaSrTabHint: "Tab to the formatting toolbar with the Alt or Option key plus F10. If inside toolbar, press ESC to return to editor.",
+            froalaSourceHint: "In Source mode, press ESC to bring focus outside the textarea. Press Enter to bring focus in the textarea.",
+            coverImage: {
+              imageGalleryLabel: "Select Cover Image",
+              imageGalleryAria: "Showing page curPage of totalPage."
+            },
+            showNMore:  "Show $n more...",
+            showNLess:  "Show $n less...",
+            makeNodePrivate: {
+                modal: "Are you sure you want to make this thread private? Only you and users with special permissions will be able to see it.",
+                success: "This post has been made private.",
+                error: "Something went wrong trying to switch post privacy.",
+            },
+            makeNodePublic: {
+                modal: "Are you sure you want to make this thread public? All users will be able to see it.",
+                success: "This post has been made public.",
+            },
+            share: {
+                msgMaximumSelected: "You may only share with up to maximumSelected users at once",
+                msgMinimumInputLength: "At least minimumInputLength user is required to share.",
+                msgSuccess: "Shared",
+                msgError: "Something went wrong"
+            }
+        },
+        answer: {
+            edit: {
+                revisionLoaded: "Revision nrevisions has been loaded into the form below."
+            }
+        },
+        url: {
+            base: "/answers",
+            login: "/answers/users/login.html",
+            register: "/answers/users/register.html",
+            getRevision: "/answers/revisions/get-revision.json",
+            getComments: "/answers/comments/%25ID%25/list.json",
+            authorizeAttachments: "/answers/authorizeAttachment.json",
+            uploadFile: "/answers/uploadFile.html",
+            uploadFileJson: "/answers/uploadFile.json",
+            uploadProgress: "/answers/uploadProgress.json",
+            uploadPreview: "/answers/uploadPreview.html",
+            cropUpload: "/answers/cropUpload.json",
+            cancelUpload: "/answers/cancelUpload.json",
+            profile: "/answers/users/{id}/{plug}.html",
+            extractKeywords: "/answers/extract-keywords.json",
+            follow: "/answers/follow/%7BobjId%7D/%7Btype%7D.json",
+            unfollow: "/answers/unfollow/%7BobjId%7D/%7Btype%7D.json",
+            getUserFollows: "/answers/%7Buser%7D/getUserFollows.json",
+            condensedProfileUrl: "/answers/users/%7Buser%7D/condensedProfile.json",
+            viewTopicJSON: "/answers/topics/%7Btopic%7D/view.json",
+            topicIcon: "/answers/topics/%7Btopic%7D/icon.html",
+            topic: "/answers/topics/%7Btopic%7D.html",
+            topicSearch: "/answers/search/topics.json",
+            awardListUrl: "/answers/badge/%7BawardType%7D/%7Bdesc%7D.json",
+            usersSearch: "/answers/users/list.json",
+            removeAsk: '/answers/questions/%7Bquestion%7D/%7BaskedToAnswer%7D/removeAskToAnswer.json',
+            usersLookup: "/answers/users/lookup.json",
+            mentionsSearch: "/answers/users/mentionsSearch.json",
+            searchJson: "/answers/search.json",
+            trackJs: "/answers/static/trackJs.json",
+            userAvatar: "/answers/users/%7BuserId%7D/photo/view.html",
+            reloadAskList: "/answers/questions/%7Bquestion%7D/askedToAnswerList.html?unstyled=true",
+            revisionView: "/answers/revisions/{nodeId}.html",
+            authorizeAttachmentsUrl: "/answers/authorizeAttachment.json",
+            authorizeUploadCoverImage: "/answers/authorizeUploadCoverImage.json",
+            saveCoverImage: "/answers/saveCoverImage.json",
+            getCoverImages: "/answers/getCoverImages.json",
+            shareInternal: "/answers/share/shareInternal.json",
+            userShareList: "/answers/share/userShareList.json",
+        },
+        extraScripts: {
+            jcrop: {
+                js: '/answers/themes/thub/scripts/jcrop/js/jquery.Jcrop.js',
+                css: '/answers/themes/thub/scripts/jcrop/css/jquery.Jcrop.css'
+            }
+        },
+        options: {
+        	maxTopics: '5',
+            gravatarEnabled: true,
+            extractKeywordsEnabled: true,
+	       	attachments: {
+	               'comment': {
+                       enabled: true,
+                       maxSizeBytes: 3145728,
+                       maxSizeBytesTotal: 31457280
+                   },
+	               'kbentry': {
+                       enabled: true,
+                       maxSizeBytes: 3145728,
+                       maxSizeBytesTotal: 62914560
+                   },
+	               'answer': {
+                       enabled: true,
+                       maxSizeBytes: 3145728,
+                       maxSizeBytesTotal: 62914560
+                   },
+	               'question': {
+                       enabled: true,
+                       maxSizeBytes: 3145728,
+                       maxSizeBytesTotal: 62914560
+                   },
+	               'idea-comment': {
+                       enabled: true,
+                       maxSizeBytes: 3145728,
+                       maxSizeBytesTotal: 31457280
+                   },
+	               'idea': {
+                       enabled: true,
+                       maxSizeBytes: 3145728,
+                       maxSizeBytesTotal: 62914560
+                   }
+            },
+            coverImages: {
+                    maxSizeBytes:'5242880',
+                    minSizeBytes:'1',
+                    allowedTypes:'gif,png,jpg,jpeg'.split(','),
+            },
+            keepAliveTimeout: 60,
+            isAutoSaveEnabled: true,
+            autoSaveDialogTitle: "{0} previous version",
+            autoSaveDialogBody: "There is a previous version saved. Would you like to load it or discard it?",
+            topicImageUploadContext: {
+                authorizedImageTypes: 'jpg,gif,png,jpg,jpeg,svg'.split(','),
+                maxSizeBytes: 5242880
+            },
+            userImageUploadContext: {
+                authorizedImageTypes: 'jpg,gif,png,jpg,jpeg,svg'.split(','),
+                maxSizeBytes: 5242880
+            },
+            charCommentMaxBodyLength: 1600,
+            siteNotificationsImageMaxSizeBytes: 512000,
+            share: {
+                maximumSelectionLength: 10,
+                minimumInputLength: 1
+            }
+        },
+        authorizedImageTypes: authorizedImageTypes,
+        sanitizationProfile: {
+        },
+        searchListableTypes: [
+	        "question",
+	        "idea",
+	        "kbentry"
+        ],
+        additional: {},
+        useRelativeTime: true,
+        userRealName: false,
+        csrf: {
+            parameter: '_csrf',
+            header: 'X-CSRF-TOKEN',
+            setToken: function(value) {
+                sessionStorage["AH" + '_csrf'] = value;
+            },
+            getToken: function() {
+                return sessionStorage["AH" + '_csrf'];
+            }
+        },
+        locale: 'en',
+        currentEditor: {
+            name: 'wmd-escaped',
+            label: 'CommonMark',
+            helpLink: '\/markdown/help.html',
+            helpLinkAriaLabel: "Open help documentation in a new tab",
+            previewAriaLabel: "Show Preview in the text editor",
+            sourceAriaLabel: "Show HTML source in the text editor",
+            enableLineNum: true
+        },
+        markupLanguageObjects: {
+            'wmd-escaped': {
+                label: 'CommonMark',
+                helpLink: '\/markdown/help.html'
+            },
+            'text': {
+                label: 'Plain Text',
+                helpLink: ''
+            },
+            'wmd': {
+                label: 'CommonMark',
+                helpLink: '\/markdown/help.html'
+            }
+        },
+        sanitizationEscapeHtml: true,
+        survey: {
+            deadlineButton: {
+                ariaLabel : "Click or press the Enter key or the spacebar to open the calendar"
+            }
+        }
+
+    };
+    pageContext.i18n["delete"] = "Delete";
+    pageContext.csrf.setToken('5538a40c-7859-453c-8639-00e7e3247f20');
+
+</script> 
+  <!--[if lte IE 10]>
+    <script src="/answers/themes/thub/scripts/compatibility/indexOf.js" type="text/javascript"></script>
+    <![endif]--> 
+  <!--[if lt IE 9]>
+    <script src="/answers/themes/thub/scripts/compatibility/document.getSelection.js" type="text/javascript"></script>
+    <script src="/answers/themes/thub/scripts/compatibility/ierange-m2-packed.js" type="text/javascript"></script>
+    <style type="text/css">
+        input[type="password"] {
+            font-family: Arial;
+        }
+    </style>
+    <![endif]--> 
+  <script type="text/javascript" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/7b32e075979b0fb15765dea4b3955749.pack.js.download" charset="utf-8"></script>
+  <script type="text/javascript" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/624e4935525d020c6ab83804f2290aac.pack.js.download" charset="utf-8"></script> 
+  <script type="text/javascript">
+(function ($) {
+    "use strict";
+
+    $.extend($.fn.select2.defaults, {
+        formatNoMatches: function () {
+            return 'No matches found';
+        },
+        formatInputTooShort: function (input, min) {
+            var n = min - input.length;
+            if (n == 1) {
+                return 'Please enter 1 more character.';
+            }
+            else {
+                var return_str = "Please enter $n more characters.";
+                return return_str.replace("$n", n.toString());
+            }
+        },
+        formatInputTooLong: function (input, max) {
+            var n = input.length - max;
+            if (n == 1)
+                return 'Please delete 1 character.';
+            else {
+                var return_str = 'Please delete $n characters.';
+                return return_str.replace("$n", n.toString());
+            }
+        },
+        formatSelectionTooBig: function (limit) {
+            if (limit == 1)
+                return 'You can only select 1 item.';
+            else {
+                var return_str = 'You can only select $n items.';
+                return return_str.replace("$n", limit.toString());
+            }
+        },
+        formatLoadMore: function (pageNumber) {
+            return 'Loading more results...';
+        },
+        formatSearching: function () {
+            return 'Searching...';
+        }
+    });
+})(jQuery);
+</script> 
+  <!-- Core Bootstrap css + Kickstrap styles --> 
+  <link rel="stylesheet" type="text/css" href="./Extended disk diagnosis - Microsoft Q&amp;A_files/4ebd4f8a4613023d140690821997a7c2.pack.css" charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="./Extended disk diagnosis - Microsoft Q&amp;A_files/68b1b29ceac2ec3e0eeee425574b56b6.pack.css" charset="utf-8"> 
+  <!--[if lt IE 9]>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $style;
+            $style = $('<style type="text/css">:before,:after{content:none !important}</style>');
+            $('head').append($style);
+            return setTimeout((function() {
+                return $style.remove();
+            }), 0);
+        });
+    </script>
+    <![endif]--> 
+  <meta name="uhfHeaderId" content="answers"> 
+  <link rel="stylesheet" type="text/css" href="./Extended disk diagnosis - Microsoft Q&amp;A_files/forums.css"> 
+  <script src="./Extended disk diagnosis - Microsoft Q&amp;A_files/wcp-consent.js.download"></script> 
+  <!-- <script src="https://az725175.vo.msecnd.net/scripts/jsll-4.js"></script> --> 
+  <script src="./Extended disk diagnosis - Microsoft Q&amp;A_files/jsll-4.js.download"></script> 
+  <script>window.jsllAwa = window.awa;</script> 
+  <script nomodule="" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/bluebird.min.js.download" integrity="sha384-aD4BDeDGeLXLpPK4yKeqtZQa9dv4a/7mQ+4L5vwshIYH1Mc2BrXvHd32iHzYCQy5" crossorigin="anonymous"></script> 
+  <script nomodule="" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/fetch.umd.min.js.download" integrity="sha384-EQIXrC5K2+7X8nGgLkB995I0/6jfAvvyG1ieZ+WYGxgJHFMD/alsG9fSDWvzb5Y1" crossorigin="anonymous"></script> 
+  <script nomodule="" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/template.min.js.download" integrity="sha384-1zKzI6ldTVHMU7n0W2HpE/lhHI+UG4D9IIaxbj3kT2UhCWicdTuJkTtnKuu0CQzN" crossorigin="anonymous"></script> 
+  <script nomodule="" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/url.min.js.download" integrity="sha384-vn7xBMtpSTfzaTRWxj0kVq0UcsbBrTOgZ/M1ISHqe1V358elYva+lfiEC+T8jLPc" crossorigin="anonymous"></script> 
+  <script nomodule="" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/index-polyfills.js.download"></script> 
+  <script>
+	window.msDocs = { data: { brand: 'docs', userLocale: 'en-us', userDir: 'ltr', context: {} } };
+
+	$(function () {
+		if (window.location.pathname === '/answers/moderation/index.html') {
+			$('#navigation-custom-widget').css('display', 'none');
+		}
+
+		var buttonId = '66be21b280f6';
+		var campaignIds = ['6c966bc84285'];
+		for (var i = 0; i < campaignIds.length; i++) {
+			//remove the localStorage in order to show survey to one people more than once.
+			localStorage.removeItem('usbl.' + buttonId + '.c.' + campaignIds[i]);
+		}
+	});
+</script> 
+  <script src="./Extended disk diagnosis - Microsoft Q&amp;A_files/index-forums.js.download"></script><style>
+		.question-gravatar [href*="/Anonymous.html"] ~ .vote-widget .vote-up,
+		.question-gravatar [href*="/Anonymous.html"] ~ .vote-widget .vote-down,
+		.answer-gravatar [href*="/Anonymous.html"] ~ .vote-widget .vote-up,
+		.answer-gravatar [href*="/Anonymous.html"] ~ .vote-widget .vote-down {
+			display: none !important;
+		}
+	</style> 
+  <style type="text/css">
+            
+        </style> 
+  <script type="text/javascript">
+        $(document).ready(function(){pageContext.options.commentsAttachmentsEnabled = true});
+    </script> 
+  <script type="text/javascript">
+        $(function () {
+pageContext.i18n.modTalk = 'moderation talk';
+pageContext.i18n.replyToComment = 'Reply';
+pageContext.i18n.modTalkEmpty = 'moderation talk is empty';
+pageContext.url.getModTalk = "/answers/comments/%25ID%25/listModTalk.json";
+pageContext.url.possibleCommentRecipients = "/answers/comments/%ID%/possibleRecipients.json";
+pageContext.url.commentEdit = '/answers/comments/%25ID%25/edit.html';
+pageContext.url.commentView = '/answers/comments/%ID%/view.html';
+
+pageContext.i18n.commentVisibility = {
+'full': 'Visible to all users',
+'op': 'Visible to the original poster & Microsoft',
+'mod': 'Viewable by moderators',
+'opAndMod': 'Viewable by moderators and the original poster',
+'other': 'Advanced visibility',
+'dialogTitle': 'Comment visibility',
+'selectGroups': 'Visible to groups',
+'selectOther': 'Other recipients',
+'selectOriginalPoster': 'Original poster',
+'selectModerators': 'Moderators',
+'selectAssignees': 'Asked to answer users'
+};
+
+pageContext.i18n.commentMenuLabels = {
+'comment-edit': 'comments.menu.edit',
+'comment-delete': 'comments.menu.delete',
+'comment-convert': 'comments.menu.convert'
+};pageContext.i18n.answer= {
+	bestAnswer: 'ACCEPTED ANSWER',
+	expertAnswer: 'Community Expert',
+	controlBar : {
+		accept: 'Accept',
+		unaccept: 'Unaccept',
+		acceptCommand: 'Accept this answer as correct',
+		cancelAcceptedCommand: 'Remove this answers accepted status'
+	}
+};
+    window.croles = {
+        u: false, op: false, m: false,
+        og: false, as: false, ag: false,
+        dc: false, doc: false, eo: false, ea: false
+    };
+
+    tools.init({
+        q: {
+            e: false, ew: false, eo: false,
+            r: false, ro: false,
+            d: false, dow: false, fv: false,
+            c: false, co: false,
+            p: false, tm: false
+        },
+        n: {
+            f: false, vf: false, vfo: false,
+            vr: false, vro: false,
+            c: false, co: false,
+            vu: false, vd: false,
+            w: false, wo: false,
+            l: false
+        },
+        c: {
+            e: false, eo: false,
+            d: false, dow: false,
+            ta: false, tao: false,
+            l: false
+        },
+        a: {
+            e: false, ew: false, eo: false,
+            d: false, dow: false,
+            a: false, aoq: false, ao: false,
+            tc: false, tco: false,
+            p: false, tm: false
+        },
+        pc: croles
+    }, {
+        tc: true,
+        nsc: false
+    });
+
+            commandUtils.initializeLabels();
+        });
+    </script> 
+ </head> 
+ <body> 
+  <div> 
+   <div class="header-holder has-default-focus"> 
+    <div hidden="" id="cookie-consent-holder"></div> 
+    <div id="headerAreaHolder" data-bi-name="header"> 
+     <header role="banner" itemscope="" itemtype="http://schema.org/Organization"><!----> <div class="nav-bar"><!---->  <div class="nav-bar-brand">
+		<a class="nav-bar-button" itemprop="url" href="https://www.microsoft.com/" aria-label="Microsoft">
+			<div class="nav-bar-logo" role="presentation" aria-hidden="true" itemprop="logo" itemscope="itemscope">
+				<svg xmlns="http://www.w3.org/2000/svg" width="108" height="23" viewBox="72 72 337 74" preserveAspectRatio="xMidYMin slice">
+					<g data-name="MS-symbol">
+						<clippath>
+							<path transform="matrix(1 0 0 -1 0 216)" d="M0 216h482V0H0z"></path>
+						</clippath>
+						<g clip-path="url(#a)">
+							<path class="has-fill-current-color has-text-subtle" d="M394.942 104.59h-10.858v25.003h-7.38V104.59h-5.182v-5.965h5.182v-4.308c0-3.254 1.06-5.92 3.178-7.998 2.12-2.079 4.835-3.118 8.15-3.118.882 0 1.666.045 2.35.135a9.37 9.37 0 011.806.407v6.296c-.24-.14-.663-.31-1.265-.512-.603-.2-1.296-.3-2.078-.3-1.528 0-2.702.476-3.526 1.43-.824.954-1.235 2.365-1.235 4.232v3.736h10.858v-6.959l7.321-2.229v9.188h7.381v5.965h-7.38v14.49c0 1.91.345 3.254 1.038 4.037.693.783 1.782 1.175 3.27 1.175.42 0 .927-.1 1.52-.3a7.178 7.178 0 001.552-.724v6.025c-.463.261-1.23.502-2.305.723a15.742 15.742 0 01-3.178.331c-3.073 0-5.378-.817-6.914-2.455-1.537-1.637-2.305-4.102-2.305-7.396zm-48.407 9.73c0 3.233.733 5.703 2.2 7.411 1.465 1.707 3.564 2.56 6.295 2.56 2.652 0 4.67-.853 6.055-2.56 1.386-1.708 2.08-4.238 2.08-7.592 0-3.334-.719-5.849-2.155-7.547-1.436-1.697-3.45-2.545-6.04-2.545-2.67 0-4.745.888-6.22 2.666-1.477 1.777-2.215 4.313-2.215 7.607m-7.592.24c0-5.12 1.446-9.177 4.338-12.17 2.892-2.993 6.91-4.489 12.05-4.489 4.841 0 8.621 1.441 11.343 4.323 2.721 2.883 4.082 6.774 4.082 11.674 0 5.021-1.447 9.018-4.338 11.99-2.892 2.973-6.829 4.458-11.81 4.458-4.8 0-8.61-1.41-11.432-4.232-2.822-2.82-4.233-6.673-4.233-11.554m-16.417-7.802c0 1.045.331 1.863.994 2.456.662.592 2.128 1.34 4.398 2.243 2.912 1.166 4.956 2.476 6.131 3.932 1.175 1.456 1.762 3.22 1.762 5.287 0 2.912-1.12 5.252-3.359 7.02-2.24 1.767-5.267 2.65-9.083 2.65-1.285 0-2.706-.155-4.263-.467-1.556-.31-2.877-.707-3.96-1.19v-7.169a17.945 17.945 0 004.277 2.198c1.526.543 2.911.814 4.157.814 1.647 0 2.862-.23 3.645-.693.784-.46 1.175-1.235 1.175-2.319 0-1.005-.406-1.853-1.22-2.546-.813-.693-2.355-1.492-4.624-2.395-2.69-1.125-4.599-2.39-5.724-3.796-1.125-1.406-1.687-3.193-1.687-5.362 0-2.792 1.11-5.086 3.33-6.884 2.217-1.797 5.095-2.696 8.63-2.696 1.084 0 2.3.12 3.645.361 1.346.242 2.47.553 3.374.934v6.93c-.964-.644-2.089-1.195-3.374-1.658-1.286-.462-2.56-.693-3.826-.693-1.386 0-2.465.271-3.238.813-.774.543-1.16 1.286-1.16 2.23m-35.066 7.562c0 3.233.733 5.703 2.2 7.411 1.465 1.707 3.564 2.56 6.295 2.56 2.652 0 4.67-.853 6.055-2.56 1.386-1.708 2.08-4.238 2.08-7.592 0-3.334-.719-5.849-2.155-7.547-1.436-1.697-3.449-2.545-6.039-2.545-2.672 0-4.745.888-6.222 2.666-1.476 1.777-2.214 4.313-2.214 7.607m-7.592.24c0-5.12 1.446-9.177 4.338-12.17 2.893-2.993 6.91-4.489 12.051-4.489 4.84 0 8.621 1.441 11.342 4.323 2.721 2.883 4.082 6.774 4.082 11.674 0 5.021-1.446 9.018-4.338 11.99-2.892 2.973-6.828 4.458-11.809 4.458-4.8 0-8.61-1.41-11.433-4.232-2.822-2.82-4.233-6.673-4.233-11.554m-3.136-16.448c.582 0 1.105.041 1.567.121.462.08.853.18 1.175.301v7.38c-.382-.28-.939-.546-1.672-.798-.733-.25-1.622-.376-2.666-.376-1.788 0-3.299.753-4.534 2.26-1.235 1.505-1.853 3.825-1.853 6.958v15.635h-7.29V98.624h7.29v4.88h.12c.663-1.687 1.667-3.007 3.013-3.96 1.346-.954 2.962-1.432 4.85-1.432m-27.956 26.18c1.084 0 2.28-.25 3.585-.754a15.06 15.06 0 003.615-1.988v6.778c-1.165.663-2.485 1.165-3.962 1.506-1.475.342-3.098.512-4.865.512-4.559 0-8.265-1.44-11.116-4.323-2.852-2.88-4.278-6.562-4.278-11.04 0-4.98 1.456-9.083 4.37-12.307 2.91-3.224 7.037-4.835 12.38-4.835 1.366 0 2.746.176 4.143.527 1.395.352 2.504.758 3.328 1.22v6.99c-1.125-.824-2.274-1.462-3.45-1.914a9.966 9.966 0 00-3.599-.678c-2.872 0-5.192.934-6.959 2.802-1.768 1.868-2.652 4.388-2.652 7.562 0 3.132.85 5.573 2.546 7.32 1.697 1.748 4.002 2.621 6.914 2.621m-22.112 5.302h-7.29V98.624h7.29zm-8.044-39.916c0-1.205.437-2.214 1.311-3.028.874-.813 1.913-1.22 3.118-1.22 1.285 0 2.35.417 3.193 1.25.844.834 1.266 1.833 1.266 2.998 0 1.185-.432 2.18-1.296 2.982-.864.804-1.918 1.205-3.163 1.205-1.246 0-2.295-.406-3.148-1.219-.854-.815-1.28-1.803-1.28-2.968m-6.274-3.284v43.2h-7.5v-33.86h-.12l-13.408 33.86h-4.97l-13.738-33.86h-.09v33.86h-6.929v-43.2h10.755l12.412 32.024h.18l13.105-32.024z"></path>
+							<path d="M106.214 106.214H71.996V71.996h34.218z" fill="#f25022"></path>
+							<path d="M143.993 106.214h-34.218V71.996h34.218z" fill="#7fba00"></path>
+							<path d="M106.214 143.993H71.996v-34.218h34.218z" fill="#00a4ef"></path>
+							<path d="M143.993 143.993h-34.218v-34.218h34.218z" fill="#ffb900"></path>
+						</g>
+					</g>
+				</svg>
+			</div>
+		</a>
+	</div> 
+				
+		<div class="nav-bar-item is-hidden-tablet">
+			<div class="nav-bar-menu">
+				<button class="nav-bar-button is-title" title="Global navigation" aria-expanded="false">
+					<span class="nav-bar-menu-title"><!---->Q&amp;A<!----></span>
+					<div class="nav-bar-burger">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span class="nav-bar-burger-label"><!---->Global navigation<!----></span>
+					</div>
+				</button>
+			</div>
+		</div>
+	
+				
+		<nav class="nav-bar-nav" role="navigation" aria-label="Global">
+			<ul class="nav-bar-nav-list">
+				
+		<li class="nav-bar-item is-category">
+			<a class="nav-bar-button is-title has-hover-underline" itemprop="url" href="https://docs.microsoft.com/en-us/">
+				<span><!---->Docs<!----></span>
+			</a>
+		</li>
+	
+				<!----> <li class="nav-bar-item">
+				<a class=" nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/documentation">
+					<span><!---->Documentation<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class=" nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/learn/">
+					<span><!---->Learn<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class=" nav-bar-button has-hover-underline is-active" href="https://docs.microsoft.com/en-us/answers/products/">
+					<span><!---->Q&amp;A<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class=" nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/samples/browse/">
+					<span><!---->Code Samples<!----></span>
+				</a>
+		  </li><!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-31">
+			<span><!---->More<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-31" aria-label="More">
+			<!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://docs.microsoft.com/en-us/documentation"><!---->Documentation<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://docs.microsoft.com/en-us/learn/"><!---->Learn<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button is-active" href="https://docs.microsoft.com/en-us/answers/products/"><!---->Q&amp;A<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class=" nav-bar-button " href="https://docs.microsoft.com/en-us/samples/browse/"><!---->Code Samples<!----></a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+			</ul>
+		</nav>
+	
+				<span class="nav-bar-spacer"></span>
+				
+				
+		<div class="nav-bar-profile">
+			
+		<a class="docs-sign-in auth-status-determined not-authenticated" href="https://docs.microsoft.com/en-us/answers/questions/357539/extended-disk-diagnosis.html#"> Sign in </a>
+	 
+			<div class="dropdown has-caret auth-status-determined authenticated">
+				<button class="dropdown-trigger button-reset" aria-controls="user-menu" aria-expanded="false" aria-label="Your Account">
+					<figure class="image is-36x36">
+						<img class="has-body-background-medium is-rounded" alt="" data-profile-property="avatarUrl">
+					</figure>
+				</button>
+				<div class="dropdown-menu box justify-content-flex-start has-body-background" id="user-menu" role="menu">
+					<div class="media is-user-dir">
+						<div class="media-left">
+							<figure class="image is-48x48" aria-hidden="true">
+								<img class="has-body-background-medium is-rounded" aria-labelledby="displayName" data-profile-property="avatarUrl">
+							</figure>
+						</div>
+						<div class="media-content">
+							<p class="title font-size-l">
+								<span id="displayName" class="is-inline-truncated has-max-width-200" data-profile-property="displayName"></span>
+							</p>
+							<p class="subtitle font-size-s has-margin-bottom-none">
+								<span class="is-inline-truncated has-max-width-200" data-profile-property="upn"></span>
+							</p>
+						</div>
+					</div>
+					<ul class="has-padding-top-small has-padding-bottom-medium">
+						<li class="has-padding-top-extra-small has-padding-bottom-extra-small">
+							<a href="https://docs.microsoft.com/profile" data-profile-property="profileUrl"><!---->Profile<!----></a>
+						</li>
+						<li class="has-padding-top-extra-small has-padding-bottom-extra-small">
+							<a href="https://docs.microsoft.com/profile" data-profile-property="collectionsUrl"><!---->Collections<!----></a>
+						</li>
+						<li class="has-padding-top-extra-small">
+							<a href="https://docs.microsoft.com/profile" data-profile-property="challengesUrl"><!---->Challenges<!----></a>
+						</li>
+					</ul>
+					<div class="border-top has-padding-top-medium">
+						<a class="docs-sign-out" href="https://docs.microsoft.com/en-us/answers/questions/357539/extended-disk-diagnosis.html#"><!---->Sign out<!----></a>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	
+			 <!----></div> <div class="nav-bar border-top is-hidden-mobile"><!----> 
+		<a class="nav-bar-button is-title has-hover-underline" itemprop="url" href="https://docs.microsoft.com/answers/products/">
+			<span>
+				Q&amp;A
+				
+			</span>
+		</a>
+	 
+		
+		<nav class="nav-bar-nav" role="navigation" aria-label="Site">
+			<ul class="nav-bar-nav-list">
+				
+				<!----> <li class="nav-bar-item">
+				<a class="has-external-link-indicator nav-bar-button has-hover-underline is-active" href="https://docs.microsoft.com/en-us/answers/index.html">
+					<span><!---->Questions<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class="has-external-link-indicator nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/answers/topics.html">
+					<span><!---->Tags<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class="has-external-link-indicator nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/answers/users/index.html">
+					<span><!---->Users<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class="has-external-link-indicator nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/answers/content/idea/list.html">
+					<span><!---->Feedback<!----></span>
+				</a>
+		  </li><!----> <li class="nav-bar-item">
+				<a class="has-external-link-indicator nav-bar-button has-hover-underline " href="https://docs.microsoft.com/en-us/answers/support">
+					<span><!---->FAQ &amp; Help<!----></span>
+				</a>
+		  </li><!----> <li class="dropdown nav-bar-item" hidden="">
+		<button aria-expanded="false" class="dropdown-trigger nav-bar-button  has-hover-underline" aria-controls="ax-32">
+			<span><!---->More<!----></span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-chevron-down-light expanded-indicator"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="ax-32" aria-label="More">
+			<!---->
+				<li class="nav-bar-item" hidden="">
+					<a class="has-external-link-indicator nav-bar-button is-active" href="https://docs.microsoft.com/en-us/answers/index.html"><!---->Questions<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class="has-external-link-indicator nav-bar-button " href="https://docs.microsoft.com/en-us/answers/topics.html"><!---->Tags<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class="has-external-link-indicator nav-bar-button " href="https://docs.microsoft.com/en-us/answers/users/index.html"><!---->Users<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class="has-external-link-indicator nav-bar-button " href="https://docs.microsoft.com/en-us/answers/content/idea/list.html"><!---->Feedback<!----></a>
+				</li>
+		  <!---->
+				<li class="nav-bar-item" hidden="">
+					<a class="has-external-link-indicator nav-bar-button " href="https://docs.microsoft.com/en-us/answers/support"><!---->FAQ &amp; Help<!----></a>
+				</li>
+		  <!---->
+		</ul>
+	</li><!---->
+			</ul>
+		</nav>
+	
+		<span class="nav-bar-spacer"></span>
+		
+		<ol class="nav-bar-list">
+			
+		<li class="nav-bar-item has-spacing">
+			<a class="button is-small is-primary is-outlined" href="https://docs.microsoft.com/answers/content/idea/post.html">
+				Site feedback
+			</a>
+		</li>
+	 
+		<li class="nav-bar-item ">
+			<a class="button is-small is-primary " href="https://docs.microsoft.com/answers/questions/ask.html">
+				Ask a question
+			</a>
+		</li>
+	
+		</ol>
+	 
+	 <!----></div> <!----></header> 
+    </div> 
+   <a class="skip-to-main-link visually-hidden-until-focused position-fixed has-inner-focus focus-visible top-0 left-0 right-0 padding-xs has-text-centered has-body-background" tabindex="1" href="https://docs.microsoft.com/en-us/answers/questions/357539/extended-disk-diagnosis.html#middle">Skip to main content</a></div> 
+  </div> 
+  <div id="not-footer" class="has-default-focus" style="margin-bottom: -75px;"> 
+   <div class="off-canvas-nav sidr left" id="sidr" role="navigation" aria-label="Mobile Navigation" style="transition: left 0.2s ease 0s;"> 
+    <ul class="nav nav-list"> 
+     <li> <a tabindex="-1" href="https://docs.microsoft.com/answers/"><i class="fa fa-home"></i> Home</a> </li> 
+     <li class="nav-header"> Anonymous </li> 
+     <li> <a tabindex="-1" href="https://docs.microsoft.com/answers/users/login.html">Sign in to post</a> </li> 
+     <li class="nav-header">Post</li> 
+     <li class="nav-header">Explore</li> 
+     <li> <a href="https://docs.microsoft.com/answers/topics.html">Tags</a> </li> 
+     <li> <a tabindex="-1" href="https://docs.microsoft.com/answers/questions/index.html">Questions</a> </li> 
+     <li> <a tabindex="-1" href="https://docs.microsoft.com/answers/content/idea/list.html">Site feedback</a> </li> 
+     <li> <a tabindex="-1" href="https://docs.microsoft.com/answers/content/kbentry/list.html">Articles</a> </li> 
+     <li> <a tabindex="-1" href="https://docs.microsoft.com/answers/users/index.html">Users</a> </li> 
+    </ul> 
+   </div> 
+   <div> 
+     
+    <div id="main-navbar" class="navbar navbar-fixed-top"> 
+     <div class="navbar-inner brand-nav"> 
+      <div class="container brand-container"> 
+       <a class="brand" href="https://docs.microsoft.com/answers/"> <img src="./Extended disk diagnosis - Microsoft Q&amp;A_files/logo.png" alt="Microsoft logo"> </a> 
+      </div> 
+     </div> 
+     <div class="navbar-inner"> 
+      <div class="container"> 
+       <div class="row-fluid"> 
+        <div class="search-wrapper span8"><!---->
+		<form class="navbar-search">
+			<input type="hidden" id="search-container" name="c" value="7">
+			<input type="hidden" id="include-space-children" name="includeChildren" value="false">
+			<input type="hidden" id="search-filters" name="f" value="">
+			<input type="hidden" id="search-types" name="type" value="question OR idea OR kbentry OR answer OR topic OR user">
+			<input type="hidden" id="search-redirect" name="redirect" value="search/search">
+			<input type="hidden" id="search-sort" name="sort" value="relevance">
+			<div class="autocomplete is-block" data-bi-name="autocomplete"><!----> <div class="control has-icons-left">
+				<input role="combobox" maxlength="100" aria-autocomplete="list" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="new-search-query" class="autocomplete-input input control has-icons-left is-full-width " type="search" name="q" aria-expanded="false" aria-owns="ax-17-listbox" aria-activedescendant="" aria-label="Search" placeholder="Find posts, tags, and users">
+
+				<span aria-hidden="true" class="icon is-small is-left">
+					<span class="has-text-primary docon docon-search"></span>
+				</span>
+
+				<span aria-hidden="true" class="autocomplete-loader loader has-text-primary " hidden=""></span>
+			</div>
+
+			<ul class="autocomplete-suggestions is-vertically-scrollable" role="listbox" id="ax-17-listbox" aria-label="new-search-query-suggestions" hidden="">
+				
+				
+			</ul><!----></div>
+		</form>
+	<!----></div> 
+        <div class="span4 nav-links-container" hidden=""> 
+         <ul class="nav-links hidden"> 
+          <li> </li> 
+          <li class="dropdown" id="exploreMenu"> <button id="explore-menu-dropdown" class="dropdown-toggle has-tooltip" data-toggle="dropdown" aria-label="Explore" aria-expanded="false" aria-haspopup="true" data-hasqtip="19"> <i aria-hidden="true" class="icon-sitemap"></i> <i aria-hidden="true" class="icon-caret-down"></i> <span aria-hidden="true" class="tooltip">Explore</span> </button> 
+           <ul class="dropdown-menu pull-right"> 
+            <li><span class="visually-hidden" id="ax-0"><!----> 1 of 5 <!----></span> <a id="explore_topics_link" href="https://docs.microsoft.com/answers/topics.html" aria-describedby="ax-0">Tags</a> </li> 
+            <li><span class="visually-hidden" id="ax-1"><!----> 2 of 5 <!----></span> <a id="question_explore_link" href="https://docs.microsoft.com/answers/questions/index.html" aria-describedby="ax-1">Questions</a> </li> 
+            <li><span class="visually-hidden" id="ax-2"><!----> 3 of 5 <!----></span> <a id="idea_explore_link" href="https://docs.microsoft.com/answers/content/idea/list.html" aria-describedby="ax-2">Site feedback</a> </li> 
+            <li><span class="visually-hidden" id="ax-3"><!----> 4 of 5 <!----></span> <a id="kbentry_explore_link" href="https://docs.microsoft.com/answers/content/kbentry/list.html" aria-describedby="ax-3">Articles</a> </li> 
+            <li><span class="visually-hidden" id="ax-4"><!----> 5 of 5 <!----></span> <a id="explore_users_link" href="https://docs.microsoft.com/answers/users/index.html" aria-describedby="ax-4">Users</a> </li> 
+           </ul> </li> 
+          <li class="login-link"> <a id="login-link" href="https://docs.microsoft.com/answers/users/login.html">Sign in to post</a> </li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="main-breadcrumb"> 
+     <div class="container"> 
+      <ul class="breadcrumb"> 
+       <li> <a href="https://docs.microsoft.com/answers/">Home</a> <span class="divider"><i class="fa fa-angle-right" aria-hidden="true"></i></span> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+   <section role="main" id="middle"> 
+    <div class="main"> 
+     <div class="main-inner"> 
+      <div class="container"> 
+       <div class="row"> 
+        <div class="span8 mainContent"> 
+         <div itemscope="" itemtype="http://schema.org/Question"> 
+          <script>
+
+
+    $(document).ready(function () {
+
+        var retagUrl = '/answers/commands/357539/editQuestionTopics.json';
+
+
+        function submit_retag() {
+            $.post(retagUrl, $("#topics_retag_container").serializeArray(), function (data) {
+                document.location.reload();
+            });
+        }
+        function setup_retag() {
+            $("#topics_retag_container").css("display", "inline");
+            $("#id_tags_container").hide();
+            $("#topics_retag").select2({
+                placeholder: 'Enter tags...',
+                minimumInputLength: 1,
+                multiple: true,
+                width: "250px",
+                ajax: {
+                    url: pageContext.url.topicSearch,
+                    dataType: 'json',
+                    data: function (q, page) {
+                        return {
+                            q: q.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        for (var i = 0; i < data.topics.length; i++) {
+                            data.topics[i].text = data.topics[i].name;
+                            data.topics[i].id = data.topics[i].name;
+                        }
+                        return {results: data.topics};
+                    }
+                },
+                tokenSeparators: [","],
+                tags: true,
+                templateResult: function (item, container, query, escapeMarkup){
+                    return item.text;
+                },
+                templateSelection: function(item,container, escapeMarkup) {
+                    return item.text;
+                },
+                createTag: function (params) {
+                    if (!pageContext.currentUser.canCreateTopics)
+                        return null;
+                    return { id: params.term, text: params.term }
+                }
+            });
+            // get the select 2 element
+
+            $("#topics_retag").trigger('change')
+        }
+
+        $("#id_do_retag").click(function () {
+            if ($('#topics_retag_container')) {
+                setup_retag();
+                if ($('#topics_retag_container .select2-search__field').length) {
+                    $('#topics_retag_container .select2-search__field')[0].focus();
+                }
+            }
+            return false;
+        });
+
+        $("#topics_retag_cancel").click(function (e) {
+            e.preventDefault();
+            $("#topics_retag_container").hide();
+            $("#id_tags_container").show();
+        });
+
+        $("#topics_retag_submit").click(function (e) {
+            e.preventDefault();
+            submit_retag();
+        });
+
+    });
+</script> 
+          <div class="widget widget-nopad smallmargin"> 
+           <div class="widget-content"> 
+            <div class="post-icon-wrapper col-sm-12 post-title-357539"> 
+             <i aria-hidden="true" class="icon-question-sign"></i> 
+             <h1 class="h3 d-inline capitalize">question</h1> 
+             <script type="text/javascript">
+			$(document).ready(function () {
+
+				var nodeId = '357539';
+				var nodeType = pageContext.i18n['question'] ? pageContext.i18n['question'].toLowerCase() : pageContext.i18n.post;
+				var postTags = [];
+
+
+
+				
+
+
+				postTags.forEach(function (x) {
+					commandUtils.AccessibleUI.createTag({
+						label: x.label,
+						srLabel: x.srLabel,
+						addClass: x.addClass,
+						type: x.type,
+						selector: '.post-title-' + nodeId,
+						transition: false
+					});
+				})
+			});
+
+		</script> 
+            </div> 
+            <div id="question-container-357539" class="post-container question-container" nodeid="357539"> 
+             <div class="report-post-alert"></div> 
+             <style type="text/css">
+    .question-body, .node-body {
+        min-height: 50px;
+    }
+
+    .answer-body, .reply-body {
+        min-height: 115px;
+    }
+</style> 
+             <div class="post-gravatar question-gravatar col-sm-1" nodeid="357539"> 
+              <a href="https://docs.microsoft.com/answers/users/3222472/nndng.html" style="display: inline-block; max-width: 48px; position: relative;" class="gravatar" rel="user" nodeid="3222472" data-hasqtip="0"><span> <img class="gravatar " width="48" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/256f48e99d3474d8964e9ced9042f194" id="" alt="NndnG avatar image"> </span></a> 
+              <div class="vote-widget"> 
+               <div class="sr-only 357539-vote-action-performed" aria-live="assertive"></div> 
+               <button id="vote-up-button-357539-node-left" class="vote-up vote-up-node-left votes" command="voteUp" data-hasqtip="16"><i class="icon-chevron-up icon-2x"></i><span class="sr-only">Click to vote</span></button> 
+               <span id="left_post-357539-score-wrapper" class="post-score-wrapper post-357539-score-wrapper count votes" style="cursor:default"> <span id="left_post-357539-score-sr" class="sr-only post-score-sr">0 Votes" </span> <span aria-hidden="true" id="left_post-357539-score" class="post-357539-score score">0</span> </span> 
+               <button id="vote-down-button-357539-node-left" class="vote-down vote-down-node-left votes" command="voteDown" data-hasqtip="13"><i class="icon-chevron-down icon-2x"></i><span class="sr-only">Click to down vote</span></button> 
+              </div> 
+             </div> 
+             <div id="question-357539" class="question post col-sm-11"> 
+              <div> 
+               <span class="user og-poster-author"> <a href="https://docs.microsoft.com/answers/users/3222472/nndng.html" aria-labelledby="357539-og-action-user 357539-og-action-verb 357539-og-action-date" id="357539-og-action-user" rel="user" nodeid="3222472" data-hasqtip="1" style="position: relative;"><span>NndnG</span></a> </span> 
+               <span id="357539-og-action-verb"> asked </span> 
+               <span aria-hidden="true" class="action-divider">•</span> 
+               <span id="357539-og-action-date" class="action-date og-poster-action-date" title="Apr 14, 2021 7:35:54 PM"> <time role="presentation" datetime="2021-04-14T19:35:54.053Z" format="MMM d, &#39;&#39;yy" suffix="">Apr 14 2021 at 3:35 PM</time> </span> 
+               <span aria-hidden="true">|</span> 
+               <span class="user"> <a href="https://docs.microsoft.com/answers/users/6645484/docs-4663.html" aria-labelledby="357539-action-user 357539-action-verb 357539-action-date" id="357539-action-user" rel="user" nodeid="6645484" data-hasqtip="2" style="position: relative;"><span>Docs-4663</span></a> </span> 
+               <span id="357539-action-verb"> published </span> 
+               <span aria-hidden="true" class="action-divider">•</span> 
+               <span id="357539-action-date" title="Apr 15, 2021 8:19:54 AM"> <time role="presentation" datetime="2021-04-15T08:19:54.35Z" format="MMM d, &#39;&#39;yy" suffix="">Apr 15 2021 at 4:19 AM</time> </span> 
+              </div> 
+              <h2 itemprop="name" class="question-title">Extended disk diagnosis</h2> 
+              <div itemprop="text" class="question-body post-body" data-markup-language="wmd-escaped"> 
+               <p>Hi,</p> 
+               <p>Related to disk diagnosis, I have some questions and all are related to each other. That’s why I am asking all questions in the single post.</p> 
+               <p><em>Is it correct, in most cases, bad sectors issue is a software-based issue which can be resolved by various ways but removing all volumes and Windows installation are the best way?</em></p> 
+               <p>We all know chkdsk is a well-known command for local disk diagnosis. Also, we all know parameters like</p> 
+               <ul> 
+                <li><p> /f for fixes errors on the disk.<br></p> </li> 
+                <li><p> /r for locating bad sectors and recovering readable information.<br></p> </li> 
+                <li><p> /x for forcing the volume to dismount first, if necessary.</p> </li> 
+               </ul> 
+               <p>I read, the disk must be locked for using /f and /r.</p> 
+               <p><em>Is chkdsk /f enough for resolving bad sector issue?</em></p> 
+               <p><em>How does chkdsk /f work for resolving bad sectors and for how long it works?</em></p> 
+               <p><em>What is locked disk here? How do I know, by default, disk is locked or unlocked?</em></p> 
+               <p><em>Like locked disk, let me know about mounted and dismounted. And how do I know, by default, disk is mounted or dismounted?</em></p> 
+               <p><em>What should be the ideal states of disk; locked or unlocked and mounted or unmounted?</em></p> 
+               <p><em>In case of two disks (like SSD and HD), if Windows is installed in SSD and HD is partitioned in various volumes; can I diagnosis all volumes at the same time or can I diagnosis HD at the same time with a single command?</em></p> 
+               <p><em>For disk diagnosis, chkdsk has been in use for long time. Does Windows offer any other advanced way for disk diagnosis?</em></p> 
+               <p>Please resolve my all above questions.</p> 
+               <p>With Regards<br>NndnG</p> 
+              </div> 
+              <span class="tags" id="id_tags_container"> <a href="https://docs.microsoft.com/answers/topics/windows-10-hardware-performance.html" class="tag" rel="topic" nodeid="46466" data-hasqtip="12" style="position: relative;"><span>windows-10-hardware-performance</span></a> </span> 
+              <div class="comment-tools hidden">
+               <span class="add-comment-link "><a href="https://docs.microsoft.com/en-us/answers/questions/357539/extended-disk-diagnosis.html#">Comment</a></span>
+              </div> 
+              <script type="text/javascript">
+    $(document).ready(function() {
+        $('#reply-link-357539').click(function() {
+            commandUtils.showMessage('', "Please sign in to comment.");
+            return false;
+        });
+    });
+</script> 
+              <div class="control-bar" nodeid="357539"> 
+               <div class="post-controls" nodeid="357539"> 
+                <button id="reply-link-357539" class="button-to-link"> <i class="fa fa-comment-o" aria-hidden="true"></i> Comment </button> 
+                <button id="357539-show-comments-container" class="show-comments-container button-to-link" style="display: none;"><i class="fa fa-comments" aria-hidden="true"></i> Hide</button> 
+                <span id="357539-comment-count" class="control-score-counter comment-count" style="display: none;">0</span> 
+               <button class="collection button-to-link" data-list-type="collection" aria-pressed="false" title="Add Extended disk diagnosis - Microsoft Q&amp;A to a collection"><!---->
+		<span class="icon" aria-hidden="true">
+			<span class="docon docon-circle-addition"></span>
+		</span>
+		<span class="add-to-collection-status">Save</span>
+	<!----></button></div> 
+              </div> 
+              <div id="comment-357539-form-container" class="clearfix well comment-form-container"> 
+               <form id="comment-357539-form" action="https://docs.microsoft.com/answers/comments/357539/add.json" method="POST" accept-charset="utf-8"> 
+                <div class="comment-form-widgets-container"> 
+                 <div class="comment-form-textarea-container"> 
+                  <label for="comment-357539-textarea" id="comment-357539-form-label" class="sr-only comment-form-label"> Comment </label> 
+                  <textarea id="comment-357539-textarea" aria-describedby="comment-357539-chars-left" name="body" class="commentBox has-inner-focus" data-type="comment" data-attachments="true"></textarea> 
+                 </div> 
+                 <div class="comment-form-buttons"> 
+                  <span id="comment-357539-chars-left" class="comment-chars-left" aria-live="polite" aria-atomic="true"> <span class="comments-char-left-count warn">5 |1600</span> <span class="comments-chars-togo-msg">characters needed</span> <span class="comments-chars-left-msg">characters left</span> <span class="comments-chars-exceeded-msg">characters exceeded</span> </span> 
+                  <div class="comment-form-buttons-container"> 
+                   <input type="submit" class="btn btn-primary comment-submit" value="Submit"> 
+                   <input type="submit" class="btn btn-default comment-cancel" value="Cancel"> 
+                  </div> 
+                   
+                 </div> 
+                 <div style="clear:both;"></div> 
+                </div> 
+                <input type="hidden" name="parent" value="357539"> 
+                <input type="hidden" name="visibility" value="full"> 
+                <input type="hidden" name="editor" value="wmd-escaped/"> 
+                <input type="hidden" name="escapeHtml" value="true"> 
+                <div style="display: none" class="comment-form-extra-inputs"></div> 
+                <div class="main-attachments-container message control-group "> 
+                 <p> <strong><label>Attachments:</label></strong> Up to 10 attachments (including images) can be used with a maximum of 3.0 MiB each and 30.0 MiB total. </p> 
+                 <div class="controls"> 
+                  <div class="img-attachments-container"></div> 
+                  <div class="attachments-container"></div> 
+                 </div> 
+                </div> 
+                <input type="hidden" name="_csrf" value="5538a40c-7859-453c-8639-00e7e3247f20">
+               </form> 
+              </div> 
+              <div class="comments-container" id="comments-container-357539" nodeid="357539" style="display: block;"> 
+              </div> 
+              <script type="text/javascript">$(function () {
+                    setupComments($('#question-container-357539'), true, false, croles, "full", true)
+                });</script> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+          <script type="text/javascript">
+    $(document).ready(function () {
+        var $question = $("#question-container-357539");
+        var $replyLink = $question.find(".reply-link");
+        $replyLink.click(function (e) {
+            e.preventDefault();
+            $question.find(".add-comment-link").click();
+        });
+    });
+
+    $('form.survey input[type="radio"]').change(function(ev) {
+        if(pageContext.currentUser.id.length > 0) {
+            $('form.survey button[type="submit"]').removeAttr('disabled').removeAttr('style');
+        }
+    })
+</script> 
+          <div class="widget widget-nopad answer-list"> 
+           <div class="widget-header" answercount="2"> 
+            <span class="col-sm-6"> <h3> <span itemprop="answerCount" class="child-counter"> 2 </span> <span> Answers </span> </h3> </span> 
+            <div class="col-sm-6"> 
+             <ul role="listbox" aria-label="Sort options" class="nav nav-pills sort pull-right"> 
+              <li role="presentation" class=""> <a role="option" href="https://docs.microsoft.com/answers/questions/357539/extended-disk-diagnosis.html?sort=newest" class="has-tooltip" aria-selected="false" data-hasqtip="20"> <span class="sr-only">Sort by Created</span> <i aria-hidden="true" class="fa fa-clock-o"></i> <span class="tooltip sort-bar-theme" role="tooltip">Created</span> </a> </li> 
+              <li role="presentation" class="active "> <a role="option" href="https://docs.microsoft.com/answers/questions/357539/extended-disk-diagnosis.html?sort=oldest" class="has-tooltip" aria-selected="true" data-hasqtip="21"> <span class="sr-only">Sort by Oldest</span> <i aria-hidden="true" class="fa fa-history"></i> <span class="tooltip sort-bar-theme" role="tooltip">Oldest</span> </a> </li> 
+              <li role="presentation" class=""> <a role="option" href="https://docs.microsoft.com/answers/questions/357539/extended-disk-diagnosis.html?sort=votes" class="has-tooltip" aria-selected="false" data-hasqtip="22"> <span class="sr-only">Sort by Votes</span> <i aria-hidden="true" class="fa fa-thumbs-o-up"></i> <span class="tooltip sort-bar-theme" role="tooltip">Votes</span> </a> </li> 
+             </ul> 
+            </div> 
+           </div> 
+           <div class="widget-content"> 
+            <div id="answer-container-358309" class="post-container answer-container " nodeid="358309"> 
+             <div class="report-post-alert"></div> 
+             <div class="post-gravatar answer-gravatar col-sm-1" nodeid="358309"> 
+              <a href="https://docs.microsoft.com/answers/users/6032755/jiayaozhu-msft.html" style="display: inline-block; max-width: 48px; position: relative;" class="gravatar" rel="user" nodeid="6032755" data-hasqtip="3"><span> <img class="gravatar " width="48" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/view.html" id="" alt="jiayaozhu-MSFT avatar image"> </span></a> 
+              <div class="vote-widget"> 
+               <div class="sr-only 358309-vote-action-performed" aria-live="assertive"></div> 
+               <button id="vote-up-button-358309-node-left" class="vote-up vote-up-node-left votes" command="voteUp" data-hasqtip="17"><i class="icon-chevron-up icon-2x"></i><span class="sr-only">Click to vote</span></button> 
+               <span id="left_post-358309-score-wrapper" class="post-score-wrapper post-358309-score-wrapper count votes" style="cursor:default"> <span id="left_post-358309-score-sr" class="sr-only post-score-sr">0 Votes" </span> <span aria-hidden="true" id="left_post-358309-score" class="post-358309-score score">0</span> </span> 
+               <button id="vote-down-button-358309-node-left" class="vote-down vote-down-node-left votes" command="voteDown" data-hasqtip="14"><i class="icon-chevron-down icon-2x"></i><span class="sr-only">Click to down vote</span></button> 
+              </div> 
+             </div> 
+             <div id="answer-358309" class="answer post col-sm-11"> 
+              <div class="muted author-info"> 
+               <span class="user og-poster-author"> <a href="https://docs.microsoft.com/answers/users/6032755/jiayaozhu-msft.html" aria-labelledby="358309-og-action-user 358309-og-action-verb 358309-og-action-date" id="358309-og-action-user" rel="user" nodeid="6032755" data-hasqtip="4" style="position: relative;"><span>jiayaozhu-MSFT</span></a> </span> 
+               <span id="358309-og-action-verb"> answered </span> 
+               <span aria-hidden="true" class="action-divider">•</span> 
+               <span id="358309-og-action-date" class="action-date og-poster-action-date" title="Apr 15, 2021 7:50:43 AM"> <time role="presentation" datetime="2021-04-15T07:50:43.87Z" format="MMM d, &#39;&#39;yy" suffix="">Apr 15 2021 at 3:50 AM</time> </span> 
+               <span class="labels post-title-358309"> <script type="text/javascript">
+                                $(document).ready(function () {
+
+                                    var nodeId = '358309';
+                                    var nodeType = pageContext.i18n.answer;
+                                    var postTags = [];
+
+
+
+
+
+
+
+                                    postTags.forEach(function (x) {
+                                        commandUtils.AccessibleUI.createTag({
+                                            label: x.label,
+                                            srLabel: x.srLabel,
+                                            addClass: x.addClass,
+                                            type: x.type,
+                                            selector: '.post-title-' + nodeId,
+                                            transition: false
+                                        });
+                                    })
+                                });
+
+                            </script> </span> 
+              </div> 
+              <div class="answer-body" data-markup-language="wmd-escaped"> 
+               <p>Hi,</p> 
+               <p>Thank you for your posting!</p> 
+               <p>1) There are two types of bad sectors – hard and soft. </p> 
+               <p>Hard bad sectors cannot be repaired in most cases. Besides, if the disk contains many soft bad sectors, always stuck or slow to load data on the computer, or your file system is severely corrupted, these soft-based bad sectors can hardly be repaired either. </p> 
+               <p>The wise choice is to back up and save your data at first. Then, removing all volumes and Windows installation may be the best practice. Otherwise, you can just use <strong>chkdsk</strong> command. Here are two articles I found that can be helpful for you to better understand bad sector and how to repair it according to different scenarios:</p> 
+               <p><a href="https://www.auslogics.com/en/articles/bad-sector" target="_blank">https://www.auslogics.com/en/articles/bad-sector</a>/</p> 
+               <p><a href="https://www.easeus.com/disk-copy/clone-resource/repair-a-bad-sector-in-windows-10-8-7.html#3" target="_blank">https://www.easeus.com/disk-copy/clone-resource/repair-a-bad-sector-in-windows-10-8-7.html#3</a></p> 
+               <p>(Please note: Information posted in the given links are hosted by a third party. Microsoft does not guarantee the accuracy and effectiveness of information.)</p> 
+               <p>2) It depends on what you want. Generally chkdsk /r not only does the same thing as chkdsk /f, but also checks the bad sectors on the hard disk and tries to recover the readable information. <strong>Running chkdsk /r also means that the chkdsk /f is run. However, running chkdsk /f will only check for logical disk errors, but not bad sectors.</strong></p> 
+               <p>Therefore, if you only want to check and correct logical disk errors in the file system, you can only run chkdsk /f command; if you want to find physical disk errors in the disk, you can use chkdsk /r command. </p> 
+               <p>And you can type chkdsk /f /r or chkdsk /r /f, or even chkdsk E: /f /r /x , to use them altogether as a combo to better fit your demands. There no much difference between chkdsk /f /r and chkdsk /r /f. They do the same thing but just in different order. Here are two articles that I think are helpful to you:</p> 
+               <p><a href="https://www.minitool.com/data-recovery/chkdsk-f-or-r.html" target="_blank">https://www.minitool.com/data-recovery/chkdsk-f-or-r.html</a></p> 
+               <p><a href="https://www.acronis.com/en-us/articles/chkdsk" target="_blank">https://www.acronis.com/en-us/articles/chkdsk</a>/</p> 
+               <p>(Please note: Information posted in the given links are hosted by a third party. Microsoft does not guarantee the accuracy and effectiveness of information.)</p> 
+               <p>3) As I have mentioned in 2), you can just run chkdsk /r command since it includes the /f function (p. s. while if you want to fix errors in file system, merely running /f command can save you a lot of time.).</p> 
+               <p>The reason why the /f function is included in the /r function, is that the former runs to stage 3 while the latter runs the whole 5 stage. More information about the 5 stages for repairing bad sectors:</p> 
+               <p><a href="https://www.acronis.com/en-us/articles/chkdsk" target="_blank">https://www.acronis.com/en-us/articles/chkdsk</a>/</p> 
+               <p>(Please note: Information posted in the given link is hosted by a third party. Microsoft does not guarantee the accuracy and effectiveness of information.)</p> 
+               <p>With regards of the working hour about /f command, it depends on many things, like overall PC speed, number of files and folders on the disk, amount of RAM, and disk size. </p> 
+               <p>For instance, the chkdsk process is usually completed in 5 hours for 1TB drives, and if you're scanning a 3TB drive, the required time triples. As we already mentioned, chkdsk scan can take a while depending on the size of the selected partition.</p> 
+               <p>4) When you type chkdsk commands, you will know whether your disk is locked or not, and if it is unlocked, you can just type <strong>"y"</strong> and the scan is to take place:<br><img src="./Extended disk diagnosis - Microsoft Q&amp;A_files/87940-disk-chkdsk.jpg" alt="87940-disk-chkdsk.jpg"></p> 
+               <p>5) If you're running Windows 10 or Windows 8, you can view all mounted drives in File Explorer. You can open File Explorer by pressing Windows key + E . In the left pane, select This PC, and all drives are shown on the right. <br><img src="./Extended disk diagnosis - Microsoft Q&amp;A_files/88007-disk-mounted.jpg" alt="88007-disk-mounted.jpg"></p> 
+               <br> 
+               <br> 
+               <p>6) I suppose there is no ideal status for disk, to lock or not to lock, just depends on your own condition. The disk lock feature is concerned with computer security issue. To view this article:</p> 
+               <p><a href="https://managementmania.com/en/how-to-secure-hard-drive" target="_blank">https://managementmania.com/en/how-to-secure-hard-drive</a></p> 
+               <p>Please note: Information posted in the given link is hosted by a third party. Microsoft does not guarantee the accuracy and effectiveness of information.</p> 
+               <p>While for dismounted vs mounted, I may suggest you to mount your disk, which is an important step in your disk management, and only mounted disk will show in File Explorer.</p> 
+               <p>7) After my research, you can conduct disk diagnosis at the same time but you need to open multiple instances of the command prompt and run chkdsk for each drive letter.</p> 
+               <p>8) After research, I found 5 other ways that can be used to conduct disk diagnosis:</p> 
+               <p><a href="https://www.maketecheasier.com/check-hard-disk-health-windows" target="_blank">https://www.maketecheasier.com/check-hard-disk-health-windows</a>/</p> 
+               <p>(Please note: Information posted in the given link is hosted by a third party. Microsoft does not guarantee the accuracy and effectiveness of information.)</p> 
+               <p>However, I am not sure if they are your advanced ways like chkdsk.</p> 
+               <p>Thank you for your support!</p> 
+               <p>Best regards<br>Joan<br></p> 
+               <hr> 
+               <p>If the Answer is helpful, please click "<strong>Accept Answer</strong>" and upvote it.</p> 
+               <p><strong>Note: Please follow the steps in our <a href="https://docs.microsoft.com/en-us/answers/articles/67444/email-notifications.html">documentation</a> to enable e-mail notifications if you want to receive the related email notification for this thread.</strong></p> 
+              </div> 
+              <br> 
+              <div class="node-attachments"> 
+               <div class="node-attachment"> 
+                <span class="img-attachment-icon"></span> 
+                <a href="./Extended disk diagnosis - Microsoft Q&amp;A_files/87940-disk-chkdsk.jpg">disk-chkdsk.jpg</a> 
+                <span>(36.3 KiB)</span> 
+               </div> 
+               <div class="node-attachment"> 
+                <span class="img-attachment-icon"></span> 
+                <a href="./Extended disk diagnosis - Microsoft Q&amp;A_files/88007-disk-mounted.jpg">disk-mounted.jpg</a> 
+                <span>(25.9 KiB)</span> 
+               </div> 
+              </div> 
+              <div class="comment-tools hidden"> 
+               <span class="add-comment-link "> <button class="button-to-link">Comment</button> </span> 
+              </div> 
+              <script type="text/javascript">
+    $(document).ready(function() {
+        $('#reply-link-358309').click(function() {
+            commandUtils.showMessage('', "Please sign in to comment.");
+            return false;
+        });
+    });
+</script> 
+              <div class="control-bar" nodeid="358309"> 
+               <div class="post-controls" nodeid="358309"> 
+                <button id="reply-link-358309" class="button-to-link"> <i class="fa fa-comment-o" aria-hidden="true"></i> Comment </button> 
+                <button id="358309-show-comments-container" class="show-comments-container button-to-link" style="display: none;"><i class="fa fa-comments" aria-hidden="true"></i> Hide</button> 
+                <span id="358309-comment-count" class="control-score-counter comment-count" style="display: none;">0</span> 
+               </div> 
+              </div> 
+              <div id="comment-358309-form-container" class="clearfix well comment-form-container"> 
+               <form id="comment-358309-form" action="https://docs.microsoft.com/answers/comments/358309/add.json" method="POST" accept-charset="utf-8"> 
+                <div class="comment-form-widgets-container"> 
+                 <div class="comment-form-textarea-container"> 
+                  <label for="comment-358309-textarea" id="comment-358309-form-label" class="sr-only comment-form-label"> Comment </label> 
+                  <textarea id="comment-358309-textarea" aria-describedby="comment-358309-chars-left" name="body" class="commentBox has-inner-focus" data-type="comment" data-attachments="true"></textarea> 
+                 </div> 
+                 <div class="comment-form-buttons"> 
+                  <span id="comment-358309-chars-left" class="comment-chars-left" aria-live="polite" aria-atomic="true"> <span class="comments-char-left-count warn">5 |1600</span> <span class="comments-chars-togo-msg">characters needed</span> <span class="comments-chars-left-msg">characters left</span> <span class="comments-chars-exceeded-msg">characters exceeded</span> </span> 
+                  <div class="comment-form-buttons-container"> 
+                   <input type="submit" class="btn btn-primary comment-submit" value="Submit"> 
+                   <input type="submit" class="btn btn-default comment-cancel" value="Cancel"> 
+                  </div> 
+                   
+                 </div> 
+                 <div style="clear:both;"></div> 
+                </div> 
+                <input type="hidden" name="parent" value="358309"> 
+                <input type="hidden" name="visibility" value="full"> 
+                <input type="hidden" name="editor" value="wmd-escaped/"> 
+                <input type="hidden" name="escapeHtml" value="true"> 
+                <div style="display: none" class="comment-form-extra-inputs"></div> 
+                <div class="main-attachments-container message control-group "> 
+                 <p> <strong><label>Attachments:</label></strong> Up to 10 attachments (including images) can be used with a maximum of 3.0 MiB each and 30.0 MiB total. </p> 
+                 <div class="controls"> 
+                  <div class="img-attachments-container"></div> 
+                  <div class="attachments-container"></div> 
+                 </div> 
+                </div> 
+                <input type="hidden" name="_csrf" value="5538a40c-7859-453c-8639-00e7e3247f20">
+               </form> 
+              </div> 
+              <div class="comments-container" id="comments-container-358309" nodeid="358309" style="display: block;"> 
+              </div> 
+             </div> 
+            </div> 
+            <script type="text/javascript">
+          $(function () {
+              setupComments($('#answer-container-358309'), true, false, croles, "full", true)
+          });
+          $(document).ready(function () {
+              var $answer = $("#answer-container-358309");
+              var $replyLink = $answer.find(".reply-link");
+              $replyLink.click(function (e) {
+                  e.preventDefault();
+                  $answer.find(".add-comment-link").click();
+              });
+          });
+      </script> 
+            <div id="answer-container-358398" class="post-container answer-container " nodeid="358398"> 
+             <div class="report-post-alert"></div> 
+             <div class="post-gravatar answer-gravatar col-sm-1" nodeid="358398"> 
+              <a href="https://docs.microsoft.com/answers/users/6645484/docs-4663.html" style="display: inline-block; max-width: 48px; position: relative;" class="gravatar" rel="user" nodeid="6645484" data-hasqtip="5"><span> <img class="gravatar " width="48" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/c4bf59e8aad36e0631187478e0416a10" id="" alt="Docs-4663 avatar image"> </span></a> 
+              <div class="vote-widget"> 
+               <div class="sr-only 358398-vote-action-performed" aria-live="assertive"></div> 
+               <button id="vote-up-button-358398-node-left" class="vote-up vote-up-node-left votes" command="voteUp" data-hasqtip="18"><i class="icon-chevron-up icon-2x"></i><span class="sr-only">Click to vote</span></button> 
+               <span id="left_post-358398-score-wrapper" class="post-score-wrapper post-358398-score-wrapper count votes" style="cursor:default"> <span id="left_post-358398-score-sr" class="sr-only post-score-sr">0 Votes" </span> <span aria-hidden="true" id="left_post-358398-score" class="post-358398-score score">0</span> </span> 
+               <button id="vote-down-button-358398-node-left" class="vote-down vote-down-node-left votes" command="voteDown" data-hasqtip="15"><i class="icon-chevron-down icon-2x"></i><span class="sr-only">Click to down vote</span></button> 
+              </div> 
+             </div> 
+             <div id="answer-358398" class="answer post col-sm-11"> 
+              <div class="muted author-info"> 
+               <span class="user og-poster-author"> <a href="https://docs.microsoft.com/answers/users/6645484/docs-4663.html" aria-labelledby="358398-og-action-user 358398-og-action-verb 358398-og-action-date" id="358398-og-action-user" rel="user" nodeid="6645484" data-hasqtip="6" style="position: relative;"><span>Docs-4663</span></a> </span> 
+               <span id="358398-og-action-verb"> answered </span> 
+               <span aria-hidden="true" class="action-divider">•</span> 
+               <span id="358398-og-action-date" class="action-date og-poster-action-date" title="Apr 15, 2021 8:11:38 AM"> <time role="presentation" datetime="2021-04-15T08:11:38.277Z" format="MMM d, &#39;&#39;yy" suffix="">Apr 15 2021 at 4:11 AM</time> </span> 
+               <span aria-hidden="true">|</span> 
+               <span class="user"> <a href="https://docs.microsoft.com/answers/users/6645484/docs-4663.html" aria-labelledby="358398-action-user 358398-action-verb 358398-action-date" id="358398-action-user" rel="user" nodeid="6645484" data-hasqtip="7" style="position: relative;"><span>Docs-4663</span></a> </span> 
+               <span id="358398-action-verb"> published </span> 
+               <span aria-hidden="true" class="action-divider">•</span> 
+               <span id="358398-action-date" title="Apr 15, 2021 8:19:54 AM"> <time role="presentation" datetime="2021-04-15T08:19:54.35Z" format="MMM d, &#39;&#39;yy" suffix="">Apr 15 2021 at 4:19 AM</time> </span> 
+               <span class="labels post-title-358398"> <script type="text/javascript">
+                                $(document).ready(function () {
+
+                                    var nodeId = '358398';
+                                    var nodeType = pageContext.i18n.answer;
+                                    var postTags = [];
+
+
+
+
+
+
+
+                                    postTags.forEach(function (x) {
+                                        commandUtils.AccessibleUI.createTag({
+                                            label: x.label,
+                                            srLabel: x.srLabel,
+                                            addClass: x.addClass,
+                                            type: x.type,
+                                            selector: '.post-title-' + nodeId,
+                                            transition: false
+                                        });
+                                    })
+                                });
+
+                            </script> </span> 
+              </div> 
+              <div class="answer-body" data-markup-language="wmd-escaped"> 
+               <p>There are multiple methods to test drives:</p> 
+               <p>SMART<br>Chkdsk<br>Full error / surface scan<br>Long DST<br>Long Generic<br>Benchmark</p> 
+               <br> 
+               <p>For chkdsk there are many switches:<br><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk" target="_blank">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/chkdsk</a></p> 
+               <p>One chkdsk command can check only one partition.<br>Some hidden partitions can have drive letters assigned to run chkdsk commands.</p> 
+               <br> 
+               <p>For bad sectors it is typically useful to view error / surface scans.</p> 
+               <br> 
+               <p>For drive bad sector workups these are useful tests:</p> 
+               <br> 
+               <p>1) Open administrative command prompt and type or copy and paste: <br>chkdsk /b /v<br>This may take hours to run so plan to run overnight.<br>Run on all drives using the syntax: chkdsk /b /v C: or chkdsk /b /v D: changing the drive letter to the applicable drive.</p> 
+               <p>C:\Windows\system32&gt;chkdsk /b /v<br>The type of the file system is NTFS.<br>Cannot lock current drive.</p> 
+               <p>Chkdsk cannot run because the volume is in use by another<br>process. Would you like to schedule this volume to be<br>checked the next time the system restarts? (Y/N)</p> 
+               <p>Type: Y<br>reboot</p> 
+               <br> 
+               <p>2) Use the information in this link to find the chkdsk report in the event viewer. <br>Copy and paste into notepad &gt; save to desktop &gt; post into the thread using a one drive, drop box, or google drive share link:<br>Read Chkdsk Log in Event Viewer in Windows 10 Windows 10 Performance Maintenance Tutorials <br><a href="https://www.tenforums.com/tutorials/40822-read-chkdsk-log-event-viewer-windows-10-a.html" target="_blank">https://www.tenforums.com/tutorials/40822-read-chkdsk-log-event-viewer-windows-10-a.html</a></p> 
+               <br> 
+               <p>3) Run HD Tune (free version) (all drives)<br><a href="https://www.hdtune.com/" target="_blank">https://www.hdtune.com</a>/<br>Post images into the thread for results on these tabs:<br>a) Health<br>b) Benchmark<br>c) Full error scan</p> 
+               <br> 
+               <p>4) Run Sea Tools for Windows<br>long generic test<br>Post an image of the test result into the thread<br><a href="http://www.seagate.com/support/downloads/seatools/seatools-win-master" target="_blank">http://www.seagate.com/support/downloads/seatools/seatools-win-master</a>/<br><a href="http://knowledge.seagate.com/articles/en_US/FAQ/202435en" target="_blank">http://knowledge.seagate.com/articles/en_US/FAQ/202435en</a></p> 
+               <br> 
+               <p>5) Run HD Sentinel: (free or trial edition)<br>Hard Disk Sentinel - HDD health and temperature monitoring<br><a href="https://www.hdsentinel.com/" target="_blank">https://www.hdsentinel.com</a>/<br>For each drive post images of these tabs into the thread:<br> Overview tab<br> Temperature<br> SMART<br> Disk performance</p> 
+               <br> 
+               <p>6) Run Crystal Disk standard edition:<br><a href="https://crystalmark.info/en/software/crystaldiskinfo" target="_blank">https://crystalmark.info/en/software/crystaldiskinfo</a>/</p> 
+               <br> 
+               <br> 
+               <br> 
+               <br> 
+               <br> 
+               <p><a href="https://www.tenforums.com/tutorials/163843-how-check-drive-health-smart-status-windows-10-a.html" target="_blank">https://www.tenforums.com/tutorials/163843-how-check-drive-health-smart-status-windows-10-a.html</a></p> 
+               <br> 
+               <br> 
+               <p>These are examples of entries that may appear in the event viewer:</p> 
+               <br> 
+               <p>Event ID: 98 Volume D: (\Device\HarddiskVolume3) requires an Online Scan. An Online Scan will automatically run as part of the next scheduled maintenance task. <br>Alternatively you may run "CHKDSK /SCAN" locally via the command line, or run "REPAIR-VOLUME &lt;drive:&gt; -SCAN" locally or remotely via PowerShell.</p> 
+               <p>Event ID: 55 A corruption was discovered in the file system structure on volume D:. The exact nature of the corruption is unknown. The file system structures need to be scanned online.</p> 
+               <p>Event ID: 55 The file system structure on the disk is corrupt and unusable. Please run the chkdsk utility on the volume System OS.</p> 
+               <p>Event ID: 153 The IO operation at logical block address 0x800 for Disk 0 (PDO name: \Device\Ide\IdeDeviceP0T0L0-0) was retried.</p> 
+               <p>Event ID: 154 The IO operation at logical block address 0x155810 for Disk 1 (PDO name: \Device\00000035) failed due to a hardware error.</p> 
+               <br> 
+               <br> 
+               <p><a href="https://www.crucial.com/support/articles-faq-ssd/my-ssd-has-bad-sectors" target="_blank">https://www.crucial.com/support/articles-faq-ssd/my-ssd-has-bad-sectors</a></p> 
+               <br> 
+               <p><a href="https://www.backblaze.com/blog/how-long-do-disk-drives-last" target="_blank">https://www.backblaze.com/blog/how-long-do-disk-drives-last</a>/<br><a href="https://www.backblaze.com/blog/hard-drive-smart-stats" target="_blank">https://www.backblaze.com/blog/hard-drive-smart-stats</a>/<br><a href="https://www.backblaze.com/blog/how-reliable-are-ssds" target="_blank">https://www.backblaze.com/blog/how-reliable-are-ssds</a>/<br><a href="https://www.backblaze.com/blog/ssd-vs-hdd-future-of-storage" target="_blank">https://www.backblaze.com/blog/ssd-vs-hdd-future-of-storage</a>/<br><a href="https://www.backblaze.com/blog/hdd-versus-ssd-whats-the-diff" target="_blank">https://www.backblaze.com/blog/hdd-versus-ssd-whats-the-diff</a>/<br><a href="https://www.backblaze.com/blog/ssd-troubleshooting" target="_blank">https://www.backblaze.com/blog/ssd-troubleshooting</a>/<br><a href="https://www.backblaze.com/blog/ssd-upgrade-guide" target="_blank">https://www.backblaze.com/blog/ssd-upgrade-guide</a>/</p> 
+               <br> 
+              </div> 
+              <div class="comment-tools hidden"> 
+               <span class="add-comment-link "> <button class="button-to-link">Comment</button> </span> 
+              </div> 
+              <script type="text/javascript">
+    $(document).ready(function() {
+        $('#reply-link-358398').click(function() {
+            commandUtils.showMessage('', "Please sign in to comment.");
+            return false;
+        });
+    });
+</script> 
+              <div class="control-bar" nodeid="358398"> 
+               <div class="post-controls" nodeid="358398"> 
+                <button id="reply-link-358398" class="button-to-link"> <i class="fa fa-comment-o" aria-hidden="true"></i> Comment </button> 
+                <button id="358398-show-comments-container" class="show-comments-container button-to-link" style="display: none;"><i class="fa fa-comments" aria-hidden="true"></i> Hide</button> 
+                <span id="358398-comment-count" class="control-score-counter comment-count" style="display: none;">0</span> 
+               </div> 
+              </div> 
+              <div id="comment-358398-form-container" class="clearfix well comment-form-container"> 
+               <form id="comment-358398-form" action="https://docs.microsoft.com/answers/comments/358398/add.json" method="POST" accept-charset="utf-8"> 
+                <div class="comment-form-widgets-container"> 
+                 <div class="comment-form-textarea-container"> 
+                  <label for="comment-358398-textarea" id="comment-358398-form-label" class="sr-only comment-form-label"> Comment </label> 
+                  <textarea id="comment-358398-textarea" aria-describedby="comment-358398-chars-left" name="body" class="commentBox has-inner-focus" data-type="comment" data-attachments="true"></textarea> 
+                 </div> 
+                 <div class="comment-form-buttons"> 
+                  <span id="comment-358398-chars-left" class="comment-chars-left" aria-live="polite" aria-atomic="true"> <span class="comments-char-left-count warn">5 |1600</span> <span class="comments-chars-togo-msg">characters needed</span> <span class="comments-chars-left-msg">characters left</span> <span class="comments-chars-exceeded-msg">characters exceeded</span> </span> 
+                  <div class="comment-form-buttons-container"> 
+                   <input type="submit" class="btn btn-primary comment-submit" value="Submit"> 
+                   <input type="submit" class="btn btn-default comment-cancel" value="Cancel"> 
+                  </div> 
+                   
+                 </div> 
+                 <div style="clear:both;"></div> 
+                </div> 
+                <input type="hidden" name="parent" value="358398"> 
+                <input type="hidden" name="visibility" value="full"> 
+                <input type="hidden" name="editor" value="wmd-escaped/"> 
+                <input type="hidden" name="escapeHtml" value="true"> 
+                <div style="display: none" class="comment-form-extra-inputs"></div> 
+                <div class="main-attachments-container message control-group "> 
+                 <p> <strong><label>Attachments:</label></strong> Up to 10 attachments (including images) can be used with a maximum of 3.0 MiB each and 30.0 MiB total. </p> 
+                 <div class="controls"> 
+                  <div class="img-attachments-container"></div> 
+                  <div class="attachments-container"></div> 
+                 </div> 
+                </div> 
+                <input type="hidden" name="_csrf" value="5538a40c-7859-453c-8639-00e7e3247f20">
+               </form> 
+              </div> 
+              <div class="comments-container" id="comments-container-358398" nodeid="358398" style="display: block;"> 
+              </div> 
+             </div> 
+            </div> 
+            <script type="text/javascript">
+          $(function () {
+              setupComments($('#answer-container-358398'), true, false, croles, "full", true)
+          });
+          $(document).ready(function () {
+              var $answer = $("#answer-container-358398");
+              var $replyLink = $answer.find(".reply-link");
+              $replyLink.click(function (e) {
+                  e.preventDefault();
+                  $answer.find(".add-comment-link").click();
+              });
+          });
+      </script> 
+           </div> 
+          </div> 
+          <script type="text/javascript">
+    $(document).ready(function () {
+        /* TODO: Move the javascript concerning revision to another file */
+        var revisionData = [];
+    });
+</script> 
+         </div> 
+         <script type="text/javascript">
+    
+    commands.likeComment.setUrl('click.on', "/answers/commands/%25ID%25/cancelvote.json");
+    commands.likeComment.setUrl('click.off', "/answers/commands/%25ID%25/voteup.json");
+
+    commands.deleteComment.setUrl('click.off', "/answers/commands/%25ID%25/delete.json");
+
+    commands.voteUp.urls = commands.likeComment.urls;
+
+    commands.voteDown.setUrl('click.on', commands.voteUp.urls['click.on']);
+    commands.voteDown.setUrl('click.off', "/answers/commands/%25ID%25/votedown.json");
+
+    commands.acceptAnswer.setUrl('click.on', "/answers/commands/%25ID%25/unaccept.json");
+    commands.acceptAnswer.setUrl('click.off', "/answers/commands/%25ID%25/accept.json");
+
+    commands.markFavorite.setUrl('click.on', "/answers/commands/%25ID%25/unmarkfavorite.json");
+    commands.markFavorite.setUrl('click.off', "/answers/commands/%25ID%25/markfavorite.json");
+
+    commands.reportPost.setMsg('ariaLabel.on', "Cancel your report");
+    commands.reportPost.setMsg('ariaLabel.off', "Report as offensive (i.e containing spam, advertising, malicious text, etc.)");
+    commands.reportPost.setMsg('link.on', "Cancel Report");
+    commands.reportPost.setMsg('link.off', "Report");
+    commands.reportPost.setMsg('description', "Please select a reason below to close this thread. You can use the text box to input additional information.");
+
+    commands.reportPost.setMsg('reportHints', [
+        "Spam",
+        "Advertising",
+        "Offensive, abusive, or inappropriate",
+        "Content violates terms of use",
+        "Copyright violation",
+        "Misleading",
+        "Someone is not being nice",
+        "Content contains user personal or sensitive information",
+        "Other"]);
+
+    commands.reportPost.setMsg('reportSelectLabel', "Select a reason.");
+    commands.reportPost.setMsg('reportInputLabel', "Input your own reason.");
+
+    commands.reportPost.setUrl('click.on', "/answers/commands/%25ID%25/cancelReport.json");
+    commands.reportPost.setUrl('click.off', "/answers/commands/%25ID%25/report.json");
+
+    commands.publishPost.setUrl('click', "/answers/commands/%25ID%25/publish.json");
+    commands.publishPost.setMsg('linkText', "Publish");
+
+    commands.sendToMod.setUrl('click', "/answers/commands/%25ID%25/sendToMod.json");
+    commands.sendToMod.setMsg('linkText', "Send to Moderation");
+
+    commands.redirectQuestion.setMsg('linkText.off', "Redirect");
+    commands.redirectQuestion.setMsg('linkText.on', "Cancel Redirect");
+    commands.redirectQuestion.setMsg('header', "Redirect Into An Existing Question");
+    commands.redirectQuestion.setMsg('search', "Search for a question:");
+    commands.redirectQuestion.setMsg('related', "Pick a related question:");
+
+    commands.redirectQuestion.setUrl('click.off', "/answers/commands/%25ID%25/redirect.json");
+    commands.redirectQuestion.setUrl('click.on', "/answers/commands/%25ID%25/unredirect.json");
+    commands.redirectQuestion.setUrl('search', "/answers/search.json");
+
+    commands.deletePost.urls = commands.deleteComment.urls;
+    commands.deletePost.setUrl('click.on', "/answers/commands/%25ID%25/undelete.json");
+
+    commands.deletePost.setMsg('linkText.off', "Delete");
+    commands.deletePost.setMsg('linkText.on', "Undelete");
+
+    commands.closeQuestion.setMsg('linkText.on', "Reopen");
+    commands.closeQuestion.setMsg('linkText.off', "Close");
+    commands.closeQuestion.setMsg('description', "Please select a reason below to close this thread. You can use the text box to input additional information.");
+    commands.closeQuestion.setMsg('lock', "also lock comments");
+
+    commands.closeQuestion.setMsg('reportHints', [
+        "Question has been asked before ",
+        "Question is off-topic or not relevant",
+        "Question is too subjective and argumentative",
+        "Question is answered, right answer was accepted",
+        "Problem is not reproducible or outdated",
+        "Other"]);
+
+    commands.closeQuestion.setMsg('reportSelectLabel', "Select a reason.");
+    commands.closeQuestion.setMsg('reportInputLabel', "Input your own reason.");
+
+    commands.closeQuestion.setUrl('click.on', "/answers/commands/%25ID%25/reopen.json");
+    commands.closeQuestion.setUrl('click.off', "/answers/commands/%25ID%25/close.json");
+
+    commands.lockPost.setMsg('linkText.on', "Unlock Comments");
+    commands.lockPost.setMsg('linkText.off', "Lock Comments");
+    commands.lockPost.setMsg('description', "Please select a reason below to close this thread. You can use the text box to input additional information.");
+
+    commands.lockPost.setMsg('reportHints', [
+        "Discussion has gone too far",
+        "No more thank you or +1 comments",
+        "Other"]);
+
+    commands.lockPost.setMsg('reportSelectLabel', "Select a reason.");
+    commands.lockPost.setMsg('reportInputLabel', "Input your own reason.");
+
+    commands.lockPost.setUrl('click.on', "/answers/commands/%25ID%25/unlock.json");
+    commands.lockPost.setUrl('click.off', "/answers/commands/%25ID%25/lock.json");
+
+    commands.wikifyPost.setMsg('linkText.off', "Wikify");
+    commands.wikifyPost.setMsg('linkText.on', "Unwikify");
+
+    commands.wikifyPost.setUrl('click.on', "/answers/commands/%25ID%25/cancelwiki.json");
+    commands.wikifyPost.setUrl('click.off', "/answers/commands/%25ID%25/wikify.json");
+
+    commands.makeSticky.setMsg('linkText.off', "Make Sticky");
+    commands.makeSticky.setMsg('linkText.on', "Undo Make Sticky");
+    commands.makeSticky.setUrl('click.on', "/answers/commands/%25ID%25/cancelSticky.json");
+    commands.makeSticky.setUrl('click.off', "/answers/commands/%25ID%25/makeSticky.json");
+
+    commands.makeSiteSticky.setMsg('linkText.off', "Make Site Sticky");
+    commands.makeSiteSticky.setMsg('linkText.on', "Undo Site Sticky");
+    commands.makeSiteSticky.setUrl('click.on', "/answers/commands/%25ID%25/cancelSiteSticky.json");
+    commands.makeSiteSticky.setUrl('click.off', "/answers/commands/%25ID%25/makeSiteSticky.json");
+
+    commands.convertToComment.setUrl('click', "/answers/commands/%25ID%25/convertToComment.json");
+    commands.convertToComment.setUrl('candidates', "/answers/commands/%25ID%25/convertToComment/possibleParents.json");
+    commands.convertToComment.setMsg('linkText', "Convert to Comment");
+    commands.convertToComment.setMsg('description', "Place the comment under:");
+    commands.convertToComment.setMsg('question', "Question");
+    commands.convertToComment.setMsg('answer', "Answer");
+
+    commands.convertToAnswer.setUrl('click', "/answers/commands/%25ID%25/convertToAnswer.json");
+
+    commands.moveToSpace.setUrl('click', "/answers/commands/%25ID%25/moveToSpace.json");
+    commands.moveToSpace.setUrl('candidates', "/answers/spaces/%25ID%25/moveToCandidates.json");
+    commands.moveToSpace.setMsg('linkText', "Move");
+    commands.moveToSpace.setMsg('description', "Select the space to move the question to");
+
+	commands.switchPrivacy.setMsg('linkText.off', "Make private");
+    commands.switchPrivacy.setMsg('linkText.on', "Make public");
+
+    commands.switchPrivacy.setUrl('click.on', "/answers/commands/%25ID%25/makePublic.json");
+    commands.switchPrivacy.setUrl('click.off', "/answers/commands/%25ID%25/makePrivate.json");
+
+    commands.giveReputation.setUrl('click', "/answers/commands/giveReputation.json");
+    commands.giveReputation.setMsg('answerIntro', "If you like this answer you can reward the user with reputation points.");
+    commands.giveReputation.setMsg('questionIntro', "If you like this question you can reward the user with reputation points.");
+    commands.giveReputation.setMsg('description', "Use the input field to choose the number of points you would like to give.");
+    commands.giveReputation.setMsg('points', "Points:");
+
+    commands.share.setUrl("answer-url", "https://docs.microsoft.com/answers/answers/%25ID%25/view.html");
+    commands.share.setUrl("comment-url", "https://docs.microsoft.com/answers/comments/%25ID%25/view.html");
+    commands.share.setMsg("description", "Copy and paste the URL below to share a direct link to this answer.");
+    commands.share.setMsg("comment-description", "Copy and paste the URL below to share a direct link to this comment.");
+    commands.share.setMsg("title", "Share a link to this answer");
+    commands.share.setMsg("comment-title", "Share a link to this comment");
+
+    commands.submitSurvey.setUrl("survey-url", "/answers/questions/submitSurvey.json");
+
+    pageContext.i18n.seeRevisions = 'see revisions';
+    pageContext.url.seeRevisions = '/answers/revisions/%25ID%25.html';
+    pageContext.url.questionEdit = '/answers/questions/%25ID%25/edit.html';
+    pageContext.url.answerEdit = '/answers/answers/%25ID%25/edit.html';
+    pageContext.url.commentEdit = '/answers/comments/%25ID%25/edit.html';
+
+
+</script> 
+         <script type="text/x-jquery-tmpl" id="give-reputation-dialog">
+        <p style="font-size:14px;">{{if isAnswer }} ${answerIntro} {{/if}} {{if !isAnswer }} ${questionIntro} {{/if}}</p>
+        <p style="font-size:14px;">${description}</p>
+        <form class="form-inline">
+            <div style="font-size:14px;">
+                <label for="reputation-input-points">
+                    ${points}
+                </label>
+                <input type="text" id="reputation-input-points" aria-describedby="reputation-dialog-description" class="input-mini" name="points" />
+                <span id="reputation-dialog-description">(${currentUserPoints} ${currentPointsLabel})</span>
+            </div>
+        </form>
+        <p style="color:red" id="invaliderror"></p>
+</script> 
+         <script type="text/x-jquery-tmpl" id="flag-or-close-post-dialog">
+
+    
+
+    <form style="with: 250px;margin-bottom:10px">
+    
+        <p>
+            
+            <label for="selectable-report-reasons">${description}</label>
+            <select id="selectable-report-reasons" name="sample" class="prompt-examples" style="width: 100%;">
+                {{each(i, hint) reportHints }}
+                    <option value="${hint}">${hint}</option>
+                {{/each}}
+            </select>
+        </p>
+        <p>
+            <label class="sr-only" for="input-report-reason">${reportInputLabel}</label>
+            <textarea id="input-report-reason" name="prompt" style="width: 100%; padding: 0;"></textarea>
+            {{if canLock }}
+                <input type="checkbox" name="lock" value="true" /> ${lock}
+            {{/if}}
+        </p>
+    </form>
+
+</script> 
+         <script type="text/x-jquery-tmpl" id="convert-to-comment-dialog">
+    <form>
+        <label for="convertToCommentCommandId">
+            ${description}
+        </label>
+        <select name="targetParent" class="prompt-examples" id="convertToCommentCommandId">
+            {{each(p, target) parentCandidates }}
+            <option value="${target.id}">${target.summary}</option>
+            {{/each}}
+        </select>
+    </form>
+</script> 
+         <script type="text/x-jquery-tmpl" id="move-to-space-dialog">
+    <label for="move-to-space">Select the space to move the question to</label>
+    <form>
+        <select id="move-to-space" name="targetSpace" class="prompt-examples">
+        </select>
+    </form>
+</script> 
+         <script type="text/x-jquery-tmpl" id="share-dialog">
+    <label for="share-url">${description}</label>
+    <input type="text" id="share-url" class="input-block-level" value="${shareURL}"/>
+</script> 
+         <script type="text/x-jquery-tmpl" id="advanced-visibility-dialog">
+    <form id="advanced-visibility-dialog-form">
+        <div>
+            {{if (perm.ag || perm.og) }}
+                <fieldset class="form-section">
+                    <legend class="h4">${msg.selectGroups}</legend>
+                    {{if groupsCheck }}
+                        {{each(i, group) groups }}
+                            <label for="adv_visibility_comment_recipients_groups_${groups.indexOf(group)}"><input {{if currentSelection.recipients[group.id]}}checked{{/if}} type="checkbox" name="recipients" value="${group.id}" id="adv_visibility_comment_recipients_groups_${groups.indexOf(group)}" /> ${group.name}</label>
+                        {{/each}}
+                    {{else}}
+                        <input type="text" class="comment-recipients-groups-autocomplete" id="adv_visibility_comment_recipients_groups_autocomplete" />
+                        <div class="comment-recipients-groups-container" ></div>
+                    {{/if}}
+                </fieldset>
+            {{/if}}
+            {{if (perm.op || perm.mod || perm.as) }}
+                <fieldset class="form-section">
+                    <legend class="h4">${msg.selectOther}</legend>
+                    {{if perm.op }}
+                        <label for="adv_visibility_select_orig_poster"><input {{if currentSelection.specialRecipients.op}}checked{{/if}} type="checkbox" name="specialRecipients" value="op" id="adv_visibility_select_orig_poster" /> ${msg.selectOriginalPoster}</label>
+                    {{/if}}
+                    {{if perm.m }}
+                        <label for="adv_visibility_select_moderators"><input {{if currentSelection.specialRecipients.mod}}checked{{/if}} type="checkbox" name="specialRecipients" value="mod" id="adv_visibility_select_moderators"/> ${msg.selectModerators}</label>
+                    {{/if}}
+                    {{if perm.as }}
+                        <label for="adv_visibility_special_assignees"><input {{if currentSelection.specialRecipients.asg}}checked{{/if}} type="checkbox" name="specialRecipients" value="asg" id="adv_visibility_special_assignees" /> ${msg.selectAssignees}</label>
+                    {{/if}}
+                </fieldset>
+            {{/if}}
+        </div>
+    </form>
+</script> 
+         <script type="text/x-jquery-tmpl" id="new-comment-skeleton">
+        <div class="comment nsc" id="comment-${comment.id}" activerev="${comment.activeRevisionId}" nodeid="${comment.id}"
+             authorid="${comment.author.id}" privateComment="${comment.private}">
+            <div class="comment-content" nodeid="${comment.id}">
+                <div class="comment-header comment-skeleton">
+                   <a class="gravatar" nodeId="${author.id}" rel="user" href="${author.url}">
+                        <img class="gravatar comment-user-gravatar" src="${author.avatar}"  alt="${author.username}" style="width:${comment.depth > 0 ? 24 : 36};">
+                    </a>
+                   {{if comment.private }}
+                    <i class="icon-lock" role="img" tabindex="0" aria-label="Visible to: {{each(prop, val) comment.recipients}}${val}{{if prop+1 != comment.recipients.length}},{{/if}} {{/each}}" title="Visible to: {{each(prop, val) comment.recipients}}${val}{{if prop+1 != comment.recipients.length}},{{/if}} {{/each}}"></i>&nbsp;
+                   {{/if}}
+                    <a class="comment-user userinfo" nodeId="${author.id}" rel="user" href="${author.url}">
+                        ${(pageContext.userRealName && comment.author.realname) ? comment.author.realname : comment.author.username}
+                    </a>
+                    {{if realAuthor}}
+                    (
+                    <a  nodeId="${realAuthor.id}" rel="user" href="${realAuthor.url}" class="gravatar">
+                        <img class="gravatar" src="${realAuthor.avatar}" alt="${realAuthor.username}" style="display: inline-block; width:12px;">
+                    </a>
+                    <a  nodeId="${realAuthor.id}" rel="user" href="${realAuthor.url}">
+                        ${(pageContext.userRealName && realAuthor.realname) ? realAuthor.realname : realAuthor.username}
+                    </a>
+                    )
+                    {{/if}}
+                    {{if comment.parentId != comment.originalParentId}}
+                        <span class="comment-parent">
+                            <i class="icon-share-alt"></i>
+                            <span class="parent-author">
+                                ${(pageContext.userRealName && comment.parentAuthor.realname)
+                                ? comment.parentAuthor.realname : comment.parentAuthor.username}
+                            </span>
+                        </span>
+                    {{/if}}
+                    <span class="middot">
+                            &middot;
+                    </span>
+                    <span class="comment-age friendly-date" title="${creationDateFormatted}">
+                         ${commentDateFriendly}
+                    </span>
+                    {{if comment.deleted}}
+                        <span role="status" aria-label="Deleted" class="post-label post-label-error post-label-outline post-label-${comment.id}-delete">
+                            <span class="sr-only">Deleted</span>
+                            <span class="sr-hidden" aria-hidden="true">Deleted</span>
+                        </span>
+                    {{/if}}
+
+                </div>
+
+                <div class="comment-text">{{html comment.bodyAsHTML}}</div>
+                    <div class="comment-info btn-broup" id="comment-${comment.id}-info">
+                        <a id="vote-up-button-${comment.id}" command="voteUp" href="#" class="make-tooltip vote-up {{if crel.votedUp}}on{{/if}}" title="Vote comment">
+Vote                        </a>
+                        <a id="vote-down-button-${comment.id}" command="voteDown" href="#" class="make-tooltip vote-down {{if crel.votedDown}}on{{/if}}"  title="Vote comment">
+                            <i class=" icon-chevron-down"></i>
+                        </a>
+                        <span class="post-${comment.id}-score-wrapper">
+                          <span class="sr-only post-score-sr">${comment.score} <#if comment.score == 1 || comment.score == -1><@trans key='label.like' /><#else><@trans key='label.likes' /></#if></span>
+                          <span id="post-${comment.id}-score" class="post-${comment.id}-score comment-score control-score-counter">${comment.score}</span>
+                        </span>
+                        <span class="middot">
+                            &middot;
+                        </span>
+                        {{if crel.canComment }}
+                                    <button id="comment-${comment.id}-reply" class="comment-reply button-to-link">
+Reply                                    </button>
+                        {{/if}}
+                        {{if crel.canShare }}
+                            <span aria-hidden="true">&middot;&nbsp;</span>
+    <i class="fa fa-share-alt"></i>
+    <button class="share-btn" command="shareModal" role="button">Share</button>
+                        {{/if}}
+                        {{if (crel.canReport || crel.canCancelReport) || crel.canEdit || crel.canDelete || crel.canConvertToAnswer }}
+                            <div class="dropdown" style="display:inline">
+                                <button aria-expanded="false" class="dropdown-toggle button-to-link" data-toggle="dropdown">
+More                                </button>
+                                <ul aria-expanded="false" class="dropdown-menu" role="menu" aria-label="More">
+                                    {{if crel.canReport || crel.canCancelReport }}
+                                        <li class="item" role="menuitem">
+                                            <button class="ajax-coxmmand button-to-link {{if crel.reported }} on{{/if}}" command="reportPost">
+                                                {{if !crel.reported }}
+                                                    123
+Flag                                                {{else}}
+label.report.cancel                                                {{/if}}
+                                                {{if crel.canViewReports }}
+                                                    (${comment.reportCount})
+                                                {{/if}}
+                                            </button>
+                                        </li>
+                                    {{/if}}
+                                    {{if crel.canViewRevisions }}
+                                        <li role="menuitem" class="item">
+                                            <a rel="nofollow" class="node-tools-revisions-link button-to-link" href="${revisionUrl}">
+See revisions                                            </a>
+                                        </li>
+                                    {{/if}}
+                                    {{if crel.canEdit }}
+                                        <li role="menuitem" class="item">
+                                            <button id="comment-${comment.id}-edit" class="comment-edit button-to-link">
+Edit                                            </button>
+                                        </li>
+                                    {{/if}}
+                                    {{if crel.canDelete }}
+                                        <li role="menuitem" class="item">
+                                            <button id="comment-${comment.id}-delete" class="comment-delete button-to-link" command="deleteComment">
+Delete                                            </button>
+                                        </li>
+                                    {{/if}}
+                                    {{if crel.canConvertToAnswer }}
+                                        <li role="menuitem" class="item">
+                                            <button class="convert-to-answer button-to-link" command="convertToAnswer">
+Convert to answer                                            </button>
+                                        </li>
+                                    {{/if}}
+                                </ul>
+                            </div>
+                        {{/if}}
+                    </div>
+                 </div>
+
+                <div id="comment-${comment.id}-left" class="comment-left">
+                    <div id="post-${comment.id}-score-left" class="post-${comment.id}-score comment-score"></div>
+                </div>
+        </div>
+    </script> 
+         <script type="text/x-jquery-tmpl" id="redirect-question-dialog">
+    <form>
+        <h4>Extended disk diagnosis</h4>
+        <label class="control-label" for="searchQuestion">into:</label>
+        <div class="controls">
+            <div class="SearchAnswers">
+                <select class="textInput input-block-level" name="to" id="searchQuestion" placeholder="Search for a question" onclick="if(this.value=='Find Question'){this.value = ''}" >
+                </select>
+                <div id="results"></div>
+            </div>
+        </div>
+    </form>
+</script>
+         <script type="text/x-jquery-tmpl" id="post-wiki-mark">
+    <div class="community-wiki">
+        <div class="wiki-icon">&nbsp;</div>
+        <div class="wiki-text">
+            {{if isAnswer }}
+        This answer is marked "community wiki".
+            {{else}}
+        This question is marked "community wiki".
+            {{/if}}
+
+            {{if canEdit }}
+            <br />Feel free to <a href="${editUrl}">edit it</a>.
+            {{/if}}
+        </div>
+    </div>
+</script>
+         <script type="text/x-jquery-tmpl" id="user-with-follow">
+    <li class="userWithFollow">
+        <a class="gravatar-link" href="${user.profileUrl}"><img class="gravatar" src="${user.avatarUrl}"></a>
+        <div class="info">
+            <a href="${user.profileUrl}" class="username">${user.displayName}</a>
+        </div>
+        {{if user.id != currentUser.id}}
+        {{if $.grep(follows, function(follow){ return follow.followed.id == user.id }).length < 1}}
+        <a class="followLink btn" command="follow" data-node-type="user" nodeId="${user.id}"></a>
+        {{else}}
+        <a class="followLink on btn" command="follow" data-node-type="user" nodeId="${user.id}" ></a>
+        {{/if}}
+        {{/if}}
+    </li>
+</script> 
+        </div> 
+        <div class="span4 sidebarTwo"> 
+         <div> 
+          <div class="widget follow-widget question-follow-widget" data-follow-widget-id="357539"> 
+           <div class="widget-header"> 
+            <h3>question details</h3> 
+           </div> 
+           <div class="widget-content"> 
+            <script data-id="followJsonMessages" type="application/json">
+                {
+                  "empty": "No one has followed this question yet.",
+                  "singular": "<strong>1</strong> Person is following this question.",
+                  "plural": "<strong>2</strong> people are following this question."
+                }
+            </script> 
+            <p data-follow-count-id="357539"> <strong>4</strong> people are following this question. </p> 
+            <div class="followers"> 
+             <a href="https://docs.microsoft.com/answers/users/5156915/taolihourkim-8267.html" style="display: inline-block; max-width: 28px; position: relative;" class="gravatar" rel="user" nodeid="5156915" data-hasqtip="8"><span> <img class="gravatar " width="28" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/e8f0f9dbf5fb15a43e2fdb0a3271021f" id="" alt="TaolihourKim-8267 follows this question"> </span></a>
+             <a href="https://docs.microsoft.com/answers/users/762555/quockienly-4216.html" style="display: inline-block; max-width: 28px; position: relative;" class="gravatar" rel="user" nodeid="762555" data-hasqtip="9"><span> <img class="gravatar " width="28" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/3559a115563d0ee378e123353bda4197" id="" alt="QuocKienLy-4216 follows this question"> </span></a>
+             <a href="https://docs.microsoft.com/answers/users/6032755/jiayaozhu-msft.html" style="display: inline-block; max-width: 28px; position: relative;" class="gravatar" rel="user" nodeid="6032755" data-hasqtip="10"><span> <img class="gravatar " width="28" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/view(1).html" id="" alt="jiayaozhu-MSFT follows this question"> </span></a>
+             <a href="https://docs.microsoft.com/answers/users/6645484/docs-4663.html" style="display: inline-block; max-width: 28px; position: relative;" class="gravatar" rel="user" nodeid="6645484" data-hasqtip="11"><span> <img class="gravatar " width="28" src="./Extended disk diagnosis - Microsoft Q&amp;A_files/c4bf59e8aad36e0631187478e0416a10(1)" id="" alt="Docs-4663 follows this question"> </span></a> 
+            </div> 
+            <div class="rss-buttons"> 
+             <a class="btn btn-small btn-default" title="Subscribe to Answers" href="https://docs.microsoft.com/answers/feed/357539/answers.rss"> <i aria-hidden="true" class="icon-rss"></i> <span aria-hidden="true">Answers</span> <span class="sr-only">Subscribe to Answers</span> </a> 
+             <a class="btn btn-small btn-default" title="Subscribe to Comments and Answers" href="https://docs.microsoft.com/answers/feed/357539/comments-and-answers.rss"> <i aria-hidden="true" class="icon-rss"></i> <span aria-hidden="true">Answers and Comments</span> <span class="sr-only">Subscribe to Comments and Answers</span> </a> 
+            </div> 
+           </div> 
+          </div> 
+          <script type="text/x-jquery-tmpl" id="user-avatar">
+    <a href="${profileUser.profileUrl}" rel="user" class="gravatar" nodeid="${profileUser.id}" style="max-width: ${size}px;">
+        <span>
+            <img id="" class="gravatar " height="${size}" width="${size}" title="${profileUser.displayName}" alt="${profileUser.displayName} ${pageContext.i18n.userAvatar}" src="${pageContext.url.userAvatar.replace("%7BuserId%7D",profileUser.id)}?s=${size}">
+        </span>
+    </a>
+</script> 
+          <script type="application/javascript">
+    $(function() {
+        $("div.follow-widget[data-follow-widget-id]").on("followCountUpdated", function(event, data) {
+            var $this = $(this);
+            var messages = JSON.parse($this.find("script[data-id=followJsonMessages").text());
+            var message = data.followCount == 0 ? messages.empty : (data.followCount == 1 ? messages.singular : messages.plural.replace("2", data.followCount));
+            $this.find("[data-follow-count-id=" + $this.attr("data-follow-widget-id") + "]").empty().append($.parseHTML(message));
+            if (data.following) {
+                $.get(pageContext.url.condensedProfileUrl.replace("%7Buser%7D",data.action.user.id)).then(function(condensedProfile) {
+                    if (pageContext.userRealName) {
+                        if (condensedProfile.profileUser.realname) {
+                            condensedProfile.profileUser.displayName = condensedProfile.profileUser.realname;
+                        } else {
+                            condensedProfile.profileUser.displayName = condensedProfile.profileUser.plug;
+                        }
+                    } else {
+                        condensedProfile.profileUser.displayName = condensedProfile.profileUser.username;
+                    }
+                    condensedProfile.profileUser.profileUrl = pageContext.url.profile.replace('{id}',condensedProfile.profileUser.id).replace('{plug}',condensedProfile.profileUser.plug);
+                    condensedProfile.size =28;
+                    var avatar = commandUtils.renderTemplate("user-avatar",condensedProfile);
+                    $this.find(".followers").append(avatar);
+                    createUserPopOver(avatar);
+                });
+            } else {
+                $this.find(".followers a[nodeid=" + data.action.user.id +"]").remove();
+            }
+        })
+    })
+</script> 
+         </div> 
+         <div>   
+         </div> 
+         <div> 
+          <div class="widget related-questions-widget"> 
+           <div class="widget-header"> 
+            <i class="icon-list-alt"></i> 
+            <h3>Related Questions</h3> 
+           </div> 
+           <div class="widget-content"> 
+            <p><a href="https://docs.microsoft.com/answers/questions/46626/different-printer-settings-are-not-used-default-pr.html">Different printer settings are not used - default printer settings are used instead</a></p> 
+            <p><a href="https://docs.microsoft.com/answers/questions/46649/disk-drive-capabilities-change.html">Disk Drive Capabilities change !!</a></p> 
+            <p><a href="https://docs.microsoft.com/answers/questions/46650/event-id-10016-the-application-specific-permission.html">Event ID 10016 - The application-specific permission settings do not grant Local Activation permission for the COM Server application with CLSID</a></p> 
+            <p><a href="https://docs.microsoft.com/answers/questions/46664/my-usb-ports-are-sporadically-failing.html">My USB Ports are sporadically failing</a></p> 
+            <p><a href="https://docs.microsoft.com/answers/questions/46666/disk-utilisation-100.html">Disk utilisation 100%</a></p> 
+           </div> 
+          </div> 
+         </div> 
+         <!-- Changed order between properties and widgets because of https://dzonedev.atlassian.net/browse/TR-2732 --> 
+         <div class="clearfix"></div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <div class="push" style="height: 75px;"></div> 
+  </div> 
+  <section role="contentinfo" id="bottom"><!---->
+		<section class="has-default-focus is-hidden-interactive border-top margin-none">
+			<footer id="footer" data-bi-name="footer" class="footer-layout uhf-container has-padding" role="contentinfo">
+				<ul class="links" data-bi-name="footerlinks">
+					<li class="manage-cookies-holder" hidden=""></li>
+					<li>
+						<a data-mscc-ic="false" href="https://aka.ms/msftqafaq" data-bi-name="faq">
+							FAQ
+						</a>
+					</li>
+					<li>
+						<a data-mscc-ic="false" data-bi-name="feedback" href="https://docs.microsoft.com/en-us/answers/content/idea/post.html">
+							Feedback
+						</a>
+					</li>
+					<li>
+						<a data-mscc-ic="false" href="https://aka.ms/msftqacodeconduct" data-bi-name="codeofconduct">
+							Code of Conduct
+						</a>
+					</li>
+					<li>
+						<a data-mscc-ic="false" data-bi-name="termsofuse" href="https://docs.microsoft.com/en-us/legal/termsofuse">
+							Terms of Use
+						</a>
+					</li>
+					<li>
+						<a data-mscc-ic="false" data-bi-name="bloglink" href="https://docs.microsoft.com/en-us/teamblog/">
+							Blog
+						</a>
+					</li>
+					<li>
+						<a data-mscc-ic="false" href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/" data-bi-name="trademarks" title="">
+							Trademarks 
+						</a>
+					</li>
+					<li>
+						<a data-mscc-ic="false" href="https://privacy.microsoft.com/en-US/privacystatement" data-bi-name="privacyandcookies" title="">
+							Privacy  Cookies 
+						</a>
+					</li>
+					<li>© Microsoft 2021<!----></li>
+				</ul>
+			</footer>
+		</section>
+	<!----></section> 
+  <script type="text/x-jquery-tmpl" id="user-popover">
+    <div class="user-popover ahub-popover">
+        <div class="ahub-popover-content">
+            <div class="header">
+                <div class="popover-gravatar">
+                    <a href="${profileUser.profileUrl}" rel="user" class="gravatar">
+                        <img id="" class="gravatar " height="84" width="84" title="${profileUser.displayName}" alt="${profileUser.displayName} ${pageContext.i18n.userAvatar}"  src="${pageContext.url.userAvatar.replace("%7BuserId%7D",profileUser.id)}?s=84">
+                    </a>
+                </div>
+                <p class="name">
+                    {{if profileUser.suspended}}
+                        <span class="badge badge-warning">
+                            <i class="icon-lock"></i>
+                            ${pageContext.i18n.userSuspended}
+                        </span>
+                    {{/if}}
+                    {{if profileUser.deactivated}}
+                        <span class="badge badge-important">
+                            <i class="icon-lock"></i>
+                            ${pageContext.i18n.userDeactivated}
+                        </span>
+                    {{/if}}
+                    <a href="${profileUser.profileUrl}" class="username">${profileUser.displayName}</a>
+                </p>
+                {{if currentUser.id != profileUser.id}}
+                    {{if currentUserFollowing}}
+                        <button class="btn btn-success on btn-follow" command="follow" data-node-type="user" nodeId="${profileUser.id}" data-follow-id="${profileUser.id}"></button>
+                    {{else}}
+                        <button class="btn btn-outline btn-outline-success btn-follow" command="follow" data-node-type="user" nodeId="${profileUser.id}" data-follow-id="${profileUser.id}"></button>
+                    {{/if}}
+                {{/if}}
+            </div>
+            <div class="body">
+                <div class="stats-wrapper">
+                    <ul class="stats unstyled">
+                        <li><a href="${profileUser.profileUrl}"><span class="count d-block">${profileUser.reputation}</span>${i18n.reputation}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count d-block">${profileUser.postCount}</span>${i18n.posts}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count d-block">${profileUser.userFollowCount}</span>${i18n.following}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count d-block" data-follow-widget-id="${profileUser.id}">${profileUser.followerCount}</span>${i18n.followers}</a></li>
+                        <li><a href="${profileUser.profileUrl}"><span class="count d-block">${profileUser.creationDateObj.getMonth() + 1 + "/" + profileUser.creationDateObj.getFullYear().toString().substring(2,4)}</span>${i18n.joined}</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script> 
+  <script type="text/x-jquery-tmpl" id="topic-popover">
+    <div class="topic-popover ahub-popover">
+        <div class="ahub-popover-content">
+            <div class="header">
+                <div class="popover-icon">
+                    <a href="${topic.url}" class="gravatar">
+                        <img id="" class="gravatar " height="84" width="84" title="${topic.name}" alt="${topic.name} icon" src="${topic.icon}">
+                    </a>
+                </div>
+                <div class="name-and-follow">
+                    <p class="name"><a href="${topic.url}">${topic.name}</a></p>
+                    <div class="follow-button">
+                    {{if currentUserCanFollow}}<button class="btn btn-follow {{if currentUserFollowing}}on btn-info{{/if}}" command="follow" data-node-type="topic" nodeId="${topic.name}" data-follow-id="${topic.id}"></button>{{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <div class="stats-wrapper">
+                    <ul class="stats unstyled">
+                        <li><a href="${topic.url}"><span class="count d-block" data-follow-widget-id="${topic.id}">${followerCount}</span>${i18n.followers}</a></li>
+                        <li><a href="${topic.url}"><span class="count d-block">${questionCount}</span>${i18n.questions}</a></li>
+                        <li><a href="${topic.url}"><span class="count d-block">${answerCount}</span>${i18n.answers}</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                {{if description}}<div class="description">{{html description}}</div>{{/if}}
+            </div>
+        </div>
+    </div>
+</script> 
+  <script type="text/x-jquery-tmpl" id="badge-popover">
+    <div class="badge-popover ahub-popover">
+        <div class="ahub-popover-content">
+            <div class="header">
+                <div class="pull-left">
+                    <img class="gravatar award-icon" height="84" width="84" title="${awardType.name}" alt="${awardType.name} icon" src="${awardType.awardIconSrc}">
+                </div>
+                <p class="nameAndTagline">
+                    <a href="${awardType.awardUrl}" class="name d-block">${awardType.name}</a>
+                    <span class="tagline">${awardType.description}</span>
+                </p>
+            </div>
+            <div class="body">
+                	<div class="stats-wrapper">
+	                	<ul class="stats unstyled">
+							<li><a href="${awardType.awardUrl}"><span class="count d-block">${awardPager.totalCount}</span>${i18n.awarded}</a></li>
+	                		<li>
+	                			<ul class="users unstyled">
+	                				<li><span class="user-list-title">${i18n.completedBy}:</span></li>
+			                		{{each awardPager.list}}
+				                		<li>
+					                		<a href="${$value.user.profileUrl}" title="${$value.user.username}" class="gravatar">
+					                			<img class="gravatar " alt="${$value.user.username} ${pageContext.i18n.userAvatar}" width="32" height="32" src="${$value.user.avatar}?s=32">
+					                		</a>
+					                	</li>
+				                	{{/each}}
+				                	<div class="clearfix"></div>
+		                		</ul>
+	                		</li>
+	                		<div class="clearfix"></div>
+	                	</ul>
+	                </div>
+            </div>
+        </div>
+    </div>
+</script> 
+  <script type="text/javascript">
+$(document).ready(function () {
+    var searchItemMouseDown = false;
+    var $searchAuto = $("#search-query").autocomplete({
+        open: function () {
+            $('#search-query').popover('hide');
+            $('#search-query').attr("aria-expanded", true);
+            $searchAuto.addClass("open");
+            $("#searchResultsAutoComplete").find("a").mousedown(function (e) {
+                searchItemMouseDown = true;
+            });
+        },
+        close: function (e) {
+            $('#search-query').attr("aria-expanded", false);
+            $('#searchResultsAutoComplete #search-query').attr('aria-describedby', 'advanced-tips-title');
+            $searchAuto.removeClass("open");
+            $('.icon-search').css('color', '#999');
+            $('#searchResultsAutoComplete #search-query').removeAttr('aria-activedescendant');
+        },
+        appendTo: '#autoCompleteContents',
+        autoFocus: false,
+        highlight: function (match, keywords) {
+            keywords = keywords.split(' ').join('|');
+            return match.replace(new RegExp("(" + keywords + ")", "gi"), '<b>$1</b>');
+        },
+        source: function (request, response) {
+            var query = request.term;
+            var labelText = $('<div/>').text(request.term).html();
+            if (!/\s/.test(query)) {
+                query += "*";
+            }
+            $.ajax({
+                url: '/answers/search.json',
+                dataType: 'json',
+                minLength: 0,
+                delay: 30,
+                data: { q: query, page: 1, pageSize: 7, type: "object", compact: 'true' },
+                success: function (data) {
+                    if (data.searchResults) {
+                        var allResults = data.searchResults.results.concat(data.externalSearchResults.results);
+                        var $results = $.map(allResults, function (item, index) {
+                        if (item != null) {
+                            if (item.username) {
+                                var name = item.username;
+                                if(item.realname){
+                                    name += " | " + item.realname;
+                                }
+                                return {
+                                    label: name.replace(
+                                            new RegExp(
+                                                            "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                            $.ui.autocomplete.escapeRegex(request.term) +
+                                                            ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                            ), "<strong>$1</strong>"),
+                                    url: "/answers/users/%7Bid%7D/%7Bplug%7D.html",
+                                    value: name,
+                                    id: item.id,
+                                    plug: item.plug,
+                                    type: "user",
+                                    avatar: item.avatar
+                                };
+                            }
+                            switch (item.type) {
+                                case 'topic':
+                                    return {
+                                        label: item.name.replace(
+                                                new RegExp(
+                                                        "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                $.ui.autocomplete.escapeRegex(request.term) +
+                                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                ), "<strong>$1</strong>"),
+                                        url: "/answers/topics/%7Bid%7D.html",
+                                        value: item.name,
+                                        id: item.name,
+                                        plug: item.plug,
+                                        type: "Topic"
+                                    };
+                                case 'user':
+                                    var name = item.username;
+                                    if(item.realname){
+                                        name += " | " + item.realname;
+                                    }
+                                    return {
+                                        label: name.replace(
+                                                new RegExp(
+                                                        "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                $.ui.autocomplete.escapeRegex(request.term) +
+                                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                ), "<strong>$1</strong>"),
+                                        url: "/answers/users/%7Bid%7D/%7Bplug%7D.html",
+                                        value: name,
+                                        id: item.id,
+                                        plug: item.plug,
+                                        type: "User",
+                                        avatar: item.avatar
+                                    };
+                                case 'question':
+                                    return {
+                                        label: item.title.replace(
+                                                new RegExp(
+                                                        "(?![^&;]+;)(?!<[^<>]*)(" +
+                                                                $.ui.autocomplete.escapeRegex(request.term) +
+                                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
+                                                ), "<strong>$1</strong>"),
+                                        url: "/answers/questions/%7Bid%7D/%7Bplug%7D.html",
+                                        value: item.title,
+                                        id: item.id,
+                                        plug: item.plug,
+                                        type: item.type
+                                    };
+                                default:
+                                    if (item.title) {
+	                                    return {
+	                                        label: item.title.replace(
+	                                                new RegExp(
+	                                                        "(?![^&;]+;)(?!<[^<>]*)(" +
+	                                                                $.ui.autocomplete.escapeRegex(request.term) +
+	                                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
+	                                                ), "<strong>$1</strong>"),
+	                                        url: item.url,
+	                                        value: item.title,
+	                                        id: item.id,
+	                                        plug: item.plug,
+	                                        type: item.type
+	                                    };
+                                    }
+                                    return null;
+                                }
+                            }
+                        });
+
+                        response($results);
+                        $('.icon-search').css('color', '#1c84c6');
+                        $('#searchResultsAutoComplete .ui-helper-hidden-accessible').attr('id', 'search-result-status').attr('aria-live','polite').attr('aria-atomic', true).attr('aria-relevant', 'text');
+                        $('#searchResultsAutoComplete #search-query').attr('aria-describedby', 'search-result-status');
+                        $("#search-query").attr("aria-haspopup", "listbox");
+                        $("#search-query").attr("aria-owns", "search_results_list");
+                    }
+                }
+            });
+        },
+        select: function (event, ui) {
+            if(event.key=='Enter') {
+                var url = ui.item.url.replace("%7Bid%7D", ui.item.id);
+                url = url.replace("%7Bplug%7D", ui.item.plug);
+                url = url.replace("{query}", ui.item.query);
+                url = url.replace("%7Btype%7D", ui.item.type);
+                window.location = url;
+                return false;
+            }
+        },
+        focus: function(event, ui) {
+            $('#search-query').attr('aria-activedescendant', ('option_' + (ui.item.index || ui.item.id || "search")));
+        }
+    }).keydown(function () {
+        $(this).css('color', '#000');
+    });
+    if ($searchAuto.length) {
+        $searchAuto.data("uiAutocomplete")._renderMenu = function(ul, items) {
+            var that = this;
+            $.each(items, function(index, item) {
+                item.index = index;
+                that._renderItemData(ul, item);
+            });
+            $(ul).find("li").attr("role", "presentation").addClass("ui-menu-item");
+        };
+        $searchAuto.data("uiAutocomplete")._renderItem = function (ul, item) {
+            var type_str = "";
+            var searchListItemLinkTextImage = $('<i />');
+            searchListItemLinkTextImage.attr('aria-hidden','true');
+            var searchListItemLinkTextImageSpan = $('<span />');
+            searchListItemLinkTextImageSpan.attr('class','sr-only');
+
+            if (item.type == "Topic") {
+                type_str = "<span class='autocomplete-type'>Tag</span>";
+                var image = '<img class="search-icon topic-icon" alt="' + item.value + ' tag icon" src="/answers/themes/base/images/topic_placeholder.png">';
+            } else if (item.type == "user") {
+                type_str = "<span class='autocomplete-type'>User</span>";
+                var image = '<img class="search-icon user-icon" alt="' + item.value + ' user icon" src="/answers/themes/base/images/user_placeholder.png">';
+                searchListItemLinkTextImage = null;
+            } else if (item.type == "question") {
+                searchListItemLinkTextImage.attr('class','icon-question-sign');
+                searchListItemLinkTextImageSpan.append("question");
+                searchListItemLinkTextImage.append(searchListItemLinkTextImageSpan);
+            } else if (item.type == "idea") {
+                searchListItemLinkTextImage.attr('class','icon-lightbulb');
+                searchListItemLinkTextImageSpan.append("feedback");
+                searchListItemLinkTextImage.append(searchListItemLinkTextImageSpan);
+            } else if (item.type == "kbentry") {
+                searchListItemLinkTextImage.attr('class','icon-book');
+                searchListItemLinkTextImageSpan.append("article");
+                searchListItemLinkTextImage.append(searchListItemLinkTextImageSpan);
+            }
+
+            var url = item.url.replace("%7Bid%7D", item.id);
+            url = url.replace("%7Bplug%7D", item.plug);
+            url = url.replace("{query}", item.query);
+            url = url.replace("%7Btype%7D", item.type);
+
+            //prevent xss attribute injection attacks
+            url = url.replace(/'/g,"%27");
+            url = url.replace(/"/g,"%22");
+            url = url.replace(/\\/g,"%5C");
+
+            var describedby = 'Press enter to search for ' + item.query;
+            if (item.type) {
+                var type;
+                if (item.type == "Topic") {
+                    type = 'Tag'
+                } else if (item.type == "question") {
+                    type = 'question';
+                } else if (item.type == "idea") {
+                    type = 'feedback';
+                } else if (item.type == "kbentry") {
+                    type = 'article';
+                } else if (item.type == "user") {
+                    type = 'user';
+                    var $gravatar = $('<img />').addClass("gravatar")
+                                                .attr("alt", item.value + 'avatar image' )
+                                                .attr("src", item.avatar);
+
+                }
+                describedby = 'Press enter to navigate to ' + type;
+            }
+            ul
+            .attr('role', 'listbox')
+            .attr('id', 'search_results_list')
+            .attr('aria-label', 'Search Suggestions');
+
+            let spanIdStr = item.index || item.id || 'search';
+
+            let $searchListItemLink = $('<a />')
+                .addClass("none")
+                .attr('aria-label', (item.type? (type + ": ") : '') + commandUtils.escapeHtml2(item.value))
+                .attr('id', "option_" + spanIdStr)
+                .attr('aria-describedby', "instructions_" + spanIdStr)
+                .attr('role', 'option')
+                .attr('href', url)
+                .append($gravatar, searchListItemLinkTextImage, item.label + " " + type_str);
+
+            let $searchListItemSpan = $('<span />')
+                .attr('id',"instructions_" + + spanIdStr)
+                .attr('class','sr-only')
+                .text(describedby);
+
+            let searchListItem = $('<li />')
+                .data("item.autocomplete", item)
+                .append($searchListItemLink, $searchListItemSpan)
+                .appendTo(ul);
+
+            return searchListItem;
+        };
+    }
+});
+</script> 
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+        $bottom = $("#bottom");
+        $notFooter = $("#not-footer");
+        $push = $(".push");
+        $push.css("height", $bottom.outerHeight() + "px");
+        $notFooter.css("margin-bottom", "-" + $bottom.outerHeight() + "px");
+
+        $("#sidrLink").sidr({
+            onOpen: function() {
+                if($('#sidr').outerHeight() ==0) {
+                    $('#sidr').css({'height': '100%', 'visibility': 'visible'});
+                }
+                $(document.body).prepend("<div class='cover'></div>");
+                $('#sidrLink').attr("aria-expanded", "true");
+                $('#sidr a').attr("tabindex", "0");
+                var firstChild = $('#sidr ul').find('li a')[0];
+                if(firstChild) {
+                    firstChild.focus();
+                }
+                $(".cover").fadeIn().on("click", function() {
+                    $(this).remove();
+                    $.sidr('close');
+                });
+                $("#sidr").keyup(function(e) {
+                    // if key pressed is ESC
+                    if(e.key === "Escape") {
+                        $.sidr('close');
+                    }
+                });
+
+                $("#sidr").on('focusout', function(e) {
+                    if ($("#sidr").is(":visible") && !$("#sidr").has(e.relatedTarget).length > 0)
+                        $.sidr('close');
+                });
+            },
+            onClose: function() {
+                $('#sidrLink').attr("aria-expanded", "false").focus();
+                $('#sidr a').attr("tabindex", "-1");
+            }
+        });
+
+        $(".search-button").click(function(){
+            $(".navbar-search").submit();
+        });
+    });
+
+    //Pretty print code blocks, some of them might be escaped, we need to unescape in order to pretty print them.
+    //TODO: Find a better place to this code.
+    var evaluateLineNum = function() {
+      let $codeBlocks = $(".answer-body, .node-body, .question-body, .reply-body, .comment-text, .wmd-previewer");
+      $.each($codeBlocks, function(indexI, elementI) {
+          $.each($(elementI).find('pre'), function(indexJ, elementJ) {
+              $(elementJ).addClass("prettyprint").addClass("linenums");
+
+              if(!pageContext.currentEditor.enableLineNum) {
+                $(elementJ).addClass('no-num');
+              }
+
+              if($(elementI).attr('data-markup-language') === 'wmd' && ! /[<>]/g.test($(elementJ).text())) {
+                  $(elementJ).text(commandUtils.unescapeHtml($(elementJ).text()));
+              }
+          });
+      });
+    }
+
+    evaluateLineNum();
+    prettyPrint();
+    objectFitImages();
+
+    if(commandUtils.getUrlVars()['sort'] && commandUtils.getUrlVars()['sort'].length) {
+      let targetHref = "?sort=" + commandUtils.getUrlVars()['sort'];
+      $('a[href="' + targetHref + '"]').focus();
+    }
+
+</script> 
+  <script type="text/javascript">(function(){(function(a,b){if("undefined"!==typeof module&&module.exports)return module.exports=b();if("function"===typeof define&&define.amd)define([],function(){return a.TimeMe=b()});else return a.TimeMe=b()})(this,function(){var a={startStopTimes:{},idleTimeoutMs:6E4,currentIdleTimeMs:0,checkStateRateMs:250,active:!1,idle:!1,currentPageName:"default-page-name",timeElapsedCallbacks:[],userLeftCallbacks:[],userReturnCallbacks:[],startTimer:function(){var b=a.currentPageName;if(void 0===a.startStopTimes[b])a.startStopTimes[b]=
+[];else{var c=a.startStopTimes[b];c=c[c.length-1];if(void 0!==c&&void 0===c.stopTime)return}a.startStopTimes[b].push({startTime:new Date,stopTime:void 0});a.active=!0},stopTimer:function(){var b=a.startStopTimes[a.currentPageName];void 0!==b&&0!==b.length&&(void 0===b[b.length-1].stopTime&&(b[b.length-1].stopTime=new Date),a.active=!1)},getTimeOnCurrentPageInSeconds:function(){return a.getTimeOnPageInSeconds(a.currentPageName)},getTimeOnPageInSeconds:function(b){if(void 0!==a.getTimeOnPageInMilliseconds(b))return a.getTimeOnPageInMilliseconds(b)/
+1E3},getTimeOnCurrentPageInMilliseconds:function(){return a.getTimeOnPageInMilliseconds(a.currentPageName)},getTimeOnPageInMilliseconds:function(b){b=a.startStopTimes[b];if(void 0!==b){for(var c=0,d=0;d<b.length;d++){var e=b[d].startTime,f=b[d].stopTime;void 0===f&&(f=new Date);c+=f-e}return b=Number(c)}},getTimeOnAllPagesInSeconds:function(){for(var b=[],c=Object.keys(a.startStopTimes),d=0;d<c.length;d++){var e=c[d],f=a.getTimeOnPageInSeconds(e);b.push({pageName:e,timeOnPage:f})}return b},setIdleDurationInSeconds:function(b){var c=
+parseFloat(b);if(!1===isNaN(c))a.idleTimeoutMs=1E3*b;else throw{name:"InvalidDurationException",message:"An invalid duration time ("+b+") was provided."};return this},setCurrentPageName:function(b){a.currentPageName=b;return this},resetRecordedPageTime:function(b){delete a.startStopTimes[b]},resetAllRecordedPageTimes:function(){for(var b=Object.keys(a.startStopTimes),c=0;c<b.length;c++)a.resetRecordedPageTime(b[c])},resetIdleCountdown:function(){a.idle&&a.triggerUserHasReturned();a.idle=!1;a.currentIdleTimeMs=
+0},callWhenUserLeaves:function(a,c){this.userLeftCallbacks.push({callback:a,numberOfTimesToInvoke:c})},callWhenUserReturns:function(a,c){this.userReturnCallbacks.push({callback:a,numberOfTimesToInvoke:c})},triggerUserHasReturned:function(){if(!a.active)for(var b=0;b<this.userReturnCallbacks.length;b++){var c=this.userReturnCallbacks[b],d=c.numberOfTimesToInvoke;if(isNaN(d)||void 0===d||0<d)--c.numberOfTimesToInvoke,c.callback()}a.startTimer()},triggerUserHasLeftPage:function(){if(a.active)for(var b=
+0;b<this.userLeftCallbacks.length;b++){var c=this.userLeftCallbacks[b],d=c.numberOfTimesToInvoke;if(isNaN(d)||void 0===d||0<d)--c.numberOfTimesToInvoke,c.callback()}a.stopTimer()},callAfterTimeElapsedInSeconds:function(b,c){a.timeElapsedCallbacks.push({timeInSeconds:b,callback:c,pending:!0})},checkState:function(){for(var b=0;b<a.timeElapsedCallbacks.length;b++)a.timeElapsedCallbacks[b].pending&&a.getTimeOnCurrentPageInSeconds()>a.timeElapsedCallbacks[b].timeInSeconds&&(a.timeElapsedCallbacks[b].callback(),
+a.timeElapsedCallbacks[b].pending=!1);!1===a.idle&&a.currentIdleTimeMs>a.idleTimeoutMs?(a.idle=!0,a.triggerUserHasLeftPage()):a.currentIdleTimeMs+=a.checkStateRateMs},visibilityChangeEventName:void 0,hiddenPropName:void 0,listenForVisibilityEvents:function(){"undefined"!==typeof document.hidden?(a.hiddenPropName="hidden",a.visibilityChangeEventName="visibilitychange"):"undefined"!==typeof doc.mozHidden?(a.hiddenPropName="mozHidden",a.visibilityChangeEventName="mozvisibilitychange"):"undefined"!==
+typeof document.msHidden?(a.hiddenPropName="msHidden",a.visibilityChangeEventName="msvisibilitychange"):"undefined"!==typeof document.webkitHidden&&(a.hiddenPropName="webkitHidden",a.visibilityChangeEventName="webkitvisibilitychange");document.addEventListener(a.visibilityChangeEventName,function(){document[a.hiddenPropName]?a.triggerUserHasLeftPage():a.triggerUserHasReturned()},!1);window.addEventListener("blur",function(){a.triggerUserHasLeftPage()});window.addEventListener("focus",function(){a.triggerUserHasReturned()});
+document.addEventListener("mousemove",function(){a.resetIdleCountdown()});document.addEventListener("keyup",function(){a.resetIdleCountdown()});document.addEventListener("touchstart",function(){a.resetIdleCountdown()});window.addEventListener("scroll",function(){a.resetIdleCountdown()});setInterval(function(){a.checkState()},a.checkStateRateMs)},websocket:void 0,websocketHost:void 0,setUpWebsocket:function(b){if(window.WebSocket&&b){var c=b.websocketHost;try{a.websocket=new WebSocket(c),window.onbeforeunload=
+function(c){a.sendCurrentTime(b.appId)},a.websocket.onopen=function(){a.sendInitWsRequest(b.appId)},a.websocket.onerror=function(a){console&&console.log("Error occurred in websocket connection: "+a)},a.websocket.onmessage=function(a){console&&console.log(a.data)}}catch(d){console&&console.error("Failed to connect to websocket host.  Error:"+d)}}return this},websocketSend:function(b){a.websocket.send(JSON.stringify(b))},sendCurrentTime:function(b){var c=a.getTimeOnCurrentPageInMilliseconds();a.websocketSend({type:"INSERT_TIME",
+appId:b,timeOnPageMs:c,pageName:a.currentPageName})},sendInitWsRequest:function(b){a.websocketSend({type:"INIT",appId:b})},initialize:function(b){var c=a.idleTimeoutMs||30,d=a.currentPageName||"default-page-name",e=void 0;b&&(c=b.idleTimeoutInSeconds||c,d=b.currentPageName||d,e=b.websocktOptions);a.setIdleDurationInSeconds(c).setCurrentPageName(d).setUpWebsocket(e).listenForVisibilityEvents();a.startTimer()}};return a})}).call(this);
+(function(){function a(a){return function(){$.ajax({method:"POST",url:c,data:{code:b,duration:parseInt(1E3*TimeMe.getTimeOnPageInSeconds(b)),done:a}})}}var b=null,d=1E4,c="/tracker/track.json";$(document).ready(function(){b&&(TimeMe.initialize({currentPageName:b,idleTimeoutInSeconds:2*d}),window.setInterval(a(),d),$(window).unload(a(!0)),a()())});window.__trackPageView=function(a,e,f){b=a;d=e;c&&(c=f)}})();
+window.__trackPageView('a99194ae-d749-4827-8be5-bb8bb39ec123', 10000, '/answers/page-view/track.json');</script>  
+ 
+</body></html>

@@ -1,0 +1,1081 @@
+!function(){"use strict";var e;"undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self&&self;(function(e,t){!function(){function e(e){var t=!0,n=!1,s=null,i={text:!0,search:!0,url:!0,tel:!0,email:!0,password:!0,number:!0,date:!0,month:!0,week:!0,time:!0,datetime:!0,"datetime-local":!0};function a(e){return!!(e&&e!==document&&"HTML"!==e.nodeName&&"BODY"!==e.nodeName&&"classList"in e&&"contains"in e.classList)}function o(e){var t=e.type,n=e.tagName;return!("INPUT"!==n||!i[t]||e.readOnly)||"TEXTAREA"===n&&!e.readOnly||!!e.isContentEditable}function r(e){e.classList.contains("focus-visible")||(e.classList.add("focus-visible"),e.setAttribute("data-focus-visible-added",""))}function c(e){e.hasAttribute("data-focus-visible-added")&&(e.classList.remove("focus-visible"),e.removeAttribute("data-focus-visible-added"))}function l(n){n.metaKey||n.altKey||n.ctrlKey||(a(e.activeElement)&&r(e.activeElement),t=!0)}function d(e){t=!1}function u(e){a(e.target)&&(t||o(e.target))&&r(e.target)}function h(e){a(e.target)&&(e.target.classList.contains("focus-visible")||e.target.hasAttribute("data-focus-visible-added"))&&(n=!0,window.clearTimeout(s),s=window.setTimeout((function(){n=!1}),100),c(e.target))}function m(e){"hidden"===document.visibilityState&&(n&&(t=!0),p())}function p(){document.addEventListener("mousemove",g),document.addEventListener("mousedown",g),document.addEventListener("mouseup",g),document.addEventListener("pointermove",g),document.addEventListener("pointerdown",g),document.addEventListener("pointerup",g),document.addEventListener("touchmove",g),document.addEventListener("touchstart",g),document.addEventListener("touchend",g)}function f(){document.removeEventListener("mousemove",g),document.removeEventListener("mousedown",g),document.removeEventListener("mouseup",g),document.removeEventListener("pointermove",g),document.removeEventListener("pointerdown",g),document.removeEventListener("pointerup",g),document.removeEventListener("touchmove",g),document.removeEventListener("touchstart",g),document.removeEventListener("touchend",g)}function g(e){e.target.nodeName&&"html"===e.target.nodeName.toLowerCase()||(t=!1,f())}document.addEventListener("keydown",l,!0),document.addEventListener("mousedown",d,!0),document.addEventListener("pointerdown",d,!0),document.addEventListener("touchstart",d,!0),document.addEventListener("visibilitychange",m,!0),p(),e.addEventListener("focus",u,!0),e.addEventListener("blur",h,!0),e.nodeType===Node.DOCUMENT_FRAGMENT_NODE&&e.host?e.host.setAttribute("data-js-focus-visible",""):e.nodeType===Node.DOCUMENT_NODE&&(document.documentElement.classList.add("js-focus-visible"),document.documentElement.setAttribute("data-js-focus-visible",""))}if("undefined"!=typeof window&&"undefined"!=typeof document){var t;window.applyFocusVisiblePolyfill=e;try{t=new CustomEvent("focus-visible-polyfill-ready")}catch(e){(t=document.createEvent("CustomEvent")).initCustomEvent("focus-visible-polyfill-ready",!1,!1,{})}window.dispatchEvent(t)}"undefined"!=typeof document&&e(document)}()})(e={exports:{}},e.exports);const t=window,n=t,s=t.document,i=t.location,a=n.msDocs,o=new Promise((e=>{"loading"===s.readyState?s.addEventListener("DOMContentLoaded",(()=>e())):e()})),r="__event_type_id__";let c=0;class l{constructor(){this.callbacks={}}publish(e){const t=e.constructor[r];if(void 0===t||void 0===this.callbacks[t])return;const n=this.callbacks[t].slice(0);for(const t of n)t(e)}subscribe(e,t){e.hasOwnProperty(r)||(e[r]=c++);const n=e[r];void 0===this.callbacks[n]&&(this.callbacks[n]=[]);const s=this.callbacks[n];return-1===s.indexOf(t)&&s.push(t),()=>this.unsubscribe(e,t)}unsubscribe(e,t){const n=e[r];if(void 0===n||void 0===this.callbacks[n])return;const s=this.callbacks[n],i=s.indexOf(t);-1!==i&&s.splice(i,1)}dispose(){this.callbacks={}}}const d=new l;class u{constructor(e,t,n){this.title=e,this.url=t,this.referrerUrl=n}}let h;function m(){h={};const e=s.head.querySelectorAll("meta[name],meta[property]");for(let t=0;t<e.length;t++){const n=e.item(t);let s=n.name;""===s&&(s=n.getAttribute("property"),""===s)||(h[s]?h[s].push(n.content):h[s]=[n.content])}d.subscribe(u,m)}function p(e){return void 0===h&&m(),void 0===h[e]?void 0:h[e][0]}const f="localhost"===location.hostname,g="review.docs.microsoft.com"===location.hostname,v="ppe.docs.microsoft.com"===location.hostname,b="docsstyleguide.z13.web.core.windows.net"===location.hostname,y=!v&&!f,w=y&&!g,x=location.pathname.split("/").map((e=>e.toLowerCase())),k=x.length>2?x[2]:"";x.length>2&&"answers"===x[2]&&document.head.querySelector('link[href*="forums.css"]');const E=v&&"learn-sandbox"===k,L="test"===k,S={setItem(e,t){try{n.localStorage.setItem(e,t)}catch(e){}},getItem(e){try{return n.localStorage.getItem(e)}catch(e){return null}},removeItem(e){try{n.localStorage.removeItem(e)}catch(e){}},clear(){try{n.localStorage.clear()}catch(e){}}},A="docs.preview",C=(new URLSearchParams(i.search).get("preview")||"").split(",").map((e=>e.trim().toLowerCase())).reduce(((e,t)=>(""!==t&&(e[t]=1),e)),{});let T;const _=(e,t)=>{T=(()=>{let e;return e=S.getItem(A)?JSON.parse(S.getItem(A)):{},e})();const n=1===C[e],s=!isNaN(T[e]),i=n||s,a=C[`x-${e}`];return n?console.log(`Preview ${e} via query string`):s&&console.log(`Preview ${e} via local storage`),t&&(i||a)&&(i&&(T[e]=Date.now()),a&&delete T[e],S.setItem(A,JSON.stringify(T))),i},N=(e,t={require:!1,persist:!1})=>{const{require:n,persist:s}=t;return!w&&0===Object.keys(C).length&&!n||(e=e.toLowerCase(),_(e,s))};function P(){const e=p("page_type"),t=p("page_kind");return"learn"===e||"profile"===e||"learn"===t&&("browse"===e||"home"===e)}class I{static get contentDir(){return a.data.contentDir}static get contentLocale(){return a.data.contentLocale}static get userDir(){return a.data.userDir}static get userLocale(){return a.data.userLocale}static get hasLocSideBySideTranslation(){return"true"===p("enable_loc_sxs")||"hover over"===p("bilingual_type")}static get translationType(){return p("ms.translationtype")?.toUpperCase()}static get machineTranslated(){return!!this.translationType&&/^(?:MT|MTE|MTE75|MTE95)$/i.test(this.translationType)}}const M=a?.environment?a.environment:function(e,t){const n=t&&!!t.reviewFeatures,s=t&&t.isolated?"isolated":"online",i=t&&t.azurePortalHostname;switch(e){case"docs.microsoft.com":return{supportLevel:"production",accessLevel:s,reviewFeatures:n,systemContent:!0,azurePortalHostname:i,legacyHosting:!0};case"review.docs.microsoft.com":return{supportLevel:"production",accessLevel:s,reviewFeatures:!0,systemContent:!0,azurePortalHostname:i,legacyHosting:!0};case"ppe.docs.microsoft.com":return{supportLevel:"development",accessLevel:s,reviewFeatures:!0,systemContent:!0,azurePortalHostname:i,legacyHosting:!0};case"docsstyleguide.z13.web.core.windows.net":return{supportLevel:"development",accessLevel:"online",reviewFeatures:!0,systemContent:!1,azurePortalHostname:"portal.azure.com",legacyHosting:!0};case"localhost":return{supportLevel:"development",accessLevel:"local",reviewFeatures:!0,systemContent:!1,azurePortalHostname:"portal.azure.com",legacyHosting:!0};case"review.docs.azure.cn":return{supportLevel:"production",accessLevel:s,reviewFeatures:!0,systemContent:!1,azurePortalHostname:"portal.azure.com",legacyHosting:!0};case"dev.docs.microsoft.com":case"internal.docs.microsoft.com":case"docs-render2-pubdev-wus.azurewebsites.net":return{supportLevel:"development",accessLevel:"online",reviewFeatures:!0,systemContent:!1,azurePortalHostname:"portal.azure.com",legacyHosting:!1};case"docs.azure.cn":case"rd.microsoft.com":case"developer.microsoft.com":case"startups.microsoft.com":default:return{supportLevel:"production",accessLevel:s,reviewFeatures:n,systemContent:!1,azurePortalHostname:"portal.azure.com",legacyHosting:!0}}}(location.hostname,a?.data?.context||{}),q={apiBrowser:"isolated"!==M.accessLevel,applicationInsights:P()&&"isolated"!==M.accessLevel,assessments:"isolated"!==M.accessLevel,assessmentBranches:"isolated"!==M.accessLevel&&"production"===M.supportLevel&&M.reviewFeatures,azureNotebooks:"isolated"!==M.accessLevel,banner:"online"!==M.accessLevel,binaryRating:"isolated"!==M.accessLevel&&a.data.hasBinaryRating,blogComments:"isolated"!==M.accessLevel,blogHome:"isolated"!==M.accessLevel,chromeless:a.data.context.chromeless,codeSamples:"isolated"!==M.accessLevel,contentBrowse:"isolated"!==M.accessLevel,cookieConsent:"isolated"!==M.accessLevel,courseScheduling:"isolated"!==M.accessLevel,facetSearch:"isolated"!==M.accessLevel,feedbackReport:"isolated"!==M.accessLevel&&a.data.showFeedbackReport,gamification:"isolated"!==M.accessLevel,gitContributors:"isolated"!==M.accessLevel,githubIssues:"isolated"!==M.accessLevel&&a.data.hasGithubIssues,googleAnalytics:"docs.microsoft.com"===location.hostname&&"isolated"!==M.accessLevel&&new Date<new Date("2021-08-09T17:00:00.000Z"),inlineFeedback:"isolated"!==M.accessLevel,oneCustomerVoiceFeedback:"isolated"!==M.accessLevel,translationFeedback:"isolated"!==M.accessLevel&&"en-us"!==a.data.userLocale&&"true"===p("ocv-translation-feedback")&&I.machineTranslated,jsll:!1,oneDS:"isolated"!==M.accessLevel,interactivity:"isolated"!==M.accessLevel,labsOnDemand:"isolated"!==M.accessLevel,marketing:"isolated"!==M.accessLevel,moduleUnitFeedbackReport:"isolated"!==M.accessLevel,pageRecommendations:"isolated"!==M.accessLevel&&"false"!==p("recommendations")&&("conceptual"===p("page_type")||"FAQ"===a.data.pageTemplate||"Architecture"===a.data.pageTemplate||"Reference"===a.data.pageTemplate||"Sample"===a.data.pageTemplate),pdfDownload:"isolated"!==M.accessLevel,profileEpisode1:"isolated"!==M.accessLevel&&N("profile-episode1",{require:!0}),rss:"isolated"!==M.accessLevel,sandbox:"isolated"!==M.accessLevel,shareLink:"isolated"!==M.accessLevel,siteSearchProducts:N("site-search-products",{require:!0}),stayCurrentAllowParam:"isolated"!==M.accessLevel&&M.reviewFeatures&&("certification"===p("page_kind")||"certificationrenewal"===p("page_kind")||"certificationRenewalAssessment"===p("page_kind")||"certificationRenewalAssessmentReport"===p("page_kind")),studyGuide:"isolated"!==M.accessLevel&&N("study-guide",{require:!0}),starRatings:"isolated"!==M.accessLevel,tocSearch:"mooncake"!==a.data.brand,userServices:"isolated"!==M.accessLevel,usabilla:"isolated"!==M.accessLevel,cscMembers:"isolated"!==M.accessLevel&&N("csc-members",{require:!0})};const O="You have signed in with an account associated to an organization ({email}). By becoming a member, <strong>you understand and acknowledge</strong> that your Microsoft Docs membership means our network of sites and applications will record and track your achievements and activities and we may share your results and activities with your organization. Additionally, your username, display name, profile picture, affiliation, achievements and activities will be publicly visible.",D="Answers",B="Back to prior menu",U="Blog",R="Cancel",H="Challenges",z="Close",F="Code Samples",V="Collections",j='A collection already exists with the title "{title}". Collection titles should be unique.',W="Title is required and up to 80 characters long.",Q="Description is optional and up to 200 characters long.",G="{userDisplayName}'s Collection {index}",J="Save to a collection",K="Please sign in to add this to your collection.",Y="By becoming a member, you understand and acknowledge that your Microsoft Docs membership means our network of sites and applications will record and track your achievements and activities. Additionally, your username, display name, profile picture, affiliation, achievements and activities will be publicly visible.",X="Documentation",Z="Global",ee="Global navigation",te="Go back",ne="This link can be accessed from the internet but not from disconnected or air-gapped cloud services.",se="You have signed in with an account associated to an organization ({email}). By becoming a member, <strong>you understand and acknowledge</strong> that your Microsoft Docs membership means our network of sites and applications will record, and track your achievements and activities and we may share your results and activities with your organization. Additionally, your username, display name, profile picture, affiliation, achievements and activities will be publicly visible.",ie="Microsoft for Startups",ae="More",oe="Preview",re="Profile",ce="Accepted",le="Question that may already have your answer",de="Questions that may already have your answer",ue="Regional Directors",he="Developer",me="Save",pe="Search",fe="Search previous versions",ge="Settings",ve="Sign in",be="Sign out",ye="Site",we="Submit",xe="This profile has been locked",$e="This profile is currently locked and is being merged with another profile. Please sign-in to a different profile.",ke="Sign in with a different account",Ee="Trademarks",Le="Votes",Se="Your Account";var Ae;!function(e){e[e.none=0]="none",e[e.case=1]="case",e[e.dot=2]="dot",e[e.slash=4]="slash"}(Ae||(Ae={}));const Ce={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},Te=/[&<>"']/g,_e=RegExp(Te.source);function Ne(e){return e&&_e.test(e)?e.replace(Te,(e=>Ce[e])):e}function Pe(e){return decodeURIComponent(atob(function(e){switch(e.length%4){case 0:return e;case 2:return e+"==";case 3:return e+"=";default:throw new Error("Illegal base64url string!")}}(e).replace(/_/g,"/").replace(/-/g,"+")).split("").map((e=>`%${("00"+e.charCodeAt(0).toString(16)).slice(-2)}`)).join(""))}const Ie="id_token",Me="docsAuthToken";class qe{constructor({detail:e}){this.message="invalid token",this.detail=e}}class Oe{constructor({detail:e}){this.message="invalid claim",this.detail=e}}class De{constructor({detail:e}){this.message="malformed claim",this.detail=e}}function Be(){return S.getItem(Ie)}function Ue(e){S.setItem(Me,e)}function Re(){return S.getItem(Me)}function He(e,t={nbfClockSkewInMilliseconds:2500}){try{if(!(e.indexOf(".")>-1))throw new qe({detail:"Invalid JWT - no separators found."});const n=e.split("."),s=JSON.parse(Pe(n[1]));if(!s)throw new qe({detail:"Invalid JWT - payload is missing."});if(s.hasOwnProperty("nbf")){const e=s.nbf;if(isNaN(e))throw new De({detail:"Invalid NBF claim - claim is malformed."});const n=new Date(0);n.setUTCSeconds(s.nbf);if(n>new Date(Date.now()+t.nbfClockSkewInMilliseconds))throw new Oe({detail:"Invalid NBF claim - token not yet valid."})}if(s.hasOwnProperty("exp")){const e=s.exp;if(isNaN(e))throw new De({detail:"Invalid EXP claim - claim is malformed."});const t=new Date(0);t.setUTCSeconds(s.exp);if(t<=new Date(Date.now()))throw new Oe({detail:"Invalid EXP claim - token has expired."})}return s}finally{}}const ze=`data:image/svg+xml;base64,${btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#F4F5F6"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.11865 26.7162C6.1436 22.1697 10.7016 19 16 19C21.2983 19 25.8564 22.1697 27.8813 26.7162C24.9531 29.9608 20.7147 32 16 32C11.2853 32 7.04689 29.9608 4.11865 26.7162ZM23 10C23 13.866 19.866 17 16 17C12.134 17 8.99999 13.866 8.99999 10C8.99999 6.13401 12.134 3 16 3C19.866 3 23 6.13401 23 10Z" fill="#B8B9BA"/></svg>')}`;btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 448"><path fill="#919191" d="M277.733 252.81c31.966-18.644 53.742-52.923 53.742-92.527 0-59.267-48.22-107.475-107.475-107.475-59.267 0-107.475 48.208-107.475 107.475 0 39.604 21.77 73.884 53.738 92.528C112.35 274.105 72 328.998 72 395.193h24.566c0-71.466 55.98-127.434 127.434-127.434 72.64 0 127.434 54.793 127.434 127.434H376c0-66.197-40.35-121.09-98.267-142.383zM141.09 160.282c0-45.713 37.197-82.91 82.91-82.91 45.725 0 82.91 37.197 82.91 82.91s-37.186 82.91-82.91 82.91c-45.713 0-82.91-37.197-82.91-82.91z"/></svg>'),btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 42 42"><path d="M32.5 14a1.492 1.492 0 011.5 1.5v23a1.494 1.494 0 01-1.5 1.5h-17a1.494 1.494 0 01-1.5-1.5v-23a1.494 1.494 0 011.5-1.5h4.873l-3-6h2.25l3 6h2.751l3-6h2.25l-3 6zm-.5 2h-8.377l1.266 2.546A1.13 1.13 0 0125 19a1.009 1.009 0 01-1 1 1 1 0 01-.534-.149.974.974 0 01-.368-.4L21.375 16H16v22h16zM20 26a3.92 3.92 0 01.312-1.555 4.023 4.023 0 012.133-2.133 4.041 4.041 0 013.109 0 4.014 4.014 0 012.133 2.133A3.886 3.886 0 0128 26a3.937 3.937 0 01-.288 1.485 3.987 3.987 0 01-.8 1.266 5.7 5.7 0 011.288.949 5.907 5.907 0 01.968 1.251 6.388 6.388 0 01.616 1.461A5.786 5.786 0 0130 34h-2a3.877 3.877 0 00-.312-1.554 4 4 0 00-2.133-2.133 4.011 4.011 0 00-3.109 0 4.023 4.023 0 00-2.133 2.133A3.912 3.912 0 0020 33.995h-2a5.786 5.786 0 01.218-1.586 6.388 6.388 0 01.616-1.461A5.933 5.933 0 0119.8 29.7a5.694 5.694 0 011.288-.951 3.991 3.991 0 01-.8-1.267A3.945 3.945 0 0120 26zm6 0a1.92 1.92 0 00-.157-.781 2.039 2.039 0 00-1.061-1.062 2.024 2.024 0 00-1.563 0 2.048 2.048 0 00-1.061 1.062 2.021 2.021 0 000 1.562 2.042 2.042 0 001.061 1.061 2.024 2.024 0 001.563 0 2.032 2.032 0 001.061-1.061A1.927 1.927 0 0026 26z" fill="#919191"/></svg>');class Fe{}const Ve="72f988bf-86f1-41af-91ab-2d7cd011db47",je={[Ve]:"microsoft","9188040d-6c67-4c5b-b112-36a304b66dad":"standard"},We=new Date("2019-11-21T00:00:00.000Z"),Qe=(e,t)=>function(e,t){let n=Ke();const s=new URLSearchParams(i.search);"profile"===p("page_type")&&(s.has("section")&&n.searchParams.set("section",s.get("section")),n.hash=i.hash);if(w){let s=`./${e}/`;t&&(s+=`${t}/`);const i=new URL(s,n);i.hash=n.hash,i.search=n.search,n=i}else s.has("branch")&&n.searchParams.set("branch",s.get("branch")),n.searchParams.set("username",e),t&&n.searchParams.set("section",t),s.has("themebranch")&&n.searchParams.set("themebranch",s.get("themebranch")),s.has("preview")&&n.searchParams.set("preview",s.get("preview"));return n}(e,t).toString();const Ge=new class extends l{constructor(){super(),this.setAnonymous()}setAnonymous(){!1!==this.isAuthenticated&&(this.userId="00000000-0000-0000-0000-000000000000",this.upn="anonymous@anonymous.com",this.email="anonymous@anonymous.com",this.userName="Anonymous",this.displayName="Anonymous",this.locale="en-us",this.country=null,this.contactPointTopicSetting=null,this.authenticationMode="AAD",this.authenticationModes=[],this.isAuthenticated=!1,this.avatarUrl=ze,this.avatarThumbnailUrl=ze,this.profileUrl="#",this.createdOn=null,this.userType="standard",this.acceptedPrivacyNotice=We,this.isAvatarTakenDown=!1,this.followerCount=0,this.followingCount=0,this.answersAccepted=0,this.isMicrosoftUser=!1,this.isMvp=!1,this.reputationPoints=1,this.qnaUserId=0,this.interests=null,this.isPrivate=!1,this.gsi=null,this.tenantId=null,this.credentialId=null,this.source=null,this.publish(new Fe))}mapIdTokenToProfile(e){this.email=e.email||e.preferred_username,this.upn=e.preferred_username,this.userName=e.name,this.displayName=e.name,this.authenticationMode="standard"===je[e.tid]?"MSA":"AAD",this.userType=je[e.tid]||"aad",this.isAuthenticated=!0,this.country="",this.credentialId="AAD"===this.authenticationMode?e.oid:e.puid,this.publish(new Fe)}readUserProfile(e){this.userId=e.userId,this.email=e.email||"",this.userName=e.userName,this.displayName=e.displayName||e.userName||e.email,this.locale=e.locale,this.country=e.country,this.contactPointTopicSetting=e.contactPointTopicSetting,this.isAuthenticated=!0,this.avatarUrl=e.avatarUrl||ze,this.avatarThumbnailUrl=e.avatarThumbnailUrl||e.avatarUrl||ze,this.profileUrl=Qe(e.userName),this.authenticationModes=e.authenticationModes,this.userType=function(e){let t="standard";e&&e.length&&(void 0!==e.find((e=>e.tenantId===Ve))?t="microsoft":void 0!==e.find((e=>"AAD"===e.type))&&(t="aad"));return t}(e.authenticationModes),this.acceptedPrivacyNotice=new Date(e.acceptedPrivacyNotice),this.isAvatarTakenDown=e.isAvatarTakenDown,this.followingCount=e.followingCount,this.followerCount=e.followerCount,this.answersAccepted=e.answersAccepted,this.isMicrosoftUser=e.isMicrosoftUser,this.isMvp=e.isMvp,this.reputationPoints=e.reputationPoints,this.createdOn=new Date(e.createdOn),this.qnaUserId=e.qnaUserId,this.interests=e.interests,this.isPrivate=e.isPrivate,this.gsi=e.gsi,this.source=e.source,this.publish(new Fe)}readUserFromToken(e){this.isAuthenticated=!0,this.userId=e.sub,this.upn=e.cred_upn,this.tenantId=e.tid,this.credentialId=e.cred_id,this.userName=e.preferred_username,this.displayName=e.name||e.preferred_username||e.email,this.avatarUrl=e.picture||ze,this.avatarThumbnailUrl=e.thumbnail||e.picture||ze,this.authenticationMode=e.cred_type,this.locale=e.locale,this.acceptedPrivacyNotice=e.accepted_privacy_notice,this.userType=je[e.tid]||"aad",this.profileUrl=Qe(e.preferred_username),this.publish(new Fe)}whenAuthenticated(){return Ge.isAuthenticated?Promise.resolve():new Promise((e=>this.subscribe(Fe,(()=>{this.isAuthenticated&&e()}))))}};function Je(e,t){Array.from(e.querySelectorAll("[data-profile-property]")).forEach((e=>{const n=e.getAttribute("data-profile-property"),s=t.profileUrl;e instanceof HTMLImageElement&&"avatarUrl"===n?(e.onerror=()=>e.src=ze,e.src=t[n]):e instanceof HTMLImageElement&&"avatarThumbnailUrl"===n?(e.onerror=()=>e.src=t.avatarUrl||ze,e.src=t[n]):e instanceof HTMLAnchorElement&&"profileUrl"===n?(e.href=q.profileEpisode1?Qe("me","activity"):s,"#"===s&&(e.href=new URL("./register",Ke()).toString())):e instanceof HTMLAnchorElement&&"bookmarksUrl"===n?(e.href=s+(w?"collections/bookmarks":"&section=collections&detail=bookmarks"),"#"===s&&e.parentElement.remove()):e instanceof HTMLAnchorElement&&"collectionsUrl"===n?(e.href=s+(w?"collections":"&section=collections"),"#"===s&&e.parentElement.remove()):e instanceof HTMLAnchorElement&&"challengesUrl"===n?(e.href=s+(w?"challenges":"&section=challenges"),"#"===s&&e.parentElement.remove()):e instanceof HTMLAnchorElement&&"settingsUrl"===n?(e.href=s+(w?"settings":"&section=settings"),"#"===s&&e.parentElement.remove()):e instanceof HTMLInputElement?"file"!==e.type&&(e.value=t[n]):e.textContent="createdOn"===n?function(e,t={year:"numeric",month:"short",day:"numeric"},n=a.data.userLocale){return new Date(e).toLocaleDateString(n,t).replace(/\u200E/g,"")}(t[n]):t[n]}))}function Ke(){const e=new URL(`/${a.data.userLocale}/`,i.origin);let t=new URL("./users/",e);return w||(t=new URL("./test/profile/profile",e)),t}const Ye={"https://review.docs.microsoft.com":{cloudShell:"https://ux.console.azure.com",ocvFeedback:"https://petrol-int.office.microsoft.com/v1/feedback"},"https://ppe.docs.microsoft.com":{cloudShell:"https://ux-rc.console.azure.com",ocvFeedback:"https://petrol-int.office.microsoft.com/v1/feedback"},"http://localhost:3000":{siteSearch:"https://ppe.docs.microsoft.com/api/search",cloudShell:"https://ux.console.azure.com"}},Xe={"https://review.docs.microsoft.com":{stayCurrent:"https://review.docs.microsoft.com/api/certification"}};function Ze(){return g?"https://review.docs.microsoft.com/api/admin":y?"https://docs.microsoft.com/api/admin":"https://ppe.docs.microsoft.com/api/admin"}function et(){return g||y?"https://docs-adminservice1-public-wus.azurewebsites.net":"https://docs-adminservice-pubdev-wus.azurewebsites.net"}const tt=function(e,t){const n=t.legacyHosting?"production"===t.supportLevel?"https://docs.microsoft.com":"https://ppe.docs.microsoft.com":e,s=t.systemContent?e:n,i=Ye[e]||{},a=Xe[e]||{};return{admin:Ze(),selfAssessmentsAdmin:"https://docs-rcs-pubdev.azurewebsites.net",apiBrowser:`${n}/api/apibrowser`,assessments:`${s}/api/assessments`,assessmentsBranch:"https://review.docs.microsoft.com/api/assessments/branches",azureManagement:"https://management.azure.com",auth:{docs:`${n}/api/profiles/auth`,identityPlatform:"https://login.microsoftonline.com/common/oauth2/v2.0/authorize",signOut:`${n}/api/profiles/signout`,token:"https://token.docs.microsoft.com"},blogs:`${n}/api/archives/blogs/comments`,browse:{certification:`${n}/api/contentbrowser/search/certifications`,course:`${n}/api/contentbrowser/search/certifications/courses`,learn:`${n}/api/contentbrowser/search`,learnHome:`${n}/api/contentbrowser/home/learn`,learnHomePersonalized:`${n}/api/contentbrowser/home/personalized/learn`,sample:`${n}/api/contentbrowser/search/samples`,lifecycle:`${n}/api/contentbrowser/search/lifecycles`,architecture:`${n}/api/contentbrowser/search/architectures`,windowsSafeguards:`${n}/api/contentbrowser/search/windowsSafeguards`},certification:{certifications:`${n}/api/certification/certifications`,linkedAccount:`${n}/api/certification/linkedAccount`},cloudShell:"https://ux.console.azure.com",contentNav:e,contentOrigin:s,forumSearch:{azureKbQuestionSuggestions:`${n}/api/qna/azurekb/searchMSDNThreads/v1.0`,forumInternalQuestionSuggestions:`${n}/answers/search.json`},gameStatus:`${n}/api/gamestatus`,githubFeedback:"https://api.github.com/",labOnDemand:`${n}/api/resources/labondemand`,learn:{achievementsByUids:`${n}/api/hierarchy/achievements`,batchItemSummaries:`${n}/api/hierarchy/items`,challenge:`${n}/api/challenges`,episode:`${n}/api/video/public/v1/entries`,iltCourses:{scheduling:`${n}/api/wwl/ilt-scheduling/offerings`,location:`${n}/api/wwl/ilt-scheduling/offerings/location`},learningPath:`${n}/api/hierarchy/paths`,module:`${n}/api/hierarchy/modules`,progress:{batchUnit:`${n}/api/progress/units`,unit:`${n}/api/progress/units`,user:`${n}/api/progress`},show:{episodes:`${n}/api/hierarchy/shows`,videos:`${n}/api/video/public/v1/entries/batch`},stayCurrent:`${n}/api/certification`,tvSchedule:"https://learntvpublicwus2.blob.core.windows.net/public/schedule.json",pubbleAuth:`${n}/api/profiles/auth/pubble`,...a},lists:`${n}/api/lists`,monikers:"isolated"===t.accessLevel?`${s}/api/familyTrees`:`${s}/_api/familyTrees`,nextSteps:`${n}/api/nextsteps`,ocvFeedback:"https://petrol.office.microsoft.com/v1/feedback",privacy:{cookieConsentDeleteService:`${e}/api/privacy/cookieDelete`,delete:`${s}/api/privacy/delete`,partialDelete:`${s}/api/privacy/partialdelete`,export:`${s}/api/privacy/export`},profile:{acknowledgeMergeStatus:`${n}/api/profiles/merge/acknowledge`,acknowledgePrivacyNotice:`${n}/api/profiles/me/acknowledgePrivacyNotice`,avatar:`${n}/api/profiles/me/avatar`,avert:`${n}/api/profiles/avert`,certification:`${n}/api/profiles/certification/certifications`,challenge:`${n}/api/profiles/challenge`,link:`${n}/api/profiles/link`,me:`${n}/api/profiles/me`,merge:`${n}/api/profiles/merge`,profiles:`${n}/api/profiles`,qnaFollowing:`${n}/api/qna/following`,reporting:`${n}/api/profiles/reporting`,validateMerge:`${n}/api/profiles/merge/validate`},qnaSettings:`${n}/en-us/answers/users/{qnaId}/{username}/preferences.html`,rating:`${n}/api/rating`,recommendations:`${n}/api/recommendations`,sandbox:`${n}/api/resources/sandbox`,siteFeedback:`${n}/api/feedback/report`,siteSearch:`${e}/api/search`,uhf:{consentBanner:`${n}/api/GetConsentBanner`},video:et(),...i}}(location.origin,M),nt=(e,t)=>new Promise(((n,s)=>{const i=setTimeout((()=>a("timeout")),3e4);function a(e){clearTimeout(i),s(e)}fetch(e,t).then((function(e){clearTimeout(i),n(e)}),a)}));function st(e,t,n=!0){(t=t||{}).mode="cors",n&&!t.credentials&&(t.credentials="omit");const s=new Request(e,t);if(n){Re()&&s.headers.set("Authorization",`Bearer ${Re()}`)}return"PUT"!==s.method&&"POST"!==s.method||s.headers.set("Content-Type","application/json"),s}class it{}function at(e,t=!0){try{if(e.ok&&e.headers.has("Authorization")){const n=e.headers.get("Authorization");if(n){const e=He(n);Ue(n),t&&Ge.readUserFromToken(e)}}return e}catch{return e}}let ot,rt=0;function ct(){return"ax-"+rt++}function lt(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("").map((e=>{if("-"===e||"4"===e)return e;const t=16*Math.random()|0;return("x"===e?t:3&t|8).toString(16)})).join("")}function dt(e=null,t=`${i.origin}${i.pathname}`){const n=e?new URL(e):new URL(t);if("https:"===n.protocol&&(n.hostname===i.hostname||n.hostname.endsWith("docs.microsoft.com")))return n;return t===`${i.origin}${i.pathname}`?new URL(`${n.pathname}${n.search}${n.hash}`,`${i.origin}`):dt(t)}function ut(e){let t;const n=/\+/g,s=/([^&=]+)=?([^&]*)/g,a=e=>decodeURIComponent(e.replace(n," "));void 0===e&&(e=i.search),e=e.substring(1);const o={};for(;t=s.exec(e);)o[a(t[1])]=a(t[2]);return o}function ht(e,t=!1){const n=[];for(const s in e)e.hasOwnProperty(s)&&""!==e[s]&&null!==e[s]&&void 0!==e[s]&&(t&&Array.isArray(e[s])?e[s].forEach((e=>{n.push(encodeURIComponent(s)+"="+encodeURIComponent(e))})):n.push(encodeURIComponent(s)+"="+encodeURIComponent(e[s].toString())));return n.join("&")}class mt{constructor(e,t,n=window){if(this.targetOrigin=t,this.subscriptions=[],this.messageHandler=({data:e,origin:t})=>{if(t!==this.targetOrigin)return;const n=this.subscriptions.filter((t=>t.predicate(e)));for(const t of n)t.callback(e)},!e)throw new Error("target is required");e instanceof HTMLIFrameElement?e.contentWindow?this.targetWindowLoaded=Promise.resolve({value:e.contentWindow}):this.targetWindowLoaded=new Promise((t=>{e.onload=()=>t({value:e.contentWindow})})):this.targetWindowLoaded=Promise.resolve({value:e}),n.addEventListener("message",this.messageHandler)}async publish(e){(await this.targetWindowLoaded).value.postMessage(e,this.targetOrigin)}subscribe(e,t=(()=>!0)){const n={predicate:t,callback:e};return this.subscriptions.push(n),()=>this.unsubscribe(n)}subscribeOnce(e=(()=>!0),t){return new Promise(((n,s)=>{const i={},a=void 0===t?0:setTimeout(r,t,i),o=this.subscribe(r,e);function r(e){clearTimeout(a),o(),e===i?s("timeout"):n(e)}}))}unsubscribe(e){const t=this.subscriptions.indexOf(e);-1!==t&&this.subscriptions.splice(t,1)}}class pt{constructor(e){this.url=dt(e),this.source=this.url.searchParams.get("source"),this.source||(this.source="learn"===p("page_type")||"learn"===p("page_kind")?"learn":"docs","answers"!==p("uhfHeaderId")&&this.url.searchParams.set("source",this.source))}static getProfileContext(e){try{const t=e||location.href,n=new pt(t),s=dt(t);return s.searchParams.delete("source"),{redirectUrl:s.href,source:n.source,microsoftUser:void 0}}catch{return{redirectUrl:void 0,source:void 0,microsoftUser:void 0}}}toString(){return this.url.href}}function ft(){n.dispatchEvent(new CustomEvent("content-update"))}ot=function(){const e=function(){let e=0;const t={};for(;e<arguments.length;e++){const n=arguments[e];for(const e in n)t[e]=n[e]}return t};function t(n){const s=function(t,i,a){let o;if("undefined"==typeof document)return;if(arguments.length>1){if("number"==typeof(a=e({path:"/"},s.defaults,a)).expires){const e=new Date;e.setMilliseconds(e.getMilliseconds()+864e5*a.expires),a.expires=e}a.expires=a.expires?a.expires.toUTCString():"";try{o=JSON.stringify(i),/^[\{\[]/.test(o)&&(i=o)}catch(e){}i=n.write?n.write(i,t):encodeURIComponent(String(i)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),t=(t=(t=encodeURIComponent(String(t))).replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent)).replace(/[\(\)]/g,escape);let r="";for(const e in a)a[e]&&(r+="; "+e,!0!==a[e]&&(r+="="+a[e]));return document.cookie=t+"="+i+r}t||(o={});const r=document.cookie?document.cookie.split("; "):[],c=/(%[0-9A-Z]{2})+/g;let l=0;for(;l<r.length;l++){const e=r[l].split("=");let s=e.slice(1).join("=");'"'===s.charAt(0)&&(s=s.slice(1,-1));try{const i=e[0].replace(c,decodeURIComponent);if(s=n.read?n.read(s,i):n(s,i)||s.replace(c,decodeURIComponent),this.json)try{s=JSON.parse(s)}catch(e){}if(t===i){o=s;break}t||(o[i]=s)}catch(e){}}return o};return s.set=s,s.get=function(e){return s.call(s,e)},s.getJSON=function(){return s.apply({json:!0},[].slice.call(arguments))},s.defaults={},s.remove=function(t,n){s(t,"",e(n,{expires:-1}))},s.withConverter=t,s}return t((function(){}))}();const gt=ot,vt=!!window.matchMedia;window.matchMedia("screen and (min-width: 768px), screen and (min-height: 1024px)");const bt=window.matchMedia("screen and (min-width: 1088px)"),yt=window.matchMedia("screen and (min-width: 768px)");window.matchMedia("screen and (max-width: 768px)");const wt=window.matchMedia("print");window.matchMedia("(prefers-color-scheme: dark)");const xt={light:{documentClass:"theme-light",name:"light",text:"Light",icon:"docon-sun"},dark:{documentClass:"theme-dark",name:"dark",text:"Dark",icon:"docon-clear-night"},"high-contrast":{documentClass:"theme-high-contrast",name:"high-contrast",text:"High contrast",icon:"docon-clear-night"}};let $t;Object.keys(xt).map((e=>xt[e].documentClass));const kt=new Promise((e=>$t=e));let Et;const Lt=new Promise((e=>Et=e)),St=e=>{for(const t of Object.values(e))if(!t)return!1;return!0};async function At(){if(!q.cookieConsent)return;if(q.chromeless)return Et(!0),void $t();const e=void 0!==gt.get("MSCC"),t=n.WcpConsent;if(void 0===t||"function"!=typeof t.init)return void Et(!1);await o;const s=document.getElementById("cookie-consent-holder"),i=Array.from(document.querySelectorAll(".manage-cookies-holder"));s&&i.length?t.init(a.data.userLocale,s,(function(e,t){if(void 0!==e)return void Et(!1);if(!t.isConsentRequired)return Et(!0),void $t();const n=document.createElement("button");if(n.setAttribute("data-bi-name","manageCookies"),n.textContent="Manage cookies",i.forEach((e=>{e.appendChild(n.cloneNode(!0)).addEventListener("click",(()=>{t.manageConsent()})),e.hidden=!1})),s.hidden=!1,ft(),St(t.getConsent()))return Et(!0),void $t();Et(!1)}),(async function(t){St(t)?$t():(await async function(e){const t={method:"POST",body:JSON.stringify(e)},n=await nt(st(tt.privacy.cookieConsentDeleteService,t));if(!n.ok)throw new Error(`Cookie Deletion Error ${n.status}: ${n.statusText}`)}
+/*!
+	 * JavaScript Cookie v2.1.3
+	 * https://github.com/js-cookie/js-cookie
+	 *
+	 * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+	 * Released under the MIT license
+	 */({domain:document.location.hostname,analytics:!t.Analytics,advertising:!t.Advertising,social:!t.SocialMedia}),e&&(n.location.href=n.location.pathname+n.location.search+n.location.hash))}),"light"):console.log("No container for cookie banner")}const Ct={audience:"aud",author:"author",manager:"manager","ms.assetid":"asst","ms.author":"pgauth","ms.contentsource":"pgpubl","ms.custom":"custom","ms.date":"date",depot_name:"depotname","ms.devlang":"pgdevlng",gitcommit:"gitcommit",original_content_git_url:"giturl",updated_at:"publishtime","ms.lasthandoff":"lasthandoff","ms.locfileid":"locfileid","ms.prod":"product","ms.reviewer":"reviewer","ms.service":"pgsrvcs","ms.suite":"suite","ms.technology":"technology","ms.tgt_pltfrm":"pgtrgtplf","ms.topic":"pgtop","ms.workload":"workload","ms.search.region":"searchregion","ms.prod_service":"prod_service","ms.component":"component",experimental:"experimental",experiment_id:"experiment_id","ms.assigned_experiments":"assigned_experiments","ms.translationtype":"translationtype",document_version_independent_id:"document_version_independent_id","ms.collection":"collection"};function Tt(e){const t=document.querySelectorAll("meta");for(let n=0;n<t.length;n++){const s=t.item(n),i=Ct[s.name];"ms.collection"===s.name||"ms.custom"===s.name?e[i]=e[i]?`${e[i]},${s.content}`:s.content:i&&(e[i]=s.content)}e.contentlocale=a.data.contentLocale,e.highContrast=false.toString()}function _t(e=location.hostname){return{"developer.microsoft.com":"DevCenter","dev.docs.microsoft.com":"DocsDev","docs.azure.cn":"DocsCN","docs.microsoft.com":"Docs","internal.docs.microsoft.com":"DocsInternal","ppe.docs.microsoft.com":"DocsPPE","review.docs.microsoft.com":"DocsReview","startups.microsoft.com":"supcom"}[e]||"JsllTest"}function Nt(e=location.hostname){return{"developer.microsoft.com":"d1574ad452ea4a37a5dda6f9f1fb5ef2-b55b2da9-95eb-4cf9-a633-191aa7b0ee25-6798","dev.docs.microsoft.com":"8617064329544862a1d4dbcc1cdda9d3-079a9ef7-af43-443d-a28b-f60ba4efc9ff-7531","docs.azure.cn":"54ae4d70fff842118ff98bccfdc28deb-7f4f32ec-ae5a-4562-881c-5c0188170faf-7594","docs.microsoft.com":"c6c27850c9c24cbfae921778d2465031-4c28c161-db47-426b-9d28-733d45d05dd9-7278","internal.docs.microsoft.com":"544ac96504db48bebdddbe3cf1e1f116-e2157ba3-a60b-464f-b49b-8dd89dac355f-7571","ppe.docs.microsoft.com":"1b68dbc9b56749fca3e6f2db2a7ff3f5-b0e31456-1fc6-40de-ad91-dad67a5c6e9e-7319","review.docs.microsoft.com":"d94fc739fadb4805bce966a4f24e2e21-a6b89116-ce98-4ffb-b1cf-d46e361ea690-7616","rd.microsoft.com":"066aa48b4fe64bd5aa1bfee3086793b0-2a9b1be5-d541-4bf6-9c2e-a5263feed23c-7531","startups.microsoft.com":"228c4e4af6ee4420925f1fa5cfd7dd7b-3090334e-ee46-4cbb-b357-8316634c0ed9-7369"}[e]||""}let Pt;async function It(){const e=window.onedsAwa;if(!q.oneDS||!e)return;!function(e,t){const n={instrumentationKey:Nt(),useShortNameForContentBlob:!1,syncMuid:t,urlCollectHash:!0,urlCollectQuery:!0,autoCapture:{pageView:!0,onLoad:!0,click:!0,scroll:!0,resize:!0,jsError:!0,addin:!0,msTags:!1,perf:!0,assets:!1,lineage:!0},coreData:{appId:_t(),pageName:p("document_id")||"missing document_id",market:a.data.userLocale,pageType:p("page_type"),pageTags:{},env:"ppe"},callback:{signedinStatus:()=>Ge.isAuthenticated,pageViewPageTags:Mt,pageActionPageTags:Mt,contentUpdatePageTags:Mt,pageActionContentTags:Mt},shareAuthStatus:!0,isLoggedIn:!1};Tt(n.coreData.pageTags),e.init(n)}(e,await Lt),Pt(e)}function Mt(){return Ge.isAuthenticated?{"ext-app-user-id":`c:${Ge.userId}`}:{}}const qt=new Promise((e=>Pt=e));const Ot=new Promise((e=>e)),Dt="O",Bt=13,Ut=60,Rt=61,Ht=300,zt="data-bi-name",Ft=e=>{for(;e&&e.hasAttribute&&!e.hasAttribute(zt);)e=e.parentElement;return e?e.getAttribute(zt):""},Vt=(e,t)=>{Ot.then((n=>n.ct.capturePageAction(e,t))),qt.then((n=>n.ct.capturePageAction(e,t)))},jt=e=>{Ot.then((t=>t.ct.captureContentPageAction(e))),qt.then((t=>t.ct.captureContentPageAction(e)))},Wt=e=>{Ot.then((t=>t.ct.captureContentUpdate(e))),qt.then((t=>t.ct.captureContentUpdate(e)))};class Qt{}class Gt{constructor(e,t,n=new l){this.stack=e,this.final=t,this.bus=n}async run(){let e=0,t=!0,n=this.final;const s=[],i=this.bus.subscribe(Qt,(()=>t=!1)),a=e=>(this.bus.publish(new Qt),n=e||n,!1);try{for(;t&&this.stack[e];){const n=await this.stack[e](a);n||!1!==s[e]?(s[e]=n,e+=n?-1:1):t=!1}e>=0&&n(),i()}catch(e){throw i(),this.final(),e}}}const Jt=tt.profile.me,Kt=`${Jt}?isCPMCalled=true`,Yt=new URL("./register",Ke()).toString(),Xt="localhost"===location.hostname?"https://localhost:3000/dev/global/sign-in.html":`${location.origin}/_themes/docs.theme/master/en-us/_themes/global/sign-in.html`,Zt={client_id:"18fbca16-2224-45f6-85b0-f7bf2b39b3f3",nonce:"",prompt:"select_account",redirect_uri:Xt,response_mode:"fragment",response_type:"id_token",scope:"openid profile email",sso_reload:!0,state:""};async function en(e=(()=>!1)){try{const e=Re();if(e){const t=He(e);return Ge.readUserFromToken(t),!0}return!1}catch(t){return!(t instanceof Oe)&&e()}}async function tn(e=(()=>!1)){try{const t=Be();if(t){He(t);return Ue(await function(e){const t=st(tt.auth.docs,{method:"GET"},!1);return t.headers.set("Authorization",`Bearer ${e}`),nt(t).then((e=>{if(e.ok)return e.text();if(404===e.status||204===e.status)throw new it;if(401===e.status)throw new Oe({detail:"token not accepted"});throw new Error(`get docs auth token failed (${e.status} ${e.statusText})`)}))}(t)),!0}return e()}catch(t){return!(t instanceof Oe)&&(t instanceof it?e(sn):e())}}async function nn(){const e=Object.assign({},Zt);e.fromOrigin=location.origin;const t=document.createElement("iframe"),n=new mt(t,new URL(Xt).origin);e.state=`silent://${location.origin}`,e.nonce=lt(),e.prompt="none",t.src=`${tt.auth.identityPlatform}?${ht(e)}`,t.classList.add("visually-hidden"),t.hidden=!0,t.setAttribute("aria-hidden","true");const s=n.subscribeOnce((e=>"auth"===e.type),4e3);await o,document.body.appendChild(t);try{return(await s).success}catch{return!1}finally{t.remove()}}function sn(){if("register"!==p("page_kind")){Ge.setAnonymous();const e=ht({redirectUrl:location.href});return void(location.href=`${Yt}?${e}`)}const e=He(Be());Ge.mapIdTokenToProfile(e)}async function an(e=location.href,t=!1){t&&await nt(tt.auth.signOut),qt.then((e=>{e.sku.getAuthExtension().signOut()})),S.removeItem(Me),S.removeItem(Ie),location.href=dt(e,"https://docs.microsoft.com").href}function on(e=location.href){const t=Object.assign({},Zt);t.state=function(e){let t=null;try{t=new pt(e).toString()}catch{t=location.href}return t}(e),t.nonce=lt(),location.href=`${tt.auth.identityPlatform}?${ht(t)}`}function rn(e){return 401===e.status&&Ge.setAnonymous(),e}async function cn(){const e=tt.profile.merge,t=await nt(ln(e,{method:"GET"}));if(rn(t),t.ok){const{status:e}=await t.json();return e}return null}function ln(e,t,n=!0,s="application/json",i=""){(t=t||{}).mode="cors";const a=new Request(e,t);return n&&a.headers.set("Authorization",`Bearer ${i||Re()}`),"PUT"!==a.method&&"POST"!==a.method||"multipart/form-data"!==s&&a.headers.set("Content-Type",s),a}const dn=new WeakMap,un=e=>(...t)=>{const n=e(...t);return dn.set(n,!0),n},hn=e=>"function"==typeof e&&dn.has(e),mn="undefined"!=typeof window&&null!=window.customElements&&void 0!==window.customElements.polyfillWrapFlushCallback,pn=(e,t,n=null)=>{for(;t!==n;){const n=t.nextSibling;e.removeChild(t),t=n}},fn={},gn={},vn=`{{lit-${String(Math.random()).slice(2)}}}`,bn=`\x3c!--${vn}--\x3e`,yn=new RegExp(`${vn}|${bn}`),wn="$lit$";class xn{constructor(e,t){this.parts=[],this.element=t;const n=[],s=[],i=document.createTreeWalker(t.content,133,null,!1);let a=0,o=-1,r=0;const{strings:c,values:{length:l}}=e;for(;r<l;){const e=i.nextNode();if(null!==e){if(o++,1===e.nodeType){if(e.hasAttributes()){const t=e.attributes,{length:n}=t;let s=0;for(let e=0;e<n;e++)$n(t[e].name,wn)&&s++;for(;s-- >0;){const t=c[r],n=Ln.exec(t)[2],s=n.toLowerCase()+wn,i=e.getAttribute(s);e.removeAttribute(s);const a=i.split(yn);this.parts.push({type:"attribute",index:o,name:n,strings:a}),r+=a.length-1}}"TEMPLATE"===e.tagName&&(s.push(e),i.currentNode=e.content)}else if(3===e.nodeType){const t=e.data;if(t.indexOf(vn)>=0){const s=e.parentNode,i=t.split(yn),a=i.length-1;for(let t=0;t<a;t++){let n,a=i[t];if(""===a)n=En();else{const e=Ln.exec(a);null!==e&&$n(e[2],wn)&&(a=a.slice(0,e.index)+e[1]+e[2].slice(0,-wn.length)+e[3]),n=document.createTextNode(a)}s.insertBefore(n,e),this.parts.push({type:"node",index:++o})}""===i[a]?(s.insertBefore(En(),e),n.push(e)):e.data=i[a],r+=a}}else if(8===e.nodeType)if(e.data===vn){const t=e.parentNode;null!==e.previousSibling&&o!==a||(o++,t.insertBefore(En(),e)),a=o,this.parts.push({type:"node",index:o}),null===e.nextSibling?e.data="":(n.push(e),o--),r++}else{let t=-1;for(;-1!==(t=e.data.indexOf(vn,t+1));)this.parts.push({type:"node",index:-1}),r++}}else i.currentNode=s.pop()}for(const e of n)e.parentNode.removeChild(e)}}const $n=(e,t)=>{const n=e.length-t.length;return n>=0&&e.slice(n)===t},kn=e=>-1!==e.index,En=()=>document.createComment(""),Ln=/([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;class Sn{constructor(e,t,n){this.__parts=[],this.template=e,this.processor=t,this.options=n}update(e){let t=0;for(const n of this.__parts)void 0!==n&&n.setValue(e[t]),t++;for(const e of this.__parts)void 0!==e&&e.commit()}_clone(){const e=mn?this.template.element.content.cloneNode(!0):document.importNode(this.template.element.content,!0),t=[],n=this.template.parts,s=document.createTreeWalker(e,133,null,!1);let i,a=0,o=0,r=s.nextNode();for(;a<n.length;)if(i=n[a],kn(i)){for(;o<i.index;)o++,"TEMPLATE"===r.nodeName&&(t.push(r),s.currentNode=r.content),null===(r=s.nextNode())&&(s.currentNode=t.pop(),r=s.nextNode());if("node"===i.type){const e=this.processor.handleTextExpression(this.options);e.insertAfterNode(r.previousSibling),this.__parts.push(e)}else this.__parts.push(...this.processor.handleAttributeExpressions(r,i.name,i.strings,this.options));a++}else this.__parts.push(void 0),a++;return mn&&(document.adoptNode(e),customElements.upgrade(e)),e}}const An=window.trustedTypes&&trustedTypes.createPolicy("lit-html",{createHTML:e=>e}),Cn=` ${vn} `;class Tn{constructor(e,t,n,s){this.strings=e,this.values=t,this.type=n,this.processor=s}getHTML(){const e=this.strings.length-1;let t="",n=!1;for(let s=0;s<e;s++){const e=this.strings[s],i=e.lastIndexOf("\x3c!--");n=(i>-1||n)&&-1===e.indexOf("--\x3e",i+1);const a=Ln.exec(e);t+=null===a?e+(n?Cn:bn):e.substr(0,a.index)+a[1]+a[2]+wn+a[3]+vn}return t+=this.strings[e],t}getTemplateElement(){const e=document.createElement("template");let t=this.getHTML();return void 0!==An&&(t=An.createHTML(t)),e.innerHTML=t,e}}const _n=e=>null===e||!("object"==typeof e||"function"==typeof e),Nn=e=>Array.isArray(e)||!(!e||!e[Symbol.iterator]);class Pn{constructor(e,t,n){this.dirty=!0,this.element=e,this.name=t,this.strings=n,this.parts=[];for(let e=0;e<n.length-1;e++)this.parts[e]=this._createPart()}_createPart(){return new In(this)}_getValue(){const e=this.strings,t=e.length-1,n=this.parts;if(1===t&&""===e[0]&&""===e[1]){const e=n[0].value;if("symbol"==typeof e)return String(e);if("string"==typeof e||!Nn(e))return e}let s="";for(let i=0;i<t;i++){s+=e[i];const t=n[i];if(void 0!==t){const e=t.value;if(_n(e)||!Nn(e))s+="string"==typeof e?e:String(e);else for(const t of e)s+="string"==typeof t?t:String(t)}}return s+=e[t],s}commit(){this.dirty&&(this.dirty=!1,this.element.setAttribute(this.name,this._getValue()))}}class In{constructor(e){this.value=void 0,this.committer=e}setValue(e){e===fn||_n(e)&&e===this.value||(this.value=e,hn(e)||(this.committer.dirty=!0))}commit(){for(;hn(this.value);){const e=this.value;this.value=fn,e(this)}this.value!==fn&&this.committer.commit()}}class Mn{constructor(e){this.value=void 0,this.__pendingValue=void 0,this.options=e}appendInto(e){this.startNode=e.appendChild(En()),this.endNode=e.appendChild(En())}insertAfterNode(e){this.startNode=e,this.endNode=e.nextSibling}appendIntoPart(e){e.__insert(this.startNode=En()),e.__insert(this.endNode=En())}insertAfterPart(e){e.__insert(this.startNode=En()),this.endNode=e.endNode,e.endNode=this.startNode}setValue(e){this.__pendingValue=e}commit(){if(null===this.startNode.parentNode)return;for(;hn(this.__pendingValue);){const e=this.__pendingValue;this.__pendingValue=fn,e(this)}const e=this.__pendingValue;e!==fn&&(_n(e)?e!==this.value&&this.__commitText(e):e instanceof Tn?this.__commitTemplateResult(e):e instanceof Node?this.__commitNode(e):Nn(e)?this.__commitIterable(e):e===gn?(this.value=gn,this.clear()):this.__commitText(e))}__insert(e){this.endNode.parentNode.insertBefore(e,this.endNode)}__commitNode(e){this.value!==e&&(this.clear(),this.__insert(e),this.value=e)}__commitText(e){const t=this.startNode.nextSibling,n="string"==typeof(e=null==e?"":e)?e:String(e);t===this.endNode.previousSibling&&3===t.nodeType?t.data=n:this.__commitNode(document.createTextNode(n)),this.value=e}__commitTemplateResult(e){const t=this.options.templateFactory(e);if(this.value instanceof Sn&&this.value.template===t)this.value.update(e.values);else{const n=new Sn(t,e.processor,this.options),s=n._clone();n.update(e.values),this.__commitNode(s),this.value=n}}__commitIterable(e){Array.isArray(this.value)||(this.value=[],this.clear());const t=this.value;let n,s=0;for(const i of e)n=t[s],void 0===n&&(n=new Mn(this.options),t.push(n),0===s?n.appendIntoPart(this):n.insertAfterPart(t[s-1])),n.setValue(i),n.commit(),s++;s<t.length&&(t.length=s,this.clear(n&&n.endNode))}clear(e=this.startNode){pn(this.startNode.parentNode,e.nextSibling,this.endNode)}}class qn{constructor(e,t,n){if(this.value=void 0,this.__pendingValue=void 0,2!==n.length||""!==n[0]||""!==n[1])throw new Error("Boolean attributes can only contain a single expression");this.element=e,this.name=t,this.strings=n}setValue(e){this.__pendingValue=e}commit(){for(;hn(this.__pendingValue);){const e=this.__pendingValue;this.__pendingValue=fn,e(this)}if(this.__pendingValue===fn)return;const e=!!this.__pendingValue;this.value!==e&&(e?this.element.setAttribute(this.name,""):this.element.removeAttribute(this.name),this.value=e),this.__pendingValue=fn}}class On extends Pn{constructor(e,t,n){super(e,t,n),this.single=2===n.length&&""===n[0]&&""===n[1]}_createPart(){return new Dn(this)}_getValue(){return this.single?this.parts[0].value:super._getValue()}commit(){this.dirty&&(this.dirty=!1,this.element[this.name]=this._getValue())}}class Dn extends In{}let Bn=!1;(()=>{try{const e={get capture(){return Bn=!0,!1}};window.addEventListener("test",e,e),window.removeEventListener("test",e,e)}catch(e){}})();class Un{constructor(e,t,n){this.value=void 0,this.__pendingValue=void 0,this.element=e,this.eventName=t,this.eventContext=n,this.__boundHandleEvent=e=>this.handleEvent(e)}setValue(e){this.__pendingValue=e}commit(){for(;hn(this.__pendingValue);){const e=this.__pendingValue;this.__pendingValue=fn,e(this)}if(this.__pendingValue===fn)return;const e=this.__pendingValue,t=this.value,n=null==e||null!=t&&(e.capture!==t.capture||e.once!==t.once||e.passive!==t.passive),s=null!=e&&(null==t||n);n&&this.element.removeEventListener(this.eventName,this.__boundHandleEvent,this.__options),s&&(this.__options=Rn(e),this.element.addEventListener(this.eventName,this.__boundHandleEvent,this.__options)),this.value=e,this.__pendingValue=fn}handleEvent(e){"function"==typeof this.value?this.value.call(this.eventContext||this.element,e):this.value.handleEvent(e)}}const Rn=e=>e&&(Bn?{capture:e.capture,passive:e.passive,once:e.once}:e.capture);const Hn=new class{handleAttributeExpressions(e,t,n,s){const i=t[0];if("."===i){return new On(e,t.slice(1),n).parts}if("@"===i)return[new Un(e,t.slice(1),s.eventContext)];if("?"===i)return[new qn(e,t.slice(1),n)];return new Pn(e,t,n).parts}handleTextExpression(e){return new Mn(e)}};function zn(e){let t=Fn.get(e.type);void 0===t&&(t={stringsArray:new WeakMap,keyString:new Map},Fn.set(e.type,t));let n=t.stringsArray.get(e.strings);if(void 0!==n)return n;const s=e.strings.join(vn);return n=t.keyString.get(s),void 0===n&&(n=new xn(e,e.getTemplateElement()),t.keyString.set(s,n)),t.stringsArray.set(e.strings,n),n}const Fn=new Map,Vn=new WeakMap,jn=(e,t,n)=>{let s=Vn.get(t);void 0===s&&(pn(t,t.firstChild),Vn.set(t,s=new Mn(Object.assign({templateFactory:zn},n))),s.appendInto(t)),s.setValue(e),s.commit()};"undefined"!=typeof window&&(window.litHtmlVersions||(window.litHtmlVersions=[])).push("1.4.1");const Wn=(e,...t)=>new Tn(e,t,"html",Hn),Qn=new WeakMap,Gn=un((e=>t=>{const n=Qn.get(t);if(void 0===e&&t instanceof In){if(void 0!==n||!Qn.has(t)){const e=t.committer.name;t.committer.element.removeAttribute(e)}}else e!==n&&t.setValue(e);Qn.set(t,e)})),Jn=new WeakMap,Kn=un((e=>t=>{if(!(t instanceof Mn))throw new Error("unsafeHTML can only be used in text bindings");const n=Jn.get(t);if(void 0!==n&&_n(e)&&e===n.value&&t.value===n.fragment)return;const s=document.createElement("template");s.innerHTML=e;const i=document.importNode(s.content,!0);t.setValue(i),Jn.set(t,{value:e,fragment:i})}));class Yn{constructor(e){this.classes=new Set,this.changed=!1,this.element=e;const t=(e.getAttribute("class")||"").split(/\s+/);for(const e of t)this.classes.add(e)}add(e){this.classes.add(e),this.changed=!0}remove(e){this.classes.delete(e),this.changed=!0}commit(){if(this.changed){let e="";this.classes.forEach((t=>e+=t+" ")),this.element.setAttribute("class",e)}}}const Xn=new WeakMap,Zn=un((e=>t=>{if(!(t instanceof In)||t instanceof Dn||"class"!==t.committer.name||t.committer.parts.length>1)throw new Error("The `classMap` directive must be used in the `class` attribute and must be the only part in the attribute.");const{committer:n}=t,{element:s}=n;let i=Xn.get(t);void 0===i&&(s.setAttribute("class",n.strings.join(" ")),Xn.set(t,i=new Set));const a=s.classList||new Yn(s);i.forEach((t=>{t in e||(a.remove(t),i.delete(t))}));for(const t in e){const n=e[t];n!=i.has(t)&&(n?(a.add(t),i.add(t)):(a.remove(t),i.delete(t)))}"function"==typeof a.commit&&a.commit()}));const es=["a","area","button:not([disabled])","iframe","input:not([disabled])","select:not([disabled])","textarea:not([disabled])","[contenteditable]",'[tabindex]:not([tabindex="-1"])'];function ts(e){return e.matches(es.join(","))}function ns(e){const t=e.createElement("span");return t.setAttribute("tabindex","0"),t.classList.add("modal-tab-sentinel"),t}const ss=e=>{const t=e.querySelector("[autofocus]");t&&ts(t)?t.focus():e.focus()};class is{constructor(e){this.restoreScrollbar=()=>{},this.clickHandler=e=>{const t=e.target,n=t.closest(".modal-pop-content"),s=t.closest(".modal-close");s?(e.preventDefault(),this.hide(s.getAttribute("data-modal-result"))):n&&(e.preventDefault(),this.popContent())},this.escHandler=e=>{27===e.keyCode&&(e.preventDefault(),this.hide())},this.setAriaLabelledBy=e=>{const t=e.querySelector("h1")||e.querySelector("h2")||e.querySelector("h3")||e.querySelector("h4")||e.querySelector("p")||e.querySelector("figcaption");t&&(t.id||(t.id="modal-heading"),e.setAttribute("aria-labelledby",t.id))},this.container=s.createElement("div"),this.container.setAttribute("tabindex","-1"),this.container.setAttribute("role","dialog"),this.container.setAttribute("aria-modal","true"),this.container.classList.add("modal","has-default-focus"),jn(Wn`<div class="modal-background modal-close"></div>
+				${e} `,this.container),this.wrapper=s.createElement("div"),this.wrapper.setAttribute("data-bi-name","modal"),this.wrapper.insertAdjacentElement("afterbegin",this.container),this.contentStack=[e]}static get openCount(){return window.openModalCount||0}static set openCount(e){window.openModalCount=e}show(){return this.container.classList.contains("is-active")||(is.openCount++,s.body.insertAdjacentElement("afterbegin",ns(s)),s.body.insertAdjacentElement("afterbegin",this.wrapper),this.wrapper.addEventListener("click",this.clickHandler),this.wrapper.addEventListener("keydown",this.escHandler),this.restoreScrollbar=function(e=document.documentElement,t=document.documentElement||document.body,n=(document.documentElement||document.body).scrollTop){return t.style.left="0",t.style.right="0",t.style.top=`-${n}px`,t.style.position="fixed",(s=!0)=>{t.style.left="",t.style.right="",t.style.top="",t.style.position="",s&&(e.scrollTop=n)}}(s.documentElement,s.scrollingElement||s.documentElement,(s.scrollingElement||s.documentElement||s.body).scrollTop),this.container.classList.add("is-active"),s.body.insertAdjacentElement("afterbegin",ns(s)),this.setAriaLabelledBy(this.container),window.dispatchEvent(new CustomEvent("modal-show",{detail:{container:this.container}})),this.lastFocus=s.activeElement,this.focusHandler=function(e,t=!0){return n=>{if(n.target instanceof Element&&!e.contains(n.target)){let s;n.preventDefault();const i=Array.from(e.querySelectorAll(es.join(",")));n.target.compareDocumentPosition(e)&(t?Node.DOCUMENT_POSITION_PRECEDING:Node.DOCUMENT_POSITION_FOLLOWING)&&i.reverse();let a=i.length;for(;a--;){const e=i[a],t=getComputedStyle(e);if(!e.hidden&&"none"!==t.display&&"hidden"!==t.visibility&&(e.offsetWidth>0||e.offsetHeight>0)){s=e;break}}s=s||e,s.focus()}}}(this.wrapper),e=window,t="focus",n=this.focusHandler,i=!0,e.addEventListener(t,n,i),ss(this.container),this.openPromise=new Promise((e=>this.resolveOpen=e))),this.openPromise;var e,t,n,i}hide(e=null){this.container.classList.contains("is-active")&&(is.openCount--,this.restoreScrollbar(),this.container.classList.remove("is-active"),this.wrapper.parentElement.removeChild(this.wrapper),Array.from(s.body.querySelectorAll(".modal-tab-sentinel")).forEach((e=>{s.body.removeChild(e)})),window.removeEventListener("focus",this.focusHandler),this.wrapper.removeEventListener("click",this.clickHandler),this.wrapper.removeEventListener("keydown",this.escHandler),this.lastFocus&&this.lastFocus instanceof HTMLElement&&this.lastFocus.focus(),this.resolveOpen(e),this.resolveOpen=void 0,this.openPromise=void 0)}updateContent(e,t=!0,n=!1){const s=this.container.querySelector(".modal-slide-container"),i=s.querySelector(".modal-slide:first-of-type");if(null===s||null===i)throw new Error(`The ${null===s?"modal-slide-container":"modal-slide"} class is missing!`);s.appendChild(e);const a={forward:"ltr"===I.userDir?"slide-right":"slide-left",backward:"ltr"===I.userDir?"slide-left":"slide-right"},o=n?a.forward:a.backward;function r(e){s.removeChild(i),ss(e.container),e.setAriaLabelledBy(e.container)}t?(setTimeout((()=>{i.classList.add(o),e.classList.add(o)}),50),setTimeout((()=>{e.classList.remove(o),r(this)}),250)):r(this)}pushContent(e){this.contentStack.push(e),jn(Wn`<div class="modal-background modal-close"></div>
+				${this.contentElement} `,this.container),this.setAriaLabelledBy(this.container),ss(this.contentElement)}popContent(){if(this.contentStack&&this.contentStack.length<=1)throw new Error("Error getting modal content");this.contentStack.pop(),jn(Wn`<div class="modal-background modal-close"></div>
+				${this.contentElement} `,this.container),ss(this.contentElement)}get contentElement(){return this.contentStack[this.contentStack.length-1]}}let as,os;async function rs(e){(function(e){const t="profile"===p("page_type");if(!e.isAuthenticated||t)return!1;let n=!1;n="boolean"==typeof e.acceptedPrivacyNotice?e.acceptedPrivacyNotice:new Date(e.acceptedPrivacyNotice)>=We;return!n})(e)&&await async function(){if(!as){const e=s.createElement("div");e.classList.add("modal-content"),jn(Wn` <div
+				id="consentModal"
+				class="modal-card is-shadowless-mobile fill-mobile padding-xs has-padding-large-tablet"
+			></div>`,e),as=new is(e),os=e.querySelector("#consentModal"),cs()}await o,as.show()}()}function cs(){const e="microsoft"===Ge.userType?"Microsoft Employee Privacy Notice":"Microsoft Privacy Notice",t=Wn`
+		<section class="modal-card-body">
+			<h2 class="title is-text-centered">${e}</h2>
+			<p>${Kn(function(e){if(e&&0!==e.length||"microsoft"===Ge.userType)return se.replace("{email}",e||Ge.upn);if("AAD"===Ge.authenticationMode||"aad"===Ge.userType)return O.replace("{email}",Ge.upn);return Y}())}</p>
+			<button
+				id="consent"
+				@click="${()=>async function(){const e=tt.profile.acknowledgePrivacyNotice,t=await nt(ln(e,{method:"POST"}));if(rn(t),at(t,!1),!t.ok)throw new Error(`Unexpected response status ${t.status} for ${e}`)}()}"
+				class="modal-close button is-primary is-block has-margin-auto-sides has-margin-top-large"
+				autofocus
+			>
+				${"OK, got it."}
+			</button>
+			<button
+				id="noThanks"
+				@click="${ls}"
+				class="link-button has-margin-auto-sides margin-top-xs"
+			>
+				${"No, thanks"}
+			</button>
+		</section>
+	`;jn(t,os)}function ls(){const e=Wn` <section class="modal-card-body has-padding-bottom-none">
+		<h2>${"Are you sure?"}</h2>
+		<p>${"You need to agree with the Microsoft Privacy Notice to keep your profile and relating data."}</p>
+		<p class="has-margin-top-large">${"Deleting your data cannot be undone."}</p>
+		<div class="display-flex justify-content-flex-end has-margin-top-extra-large">
+			<button
+				id="consent-close"
+				class="button border-none has-padding-left-large has-padding-right-large has-margin-right-small has-text-primary"
+				@click="${cs}"
+				autofocus
+			>
+				${z}
+			</button>
+			<button
+				id="consent-delete-acct"
+				class="button is-danger has-padding-left-large has-padding-right-large"
+			>
+				${"Delete"}
+			</button>
+		</div>
+		<p
+			hidden
+			id="error-message"
+			class="has-text-danger display-flex justify-content-flex-end has-margin-bottom-large"
+			aria-live="assertive"
+			aria-relevant="text"
+		>
+			${"Something went wrong. Please try again."}
+		</p>
+	</section>`;jn(e,os),async function(e){const t=e.querySelector("#error-message"),n=e.querySelector("#consent-delete-acct");t.setAttribute("hidden","hidden"),n.onclick=async()=>{n.classList.add("is-loading");try{await async function(){const e=tt.privacy.delete,t=await nt(ln(e,{credentials:"include",method:"POST"}));return rn(t),t.ok}()?(as.hide(),await an(`https://docs.microsoft.com/${a.data.userLocale}/`,!0)):t.removeAttribute("hidden")}catch(e){throw t.removeAttribute("hidden"),new Error(`error: ${e.message}`)}finally{n.classList.remove("is-loading")}}}(os)}const ds=38,us=40,hs=27,ms=13,ps="docs-sign-in",fs="docs-sign-out";function gs(e){!function(e){const t=e=>{if(!(e.target instanceof Element))return;const t=e.target.closest(".docs-sign-in, .docs-sign-out");if(!t)return;const n=t.classList.contains(ps);e.target.setAttribute("data-m",JSON.stringify({cN:n?ps:fs,bhvr:n?100:101}))};e.addEventListener("touchstart",t,!0),e.addEventListener("pointerdown",t,!0),e.addEventListener("keyup",(e=>{e.which===ms&&t(e)}),!0)}(e),e.addEventListener("click",vs)}function vs(e){if(!(e.target instanceof Element))return;const t=e.target.closest(".docs-sign-in, .docs-sign-out");if(!t)return;const n=t.classList.contains(ps);e.preventDefault();const s=t instanceof HTMLAnchorElement&&t.matches('a[href]:not([href=""]):not([href="#"])')?t.href:location.href;n?on(s):an(s,!0)}const bs={Developer:"DEV_Homeheader","Regional Directors":"MSDocsHeader-RegionalDirectors",Startups:"startups"};function ys(){const e=p("uhfHeaderId"),t=e&&!function(e){for(const t in bs)if(e===bs[t])return!0;return!1}(e)?e:void 0;return(M.reviewFeatures?ut()["header-id"]:void 0)||a.data.context.uhfHeaderId||t}const ws=function(e){const{brand:t,pathnameSegments:n,page_kind:s,page_type:i,headerId:a,isAdmin:o}=e;if("true"===o)return"Admin";if("MSDocsHeader-Archive"===a)return"Archive";if("docs"===s&&"home"===i||"welcome"===i)return"Docs_Home";if("profile"===i)return"Profile";if("locale"===i)return"Locale";if("search"===i)return"Search";if("assessments"===s)return"Assessments";if(b||"style-guide"===s)return"Style-Guide";if("samples"===n[2])return"Code Samples";if("legal"===n[2])return"Legal";if("mooncake"===t)return"Mooncake";switch(a){case"startups":return"Startups";case"answers":return"Q&A";case"mooncake":return"Mooncake";case"MSDocsHeader-Learn":return"Learn";case"MSDocsHeader-RegionalDirectors":return"Regional Directors";case"DEV_Homeheader":case"MSDocsHeader-Advocates":return"Developer";case"MSDocsHeader-DocsL1":return"Documentation";case"MSDocsHeader-Assessments":return"Assessments";default:return"Third-Party"}}({brand:a.data.brand,pathnameSegments:x,page_kind:p("page_kind"),page_type:p("page_type"),headerId:p("uhfHeaderId"),isAdmin:p("is_admin")}),xs=function(e){switch(e){case"Code Samples":return F;case"Learn":case"Profile":return"Learn";case"Admin":return"Admin";case"Q&A":return"Q&A";case"Regional Directors":return ue;case"Developer":return he;case"Startups":return ie;case"Assessments":case"Docs_Home":case"Documentation":case"Mooncake":case"Style-Guide":case"Third-Party":default:return X}}(ws),$s=function(e){switch(e){case"Regional Directors":return ue;case"Developer":return he;case"Startups":return ie;default:return"Docs"}}(ws);async function ks(e,t=a.data.userLocale){const n={branch:Es()},s=`${tt.contentNav}/${t}/content-nav/${e}.json?${ht(n)}`,i=await nt(s,{credentials:"include"});if(!i.ok){const n=new Error(`Content navigation JSON not found for ${e} in ${t}.`);return n.headerId=e,console.error(n),null}const o=await i.json();return"isolated"===M.accessLevel&&"azure"===e&&o.callToAction&&o.callToAction.secondary&&-1!==o.callToAction.secondary.href.toLowerCase().indexOf("portal.azure.com")&&(o.callToAction.secondary.href=`https://${M.azurePortalHostname}`),o.items.push({kind:"menu",title:ae,items:[]}),o}function Es(){if(!0===M.reviewFeatures){return ut(location.search)["contentnav-branch"]||"main"}return"local"===M.accessLevel?"main":null}const{userLocale:Ls}=a.data,Ss={category:{kind:"link",href:`/${Ls}/`,title:"Developer"},items:[{kind:"link",href:`https://docs.microsoft.com/${Ls}/`,title:X},{kind:"link",href:`https://docs.microsoft.com/${Ls}/learn/`,title:"Learn"},{kind:"link",href:`https://docs.microsoft.com/${Ls}/answers/products/`,title:"Q&A"},{kind:"link",href:"https://channel9.msdn.com/",title:"Videos"},{kind:"link",href:`https://docs.microsoft.com/${Ls}/samples/browse/`,title:F},{kind:"menu",title:ae,items:[]}],cookieBanner:null},{userLocale:As}=a.data,Cs=(location.hostname,"https://docs.microsoft.com"),Ts={category:{kind:"link",href:`/${As}/`,title:"Docs"},items:[{kind:"link",href:`${Cs}/${As}/documentation`,title:X},{kind:"link",href:`${Cs}/${As}/learn/`,title:"Learn"},{kind:"link",href:`${Cs}/${As}/answers/products/`,title:"Q&A"},...q.codeSamples?[{kind:"link",href:`${Cs}/${As}/samples/browse/`,title:F}]:[],{kind:"menu",title:ae,items:[]}],cookieBanner:null},{userLocale:_s}=a.data,Ns={category:{kind:"link",href:`/${_s}/`,title:ue},items:[{kind:"link",href:`/${_s}/about/`,title:"About"},{kind:"menu",title:ae,items:[]}],cookieBanner:null},Ps={category:{kind:"link",href:"/",title:ie},items:[{kind:"link",href:"https://docs.microsoft.com/en-us/learn/topics/startups",title:"Learn"},{kind:"link",href:"/blog/",title:U},{kind:"menu",title:ae,items:[]}],callToAction:{primary:{kind:"link",href:"https://portal.startups.microsoft.com/",title:"Member sign in"}},cookieBanner:null},Is={category:{kind:"link",title:"Docs Style Guide",href:"./index.html"},items:[{title:"Overview",expanded:!0,children:[{title:"Animations",href:"animations.html"},{title:"Breakpoints",href:"breakpoints.html"},{title:"Colors",expanded:!0,children:[{title:"Framework Colors",href:" ./framework-colors.html"},{title:"System Colors",href:"./system-colors.html"},{title:"Theming",href:"./theming.html"},{title:"Color Class Modifiers",href:"./color-class-modifiers.html"},{title:"Brand Colors",href:"./brand-colors.html"},{title:"Code Highlighting",href:"./code-highlighting.html"}]},{title:"Content",href:"./content.html"},{title:"Direction",href:"./direction.html"},{title:"Fonts",expanded:!0,children:[{title:"Sizes",href:"./typography-sizes.html"},{title:"Font stack",href:"./font-stack.html"},{title:"Icon font",href:"./icon-font.html"}]},{title:"Focus",href:"./focus.html"},{title:"Z-index",href:"./z-index.html"}]},{title:"Layout",expanded:!0,children:[{title:"Container",href:"./container.html"}]},{title:"Modifiers",expanded:!0,children:[{title:"Border",href:"./border.html"},{title:"Display",href:"./display.html"},{title:"Position",href:"./position.html"},{title:"Overlay",href:"./overlay.html"},{title:"Spacing",href:"./spacing.html"},{title:"Typography",href:"./typography.html"}]},{title:"Components",expanded:!0,children:[{title:"Autocomplete",href:"./autocomplete.html"},{title:"Card",href:"./card.html"},{title:"Cards on Learn",href:"./learn-cards.html"},{title:"Columns",href:"./columns.html"},{title:"Date Countdown Timer",href:"./date-countdown-timer.html"},{title:"Metadata",href:"./metadata.html"},{title:"Dropdown",href:"./dropdown.html"},{title:"Facepile",href:"./facepile.html"},{title:"Grid",href:"./grid.html"},{title:"Hero",href:"./hero.html"},{title:"Inline Feedback",href:"./inline-feedback.html"},{title:"Input Edit Toggle",href:"./input-edit-toggle.html"},{title:"Level",href:"./level.html"},{title:"Media",href:"./media.html"},{title:"Media Card",href:"./media-card.html"},{title:"Modal",href:"./modal.html"},{title:"Nav Bar",href:"./nav-bar.html"},{title:"Nav Box",href:"./nav-box.html"},{title:"Pagination",href:"./pagination.html"},{title:"Star Rating",href:"./star-rating.html"},{title:"Show More",href:"./show-more.html"},{title:"Tabs",href:"./tabs.html"},{title:"Tag Input",href:"./tag-input.html"},{title:"Toast",href:"./toast.html"},{title:"Tree",href:"./tree.html"}]},{title:"Elements",expanded:!0,children:[{title:"Alert",href:"./alert.html"},{title:"Banner",href:"./banner.html"},{title:"Bar link",href:"./bar-link.html"},{title:"Bookend",href:"./bookend.html"},{title:"Box",href:"./box.html"},{title:"Breadcrumbs",href:"./breadcrumbs.html"},{title:"Button",href:"./button.html"},{title:"Button Grouping",href:"./button-grouping.html"},{title:"Checkbox",href:"./checkbox.html"},{title:"Checkbox button",href:"./checkbox-button.html"},{title:"Completable",href:"./completable.html"},{title:"Durable Image",href:"./durable-image.html"},{title:"External Indicator",href:"./external-indicator.html"},{title:"File",href:"./file.html"},{title:"Form",href:"./form.html"},{title:"Horizontal rule",href:"./hr.html"},{title:"Icon",href:"./icon.html"},{title:"Image",href:"./image.html"},{title:"Input",href:"./input.html"},{title:"Link Button",href:"./link-button.html"},{title:"Meter",href:"./meter.html"},{title:"Progress",href:"./progress.html"},{title:"Radio",href:"./radio.html"},{title:"Select",href:"./select.html"},{title:"Stretched link",href:"./stretched-link.html"},{title:"Skeleton",href:"./skeleton.html"},{title:"Table",href:"./table.html"},{title:"Tag",href:"./tag.html"},{title:"Textarea",href:"./textarea.html"},{title:"Title",href:"./title.html"},{title:"XP Tag",href:"./xp-tag.html"}]}].map((function e({title:t,href:n,children:s}){if(s)return{kind:"menu",title:t,items:s.map(e)};return{kind:"link",title:t,href:n}})),callToAction:{primary:{kind:"link",title:"Visit Microsoft Docs",href:"https://docs.microsoft.com/en-us/"}},cookieBanner:null};Is.items.push({kind:"menu",title:"More",items:[]});const Ms={DEV_Homeheader:Ss,"MSDocsHeader-DocsL1":Ts,"MSDocsHeader-RegionalDirectors":Ns,startups:Ps};const qs=q.userServices&&"Developer"!==ws&&"Startups"!==ws&&"Regional Directors"!==ws&&"Style-Guide"!==ws,Os="Third-Party"===ws||"Developer"===ws||"Assessments"===ws||"Learn"===ws||"Mooncake"===ws||"Q&A"===ws||"Style-Guide"===ws;function Ds(e){const t=function(e=p,t=ws){if("Learn"===t)return Rs(Us);if("Q&A"===t)return Rs(Bs);return e("activeMenuId")}();if(t&&"exclude"!==t)for(const n of e){const e=n?.id===t;if(e){n.current=e;break}}}const Bs={id:"faq-help",pattern:"/answers/articles/38069/qa-help-articles",next:{id:"users",pattern:"/answers/users/",next:{id:"tags",pattern:"/answers/topics.html",next:{id:"tags",pattern:"/answers/topics/",next:{id:"feedback",pattern:"/answers/content/idea",next:{id:"feedback",pattern:"/answers/idea",next:{id:"questions",pattern:"/answers/questions",next:{id:"questions",pattern:"/answers/index.html"}}}}}}}},Us={id:"exclude",pattern:`/${a.data.userLocale}/learn/`,exact:!0,next:{id:"products",pattern:"/learn/paths",next:{id:"products",pattern:"/learn/browse",next:{id:"roles",pattern:"/learn/roles",next:{id:"learn-tv",pattern:"/learn/tv",next:{id:"certifications",pattern:"/learn/certifications",next:{id:"faq-help",pattern:"/learn/support",next:{id:"products",pattern:"/learn/"}}}}}}}};function Rs(e,t=location.pathname){let n,s=e;do{(s.exact?t===s.pattern:-1!==t.indexOf(s.pattern))&&(n=s.id),s=s.next}while(s&&!n);return n}let Hs,zs,Fs;const Vs=new Promise((e=>Fs=e));let js;const Ws=new Promise((e=>js=e));let Qs;const Gs=new Promise((e=>Qs=e));async function Js(){const e=function(e){return e in bs?bs[e]:"MSDocsHeader-DocsL1"}(ws),t=function(e){return e in Ms?Ms[e]:null}(e);if(t)return Hs=t,void js();Hs=await ks(e),js()}async function Ks(){if(!Os)return zs=null,void Qs();const e=function(){switch(ws){case"Style-Guide":return Is;default:return null}}();if(e)return zs=e,void Qs();const t=ys();if(!t)return zs=null,void Qs();zs=await ks(t),zs&&Ds(zs.items),Qs()}const Ys={setItem(e,t,n){try{const s=n.getTime();if(Date.now()>=s)return;const i={value:t,expiry:s};S.setItem(e,JSON.stringify(i))}catch(e){}},getItem(e){try{const t=S.getItem(e);if(!t)return null;const n=JSON.parse(t);return"number"!=typeof n.expiry||isNaN(n.expiry)||Date.now()>=n.expiry?(S.removeItem(e),null):n.value}catch(e){return null}},removeItem(e){S.removeItem(e)},clear(){S.clear()}},Xs={Complete:{color:"success",icon:"docon-status-success-outline",text:"Your profiles have been successfully merged."},Failed:{color:"danger",icon:"docon-status-failure-outline",text:'We ran into a problem merging your profiles. Please contact <a href="https://docs.microsoft.com/learn/support/troubleshooting#report-feedback">customer support</a>.'},Running:{color:"warning",icon:"docon-status-info-outline",text:"Merging in progress. It may take several minutes to complete."}};async function Zs(e=!1){if(e||null!==Ys.getItem("check-merge-status"))try{let e=await cn();if(null===e)return;if(ti(e),"Running"!==e)return;const t=setInterval((async()=>{e=await cn(),ti(e),"Running"!==e&&(clearInterval(t),Ys.removeItem("check-merge-status"))}),3e4)}catch{}}async function ei(){try{await async function(){const e=tt.profile.acknowledgeMergeStatus,t=await nt(ln(e,{method:"POST"}));if(rn(t),at(t,!1),!t.ok)throw new Error(`Unexpected response status ${t.status} for ${e}`)}()}catch(e){}const e=document.getElementById("merge-status-alert");if(null===e)return;e.classList.add("disappearing");document.getElementById("add-account").classList.add("is-sliding-up"),jn(Wn``,e.parentElement)}async function ti(e){if("Acknowledged"===e)return;if("Locked"===e)return void function(){const e=document.createElement("div"),t=new is(e);jn(Wn` <div class="modal-card">
+			<section class="modal-card-body">
+				<button
+					data-dismiss
+					type="button"
+					class="dismiss delete modal-close position-absolute is-large margin-top-xs margin-right-xs top-0 right-0"
+					@click="${()=>an(`https://docs.microsoft.com/${a.data.userLocale}`,!0)}"
+					aria-label="${z}"
+				>
+					<span class="docon docon-navigate-close" aria-hidden="true"></span>
+				</button>
+				<h2 class="title has-margin-top-small">
+					${xe}
+				</h2>
+				<p>${$e}</p>
+				<div
+					class="display-flex font-size-s justify-content-flex-end has-margin-top-large has-margin-bottom-small"
+				>
+					<button
+						type="button"
+						class="button modal-close align-self-center has-margin-right-small font-size-s is-primary"
+						@click="${()=>an(`https://docs.microsoft.com/${a.data.userLocale}`,!0)}"
+						data-bi-name="merging-block-notice-signin"
+					>
+						${ke}
+					</button>
+				</div>
+			</section>
+		</div>`,e),t.show();document.querySelector(".modal").addEventListener("click",(e=>{e.preventDefault(),e.stopPropagation(),an(`https://docs.microsoft.com/${a.data.userLocale}`,!0)}))}();"Complete"===e&&"profile"===class{static get brand(){return a.data.brand}static get kind(){return p("page_kind")}static get type(){return p("page_type")}static get template(){return a.data.pageTemplate}}.type&&await async function(){const e=-1!==location.pathname.split("/").indexOf("edit")?Kt:Jt;try{const t={credentials:"include"},n=await fetch(st(e,t));if(n.ok&&204!==n.status){const e=await n.json();Ge.readUserProfile(e)}else Ge.setAnonymous()}catch(e){Ge.setAnonymous()}}();const t=Xs[e];if(!t)return;const n=document.querySelector("#add-account");if(!n)return;"Running"===e?(n.disabled=!0,n.classList.add("is-disabled")):(n.disabled=!1,n.classList.remove("is-disabled"));const s=document.querySelector(".accounts");let i=s.querySelector(".merging-status");null!==s&&(null===i&&(i=document.createElement("div"),i.classList.add("merging-status"),s.appendChild(i)),jn(Wn`
+			<div
+				id="merge-status-alert"
+				class="alert is-inline-alert is-radiusless is-${t.color}"
+			>
+				<span class="icon has-text-${t.color}" aria-hidden="true">
+					<span class="docon ${t.icon}"></span>
+				</span>
+				<p class="is-inline">${Kn(t.text)}</p>
+				${"Running"!==e?Wn`<button
+							class="delete position-absolute right-0 margin-xxs"
+							data-dismiss=""
+							type="button"
+							@click=${()=>ei()}
+					  ></button>`:null}
+			</div>
+		`,i))}let ni;const si=new Promise((e=>ni=e));async function ii(e){"disappearing"===e.getAttribute("data-dismissable")&&(e.classList.add("disappearing"),await new Promise((e=>setTimeout(e,500)))),e.classList.remove("disappearing"),e.remove(),ft()}function ai(e){e.addEventListener("click",(t=>{let i=null;if(i=t.target instanceof Element&&t.target.closest(".dropdown-trigger"),i||(i=t.target instanceof Element&&t.target.shadowRoot&&t.target.shadowRoot.activeElement&&t.target.shadowRoot.activeElement.closest(".dropdown-trigger")),!i)return;t.preventDefault();const o=i.parentElement,r="true"!==i.getAttribute("aria-expanded");let c;if(i.setAttribute("aria-expanded",r.toString()),r){o.classList.contains("has-centered-menu")||function(e){const t=e=>n.getComputedStyle(e).overflowX;let s=e.parentElement;for(;s&&"BODY"!==s.nodeName&&"hidden"!==t(s);)s=s.parentElement;if(null===s)return;const i=e.querySelector(".dropdown-trigger"),o=e.querySelector(".dropdown-menu"),r=null!==e.closest(".dropdown-menu"),c=o.classList.contains("is-vertically-scrollable");o.style.left="",o.style.right="",o.style.maxHeight="";const{left:l,right:d}=s.getBoundingClientRect(),{left:u,right:h,top:m,bottom:p}=i.getBoundingClientRect(),f=o.getBoundingClientRect().width;r?(o.style.top="-1px","ltr"===a.data.userDir?h+f<=d?(o.style.right="0",o.style.transform="translateX(100%)"):(o.style.left="0",o.style.transform="translateX(-100%)"):h-f>=l?(o.style.left="0",o.style.transform="translateX(-100%)"):(o.style.right="0",o.style.transform="translateX(100%)"),c&&(o.style.maxHeight=n.innerHeight-m-8+"px")):("ltr"===a.data.userDir?u+f<=d?o.style.left="0":o.style.right="0":h-f>=l?o.style.right="0":o.style.left="0",c&&(o.style.maxHeight=n.innerHeight-p-8+"px"))}(o);const t=e=>{e.target instanceof Element&&(!o.contains(e.target)||"click"===e.type&&e.target.closest(".dropdown-menu-close"))&&(c(),e.target.classList.contains("dropdown-menu-close")&&i.focus())},r=e=>{e.keyCode===hs&&(c(),i.focus())},l=async()=>{"iframe"===(s.activeElement&&s.activeElement.nodeName||"").toLowerCase()&&c()};c=()=>{e.removeEventListener("focus",t),e.removeEventListener("click",t),e.removeEventListener("touchstart",t),e.removeEventListener("keydown",r),n.removeEventListener("blur",l),i.setAttribute("aria-expanded","false")};const d=!0;e.addEventListener("focus",t,d),e.addEventListener("click",t),e.addEventListener("touchstart",t),e.addEventListener("keydown",r),e.addEventListener("collapse-dropdown",(e=>{e.stopPropagation(),c()})),n.addEventListener("blur",l)}}))}function oi(){const e=location.pathname.split("/").slice(2).join("/").toLowerCase(),t=document.querySelector(".post-controls");if(!t||!e.startsWith("answers/questions"))return;const n=document.createElement("button");n.classList.add("collection","button-to-link"),n.setAttribute("data-list-type","collection");const s=Wn`
+		<span class="icon" aria-hidden="true">
+			<span class="docon docon-circle-addition"></span>
+		</span>
+		<span class="add-to-collection-status">${me}</span>
+	`;jn(s,n),t.appendChild(n)}const ri={idea:"docon-lightbulb-regular",question:"docon-question-circle-solid",topic:"docon-tag-circle-solid",user:"docon-user"},ci={"social.msdn.microsoft.com":{icon:"docon-book-solid",sourceTitle:"MSDN Forum"},"github.com":{icon:"docon-brand-github",sourceTitle:"GitHub"},"stackoverflow.com":{icon:"docon-brand-stack-overflow-solid",sourceTitle:"Stack Overflow"}};function li({type:e,url:t}){const n=t.startsWith("/")&&"kbentry"!==e,s=t.startsWith("/")&&"kbentry"===e;if(n)return{sourceTitle:"",icon:ri[e]};if(s)return{sourceTitle:"",icon:"docon-book-solid"};const i=new URL(t).host;return ci[i]}async function di(e,t){if(!e||e.length<4)return Promise.resolve([]);const[n,s]=await Promise.all([ui(e,t),hi(e)]);return function(e,t){const n=e.searchResults.results,s=t.Matches;return n.length>=4?s.length>=3?[...n.slice(0,4).map(mi),...s.slice(0,3).map(pi)]:[...n.slice(0,7-s.length).map(mi),...s.map(pi)]:[...n.map(mi),...s.slice(0,7-n.length).map(pi)]}(n,s)}async function ui(e,t){-1===e.indexOf("*")&&(e+="*");const n=new URLSearchParams({type:t,compact:"true",q:e}).toString(),s=st(`${tt.forumSearch.forumInternalQuestionSuggestions}?${n}`,{headers:{Accept:"application/json","Content-Type":"application/json"},method:"GET"},!1),i=await nt(s);return i.ok?i.json():{externalSearchResults:{count:0,numberOfPages:0,pageNumber:0,pageSize:0,query:"",results:[],resultsCount:0,resultIds:[]},searchResults:{count:0,numberOfPages:0,pageNumber:0,pageSize:0,query:"",results:[],resultsCount:0,resultIds:[]}}}async function hi(e){const t={body:JSON.stringify({SearchText:e,Top:7}),headers:{Accept:"application/json","Content-Type":"application/json"},method:"POST",redirect:"follow"},n=st(tt.forumSearch.azureKbQuestionSuggestions,t,!1),s=await nt(n);return s.ok?s.json():{Count:0,Matches:[]}}function mi(e){const t=li({type:e.type,url:e.url});return e.username?{icon:"docon-user",title:e.username,type:"user",url:e.url,realname:e.realname}:{answerCount:e.childCount,acceptedAnswer:e.marked,icon:t.icon,title:e.titleUnescaped,type:e.type,upVotesCount:e.score,url:e.url}}function pi(e){const t=li({type:"",url:e.SourceUri});return{answerCount:e.AnswerCount,acceptedAnswer:!1,icon:t.icon,title:e.Title,type:"kbentry",upVotesCount:e.UpVotesCount,url:e.SourceUri,sourceTitle:t.sourceTitle}}function fi(e){return e.map((e=>({title:e.title,type:e.type,url:e.url})))}function gi({suggestion:e,term:t}){jt({behavior:Ut,actionType:Dt,content:{srchq:t,srchtype:"auto suggest",resultselected:e.title,resulttype:e.type||"",resulturl:e.url||""}})}function vi(e){const t=[{srchtype:"auto suggest"}];e.forEach(((e,n)=>{t.push({cN:e.title,sN:n,type:e.type||"",url:e.url||""})})),jt({content:t})}function bi(e,t,n,s=500){let i=0;const a=(...a)=>{t(i),i=e.apply(null,[n.bind(null,...a),s])};return a.cancel=()=>t(i),a}const yi={timeout:bi.bind(null,setTimeout,clearTimeout),animationFrame:bi.bind(null,n.requestAnimationFrame,n.cancelAnimationFrame)};function wi(){const e=document.querySelector(".create-post-form-ask form#fmask #title");if(!e)return;const t=document.createElement("div");e.parentElement.insertAdjacentElement("beforebegin",t),function(e){const t=document.querySelector('label[for="title"]');e.hidden=!0,t.hidden=!0;document.querySelector("form#fmask .similar-questions").hidden=!0}(e);const n=xi(t,e);jn(n,t),function(e){setTimeout((()=>{const t=document.querySelector(".modal-footer > .btn");t&&t.addEventListener("click",(t=>{t.preventDefault();document.querySelector("#question-title").value=e.value}))}),200)}(e)}function xi(e,t,n){const s=n&&n.length>0,i=function(e,t){if(e)return 1===t.length?Wn`<span class="visually-hidden">1</span> ${le}`:Wn`<span class="visually-hidden">${t.length}</span>
+					${de}`;return Wn``}(s,n),a=s?Wn` <ul>
+				${n.map((e=>function(e){const{title:t,url:n,sourceTitle:s,answerCount:i,upVotesCount:a}=e,o=e.acceptedAnswer?Wn` <div class="column is-narrow">
+				<p class="has-text-success has-margin-right-extra-small has-padding-extra-small">
+					<span class="icon is-small" aria-hidden="true">
+						<span class="docon docon-status-success-outline"></span>
+					</span>
+					<br class="is-hidden-mobile" />
+					${ce}
+				</p>
+		  </div>`:Wn``;return Wn`
+		<li class="has-padding-top-small has-padding-bottom-small border-top">
+			<div class="columns is-gapless">
+				<div class="column">
+					<p
+						class="is-truncated has-one-line has-margin-right-extra-small has-margin-bottom-small has-margin-top-small-tablet"
+					>
+						<a
+							@click=${()=>gi({suggestion:e,term:$i()})}
+							href="${n}"
+							class="has-inner-focus  ${s?"has-external-link-indicator":""}"
+						>
+							${s?`${s}: `:""}${t}
+						</a>
+					</p>
+				</div>
+				<div class="column is-narrow">
+					<div
+						class="columns is-mobile is-gapless has-text-centered font-size-xs has-line-height-reset"
+					>
+						${o}
+						<div class="column is-narrow">
+							<p
+								class="has-background-success-light has-margin-right-extra-small has-padding-extra-small has-padding-left-small has-padding-right-small"
+							>
+								<b>${i}</b>
+								<br class="is-hidden-mobile" />
+								${D}
+							</p>
+						</div>
+						<div class="column is-narrow">
+							<p
+								class="has-body-background-medium has-padding-extra-small has-padding-left-small has-padding-right-small"
+							>
+								<b>${a}</b>
+								<br class="is-hidden-mobile" />
+								${Le}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+	`}(e)))}
+		  </ul>`:Wn``;return Wn`
+		<div class="controls">
+			<label for="question-title">
+				<i class="fa fas fa-asterisk required-asterisk" aria-hidden="true"></i>
+				${"Question Title"}
+				<span class="sr-only">${"Required field"}</span>
+			</label>
+
+			<input
+				type="text"
+				id="question-title"
+				name="question-title"
+				placeholder="${"Type your question..."}"
+				autocomplete="off"
+				autocorrect="off"
+				spellcheck="false"
+				value="${t.value||""}"
+				@input=${yi.timeout((n=>async function(e,t,n){const s=e.target.value.trim();let i=[];s&&s.length>5&&(i=await di(s,"question"),vi(fi(i)));const a=xi(t,n,i);jn(a,t)}(n,e,t)))}
+				@change=${e=>function(e,t){const n=e.target;if(!n)return;const{value:s}=n;t.value=s}(e,t)}
+			/>
+		</div>
+		<div
+			id="suggestions-container"
+			class="box-shadow-light has-max-height-300 is-vertically-scrollable padding-xs has-padding-bottom-small ${s?"":"visually-hidden"}"
+		>
+			<p class="margin-bottom-xs font-weight-semibold" aria-live="polite" aria-atomic="true">
+				${i}
+			</p>
+			${a}
+		</div>
+	`}function $i(){const e=document.querySelector("#question-title");return e?e.value:""}function ki(){const e=document.querySelector(".header-holder"),t=document.createElement("a");t.classList.add("skip-to-main-link","visually-hidden-until-focused","position-fixed","has-inner-focus","focus-visible","top-0","left-0","right-0","padding-xs","has-text-centered","has-body-background"),t.setAttribute("tabindex","1"),t.href="#middle",t.textContent="Skip to main content",e.appendChild(t),function(){const e=document.querySelector(".skip-navigation");e.parentNode&&e.parentNode.removeChild(e)}()}function Ei(){const e=pageContext.currentUser.id;Array.from(s.querySelectorAll(".comment-content")).forEach((t=>{if(t.parentElement.getAttribute("authorid").toLowerCase()===e){Array.from(t.querySelectorAll(".comment-info a.make-tooltip")).forEach((e=>{e.classList.add("hidden")}))}}))}const Li={"ar-sa":"العربية","eu-es":"Euskara","bs-cyrl-ba":"Босански","bs-latn-ba":"Bosanski","bg-bg":"Български","ca-es":"Català","zh-cn":"中文 (简体)","zh-hk":"中文 (繁體 香港特別行政區)","zh-tw":"中文 (繁體)","hr-hr":"Hrvatski","cs-cz":"Čeština","da-dk":"Dansk","nl-be":"Nederlands (België)","nl-nl":"Nederlands","en-au":"English (Australia)","en-ca":"English (Canada)","en-in":"English (India)","en-ie":"English (Ireland)","en-my":"English (Malaysia)","en-nz":"English (New Zealand)","en-sg":"English (Singapore)","en-za":"English (South Africa)","en-gb":"English (United Kingdom)","en-us":"English (United States)","et-ee":"Eesti","fil-ph":"Filipino","fi-fi":"Suomi","fr-be":"Français (Belgique)","fr-ca":"Français (Canada)","fr-fr":"Français","fr-ch":"Français (Suisse)","gl-es":"Galego","ka-ge":"Georgian","de-at":"Deutsch (Österreich)","de-de":"Deutsch","de-ch":"Deutsch (Schweiz)","el-gr":"Ελληνικά","he-il":"עברית‏","hi-in":"हिंदी","hu-hu":"Magyar","is-is":"Íslenska","id-id":"Bahasa Indonesia","ga-ie":"Irish (Ireland)","it-it":"Italiano","it-ch":"Italiano (Svizzera)","ja-jp":"日本語","kk-kz":"Қазақ","ko-kr":"한국어","lv-lv":"Latviešu","lt-lt":"Lietuvių","lb-lu":"Luxembourgish (Luxembourg)","ms-my":"Bahasa Malaysia","mt-mt":"Maltese (Malta)","nb-no":"Norsk","pl-pl":"Polski","pt-br":"Português (Brasil)","pt-pt":"Português (Portugal)","ro-ro":"Română","ru-ru":"Русский","sr-cyrl-rs":"Српски (Србија и Црна Гора)","sr-latn-rs":"Srpski (Srbija i Crna Gora)","sk-sk":"Slovenčina","sl-si":"Slovenski","es-mx":"Español (México)","es-es":"Español (España)","sv-se":"Svenska","th-th":"ไทย","tr-tr":"Türkçe","uk-ua":"Українська","vi-vn":"Tiếng Việt"},Si=/^\/([a-z]{2,3}-(?:[a-z]{4}-)?[a-z]{2})(\/|$)/i;function Ai(e,t,n=!0){return function(e){return!!Li[e]}(t)?0===e.indexOf("http://")||0===e.indexOf("https://")||0===e.indexOf("//")?e:Si.test(e)?n?function(e,t){return e.replace(Si,`/${t}$2`)}(e,t):e:"/"+t+e:e}function Ci(e){return e.replace(Si,"/")}function Ti(e,t=!1){const{username:n,subpage:s}=e;let i;i=-1!==["anon-user","css-eng-api","azure-cxp-api"].indexOf(e.username)?"https://aka.ms/msftqalocalaccounts":Qe(n,"preferences"===s?"settings":s),t?window.open(i,"_blank"):location.href=i}function _i(e){e=e.toLowerCase().replace(/\.html$/i,"");let t=Ci(new URL(e).pathname).split("/");t=t.slice(2);const[n,s,i,a=null]=t;return"users"===n&&/^\d+$/.test(s)&&i&&"index"!==i?{qnaId:s,username:i,subpage:a}:null}const Ni=async e=>{await Vs;const t=document.querySelector("#user-menu > ul"),n=document.createElement("li");n.appendChild(e),t.appendChild(n)};const Pi=w?2539:50033;
+/*! *****************************************************************************
+	Copyright (c) Microsoft Corporation.
+
+	Permission to use, copy, modify, and/or distribute this software for any
+	purpose with or without fee is hereby granted.
+
+	THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+	REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+	AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+	INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+	LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+	OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+	PERFORMANCE OF THIS SOFTWARE.
+	***************************************************************************** */
+function Ii(e,t,n,s){var i,a=arguments.length,o=a<3?t:null===s?s=Object.getOwnPropertyDescriptor(t,n):s;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)o=Reflect.decorate(e,t,n,s);else for(var r=e.length-1;r>=0;r--)(i=e[r])&&(o=(a<3?i(o):a>3?i(t,n,o):i(t,n))||o);return a>3&&o&&Object.defineProperty(t,n,o),o}const Mi=function(){if("undefined"!=typeof globalThis)return globalThis;if("undefined"!=typeof global)return global;if("undefined"!=typeof self)return self;if("undefined"!=typeof window)return window;try{return new Function("return this")()}catch(e){return{}}}();void 0===Mi.trustedTypes&&(Mi.trustedTypes={createPolicy:(e,t)=>t});const qi=Object.freeze([]),Oi=[],Di=Mi.trustedTypes.createPolicy("fast-html",{createHTML:e=>e});let Bi=Di;function Ui(){let e=0;for(;e<Oi.length;){if(Oi[e].call(),e++,e>1024){for(let t=0,n=Oi.length-e;t<n;t++)Oi[t]=Oi[t+e];Oi.length-=e,e=0}}Oi.length=0}const Ri=`fast-${Math.random().toString(36).substring(2,8)}`,Hi=`${Ri}{`,zi=`}${Ri}`,Fi=Object.freeze({supportsAdoptedStyleSheets:Array.isArray(document.adoptedStyleSheets)&&"replace"in CSSStyleSheet.prototype,setHTMLPolicy(e){if(Bi!==Di)throw new Error("The HTML policy can only be set once.");Bi=e},createHTML:e=>Bi.createHTML(e),isMarker:e=>e&&8===e.nodeType&&e.data.startsWith(Ri),extractDirectiveIndexFromMarker:e=>parseInt(e.data.replace(`${Ri}:`,"")),createInterpolationPlaceholder:e=>`${Hi}${e}${zi}`,createCustomAttributePlaceholder(e,t){return`${e}="${this.createInterpolationPlaceholder(t)}"`},createBlockPlaceholder:e=>`\x3c!--${Ri}:${e}--\x3e`,queueUpdate(e){Oi.length<1&&window.requestAnimationFrame(Ui),Oi.push(e)},nextUpdate:()=>new Promise((e=>{Fi.queueUpdate(e)})),setAttribute(e,t,n){null==n?e.removeAttribute(t):e.setAttribute(t,n)},setBooleanAttribute(e,t,n){n?e.setAttribute(t,""):e.removeAttribute(t)},removeChildNodes(e){for(let t=e.firstChild;null!==t;t=e.firstChild)e.removeChild(t)},createTemplateWalker:e=>document.createTreeWalker(e,133,null,!1)});function Vi(e){const t=this.spillover;-1===t.indexOf(e)&&t.push(e)}function ji(e){const t=this.spillover,n=t.indexOf(e);-1!==n&&t.splice(n,1)}function Wi(e){const t=this.spillover,n=this.source;for(let s=0,i=t.length;s<i;++s)t[s].handleChange(n,e)}function Qi(e){return-1!==this.spillover.indexOf(e)}class Gi{constructor(e,t){this.sub1=void 0,this.sub2=void 0,this.spillover=void 0,this.source=e,this.sub1=t}has(e){return this.sub1===e||this.sub2===e}subscribe(e){this.has(e)||(void 0!==this.sub1?void 0!==this.sub2?(this.spillover=[this.sub1,this.sub2,e],this.subscribe=Vi,this.unsubscribe=ji,this.notify=Wi,this.has=Qi,this.sub1=void 0,this.sub2=void 0):this.sub2=e:this.sub1=e)}unsubscribe(e){this.sub1===e?this.sub1=void 0:this.sub2===e&&(this.sub2=void 0)}notify(e){const t=this.sub1,n=this.sub2,s=this.source;void 0!==t&&t.handleChange(s,e),void 0!==n&&n.handleChange(s,e)}}class Ji{constructor(e){this.subscribers={},this.source=e}notify(e){const t=this.subscribers[e];void 0!==t&&t.notify(e)}subscribe(e,t){let n=this.subscribers[t];void 0===n&&(this.subscribers[t]=n=new Gi(this.source)),n.subscribe(e)}unsubscribe(e,t){const n=this.subscribers[t];void 0!==n&&n.unsubscribe(e)}}const Ki=/(:|&&|\|\||if)/,Yi=new WeakMap,Xi=new WeakMap;let Zi,ea=e=>{throw new Error("Must call enableArrayObservation before observing arrays.")};class ta{constructor(e){this.name=e,this.field=`_${e}`,this.callback=`${e}Changed`}getValue(e){return void 0!==Zi&&Zi.watch(e,this.name),e[this.field]}setValue(e,t){const n=this.field,s=e[n];if(s!==t){e[n]=t;const i=e[this.callback];"function"==typeof i&&i.call(e,s,t),sa(e).notify(this.name)}}}const na=Object.freeze({setArrayObserverFactory(e){ea=e},getNotifier(e){let t=e.$fastController||Yi.get(e);return void 0===t&&(Array.isArray(e)?t=ea(e):Yi.set(e,t=new Ji(e))),t},track(e,t){void 0!==Zi&&Zi.watch(e,t)},trackVolatile(){void 0!==Zi&&(Zi.needsRefresh=!0)},notify(e,t){sa(e).notify(t)},defineProperty(e,t){"string"==typeof t&&(t=new ta(t)),this.getAccessors(e).push(t),Reflect.defineProperty(e,t.name,{enumerable:!0,get:function(){return t.getValue(this)},set:function(e){t.setValue(this,e)}})},getAccessors(e){let t=Xi.get(e);if(void 0===t){let n=Reflect.getPrototypeOf(e);for(;void 0===t&&null!==n;)t=Xi.get(n),n=Reflect.getPrototypeOf(n);t=void 0===t?[]:t.slice(0),Xi.set(e,t)}return t},binding(e,t,n=this.isVolatileBinding(e)){return new da(e,t,n)},isVolatileBinding:e=>Ki.test(e.toString())}),sa=na.getNotifier;na.trackVolatile;const ia=Fi.queueUpdate;function aa(e,t){na.defineProperty(e,t)}let oa=null;function ra(e){oa=e}class ca{constructor(){this.index=0,this.length=0,this.parent=null,this.parentContext=null}get event(){return oa}get isEven(){return this.index%2==0}get isOdd(){return this.index%2!=0}get isFirst(){return 0===this.index}get isInMiddle(){return!this.isFirst&&!this.isLast}get isLast(){return this.index===this.length-1}}na.defineProperty(ca.prototype,"index"),na.defineProperty(ca.prototype,"length");const la=Object.seal(new ca);class da extends Gi{constructor(e,t,n=!1){super(e,t),this.binding=e,this.isVolatileBinding=n,this.needsRefresh=!0,this.needsQueue=!0,this.first=this,this.last=null,this.propertySource=void 0,this.propertyName=void 0,this.notifier=void 0,this.next=void 0}observe(e,t){this.needsRefresh&&null!==this.last&&this.disconnect();const n=Zi;Zi=this.needsRefresh?this:void 0,this.needsRefresh=this.isVolatileBinding;const s=this.binding(e,t);return Zi=n,s}disconnect(){if(null!==this.last){let e=this.first;for(;void 0!==e;)e.notifier.unsubscribe(this,e.propertyName),e=e.next;this.last=null,this.needsRefresh=this.needsQueue=!0}}watch(e,t){const n=this.last,s=sa(e),i=null===n?this.first:{};if(i.propertySource=e,i.propertyName=t,i.notifier=s,s.subscribe(this,t),null!==n){if(!this.needsRefresh){let t;Zi=void 0,t=n.propertySource[n.propertyName],Zi=this,e===t&&(this.needsRefresh=!0)}n.next=i}this.last=i}handleChange(){this.needsQueue&&(this.needsQueue=!1,ia(this))}call(){null!==this.last&&(this.needsQueue=!0,this.notify(this))}records(){let e=this.first;return{next:()=>{const t=e;return void 0===t?{value:void 0,done:!0}:(e=e.next,{value:t,done:!1})},[Symbol.iterator]:function(){return this}}}}class ua{constructor(){this.targetIndex=0}}class ha extends ua{constructor(){super(...arguments),this.createPlaceholder=Fi.createInterpolationPlaceholder}}function ma(e,t){this.source=e,this.context=t,null===this.bindingObserver&&(this.bindingObserver=na.binding(this.binding,this,this.isBindingVolatile)),this.updateTarget(this.bindingObserver.observe(e,t))}function pa(e,t){this.source=e,this.context=t,this.target.addEventListener(this.targetName,this)}function fa(){this.bindingObserver.disconnect(),this.source=null,this.context=null}function ga(){this.bindingObserver.disconnect(),this.source=null,this.context=null;const e=this.target.$fastView;void 0!==e&&e.isComposed&&(e.unbind(),e.needsBindOnly=!0)}function va(){this.target.removeEventListener(this.targetName,this),this.source=null,this.context=null}function ba(e){Fi.setAttribute(this.target,this.targetName,e)}function ya(e){Fi.setBooleanAttribute(this.target,this.targetName,e)}function wa(e){if(null==e&&(e=""),e.create){this.target.textContent="";let t=this.target.$fastView;void 0===t?t=e.create():this.target.$fastTemplate!==e&&(t.isComposed&&(t.remove(),t.unbind()),t=e.create()),t.isComposed?t.needsBindOnly&&(t.needsBindOnly=!1,t.bind(this.source,this.context)):(t.isComposed=!0,t.bind(this.source,this.context),t.insertBefore(this.target),this.target.$fastView=t,this.target.$fastTemplate=e)}else{const t=this.target.$fastView;void 0!==t&&t.isComposed&&(t.isComposed=!1,t.remove(),t.needsBindOnly?t.needsBindOnly=!1:t.unbind()),this.target.textContent=e}}function xa(e){this.target[this.targetName]=e}function $a(e){const t=this.classVersions||Object.create(null),n=this.target;let s=this.version||0;if(null!=e&&e.length){const i=e.split(/\s+/);for(let e=0,a=i.length;e<a;++e){const a=i[e];""!==a&&(t[a]=s,n.classList.add(a))}}if(this.classVersions=t,this.version=s+1,0!==s){s-=1;for(const e in t)t[e]===s&&n.classList.remove(e)}}class ka extends ha{constructor(e){super(),this.binding=e,this.bind=ma,this.unbind=fa,this.updateTarget=ba,this.isBindingVolatile=na.isVolatileBinding(this.binding)}get targetName(){return this.originalTargetName}set targetName(e){if(this.originalTargetName=e,void 0!==e)switch(e[0]){case":":if(this.cleanedTargetName=e.substr(1),this.updateTarget=xa,"innerHTML"===this.cleanedTargetName){const e=this.binding;this.binding=(t,n)=>Fi.createHTML(e(t,n))}break;case"?":this.cleanedTargetName=e.substr(1),this.updateTarget=ya;break;case"@":this.cleanedTargetName=e.substr(1),this.bind=pa,this.unbind=va;break;default:this.cleanedTargetName=e,"class"===e&&(this.updateTarget=$a)}}targetAtContent(){this.updateTarget=wa,this.unbind=ga}createBehavior(e){return new Ea(e,this.binding,this.isBindingVolatile,this.bind,this.unbind,this.updateTarget,this.cleanedTargetName)}}class Ea{constructor(e,t,n,s,i,a,o){this.source=null,this.context=null,this.bindingObserver=null,this.target=e,this.binding=t,this.isBindingVolatile=n,this.bind=s,this.unbind=i,this.updateTarget=a,this.targetName=o}handleChange(){this.updateTarget(this.bindingObserver.observe(this.source,this.context))}handleEvent(e){ra(e);const t=this.binding(this.source,this.context);ra(null),!0!==t&&e.preventDefault()}}let La=null;class Sa{addFactory(e){e.targetIndex=this.targetIndex,this.behaviorFactories.push(e)}captureContentBinding(e){e.targetAtContent(),this.addFactory(e)}reset(){this.behaviorFactories=[],this.targetIndex=-1}release(){La=this}static borrow(e){const t=La||new Sa;return t.directives=e,t.reset(),La=null,t}}function Aa(e){if(1===e.length)return e[0];let t;const n=e.length,s=e.map((e=>"string"==typeof e?()=>e:(t=e.targetName||t,e.binding))),i=new ka(((e,t)=>{let i="";for(let a=0;a<n;++a)i+=s[a](e,t);return i}));return i.targetName=t,i}const Ca=zi.length;function Ta(e,t){const n=t.split(Hi);if(1===n.length)return null;const s=[];for(let t=0,i=n.length;t<i;++t){const i=n[t],a=i.indexOf(zi);let o;if(-1===a)o=i;else{const t=parseInt(i.substring(0,a));s.push(e.directives[t]),o=i.substring(a+Ca)}""!==o&&s.push(o)}return s}function _a(e,t,n=!1){const s=t.attributes;for(let i=0,a=s.length;i<a;++i){const o=s[i],r=o.value,c=Ta(e,r);let l=null;null===c?n&&(l=new ka((()=>r)),l.targetName=o.name):l=Aa(c),null!==l&&(t.removeAttributeNode(o),i--,a--,e.addFactory(l))}}function Na(e,t,n){const s=Ta(e,t.textContent);if(null!==s){let i=t;for(let a=0,o=s.length;a<o;++a){const o=s[a],r=0===a?t:i.parentNode.insertBefore(document.createTextNode(""),i.nextSibling);"string"==typeof o?r.textContent=o:(r.textContent=" ",e.captureContentBinding(o)),i=r,e.targetIndex++,r!==t&&n.nextNode()}e.targetIndex--}}const Pa=document.createRange();class Ia{constructor(e,t){this.fragment=e,this.behaviors=t,this.source=null,this.context=null,this.firstChild=e.firstChild,this.lastChild=e.lastChild}appendTo(e){e.appendChild(this.fragment)}insertBefore(e){if(this.fragment.hasChildNodes())e.parentNode.insertBefore(this.fragment,e);else{const t=e.parentNode,n=this.lastChild;let s,i=this.firstChild;for(;i!==n;)s=i.nextSibling,t.insertBefore(i,e),i=s;t.insertBefore(n,e)}}remove(){const e=this.fragment,t=this.lastChild;let n,s=this.firstChild;for(;s!==t;)n=s.nextSibling,e.appendChild(s),s=n;e.appendChild(t)}dispose(){const e=this.firstChild.parentNode,t=this.lastChild;let n,s=this.firstChild;for(;s!==t;)n=s.nextSibling,e.removeChild(s),s=n;e.removeChild(t);const i=this.behaviors,a=this.source;for(let e=0,t=i.length;e<t;++e)i[e].unbind(a)}bind(e,t){const n=this.behaviors;if(this.source!==e)if(null!==this.source){const s=this.source;this.source=e,this.context=t;for(let i=0,a=n.length;i<a;++i){const a=n[i];a.unbind(s),a.bind(e,t)}}else{this.source=e,this.context=t;for(let s=0,i=n.length;s<i;++s)n[s].bind(e,t)}}unbind(){if(null===this.source)return;const e=this.behaviors,t=this.source;for(let n=0,s=e.length;n<s;++n)e[n].unbind(t);this.source=null}static disposeContiguousBatch(e){if(0!==e.length){Pa.setStartBefore(e[0].firstChild),Pa.setEndAfter(e[e.length-1].lastChild),Pa.deleteContents();for(let t=0,n=e.length;t<n;++t){const n=e[t],s=n.behaviors,i=n.source;for(let e=0,t=s.length;e<t;++e)s[e].unbind(i)}}}}class Ma{constructor(e,t){this.behaviorCount=0,this.hasHostBehaviors=!1,this.fragment=null,this.targetOffset=0,this.viewBehaviorFactories=null,this.hostBehaviorFactories=null,this.html=e,this.directives=t}create(e){if(null===this.fragment){let e;const t=this.html;if("string"==typeof t){e=document.createElement("template"),e.innerHTML=Fi.createHTML(t);const n=e.content.firstElementChild;null!==n&&"TEMPLATE"===n.tagName&&(e=n)}else e=t;const n=function(e,t){const n=e.content;document.adoptNode(n);const s=Sa.borrow(t);_a(s,e,!0);const i=s.behaviorFactories;s.reset();const a=Fi.createTemplateWalker(n);let o;for(;o=a.nextNode();)switch(s.targetIndex++,o.nodeType){case 1:_a(s,o);break;case 3:Na(s,o,a);break;case 8:Fi.isMarker(o)&&s.addFactory(t[Fi.extractDirectiveIndexFromMarker(o)])}let r=0;(Fi.isMarker(n.firstChild)||1===n.childNodes.length&&t.length)&&(n.insertBefore(document.createComment(""),n.firstChild),r=-1);const c=s.behaviorFactories;return s.release(),{fragment:n,viewBehaviorFactories:c,hostBehaviorFactories:i,targetOffset:r}}(e,this.directives);this.fragment=n.fragment,this.viewBehaviorFactories=n.viewBehaviorFactories,this.hostBehaviorFactories=n.hostBehaviorFactories,this.targetOffset=n.targetOffset,this.behaviorCount=this.viewBehaviorFactories.length+this.hostBehaviorFactories.length,this.hasHostBehaviors=this.hostBehaviorFactories.length>0}const t=this.fragment.cloneNode(!0),n=this.viewBehaviorFactories,s=new Array(this.behaviorCount),i=Fi.createTemplateWalker(t);let a=0,o=this.targetOffset,r=i.nextNode();for(let e=n.length;a<e;++a){const e=n[a],t=e.targetIndex;for(;null!==r;){if(o===t){s[a]=e.createBehavior(r);break}r=i.nextNode(),o++}}if(this.hasHostBehaviors){const t=this.hostBehaviorFactories;for(let n=0,i=t.length;n<i;++n,++a)s[a]=t[n].createBehavior(e)}return new Ia(t,s)}render(e,t,n){"string"==typeof t&&(t=document.getElementById(t)),void 0===n&&(n=t);const s=this.create(n);return s.bind(e,la),s.appendTo(t),s}}const qa=/([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;function Oa(e,...t){const n=[];let s="";for(let i=0,a=e.length-1;i<a;++i){const a=e[i];let o=t[i];if(s+=a,o instanceof Ma){const e=o;o=()=>e}if("function"==typeof o&&(o=new ka(o)),o instanceof ha){const e=qa.exec(a);null!==e&&(o.targetName=e[2])}o instanceof ua?(s+=o.createPlaceholder(n.length),n.push(o)):s+=o}return s+=e[e.length-1],new Ma(s,n)}function Da(e,t,n){return{index:e,removed:t,addedCount:n}}function Ba(e,t,n,s,i,a){let o=0,r=0;const c=Math.min(n-t,a-i);if(0===t&&0===i&&(o=function(e,t,n){for(let s=0;s<n;++s)if(e[s]!==t[s])return s;return n}(e,s,c)),n===e.length&&a===s.length&&(r=function(e,t,n){let s=e.length,i=t.length,a=0;for(;a<n&&e[--s]===t[--i];)a++;return a}(e,s,c-o)),i+=o,a-=r,(n-=r)-(t+=o)==0&&a-i==0)return qi;if(t===n){const e=Da(t,[],0);for(;i<a;)e.removed.push(s[i++]);return[e]}if(i===a)return[Da(t,[],n-t)];const l=function(e){let t=e.length-1,n=e[0].length-1,s=e[t][n];const i=[];for(;t>0||n>0;){if(0===t){i.push(2),n--;continue}if(0===n){i.push(3),t--;continue}const a=e[t-1][n-1],o=e[t-1][n],r=e[t][n-1];let c;c=o<r?o<a?o:a:r<a?r:a,c===a?(a===s?i.push(0):(i.push(1),s=a),t--,n--):c===o?(i.push(3),t--,s=o):(i.push(2),n--,s=r)}return i.reverse(),i}(function(e,t,n,s,i,a){const o=a-i+1,r=n-t+1,c=new Array(o);let l,d;for(let e=0;e<o;++e)c[e]=new Array(r),c[e][0]=e;for(let e=0;e<r;++e)c[0][e]=e;for(let n=1;n<o;++n)for(let a=1;a<r;++a)e[t+a-1]===s[i+n-1]?c[n][a]=c[n-1][a-1]:(l=c[n-1][a]+1,d=c[n][a-1]+1,c[n][a]=l<d?l:d);return c}(e,t,n,s,i,a)),d=[];let u,h=t,m=i;for(let e=0;e<l.length;++e)switch(l[e]){case 0:void 0!==u&&(d.push(u),u=void 0),h++,m++;break;case 1:void 0===u&&(u=Da(h,[],0)),u.addedCount++,h++,u.removed.push(s[m]),m++;break;case 2:void 0===u&&(u=Da(h,[],0)),u.addedCount++,h++;break;case 3:void 0===u&&(u=Da(h,[],0)),u.removed.push(s[m]),m++}return void 0!==u&&d.push(u),d}const Ua=Array.prototype.push;function Ra(e,t,n,s){const i=Da(t,n,s);let a=!1,o=0;for(let t=0;t<e.length;t++){const n=e[t];if(n.index+=o,a)continue;const s=(r=i.index,c=i.index+i.removed.length,l=n.index,d=n.index+n.addedCount,c<l||d<r?-1:c===l||d===r?0:r<l?c<d?c-l:d-l:d<c?d-r:c-r);if(s>=0){e.splice(t,1),t--,o-=n.addedCount-n.removed.length,i.addedCount+=n.addedCount-s;const r=i.removed.length+n.removed.length-s;if(i.addedCount||r){let e=n.removed;if(i.index<n.index){const t=i.removed.slice(0,n.index-i.index);Ua.apply(t,e),e=t}if(i.index+i.removed.length>n.index+n.addedCount){const t=i.removed.slice(n.index+n.addedCount-i.index);Ua.apply(e,t)}i.removed=e,n.index<i.index&&(i.index=n.index)}else a=!0}else if(i.index<n.index){a=!0,e.splice(t,0,i),t++;const s=i.addedCount-i.removed.length;n.index+=s,o+=s}}var r,c,l,d;a||e.push(i)}function Ha(e,t){let n=[];const s=function(e){const t=[];for(let n=0,s=e.length;n<s;n++){const s=e[n];Ra(t,s.index,s.removed,s.addedCount)}return t}(t);for(let t=0,i=s.length;t<i;++t){const i=s[t];1!==i.addedCount||1!==i.removed.length?n=n.concat(Ba(e,i.index,i.index+i.addedCount,i.removed,0,i.removed.length)):i.removed[0]!==e[i.index]&&n.push(i)}return n}let za=!1;function Fa(e,t){let n=e.index;const s=t.length;return n>s?n=s-e.addedCount:n<0&&(n=s+e.removed.length+n-e.addedCount),n<0&&(n=0),e.index=n,e}class Va extends Gi{constructor(e){super(e),this.oldCollection=void 0,this.splices=void 0,this.needsQueue=!0,this.call=this.flush,e.$fastController=this}addSplice(e){void 0===this.splices?this.splices=[e]:this.splices.push(e),this.needsQueue&&(this.needsQueue=!1,Fi.queueUpdate(this))}reset(e){this.oldCollection=e,this.needsQueue&&(this.needsQueue=!1,Fi.queueUpdate(this))}flush(){const e=this.splices,t=this.oldCollection;if(void 0===e&&void 0===t)return;this.needsQueue=!0,this.splices=void 0,this.oldCollection=void 0;const n=void 0===t?Ha(this.source,e):Ba(this.source,0,this.source.length,t,0,t.length);this.notify(n)}}function ja(e,t){const n="function"==typeof t?t:()=>t;return(t,s)=>e(t,s)?n(t,s):null}const Wa=Object.freeze({positioning:!1});function Qa(e,t,n,s){e.bind(t[n],s)}function Ga(e,t,n,s){const i=Object.create(s);i.index=n,i.length=t.length,e.bind(t[n],i)}class Ja{constructor(e,t,n,s,i,a){this.location=e,this.itemsBinding=t,this.templateBinding=s,this.options=a,this.source=null,this.views=[],this.items=null,this.itemsObserver=null,this.originalContext=void 0,this.childContext=void 0,this.bindView=Qa,this.itemsBindingObserver=na.binding(t,this,n),this.templateBindingObserver=na.binding(s,this,i),a.positioning&&(this.bindView=Ga)}bind(e,t){this.source=e,this.originalContext=t,this.childContext=Object.create(t),this.childContext.parent=e,this.childContext.parentContext=this.originalContext,this.items=this.itemsBindingObserver.observe(e,this.originalContext),this.template=this.templateBindingObserver.observe(e,this.originalContext),this.observeItems(!0),this.refreshAllViews()}unbind(){this.source=null,this.items=null,null!==this.itemsObserver&&this.itemsObserver.unsubscribe(this),this.unbindAllViews(),this.itemsBindingObserver.disconnect(),this.templateBindingObserver.disconnect()}handleChange(e,t){e===this.itemsBinding?(this.items=this.itemsBindingObserver.observe(this.source,this.originalContext),this.observeItems(),this.refreshAllViews()):e===this.templateBinding?(this.template=this.templateBindingObserver.observe(this.source,this.originalContext),this.refreshAllViews(!0)):this.updateViews(t)}observeItems(e=!1){if(!this.items)return void(this.items=qi);const t=this.itemsObserver,n=this.itemsObserver=na.getNotifier(this.items),s=t!==n;s&&null!==t&&t.unsubscribe(this),(s||e)&&n.subscribe(this)}updateViews(e){const t=this.childContext,n=this.views,s=[],i=this.bindView;let a=0;for(let t=0,i=e.length;t<i;++t){const i=e[t],o=i.removed;s.push(...n.splice(i.index+a,o.length)),a-=i.addedCount}const o=this.items,r=this.template;for(let a=0,c=e.length;a<c;++a){const c=e[a];let l=c.index;const d=l+c.addedCount;for(;l<d;++l){const e=n[l],a=e?e.firstChild:this.location,c=s.length>0?s.shift():r.create();n.splice(l,0,c),i(c,o,l,t),c.insertBefore(a)}}for(let e=0,t=s.length;e<t;++e)s[e].dispose();if(this.options.positioning)for(let e=0,t=n.length;e<t;++e){const s=n[e].context;s.length=t,s.index=e}}refreshAllViews(e=!1){const t=this.items,n=this.childContext,s=this.template,i=this.location,a=this.bindView;let o=t.length,r=this.views,c=r.length;if((0===o||e)&&(Ia.disposeContiguousBatch(r),c=0),0===c){this.views=r=new Array(o);for(let e=0;e<o;++e){const o=s.create();a(o,t,e,n),r[e]=o,o.insertBefore(i)}}else{let e=0;for(;e<o;++e)if(e<c){a(r[e],t,e,n)}else{const o=s.create();a(o,t,e,n),r.push(o),o.insertBefore(i)}const l=r.splice(e,c-e);for(e=0,o=l.length;e<o;++e)l[e].dispose()}}unbindAllViews(){const e=this.views;for(let t=0,n=e.length;t<n;++t)e[t].unbind()}}class Ka extends ua{constructor(e,t,n){super(),this.itemsBinding=e,this.templateBinding=t,this.options=n,this.createPlaceholder=Fi.createBlockPlaceholder,function(){if(za)return;za=!0,na.setArrayObserverFactory((e=>new Va(e)));const e=Array.prototype,t=e.pop,n=e.push,s=e.reverse,i=e.shift,a=e.sort,o=e.splice,r=e.unshift;e.pop=function(){const e=this.length>0,n=t.apply(this,arguments),s=this.$fastController;return void 0!==s&&e&&s.addSplice(Da(this.length,[n],0)),n},e.push=function(){const e=n.apply(this,arguments),t=this.$fastController;return void 0!==t&&t.addSplice(Fa(Da(this.length-arguments.length,[],arguments.length),this)),e},e.reverse=function(){let e;const t=this.$fastController;void 0!==t&&(t.flush(),e=this.slice());const n=s.apply(this,arguments);return void 0!==t&&t.reset(e),n},e.shift=function(){const e=this.length>0,t=i.apply(this,arguments),n=this.$fastController;return void 0!==n&&e&&n.addSplice(Da(0,[t],0)),t},e.sort=function(){let e;const t=this.$fastController;void 0!==t&&(t.flush(),e=this.slice());const n=a.apply(this,arguments);return void 0!==t&&t.reset(e),n},e.splice=function(){const e=o.apply(this,arguments),t=this.$fastController;return void 0!==t&&t.addSplice(Fa(Da(+arguments[0],e,arguments.length>2?arguments.length-2:0),this)),e},e.unshift=function(){const e=r.apply(this,arguments),t=this.$fastController;return void 0!==t&&t.addSplice(Fa(Da(0,[],arguments.length),this)),e}}(),this.isItemsBindingVolatile=na.isVolatileBinding(e),this.isTemplateBindingVolatile=na.isVolatileBinding(t)}createBehavior(e){return new Ja(e,this.itemsBinding,this.isItemsBindingVolatile,this.templateBinding,this.isTemplateBindingVolatile,this.options)}}class Ya{constructor({appId:e,submit:t,componentId:n}){this.rating=0,this.state="not-rated",this.comment="",this.starCount=5,this.appId=e,this.submit=t,this.componentId=n}onRatingChange(e){e.target&&(this.rating=parseInt(e.target.value),this.state="rating-selected")}onCommentInput(e){e.target&&(this.comment=e.target.value)}onFormSubmit(e){e.preventDefault(),this.submit&&(this.submit(this),this.comment="",this.state="rating-submitted")}onFormDismiss(e){e.preventDefault(),this.rating=0,this.comment="",this.state="not-rated"}}Ii([aa],Ya.prototype,"rating",void 0),Ii([aa],Ya.prototype,"state",void 0),Ii([aa],Ya.prototype,"comment",void 0);const Xa=(e,t=/^[a-zA-Z_$][0-9a-zA-Z_$]*$/)=>{if(e.match(t))return e;throw new Error("The ids to map have invalid characters. Please confirm the ids conform to permitted Javascript variable name characters")},Za=(e,t)=>t.reduce(((t,n)=>({...t,[n]:e+Xa(n)})),{}),eo=(e,t)=>(({starCount:e=5,idsToMap:t=["input","tooltip"],tooltipTexts:n=["Rate 1 star (worst rating)","Rate 2 stars","Rate 3 stars","Rate 4 stars","Rate 5 stars (best rating)"],componentId:s=ct()}={})=>Array.from(Array(e),((e,i)=>({value:i+1,idMap:Za(`ax-${s+(i+1).toString()}-`,t),tooltipText:n[i]}))))({componentId:e,starCount:t}),to=Oa`
+	<div class="rating-template display-flex flex-wrap-wrap margin-bottom-xs">
+		<span class="font-weight-semibold">${"Are you satisfied with this answer?"}</span>
+		<span class="star-rating-control">
+			<span class="star-layout">
+				<span class="font-size-h5 star-collection">
+					${function(e,t,n=Wa){return new Ka(e,"function"==typeof t?t:()=>t,n)}((e=>eo(e.componentId,e.starCount)),Oa` <input
+								id="${e=>e.idMap.input}"
+								@change=${(e,t)=>t.parent.onRatingChange(t.event)}
+								:value="${e=>e.value}"
+								type="checkbox"
+								class="visually-hidden ${(e,t)=>t.parent.rating>=e.value?"is-selected":""}"
+							/>
+							<label
+								for="${e=>e.idMap.input}"
+								title="${e=>e.tooltipText}"
+								aria-describedby="${e=>e.idMap.tooltip}"
+							>
+								<span class="visually-hidden" role="tooltip" id="${e=>e.idMap.tooltip}"
+									>${e=>e.tooltipText}</span
+								>
+								<span aria-hidden="true" class="docon rating-star has-text-primary"></span>
+							</label>`)}
+				</span>
+			</span>
+		</span>
+	</div>
+`,no=e=>`ax-${e.componentId}-feedback-comment`,so=Oa`
+	${()=>to}
+	<div class="comment-template">
+		<div class="font-weight-semibold margin-bottom-xs">${"Have any additional feedback? We'd love to hear it."}</div>
+		<div class="display-flex justify-content-space-between flex-wrap-wrap">
+			<label for="${e=>no(e)}">
+				<span class="visually-hidden">${"Feedback Comment"}</span>
+			</label>
+			<div class="control flex-grow-1 margin-right-xs margin-bottom-xs margin-bottom-xxs-tablet">
+				<input
+					id="${e=>no(e)}"
+					class="input is-primary"
+					name="comment"
+					:value=${e=>e.comment}
+					@input=${(e,t)=>e.onCommentInput(t.event)}
+				/>
+			</div>
+			<div class="field is-grouped">
+				<button
+					class="button is-primary margin-right-xs has-margin-right-small-tablet"
+					type="submit"
+				>
+					${we}
+				</button>
+				<button class="button" type="reset">${"Dismiss"}</button>
+			</div>
+		</div>
+		<div class="font-size-xs has-text-tertiary">${'Feedback will be sent to Microsoft. By pressing submit, your feedback will be used to improve Microsoft products and services. <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy Statement</a>.'}</div>
+	</div>
+`,io=Oa`<div class="submitted-template">
+	${'<strong class="font-weight-bold">Feedback Submitted!</strong> If you would like to rate this answer again, please reload the page. <a href="https://docs.microsoft.com/en-us/answers/articles/25853/customer-satisfaction-surveys.html">Learn More</a>'}
+</div>`,ao=Oa`
+	${ja((e=>"not-rated"===e.state),to)}
+	${ja((e=>"rating-selected"===e.state),so)}
+	${ja((e=>"rating-submitted"===e.state),io)}
+`,oo=e=>Oa`
+	<form @submit=${(e,t)=>e.onFormSubmit(t.event)} @reset=${(e,t)=>e.onFormDismiss(t.event)}>
+		${((e,t=document.createElement("div"))=>{if(e.render({},t),null!==t.querySelector("form"))throw new Error("The template configured is invalid. Please confirm that the template has no form element.");return e})(e)}
+	</form>
+`;const ro=({appId:e,rating:t,comment:n,componentId:s})=>{!async function(e){if(e.rating=(e.rating-1)/4,b)return void alert(`rating is: ${e.rating}, verbatim is: ${e.comment}`);const t={method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(e)},n=st(`${tt.ocvFeedback}`,t),s=await nt(n);let i;if(s.ok)return i=await s.json(),i;throw new Error(`ocv api responded with ${s.status} ${s.statusText}`)}({manifestType:"Psat",appId:e,submitTime:(new Date).toISOString(),source:"Client",type:"Survey",application:{appData:JSON.stringify({answerId:s})},telemetry:{loggableUserId:Ge.credentialId,tenantId:Ge.tenantId,featureArea:"Q&A"},clientFeedbackId:lt(),survey:{surveyId:"c82e7544-7b47-4a7d-ab78-7172cf408cc5"},rating:t,comment:n,web:{sourcePageURI:i.origin+i.pathname}})};function co(){if(!q.inlineFeedback)return;if(!Ge||!Ge.userName||"Anonymous"===Ge.userName)return;let e=s.querySelector(".question-container .question .author-info>a>span");if(e||(e=s.querySelector(".question-container .question .user.og-poster-author>a>span")),!e||e.innerText!==Ge.userName)return;const t=s.querySelectorAll(".answer-list .answer-container");if(0===t.length)return;const n={appId:Pi,template:ao,submit:ro};t.forEach((e=>{const t=e.querySelector(".answer"),i=e.getAttribute("nodeid"),a=s.createElement("div");a.classList.add("has-margin-top-small"),t.appendChild(a),n.container=a,n.componentId=i,function({appId:e,container:t,template:n,submit:s,componentId:i}){const a=new Ya({appId:e,submit:s,componentId:i});oo(n).render(a,t)}(n)}))}const lo="autocomplete-change-event";function uo(e){e.input.placeholder=e.input.placeholder||"",e.input.type=e.input.type||"text";const{getSuggestions:t,getTitle:n=(e=>e.toString()),itemTemplate:s=n,noResultsTemplate:i=null,initialValue:a=null,input:{biName:o}}=e,r=document.createElement("div");r.classList.add("autocomplete"),e.input.isFullWidth&&r.classList.add("is-block"),r.setAttribute("data-bi-name","autocomplete");const c=ct(),l=`${c}-listbox`,d=e=>-1===e?"":`${c}-option-${e}`;let u=[],h=-1,m=a?n(a):"",p="",f=a,g=0,v=!1,b=!1,y=!1;const w=()=>{jn(Wn` <div
+				class="control ${e.input.docon?`has-icons-${e.input.doconOrientation||"left"}`:""}"
+			>
+				<input
+					id="${e.input.id}"
+					class="autocomplete-input input ${e.input.docon?`control has-icons-${e.input.doconOrientation||"left"}`:""} ${e.input.isFullWidth?"is-full-width":""} ${e.input.size?`is-${e.input.size}`:""}"
+					type="${e.input.type}"
+					name=${Gn(e.input.name)}
+					role="combobox"
+					maxlength="100"
+					@input=${S}
+					@blur=${A}
+					@focus=${E}
+					@keydown=${C}
+					aria-autocomplete="list"
+					aria-expanded="${u.length?"true":"false"}"
+					aria-owns="${l}"
+					aria-activedescendant="${d(h)}"
+					aria-label="${Gn(e.input.label)}"
+					placeholder="${e.input.placeholder}"
+					autocapitalize="off"
+					autocomplete="off"
+					autocorrect="off"
+					spellcheck="false"
+					data-bi-name="${Gn(o)}"
+				/>
+
+				<span
+					class="icon is-small is-${e.input.doconOrientation||"left"}"
+					?hidden=${!e.input.docon||v&&"right"===e.input.doconOrientation}
+					aria-hidden="true"
+				>
+					<span
+						class="${e.input.doconClasses||"has-text-primary"} docon docon-${e.input.docon}"
+					></span>
+				</span>
+
+				<span
+					class="autocomplete-loader loader has-text-primary ${"large"===e.input.size?"is-large":""}"
+					?hidden=${!v}
+					aria-hidden="true"
+				></span>
+			</div>
+
+			<ul
+				id="${l}"
+				class="autocomplete-suggestions is-vertically-scrollable"
+				role="listbox"
+				aria-label="${e.input.id}-suggestions"
+				@mousedown=${e=>e.preventDefault()}
+				@click=${L}
+				?hidden=${!p.length||!y&&!u.length}
+			>
+				${u.map(((e,t)=>Wn` <li
+						id="${d(t)}"
+						role="option"
+						class="autocomplete-suggestion ${t===h?"is-active-descendant":""}"
+					>
+						${s(e)}
+					</li>`))}
+				${y&&i?Wn`<li role="alert">${i}</li>`:""}
+			</ul>`,r),r.querySelector("input").value=m||p,(()=>{const e=r.querySelector(`#${l}`),t=e.children.item(-1===h?0:h);t?t.offsetTop+t.offsetHeight>e.offsetHeight?e.scrollTop=t.offsetTop-e.offsetHeight+t.offsetHeight+4:t.offsetTop<e.scrollTop&&(e.scrollTop=t.offsetTop):e.scrollTop=0})()},x=()=>{y=!1,u=[],h=-1,w()},k=(e,t)=>{const s=p;if(f=e,m=e?n(e):"",p=m,x(),t){const t=new CustomEvent(lo,{detail:{suggestion:e,term:s},bubbles:!0});r.dispatchEvent(t)}};Object.defineProperty(r,"value",{get:()=>f,set(e){k(e,!1)}});const E=async()=>{if(""===p)return v=!1,f=null,void x();u=await t(p);const e=new CustomEvent("autocomplete-displayed-event",{detail:u,bubbles:!0});r.dispatchEvent(e),y=!u.length,h=-1,v=!1,w()},L=e=>{const t=e.target instanceof Element&&e.target.closest('[role="option"]');if(!t)return;e.preventDefault();const n=t.parentElement;let s=0;for(;s<n.childElementCount&&n.children.item(s)!==t;s++);const i=u[s];e.ctrlKey&&e.target instanceof Element&&e.target.closest("[data-href]")?(e=>{const t=e.url;window.open(t.href,"_blank")})(i):k(i,!0)},S=async e=>{clearTimeout(g),g=setTimeout(E,50);const t=e.target;p=t.value,m="",v||""===t.value||b||(v=!0,w())},A=()=>x(),C=({keyCode:e,shiftKey:t,altKey:s,ctrlKey:i})=>{if(!(t||s||i)){if(e===us)return event.preventDefault(),h<u.length-1?(h++,m=n(u[h])):(h=-1,m=p),void w();if(e===ds){if(event.preventDefault(),!u.length)return;return-1===h?(h=u.length-1,m=n(u[h])):h>0?(h--,m=n(u[h])):(h=-1,m=p),void w()}if(e===hs)return event.preventDefault(),void k(f,!1);if(e!==ms);else if(h>=0){const e=u[h];k(e,!0)}}};return w(),r.addEventListener("compositionstart",(()=>{b=!0})),r.addEventListener("compositionend",(()=>{b=!1})),r}const ho=(()=>{let e;return t=>{if(!t&&void 0!==e)return e;const n=ut().dataSource;return e="true"===p("is_archived")||"SearchPage"===a.data.pageTemplate&&"previousVersions"===n,e}})(),mo="is-block font-size-s has-padding-left-small has-padding-right-small",po=`/${a.data.userLocale}`,fo=e=>`${po}/answers/search.html?c=&includeChildren=&f=&type=question+OR+idea+OR+kbentry+OR+answer+OR+topic+OR+user&redirect=search%2Fsearch&sort=relevance&q=${encodeURIComponent(e)}`,go=async e=>{const t={acceptedAnswer:!1,answerCount:0,icon:"",title:e,type:"header",upVotesCount:0,url:fo(e)},n={...t,title:"Search help",type:"help",url:`${po}/answers/search/advanced-search-usage.html`},s=[t,{...t,type:"",title:"No results found",url:`${po}/answers/search`},n];if((e=e.trim()).length<4)return[];const i=await di(e,"object");return vi(fi(i)),i.length?[t,...i,n]:s},vo="is-block font-size-s has-padding-small has-text-color",bo=e=>{const{title:t,type:n,icon:s,sourceTitle:i}=e,a=i?Wn`${i}: ${t}
+				<span class="icon docon docon-navigate-external xs-hidden"></span>`:`${t}`;switch(n){case"header":return Wn`
+				<span class="${vo} border-bottom"> ${pe}: ${t} </span>
+			`;case"help":return Wn`
+				<span class="${vo} border-top">
+					<span class="has-text-primary">${t}</span>
+				</span>
+			`;default:return Wn`
+				<span class="${mo} has-overflow-ellipsis has-text-primary">
+					<span class="icon docon ${s} xs-hidden" aria-hidden="true"></span>
+					${a}
+				</span>
+			`}},yo=e=>{const t=document.getElementById("search-query");t&&(t.id="new-search-query");const{f:n="",sort:s,type:i="question OR idea OR kbentry OR answer OR topic OR user"}=ut();return Wn`
+		<form @submit=${e=>{e.preventDefault();const t=e.target.elements.namedItem("new-search-query");t.value&&(location.href=fo(t.value))}} class=${e||""}>
+			<input type="hidden" id="search-container" name="c" value="7" />
+			<input type="hidden" id="include-space-children" name="includeChildren" value="false" />
+			<input type="hidden" id="search-filters" name="f" value="${n}" />
+			<input type="hidden" id="search-types" name="type" value="${i}" />
+			<input type="hidden" id="search-redirect" name="redirect" value="search/search" />
+			<input
+				type="hidden"
+				id="search-sort"
+				name="sort"
+				value="${"newest"===s?s:"relevance"}"
+			/>
+			${(e=>{const t=ut().q||"",n={acceptedAnswer:!1,answerCount:0,title:t,type:"header",upVotesCount:0,url:fo(t)},s=uo({input:{id:e,name:"q",placeholder:"Find posts, tags, and users",type:"search",docon:"search",isFullWidth:!0,label:pe},getSuggestions:go,getTitle:e=>e.title,itemTemplate:bo,initialValue:n});return s.addEventListener(lo,(e=>{const t=e.detail.suggestion;gi({suggestion:t,term:e.detail.term}),s.value=null,location.href=t.url})),s})("new-search-query")}
+		</form>
+	`};const wo={};let xo,$o,ko;const Eo=new Promise((e=>ko=e));class Lo{}function So(e){return JSON.parse(JSON.stringify(e))}class Ao extends l{constructor(){super(),this._items=[{title:ae,kind:"menu",items:[]}],this._mobile=!1,this._searchExpanded=!1,this._desktop=!1,this._mobileNavExpanded=!1}get items(){return this._items}set items(e){this._items=e&&e.length?e:[{title:ae,kind:"menu",items:[]}],this.more.items=So(this._items.slice(0,this._items.length-1)),this.resetItemVisibility(),this.notifyPropertyChanged()}get mobile(){return this._mobile}set mobile(e){this._mobile=e,this._mobileNavExpanded=!1,this.notifyPropertyChanged()}get desktop(){return this._desktop}set desktop(e){this._desktop=e,this._searchExpanded=!1,this.notifyPropertyChanged()}get searchExpanded(){return this._searchExpanded}set searchExpanded(e){this._searchExpanded=e,this.notifyPropertyChanged()}get mobileNavExpanded(){return this._mobileNavExpanded}set mobileNavExpanded(e){this._mobileNavExpanded=e,this._searchExpanded=!1,this.notifyPropertyChanged()}get more(){const e=this._items.length;return e?this._items[e-1]:null}resetItemVisibility(){0!==this.items.length&&(this.items.forEach((e=>e.hidden=!1)),this.more.hidden=!0,this.more.items.forEach((e=>e.hidden=!0)))}notifyPropertyChanged(){this.publish(new Lo)}}class Co{constructor(){this._contentStack=[]}get stackLength(){return this._contentStack?this._contentStack.length:void 0}get bodyTemplate(){return this.stackLength?this._contentStack[this._contentStack.length-1]:null}push(e){if(!e)throw new Error("Cannot push empty content");this._contentStack.push(e)}pop(){!this._contentStack||this.stackLength<=1||this._contentStack.pop()}dispose(){this._contentStack=null}}const To=["All","Documentation","Learn","Reference"];function _o(e){const t=new URLSearchParams(e),n=t.get("category")||"All",s=To.find((e=>0===e.localeCompare(n,void 0,{sensitivity:"base"})))||"All";return{dataSource:t.get("dataSource"),category:s,skip:parseInt(t.get("skip")||"0"),term:t.get("search"),scope:t.get("scope"),preview:t.get("preview")}}async function No(e){return(await async function(e,t){const n={query:e,suggestions:[]};if(!e||!t)return Promise.resolve(n);const s=`${tt.siteSearch}/autocomplete?${ht({locale:t,query:e})}`,i={mode:"cors",credentials:g?"include":"omit"},a=await nt(s,i);return a.ok?a.json():n}(e,a.data.userLocale)).suggestions}const Po="https://www.azure.cn/searchresults/";function Io(e,t=!1){const{scope:n,category:o,dataSource:r,preview:c}=function(){const e=function(){let e=a.data.context.searchScope||p("scope");if("SearchPage"===a.data.pageTemplate&&(e=_o(location.search).scope),"true"===p("hideScope")||!e)return"";const t=e.split(",").map((e=>e.trim())).filter((e=>e.length));return t.length?t[t.length-1]:""}(),t=function(){const e=_o(i.search)?.category;if("all"!==e?.toLowerCase())return e;const t=function(e){let{pathname:t}=new URL(e);t=Ci(t),t=decodeURI(t).toLowerCase();const n=p("page_kind"),s=t.split("/").slice(1),i=s[0];return"learn"===i||"learn"===n||"certification"===n?"Learn":"powershell"===i&&s.length>1&&"module"===s[1]||-1!==s.indexOf("api")?"Reference":"All"}(i.href);if(t&&"All"!==t)return t;return""}(),n=_o(i.search).preview||"";return{scope:e,category:t,dataSource:ho()?"previousVersions":"",preview:n}}(),l=function(){let e;e="mooncake"===a.data.brand?Po:M.systemContent?`/${a.data.userLocale}/${L?"test/docs/search/search":"search/"}`:`https://docs.microsoft.com/${a.data.userLocale}/search/`;return e}(),d="mooncake"===a.data.brand?"q":"terms";return Wn`
+		<form
+			class="nav-bar-search-form"
+			method="GET"
+			id="${t?"nav-bar-search-form-desktop":"nav-bar-search-form"}"
+			name="nav-bar-search-form"
+			aria-label="${pe}"
+			role="search"
+			aria-expanded="${e.searchExpanded}"
+			action="${l}"
+			@keydown=${t=>{t.keyCode===hs&&e.searchExpanded&&(e.searchExpanded=!1,s.getElementById("form-expander").focus())}}
+			@autocomplete-change-event=${Mo}
+			@autocomplete-displayed-event=${qo}
+		>
+			${function(e,t){const n=t?ct():"site-search-input";return uo(function({id:e,name:t,isFullWidth:n=!1,docon:s=null,size:i=null}){return{input:{id:e,type:"search",name:t,placeholder:ho()?fe:pe,label:pe,docon:s||void 0,isFullWidth:n,size:i||void 0},getSuggestions:No,itemTemplate:e=>Wn`<span class="${mo}">${e}</span>`}}({id:n,name:e,docon:t?"search":null,size:"small"}))}(d,t)}
+			<!-- mobile safari will not dispatch submit event unless there's a submit button that is not display:none -->
+			<button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true"></button>
+			<input name="category" value="${o}" hidden />
+			${n?Wn`<input name="scope" value="${n}" hidden />`:""}
+			${r?Wn`<input name="dataSource" value="${r}" hidden />`:""}
+			${c?Wn`<input name="preview" value="${c}" hidden />`:""}
+		</form>
+	`}function Mo(e){gi({suggestion:{title:e.detail.suggestion},term:e.detail.term})}function qo(e){vi(e.detail.map((e=>({title:e}))))}function Oo(e){if("Q&A"===ws||"Style-Guide"===ws||"Startups"===ws)return null;const t=ct(),n=Wn`
+		<span class="is-visually-hidden-mobile">${pe}</span>
+		<span class="icon" aria-hidden="true">
+			<span class="docon docon-search"></span>
+		</span>
+	`,s=Wn`<span class="nav-bar-button-text">${R}</span>`,a=""+(e.searchExpanded?"is-expanded":"");return Wn`
+		<div
+			class="nav-bar-search ${e.searchExpanded?"is-expanded":""}"
+			id="${t}"
+			?hidden="${!e.searchExpanded}"
+		>
+			${Io(e)}
+		</div>
+		${e.mobile?null:Wn`
+					<div class="nav-bar-search" ?hidden="${!e.desktop}">
+						<!-- hidden when the width drops to tablet -->
+						${Io(e,!0)}
+					</div>
+			  `}
+		<div class="nav-bar-search ${a}" ?hidden="${e.desktop}">
+			<div class="nav-bar-search-form-expander">
+				<button
+					id="form-expander"
+					class="nav-bar-button has-hover-underline ${a}"
+					title="${e.searchExpanded?"Cancel Search":pe}"
+					aria-expanded="${e.searchExpanded}"
+					aria-controls="${t}"
+					@click=${()=>{if(e.searchExpanded=!e.searchExpanded,e.searchExpanded){const t=document.getElementById("site-search-input");e.mobile&&(t.style.fontSize="16px"),t.focus(),e.mobile&&(t.style.fontSize=""),function(e,t){e&&(t=t||_o(i.search).term,e.value=t)}(t)}}}
+				>
+					${e.searchExpanded?s:n}
+				</button>
+			</div>
+		</div>
+	`}function Do(e){if(!e)return"";const{primary:t,secondary:n}=e;return Wn`
+		<ol class="nav-bar-list">
+			${Bo(n,!0)} ${Bo(t)}
+		</ol>
+	`}function Bo(e,t=!1){if(!e)return"";const{href:n,title:s}=e;return Wn`
+		<li class="nav-bar-item ${t?"has-spacing":""}">
+			<a class="button is-small is-primary ${t?"is-outlined":""}" href="${n}">
+				${s}
+			</a>
+		</li>
+	`}function Uo(e,t,n){let s;return n&&(s=[],s.push("font-weight-semibold","font-size-m")),"link"===e.kind?Ro(e,!1,s,n):function(e,t,n=[]){return Wn`
+		<li class="nav-bar-mobile-nav-item">
+			<button
+				type="button"
+				class="nav-bar-button has-text-wrap"
+				@click=${()=>t(e)}
+				autofocus
+			>
+				<span class="is-text-left ${n.join(" ")}">${e.title}</span>
+				<span class="nav-bar-button-chevron" aria-hidden="true">
+					<span
+						class="docon docon-chevron-${"ltr"===a.data.userDir?"right":"left"}-light"
+					></span>
+				</span>
+			</button>
+		</li>
+	`}(e,t,s)}function Ro({href:e,title:t},n=!1,s=[],i=!1){const a=n?"has-text-primary":"",o=i?"":"has-external-link-indicator";return Wn` <li class="nav-bar-mobile-nav-item ${s.join(" ")}">
+		<a
+			class="${o} nav-bar-button has-text-wrap ${a}"
+			href="${e}"
+			autofocus
+			>${t}</a
+		>
+	</li>`}function Ho(e,t,n,s,i,o,r,c){return Wn`
+		${function(e,t){return t||"Docs_Home"!==ws&&xs&&e}(i,n)&&s>=2?Wn`
+					<div class="border-bottom">
+						<button
+							type="button"
+							class="nav-bar-button pop-content is-text justify-content-flex-start padding-xs is-full-width"
+							title=${B}
+							autofocus
+						>
+							<span class="icon" aria-hidden="true">
+								<span
+									class="docon docon-arrow-${"ltr"===a.data.userDir?"left":"right"}"
+								></span>
+							</span>
+							<h3 class="font-size-s">${xs}</h3>
+							<span class="is-visually-hidden">${B}</span>
+						</button>
+					</div>
+			  `:null}
+		${i?Wn`<div class="font-size-m">
+					<h2 id="modal-heading" class="padding-xs font-weight-semibold">
+						${i}
+						${c?Wn`<span class="tag is-small is-uppercase">${oe}</span>`:""}
+					</h2>
+			  </div>`:null}
+		<nav class="nav-bar-mobile-nav" role="navigation" aria-label="${Z}">
+			<ul class="nav-bar-mobile-nav-list">
+				${o?Ro({href:o.href,title:"Home"},!1,[],!n):null}
+				${e&&e.length?e.map((e=>Uo(e,t,!n))):null}
+				${r?Wn`
+							${r.primary?Ro(r.primary,!0):null}
+							${r.secondary?Ro(r.secondary,!0):null}
+					  `:null}
+			</ul>
+		</nav>
+	`}function zo(){let e="#",t=Ge.isAuthenticated?"font-size-xs has-padding-small":"auth-status-determined not-authenticated button is-extra-small has-outer-focus is-primary";"Q&A"===ws?e=`/${a.data.userLocale}/answers/users/${Ge.isAuthenticated?"logout":"login"}.html`:t=`docs-sign-${Ge.isAuthenticated?"out":"in"} `+t;let n=Wn`<span class="flex-grow-1 flex-shrink-1 font-size-xs"
+		>${Kn('<span class="font-weight-semibold">Welcome</span> to Microsoft Docs!')}</span
+	>`;"Startups"===ws&&(n=Do({primary:{kind:"link",href:"https://portal.startups.microsoft.com/",title:"Member sign in"}}));const s=Wn` ${Ge.isAuthenticated?Wn`
+		<a
+			href="${q.profileEpisode1?Qe("me","activity"):Ge.profileUrl}"
+			class="display-flex align-items-center"
+		>
+			<div class="has-padding-left-small">
+				<figure class="image is-24x24" aria-hidden="true">
+					<img
+						class="has-body-background-medium is-rounded"
+						aria-labelledby="display-name-mobile"
+						data-profile-property="avatarUrl"
+						src=${Ge.avatarUrl}
+					/>
+				</figure>
+			</div>
+			<p class="title flex-grow-1 flex-shrink-1 font-size-s margin-none has-padding-left-small">
+				<span
+					id="display-name-mobile"
+					class="is-inline-truncated has-max-width-200"
+					data-profile-property="displayName"
+					>${Ge.displayName}</span
+				>
+			</p>
+		</a>
+	`:n}
+		<div>
+			${q.profileEpisode1&&Ge.isAuthenticated?Wn`<a
+						class="font-size-xs has-padding-small"
+						href="${Qe("me","settings")}"
+						data-profile-property="settingsUrl"
+						>${ge}</a
+				  >`:""}
+
+			<a class="${t}" href="${e}"
+				>${Ge.isAuthenticated?be:ve}</a
+			>
+		</div>`;return Wn`
+		<div
+			class="border-top display-flex align-items-center has-padding-small justify-content-space-between"
+		>
+			${qs?s:n}
+		</div>
+	`}async function Fo(e){const t=s.createElement("div");t.classList.add("modal-content","is-docked-right","display-flex","flex-direction-column");const n=new Co;function i(){t.paint();!function(e){const t=e.querySelector("[autofocus]");if(t&&ts(t))return void t.focus();e.focus()}(t.querySelector("#modal-body"))}function a(e){const t=e.target instanceof HTMLElement&&e.target.closest("button");t&&t.classList.contains("pop-content")&&(n.pop(),i())}t.paint=()=>{jn(Wn` ${function(e){return Wn`
+		<div id="modal-header" class="nav-bar border-bottom">
+			<div class="nav-bar-item">
+				<button type="button" class="nav-bar-button" ?hidden=${e.searchExpanded} autofocus>
+					<span class="icon is-small">
+						<span class="docon docon-home" aria-hidden="true"></span>
+					</span>
+					<h4 class="title font-size-l has-padding-left-extra-small">${$s}</h4>
+				</button>
+			</div>
+			${Oo(e)}
+			<div class="nav-bar-item">
+				<button
+					type="button"
+					class="nav-bar-button modal-close border-left"
+					?hidden=${e.searchExpanded}
+				>
+					<span class="visually-hidden">${z}</span>
+					<span class="icon is-small">
+						<span class="docon docon-math-multiply" aria-hidden="true"></span>
+					</span>
+				</button>
+			</div>
+		</div>
+	`}(e)}
+				<div
+					id="modal-body"
+					class="flex-grow-1 flex-shrink-1 is-full-height is-vertically-scrollable"
+				>
+					${n.bodyTemplate}
+				</div>
+				${zo()}`,t)};const o=e.subscribe(Lo,t.paint);t.dispose=()=>{n.dispose(),o(),t.removeEventListener("click",a)};let r,c,l,d,u=Vo(e.items);function h(e){u=e.items,r=e.title,c=null,l=null,d=null,m(!0),i()}function m(e=!1){const t=Ho(u,h,e,n.stackLength,r,c,l,d);n.push(t)}if(m(),t.paint(),t.addEventListener("click",a),Os){await Gs;const e=zs;e&&(c=e.category,l=e.callToAction,d=e.preview,r=e.category?e.category.title:null,u=Vo(e.items),m(!0),i())}return t.querySelector("#modal-header button").onclick=function(){if(!(n.stackLength<=1)){for(;n.stackLength>1;)n.pop();i()}},t}function Vo(e){return e.slice(0,e.length-1)}function jo(e,t){const{leftTemplate:n,rightTemplate:s}=e;return Wn` ${n(t)} ${s(t)} `}function Wo(){return Wn`
+		<div class="nav-bar-profile">
+			${Wn`
+		<a class="docs-sign-in auth-status-determined not-authenticated" href="#"> ${ve} </a>
+	`} ${q.profileEpisode1?Wn`
+			<div class="dropdown has-caret auth-status-determined authenticated">
+				<button
+					class="dropdown-trigger button-reset"
+					aria-label="${Se}"
+					aria-controls="user-menu"
+					aria-expanded="false"
+				>
+					<figure class="image is-36x36">
+						<img
+							class="has-body-background-medium is-rounded"
+							alt=""
+							data-profile-property="avatarUrl"
+						/>
+					</figure>
+				</button>
+				<div
+					class="dropdown-menu box justify-content-flex-start has-body-background"
+					id="user-menu"
+					role="menu"
+				>
+					<div class="media is-user-dir">
+						<div class="media-left">
+							<figure class="image is-64x64" aria-hidden="true">
+								<img
+									class="has-body-background-medium is-rounded"
+									aria-labelledby="displayName"
+									data-profile-property="avatarUrl"
+								/>
+							</figure>
+						</div>
+						<div class="media-content">
+							<h2 class="title font-size-l">
+								<span
+									id="displayName"
+									class="is-inline-truncated has-max-width-200"
+									data-profile-property="displayName"
+								></span>
+							</h2>
+							<p class="subtitle font-size-s margin-bottom-none">
+								<span
+									class="is-inline-truncated has-max-width-200"
+									data-profile-property="upn"
+								></span>
+							</p>
+						</div>
+					</div>
+					<ul class="padding-top-xs padding-bottom-xs">
+						<li class="padding-bottom-xs">
+							<a href="${Qe("me","activity")}" data-profile-property="profileUrl"
+								>${re}</a
+							>
+						</li>
+						<li>
+							<a href="${Qe("me","settings")}" data-profile-property="settingsUrl"
+								>${ge}</a
+							>
+						</li>
+					</ul>
+					<div class="border-top padding-top-xs">
+						<a class="docs-sign-out" href="#">${be}</a>
+					</div>
+				</div>
+			</div>
+		`:Wn`
+			<div class="dropdown has-caret auth-status-determined authenticated">
+				<button
+					class="dropdown-trigger button-reset"
+					aria-label="${Se}"
+					aria-controls="user-menu"
+					aria-expanded="false"
+				>
+					<figure class="image is-36x36">
+						<img
+							class="has-body-background-medium is-rounded"
+							alt=""
+							data-profile-property="avatarUrl"
+						/>
+					</figure>
+				</button>
+				<div
+					class="dropdown-menu box justify-content-flex-start has-body-background"
+					id="user-menu"
+					role="menu"
+				>
+					<div class="media is-user-dir">
+						<div class="media-left">
+							<figure class="image is-48x48" aria-hidden="true">
+								<img
+									class="has-body-background-medium is-rounded"
+									aria-labelledby="displayName"
+									data-profile-property="avatarUrl"
+								/>
+							</figure>
+						</div>
+						<div class="media-content">
+							<p class="title font-size-l">
+								<span
+									id="displayName"
+									class="is-inline-truncated has-max-width-200"
+									data-profile-property="displayName"
+								></span>
+							</p>
+							<p class="subtitle font-size-s has-margin-bottom-none">
+								<span
+									class="is-inline-truncated has-max-width-200"
+									data-profile-property="upn"
+								></span>
+							</p>
+						</div>
+					</div>
+					<ul class="has-padding-top-small has-padding-bottom-medium">
+						<li class="has-padding-top-extra-small has-padding-bottom-extra-small">
+							<a href="/profile" data-profile-property="profileUrl">${re}</a>
+						</li>
+						<li class="has-padding-top-extra-small has-padding-bottom-extra-small">
+							<a href="/profile" data-profile-property="collectionsUrl">${V}</a>
+						</li>
+						<li class="has-padding-top-extra-small">
+							<a href="/profile" data-profile-property="challengesUrl">${H}</a>
+						</li>
+					</ul>
+					<div class="border-top has-padding-top-medium">
+						<a class="docs-sign-out" href="#">${be}</a>
+					</div>
+				</div>
+			</div>
+		`}
+		</div>
+	`}function Qo(e,t,n,s){const{items:i}=e;return Wn`
+		<nav class="nav-bar-nav" role="navigation" aria-label="${t}">
+			<ul class="nav-bar-nav-list">
+				${s?function(e){if(!e)return"";const{href:t,title:n}=e;return Wn`
+		<li class="nav-bar-item is-category">
+			<a class="nav-bar-button is-title has-hover-underline" href="${t}" itemprop="url">
+				<span>${n}</span>
+			</a>
+		</li>
+	`}(s):null}
+				${i.map((e=>Jo(e,!1,n)))}
+			</ul>
+		</nav>
+	`}function Go(e){return Wn`
+		<div class="nav-bar-item is-hidden-tablet">
+			<div class="nav-bar-menu">
+				<button
+					class="nav-bar-button is-title"
+					title="${ee}"
+					aria-expanded="${e.mobileNavExpanded}"
+					@click=${()=>async function(e){const t=await Fo(e),n=new is(t),s=window.outerWidth;function i(){t.dispose(),window.removeEventListener("resize",a),e.mobileNavExpanded=!1}function a(){n.hide(),i()}window.addEventListener("resize",(()=>{window.outerWidth!==s&&a()})),e.mobileNavExpanded=!0,await n.show(),i()}(e)}
+				>
+					<span class="nav-bar-menu-title">${xs}</span>
+					<div class="nav-bar-burger">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span class="nav-bar-burger-label">${ee}</span>
+					</div>
+				</button>
+			</div>
+		</div>
+	`}function Jo(e,t,n){return"link"===e.kind?function(e,t,n){const s="Docs_Home"===ws||"Developer"===ws||"Regional Directors"===ws||"Legal"===ws||"Locale"===ws||"Profile"===ws||"Search"===ws,i=n&&e.title===X&&"directory"===p("page_type"),o=n&&e.title===xs&&!s||i||e.current?"is-active":"",r=Ai(e.href,a.data.userLocale),c=b?e.href:r,l=n?"":"has-external-link-indicator";return t?Wn`
+				<li class="nav-bar-item" ?hidden=${e.hidden}>
+					<a class="${l} nav-bar-button ${o}" href="${c}"
+						>${e.title}</a
+					>
+				</li>
+		  `:Wn` <li class="nav-bar-item" ?hidden=${e.hidden}>
+				<a
+					class="${l} nav-bar-button has-hover-underline ${o}"
+					href="${c}"
+				>
+					<span>${e.title}</span>
+				</a>
+		  </li>`}(e,t,n):function(e,t,n){const s=ct(),i=t?"ltr"===a.data.userDir?"chevron-right-light":"chevron-left-light":"chevron-down-light",o=t?"":"expanded-indicator",r=e.current?"is-active":"";return Wn` <li class="dropdown nav-bar-item" ?hidden=${e.hidden}>
+		<button
+			class="dropdown-trigger nav-bar-button ${r} ${t?"":"has-hover-underline"}"
+			aria-controls="${s}"
+			aria-expanded="false"
+		>
+			<span>${e.title}</span>
+			<span class="nav-bar-button-chevron" aria-hidden="true">
+				<span class="docon docon-${i} ${o}"></span>
+			</span>
+		</button>
+		<ul class="dropdown-menu" id="${s}" aria-label="${e.title}">
+			${e.items.map((e=>Jo(e,!0,n)))}
+		</ul>
+	</li>`}(e,t,n)}function Ko(e){const t=document.createElement("div");t.classList.add("nav-bar");const n=new Ao;return t.paint=()=>Xo(t,n,e),Object.defineProperty(t,"items",{enumerable:!0,get:()=>n.items,set:e=>n.items=e}),n.desktop=bt.matches,n.mobile=!yt.matches,bt.addListener((()=>{n.desktop=bt.matches})),yt.addListener((()=>{n.mobile=!yt.matches})),window.addEventListener("resize",(()=>{yt.matches&&function(e,t,n){clearTimeout(Zo),Date.now()-Yo>50?e.paint():Zo=setTimeout(Xo,50,e,t,n)}(t,n,e)})),t.paint(),o.then((()=>{const e=new MutationObserver((n=>{for(const s of n)for(let n=0;n<s.addedNodes.length;n++)if(s.addedNodes[n]===t)return e.disconnect(),void t.paint()}));e.observe(document.body,{childList:!0,subtree:!0})})),n.subscribe(Lo,(()=>t.paint())),t}let Yo=0;function Xo(e,t,n){if(Yo=Date.now(),t.resetItemVisibility(),jn(jo(n,t),e),t.mobile)return;const s=e.querySelector(".nav-bar-spacer"),{more:i,items:a}=t;let o=a.length-1;for(;o>0&&0===s.getBoundingClientRect().width;)o--,i.hidden=!1,a[o].hidden=!0,i.items[o].hidden=!1,jn(jo(n,t),e)}let Zo=0;const er="Regional Directors"===ws;function tr(e){if(!0===M.systemContent||er)return e;if("menu"===e.kind){const t=So(e);return t.items=t.items.map(tr),t}const t=So(e);return t.href=new URL(e.href,tt.contentNav).href,t}async function nr(){await Ws;const e=Ko({leftTemplate:()=>Wn` <div class="nav-bar-brand">
+		<a
+			class="nav-bar-button"
+			itemprop="url"
+			href="https://www.microsoft.com"
+			aria-label="Microsoft"
+		>
+			<div
+				class="nav-bar-logo"
+				role="presentation"
+				aria-hidden="true"
+				itemprop="logo"
+				itemscope="itemscope"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="108"
+					height="23"
+					viewBox="72 72 337 74"
+					preserveAspectRatio="xMidYMin slice"
+				>
+					<g data-name="MS-symbol">
+						<clipPath>
+							<path transform="matrix(1 0 0 -1 0 216)" d="M0 216h482V0H0z" />
+						</clipPath>
+						<g clip-path="url(#a)">
+							<path
+								class="has-fill-current-color has-text-subtle"
+								d="M394.942 104.59h-10.858v25.003h-7.38V104.59h-5.182v-5.965h5.182v-4.308c0-3.254 1.06-5.92 3.178-7.998 2.12-2.079 4.835-3.118 8.15-3.118.882 0 1.666.045 2.35.135a9.37 9.37 0 011.806.407v6.296c-.24-.14-.663-.31-1.265-.512-.603-.2-1.296-.3-2.078-.3-1.528 0-2.702.476-3.526 1.43-.824.954-1.235 2.365-1.235 4.232v3.736h10.858v-6.959l7.321-2.229v9.188h7.381v5.965h-7.38v14.49c0 1.91.345 3.254 1.038 4.037.693.783 1.782 1.175 3.27 1.175.42 0 .927-.1 1.52-.3a7.178 7.178 0 001.552-.724v6.025c-.463.261-1.23.502-2.305.723a15.742 15.742 0 01-3.178.331c-3.073 0-5.378-.817-6.914-2.455-1.537-1.637-2.305-4.102-2.305-7.396zm-48.407 9.73c0 3.233.733 5.703 2.2 7.411 1.465 1.707 3.564 2.56 6.295 2.56 2.652 0 4.67-.853 6.055-2.56 1.386-1.708 2.08-4.238 2.08-7.592 0-3.334-.719-5.849-2.155-7.547-1.436-1.697-3.45-2.545-6.04-2.545-2.67 0-4.745.888-6.22 2.666-1.477 1.777-2.215 4.313-2.215 7.607m-7.592.24c0-5.12 1.446-9.177 4.338-12.17 2.892-2.993 6.91-4.489 12.05-4.489 4.841 0 8.621 1.441 11.343 4.323 2.721 2.883 4.082 6.774 4.082 11.674 0 5.021-1.447 9.018-4.338 11.99-2.892 2.973-6.829 4.458-11.81 4.458-4.8 0-8.61-1.41-11.432-4.232-2.822-2.82-4.233-6.673-4.233-11.554m-16.417-7.802c0 1.045.331 1.863.994 2.456.662.592 2.128 1.34 4.398 2.243 2.912 1.166 4.956 2.476 6.131 3.932 1.175 1.456 1.762 3.22 1.762 5.287 0 2.912-1.12 5.252-3.359 7.02-2.24 1.767-5.267 2.65-9.083 2.65-1.285 0-2.706-.155-4.263-.467-1.556-.31-2.877-.707-3.96-1.19v-7.169a17.945 17.945 0 004.277 2.198c1.526.543 2.911.814 4.157.814 1.647 0 2.862-.23 3.645-.693.784-.46 1.175-1.235 1.175-2.319 0-1.005-.406-1.853-1.22-2.546-.813-.693-2.355-1.492-4.624-2.395-2.69-1.125-4.599-2.39-5.724-3.796-1.125-1.406-1.687-3.193-1.687-5.362 0-2.792 1.11-5.086 3.33-6.884 2.217-1.797 5.095-2.696 8.63-2.696 1.084 0 2.3.12 3.645.361 1.346.242 2.47.553 3.374.934v6.93c-.964-.644-2.089-1.195-3.374-1.658-1.286-.462-2.56-.693-3.826-.693-1.386 0-2.465.271-3.238.813-.774.543-1.16 1.286-1.16 2.23m-35.066 7.562c0 3.233.733 5.703 2.2 7.411 1.465 1.707 3.564 2.56 6.295 2.56 2.652 0 4.67-.853 6.055-2.56 1.386-1.708 2.08-4.238 2.08-7.592 0-3.334-.719-5.849-2.155-7.547-1.436-1.697-3.449-2.545-6.039-2.545-2.672 0-4.745.888-6.222 2.666-1.476 1.777-2.214 4.313-2.214 7.607m-7.592.24c0-5.12 1.446-9.177 4.338-12.17 2.893-2.993 6.91-4.489 12.051-4.489 4.84 0 8.621 1.441 11.342 4.323 2.721 2.883 4.082 6.774 4.082 11.674 0 5.021-1.446 9.018-4.338 11.99-2.892 2.973-6.828 4.458-11.809 4.458-4.8 0-8.61-1.41-11.433-4.232-2.822-2.82-4.233-6.673-4.233-11.554m-3.136-16.448c.582 0 1.105.041 1.567.121.462.08.853.18 1.175.301v7.38c-.382-.28-.939-.546-1.672-.798-.733-.25-1.622-.376-2.666-.376-1.788 0-3.299.753-4.534 2.26-1.235 1.505-1.853 3.825-1.853 6.958v15.635h-7.29V98.624h7.29v4.88h.12c.663-1.687 1.667-3.007 3.013-3.96 1.346-.954 2.962-1.432 4.85-1.432m-27.956 26.18c1.084 0 2.28-.25 3.585-.754a15.06 15.06 0 003.615-1.988v6.778c-1.165.663-2.485 1.165-3.962 1.506-1.475.342-3.098.512-4.865.512-4.559 0-8.265-1.44-11.116-4.323-2.852-2.88-4.278-6.562-4.278-11.04 0-4.98 1.456-9.083 4.37-12.307 2.91-3.224 7.037-4.835 12.38-4.835 1.366 0 2.746.176 4.143.527 1.395.352 2.504.758 3.328 1.22v6.99c-1.125-.824-2.274-1.462-3.45-1.914a9.966 9.966 0 00-3.599-.678c-2.872 0-5.192.934-6.959 2.802-1.768 1.868-2.652 4.388-2.652 7.562 0 3.132.85 5.573 2.546 7.32 1.697 1.748 4.002 2.621 6.914 2.621m-22.112 5.302h-7.29V98.624h7.29zm-8.044-39.916c0-1.205.437-2.214 1.311-3.028.874-.813 1.913-1.22 3.118-1.22 1.285 0 2.35.417 3.193 1.25.844.834 1.266 1.833 1.266 2.998 0 1.185-.432 2.18-1.296 2.982-.864.804-1.918 1.205-3.163 1.205-1.246 0-2.295-.406-3.148-1.219-.854-.815-1.28-1.803-1.28-2.968m-6.274-3.284v43.2h-7.5v-33.86h-.12l-13.408 33.86h-4.97l-13.738-33.86h-.09v33.86h-6.929v-43.2h10.755l12.412 32.024h.18l13.105-32.024z"
+							/>
+							<path d="M106.214 106.214H71.996V71.996h34.218z" fill="#f25022" />
+							<path d="M143.993 106.214h-34.218V71.996h34.218z" fill="#7fba00" />
+							<path d="M106.214 143.993H71.996v-34.218h34.218z" fill="#00a4ef" />
+							<path d="M143.993 143.993h-34.218v-34.218h34.218z" fill="#ffb900" />
+						</g>
+					</g>
+				</svg>
+			</div>
+		</a>
+	</div>`,rightTemplate:e=>{const t=qs||!Hs.callToAction||e.mobile?null:Do(Hs.callToAction);return Wn`
+				${Go(e)}
+				${Qo(e,Z,!0,Hs.category)}
+				<span class="nav-bar-spacer"></span>
+				${e.mobile?null:Oo(e)}
+				${qs?Wo():t}
+			`}});return e.items=Hs.items.map(tr),e}async function sr(){if(await Gs,!zs)return null;const e=Ko(function(){const{category:e,callToAction:t,preview:n}=zs;return{leftTemplate:t=>function(e,t,n){if(!t)return"";const{href:s,title:i}=t;return Wn`
+		<a
+			class="nav-bar-button is-title has-hover-underline"
+			href="${s}"
+			?hidden=${e.mobile}
+			itemprop="url"
+		>
+			<span>
+				${i}
+				${n?Wn`<span class="tag is-small is-uppercase">${oe}</span>`:""}
+			</span>
+		</a>
+	`}(t,e,n),rightTemplate:e=>Wn`
+		${Qo(e,ye,!1)}
+		<span class="nav-bar-spacer"></span>
+		${Do(t)} ${"Learn"!==ws?"":Wn`
+		<div
+			id="level-status-container"
+			class="display-flex align-items-center is-hidden is-hidden-touch"
+		>
+			<div
+				id="level-status"
+				class="position-relative level has-margin-left-extra-small has-margin-right-extra-small"
+			></div>
+		</div>
+	`}
+	`}}());return e.items=zs.items,e.classList.add("border-top","is-hidden-mobile"),e}function ir(){!async function(){const e=()=>((e,t,n)=>{const s=t?`c:${n}`:null;Ot.then((n=>{const i=n.getConfig();i.authMethod="MSA"===e?1:2,i.isLoggedIn=t,n.ids.setAppUserId(s)})),qt.then((n=>{const s=n.sku.getAuthExtension();t?s.setAuthType("MSA"===e?1:"AAD"===e?2:0):s.setAuthType(0)}))})(Ge.authenticationMode,Ge.isAuthenticated,Ge.userId);Ge.subscribe(Fe,e),e(),await Ge.whenAuthenticated(),jt({content:{event:"user-is-signed-in"}})}(),function(){function e(e){e.isTrusted&&e.target instanceof HTMLSelectElement&&e.target.hasAttribute(zt)&&Vt(e.target,{actionType:Dt,behavior:Ht,content:{event:"select-value-changed",name:Ft(e.target),value:e.target.value}})}s.addEventListener("change",e,{passive:!0})}(),function(){let e="";function t(t){t.isTrusted&&e!==t.type&&(e=t.type,jt({actionType:Dt,behavior:Ht,content:{event:"page-focus-changed",value:t.type}}))}let s=0;function i(e){clearTimeout(s),s=setTimeout((()=>t(e)),50)}n.addEventListener("focus",i,{passive:!0}),n.addEventListener("blur",i,{passive:!0})}(),function(){function e(){jt({actionType:Dt,behavior:Ht,content:{event:"page-visibility-changed",value:s.hidden?"hidden":"visible"}})}function t(){s.addEventListener("visibilitychange",e,{passive:!0})}"interactive"===s.readyState||"complete"===s.readyState?t():s.addEventListener("DOMContentLoaded",t)}(),function(){if(!vt)return;wt.addListener((e=>{e.matches&&jt({actionType:Dt,behavior:Bt,content:{event:"print"}})}))}(),function(){function e(e){if(!(e.isTrusted&&e.target instanceof HTMLElement))return;const{width:t,height:n}=e.target.getBoundingClientRect(),{scrollLeft:s,scrollTop:i,scrollWidth:a,scrollHeight:o}=e.target;Vt(e.target,{actionType:Dt,behavior:Ht,content:{event:"secondary-content-scroll",name:Ft(e.target),viewPortWidth:Math.floor(t),viewPortHeight:Math.floor(n),contentWidth:Math.floor(a),contentHeight:Math.floor(o),horizontalOffset:Math.floor(s),verticalOffset:Math.floor(i)}})}function t(t){if(t.target===s)return;const n=t.target;clearTimeout(n.reportScrollTimeout),n.reportScrollTimeout=setTimeout((()=>e(t)),100)}n.addEventListener("scroll",t,{passive:!0,capture:!0})}(),function(){let e=!1;function t(){jt({actionType:Dt,behavior:Ht,content:{event:"unload",anchor:e}})}function s(t){t.target instanceof HTMLAnchorElement&&(e=!0,setTimeout((()=>e=!1)))}function i(t){t.target instanceof HTMLAnchorElement&&(e=!0,setTimeout((()=>e=!1)))}n.addEventListener("keydown",i,{capture:!0,passive:!0}),n.addEventListener("click",s,{capture:!0,passive:!0}),n.addEventListener("beforeunload",t,{passive:!0})}(),function(){function e(e){const t=e.target;if("nav-bar-search-form"!==t.id&&"nav-bar-search-form-desktop"!==t.id&&"welcome-page-search-form"!==t.id&&"directory-page-search-form"!==t.id&&"facet-search-form"!==t.id)return;const n=Array.from(t.querySelectorAll('input[name="terms"], input[name="facet-search-input"]'))[0].value,i=s.activeElement&&s.activeElement instanceof HTMLButtonElement&&"submit"===s.activeElement.type&&!!t.querySelector(`#${s.activeElement.id}`);Vt(t,{actionType:Dt,behavior:Rt,content:{event:"uhf-search",value:n,submitButton:i}})}n.addEventListener("submit",e,{passive:!0,capture:!0})}(),function(){function e(e){!e.isTrusted||70!==e.keyCode||!e.ctrlKey||e.shiftKey||e.altKey||e.metaKey||jt({actionType:Dt,behavior:Ht,content:{event:"ctrl-f"}})}n.addEventListener("keydown",e,{passive:!0})}(),function(){function e(e){const t={referrerUri:e.referrerUrl.href,requestUri:e.url.href,title:e.title,pageName:p("document_id")||"missing document_id",pageType:p("page_type"),pageTags:{}};Tt(t.pageTags),(e=>{Ot.then((t=>t.extendCoreData(e))),qt.then((t=>t.extendCoreData(e)))})(t),(e=>{Ot.then((t=>t.ct.capturePageView(e))),qt.then((t=>t.ct.capturePageView(e||{})))})()}d.subscribe(u,e)}()}Object.defineProperty(HTMLElement.prototype,"inlineStyle",{set(e){this.style.cssText=e}}),Object.defineProperty(HTMLInputElement.prototype,"customValidity",{set(e){this.setCustomValidity(e)}});const ar=/(^|\/)index$/i;function or(e){const t=new URL(e,location.origin);let n=decodeURIComponent(t.pathname).toLowerCase().replace(ar,"$1").replace(Si,"/");const s=t.searchParams.get("view");if(s&&(t.search="",t.searchParams.set("view",s),n+=t.search),-1!==n.indexOf("/learn/challenges")){const e=t.searchParams.get("id");t.search="",t.searchParams.set("id",e),n+=t.search}return n}function rr(e){"docs"!==e.type&&"qa"!==e.type&&(e.type="docs"),e.data.url=or(e.data.url)}function cr(e){e.items.forEach(rr)}"localhost"===i.hostname&&a.environment;const lr={baseUrl:tt.lists,async getAllLists(){const e=st(this.baseUrl,{}),t=await nt(e);if(rn(t),t.ok){const e=await t.json();return e.forEach(cr),e}throw new Error(`${t.status}: ${t.statusText}`)},async getAllListsByUrl(e){const t=[];e.forEach((e=>{t.push(or(e))}));const n=JSON.stringify(t),s=st(this.baseUrl+"/by-url",{method:"POST",body:n}),i=await nt(s);if(rn(i),i.ok)return await i.json();throw new Error(`${i.status}: ${i.statusText}`)},async getList(e){const t={locale:a.data.userLocale},n=st(`${this.baseUrl}/${e}?${ht(t)}`,{},!0),s=await nt(n);if(rn(s),s.ok){const e=await s.json();return cr(e),e}if(404===s.status)return null;throw new Error(`${s.status}: ${s.statusText}`)},async createList(e){const t=JSON.stringify(e),n=st(this.baseUrl,{method:"POST",body:t},!0),s=await nt(n);if(rn(s),s.ok){return{hasError:!1,data:await s.json()}}if(400===s.status){return{hasError:!0,error:await s.json()}}throw new Error(`${s.status}: ${s.statusText}`)},async deleteList(e){const t=st(this.baseUrl+"/"+e,{method:"DELETE"},!0),n=await nt(t);if(rn(n),!n.ok)throw new Error(`${n.status}: ${n.statusText}`)},async updateListMetadata(e,t){const n=JSON.stringify({name:t.name,description:t.description}),s=st(this.baseUrl+"/"+e,{method:"PATCH",body:n},!0),i=await nt(s);if(rn(i),i.ok){const e=await i.json();return cr(e),{hasError:!1,data:e}}if(400===i.status){return{hasError:!0,error:await i.json()}}throw new Error(`${i.status}: ${i.statusText}`)},async sortList(e,t){const n={locale:a.data.userLocale},s=st(`${this.baseUrl}/${e}?${ht(n)}`,{method:"PUT",body:JSON.stringify(t)},!0),i=await nt(s);if(rn(i),i.ok){const e=await i.json();return cr(e),{hasError:!1,data:e}}if(400===i.status){return{hasError:!0,error:await i.json()}}throw new Error(`${i.status}: ${i.statusText}`)},async addItem(e,t){const n=JSON.stringify(t),s=st(this.baseUrl+"/"+e,{method:"POST",body:n},!0),i=await nt(s);if(rn(i),i.ok){return{hasError:!1,data:await i.json()}}if(400===i.status){return{hasError:!0,error:await i.json()}}throw new Error(`${i.status}: ${i.statusText}`)},async deleteItem(e,t){const n=st(this.baseUrl+"/"+e+"/"+t,{method:"DELETE"},!0),s=await nt(n);if(rn(s),!s.ok)throw new Error(`${s.status}: ${s.statusText}`)}};async function dr(e=n.document,t=!1){let s;if("string"==typeof e)if(t||new URL(Ai(e,a.data.userLocale),n.location.origin).href!==n.location.href){const t=await async function(e){const t=await nt(e,{credentials:"include",redirect:"follow"});if(!t.ok)throw new Error(`Unexpected response status ${t.status} for ${e}`);const n=await t.text(),s=(new DOMParser).parseFromString(n,"text/html");return{url:new URL(t.url||e,location.origin),document:s}}(e);s=t.url,e=t.document}else e=n.document,s=new URL(n.location.href);else s=new URL(e.URL);const o=function(e){return Array.from(e.querySelectorAll("meta")).reduce(((e,t)=>(e[t.name||t.getAttribute("property")]=t.content,e)),{})}(e),r=new RegExp("^/"+a.data.userLocale+"/answers[$/]","i"),c=s.pathname.match(r)?"qa":"docs",l=s.toString();let d=null;if(-1!==s.pathname.indexOf("/learn/challenges")){d=function(e=new URL(i.href)){const t=new URLSearchParams(e.search),n={};return t.forEach(((e,t)=>n[t]=e)),n}().id}return{type:c,data:{url:or(l),rawUrl:l,title:o["og:title"]||e.title,docId:o.document_id||"",docVIId:o.document_version_independent_id||"",pageType:o.page_type||"",pageKind:o.page_kind||"",uid:o.uid||"",challengeId:d}}}let ur;async function hr(e,t){const n=e.elements.namedItem("collection-title").value,s=e.elements.namedItem("collection-description").value;e.querySelector("button[type=submit]").classList.add("is-loading");var i;return function(e,t){if(!0===e.hasError){const n=t.querySelector("button[type=submit]");n&&n.classList.remove("is-loading");const{errorCode:s}=e.error;return function(e,t){const n=t.elements.namedItem("collection-title"),s=t.elements.namedItem("collection-description");switch(e){case"InvalidBody":case"MissingType":return;case"InvalidTitle":return n.setCustomValidity(W),void n.reportValidity();case"InvalidDescription":return s.setCustomValidity(Q),void s.reportValidity();case"DuplicateTitle":const e=j.replace("{title}",n.value);return n.setCustomValidity(e),void n.reportValidity();default:;}}(s,t),{hasError:!0}}return{hasError:!1,data:e.data}}(await(i={type:"collection",name:n,description:s,items:t},ur=void 0,lr.createList(i)),e)}tt.certification.linkedAccount,function(){if("local"===M.accessLevel)return"main";if(!0===M.reviewFeatures){const e=ut(location.search);return e["api-branch"]||e.branch||""}}(),a.data.userLocale;let mr=[],pr={};function fr(e,t,n,s=(()=>{})){return pr={},Wn`
+		<div class="modal-card padding-xs has-padding-large-tablet">
+			<div class="has-padding-extra-small">
+				<h2 class="title has-margin-bottom-extra-small">${J}</h2>
+				<button
+					class="modal-close modal-card-close-button is-large is-sticky"
+					aria-label="Close"
+				></button>
+				<form
+					id="save-to-multiple-collections"
+					action="javascript:"
+					@submit="${async t=>{t.preventDefault();const n=e.contentElement.querySelector("button#save-collection");n.classList.add("is-loading"),n.disabled=!0,await function(e){const t=Object.keys(e);return Promise.all(t.map((async t=>"string"!=typeof e[t]?lr.addItem(t,await e[t]):lr.deleteItem(t,e[t]))))}(pr),pr={},s(),e.hide()}}"
+				>
+					<legend class="font-size-s">
+						${Kn('Add <span class="font-weight-semibold">"{pageName}"</span> to:'.replace("{pageName}",t))}
+					</legend>
+					<hr class="hr has-margin-top-small" />
+					<div id="collections" class="has-max-height-300 is-vertically-scrollable"></div>
+					<hr class="hr has-margin-bottom-small" />
+					<button
+						type="button"
+						@click="${()=>async function(e,t,n){e.pushContent(await async function(e,t,n){const s=document.createElement("div");s.classList.add("modal-content");const i=G.replace("{userDisplayName}",Ge.displayName).replace("{index}",(n+1).toString()),o=Wn`
+		<div class="modal-card padding-xs has-padding-large-tablet">
+			<div>
+				<button
+					@click="${()=>vr(e)}"
+					class="button is-text is-small has-text-primary"
+				>
+					<span class="icon">
+						<span class="docon docon-arrow-left"></span>
+					</span>
+					<span>${te}</span>
+				</button>
+			</div>
+			<div class="has-padding-extra-small">
+				<form id="save-to-collection">
+					${function(e,t,n,s,i,o="Title",r=!0,c=!1,l=!1,d=""){return Wn`
+		<h2
+			class="title is-3 margin-none ${"rtl"===a.data.userDir?"margin-left-s":"margin-right-s"}"
+		>
+			${e}
+		</h2>
+		<button
+			class="modal-close modal-card-close-button is-large is-sticky"
+			aria-label="${z}"
+		></button>
+		<p class="has-margin-top-extra-small" ?hidden="${r}">
+			${"You can find this collection in your Learn profile"}
+		</p>
+		<div class="margin-top-xs">
+			<div class="field ${d}">
+				<label for="collection-title" class="label">${o}</label>
+				<div class="control">
+					<input
+						id="collection-title"
+						class="input"
+						type="text"
+						name="title"
+						.value=${t}
+						required
+						minlength="1"
+						maxlength="100"
+						autofocus
+					/>
+				</div>
+			</div>
+			<div class="field" ?hidden="${c}">
+				<label for="collection-description" class="label">${"Description"}</label>
+				<div class="control">
+					<textarea
+						id="collection-description"
+						class="textarea"
+						name="description"
+						maxlength="550"
+						.value=${n}
+						placeholder="${"Optional"}"
+					></textarea>
+				</div>
+			</div>
+			<p class="has-padding-bottom-small" ?hidden="${l}">
+				${Kn('Collections may be publicly viewable. <a href="/learn/support/faq?pivots=general#what-is-a-collection" >Learn more</a>')}
+			</p>
+			<div class="buttons has-margin-top-large">
+				<button class="button is-primary font-weight-semibold" type="submit">${s}</button>
+				<button type="button" class="modal-close button font-weight-semibold">${i}</button>
+			</div>
+		</div>
+	`}(J,i,"",we,R)}
+				</form>
+			</div>
+		</div>
+	`;return jn(o,s),s.querySelector("button[type=submit]").onclick=async()=>{await async function(e,t){event.preventDefault();const n=event.target;n.classList.add("is-loading");const s=dr(t),i=document.getElementById("save-to-collection");await hr(i).then((async i=>{i.hasError?n.classList.remove("is-loading"):(pr[(i=i).data.id]=s,vr(e),mr=await gr(document.querySelector(".modal-card"),t))}))}(e,t)},s}(e,t,n))}(e,n,document.querySelectorAll("#collections input").length)}"
+						class="button is-text margin-bottom-xs"
+					>
+						<span class="icon" aria-hidden="true">
+							<span class="has-text-primary docon docon-math-plus-light"></span>
+						</span>
+						<span>${"New collection"}</span>
+					</button>
+					<div class="buttons">
+						<button id="save-collection" class="button is-primary title is-small" type="submit">
+							${me}
+						</button>
+						<button type="button" class="modal-close button is-unstyled title is-small">
+							${R}
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	`}async function gr(e,t){const n=await function(e=(()=>!0)){return void 0===ur&&(ur=lr.getAllLists()),ur.then((t=>{const n=t.find((e=>"bookmarks"===e.type));return n&&(n.name="Favorites"),t.filter(e)}))}((e=>"collection"===e.type||"bookmarks"===e.type)),s=0===n.length,i=e.querySelector("#collections"),a=e.querySelector("#save-collection");if(a&&a.hasAttribute("autofocus")&&a.removeAttribute("autofocus"),s){const e=Wn`<p class="has-text-subtle">${"You don't have any collections yet."}</p>`;return a&&a.setAttribute("autofocus","autofocus"),jn(e,i),[]}const o=await lr.getAllListsByUrl([t]);mr=o[0].lists;const r=Wn` ${n.map((e=>Wn` <div class="field">
+			<div class="control">
+				<label class="checkbox" for="${e.id}">
+					<input
+						@click="${()=>async function(e,t,n){const s=event.target;if(s.checked){const t=dr(e);n[s.id]=t}else{const e=t.find((e=>e.listId===s.id));e&&(n[s.id]=e.id)}}(t,o[0].lists,pr)}"
+						.checked=${pr[e.id]?"string"!=typeof pr[e.id]:o[0].lists.reduce(((t,n)=>t||n.listId===e.id),!1)||1===n.length&&"bookmarks"===n[0].id&&"bookmarks"===e.id}
+						type="checkbox"
+						class="collection-input"
+						id="${e.id}"
+						name="${e.name}"
+						?autofocus=${e===n[0]}
+					/>
+					<span class="checkbox-check" role="presentation"></span>
+					<span class="checkbox-text">${e.name}</span>
+				</label>
+			</div>
+		</div>`))}`;if(jn(r,i),1===n.length&&"bookmarks"===n[0].id&&0===mr.length){const e=await dr(t);await lr.addItem("bookmarks",e)}return mr}function vr(e){e.popContent()}class br{constructor(e){this.container=document.createElement("div"),this.container.setAttribute("role","alert"),this.container.setAttribute("aria-live","assertive"),this.container.setAttribute("data-dismissable","disappearing"),this.container.classList.add("toast"),this.container.appendChild(e),this.wrapper=document.createElement("div"),this.wrapper.insertAdjacentElement("afterbegin",this.container),this.contentElement=e}show(){const e=document.querySelector(".toast");e&&ii(e),document.body.insertAdjacentElement("afterbegin",this.container),this.container.classList.add("appearing"),setTimeout((()=>{ft()}),10),setTimeout((()=>{ii(this.container)}),3500)}}async function yr(e,t){const n=s.createElement("form");n.action="javascript:",e instanceof Tn?jn(e,n):n.appendChild(e),function(e){if(e.querySelector("form"))throw new Error("The content argument should not contain a form")}(n);const i=s.createElement("div");i.classList.add("modal-content"),i.appendChild(n);const a=new is(i);let o=!1,r={hasError:!1,data:null};return n.addEventListener("submit",(async e=>{e.preventDefault(),r=t?await t(n):{hasError:!1,data:null},!1===r.hasError&&(o=!0,a.hide())})),function(e){for(let t=0;t<e.elements.length;t++){const n=e.elements.item(t);(n instanceof HTMLInputElement||n instanceof HTMLTextAreaElement)&&(n.onchange=()=>n.setCustomValidity(/^\s+$/.test(n.value)?"Please fill out this field.":"")),n instanceof HTMLButtonElement&&"submit"===n.type&&(n.onclick=()=>e.classList.add("show-validation-status"))}}(n),await a.show(),{submitted:o,form:n,data:r.hasError?null:r.data}}const wr={bookmarks:{pressed:"single-bookmark-solid",unpressed:"single-bookmark"},collection:{pressed:"circle-addition-solid",unpressed:"circle-addition"},studyguide:{pressed:"book-open",unpressed:"book-solid"}},xr={bookmarks:{pressed:"Remove bookmark for {title}",unpressed:"Add bookmark for {title}"},collection:{pressed:"Manage {title} in collections",unpressed:"Add {title} to a collection"},studyguide:{pressed:"Manage {title} in study guides",unpressed:"Add {title} in study guides"}};function $r(e,t){return`docon-${t?wr[e].pressed:wr[e].unpressed}`}function kr(e,t,n,s){e.setAttribute("aria-pressed",s.toString()),e.setAttribute("title",function(e,t,n){return xr[e][t?"pressed":"unpressed"].replace(/\{title\}/g,n)}(t,s,n));const i=e.querySelector(".docon");if(!i)throw new Error("Expected list button to contain a docon");if(i.classList.remove($r(t,!s)),i.classList.add($r(t,s)),"collection"===t){const t=e.querySelector(".collection-status, .add-to-collection-status");t&&(t.textContent=s?"Saved":me)}}async function Er(e,t=Ge.isAuthenticated){const n=Array.from(e.querySelectorAll("button[data-list-type]")).map((e=>Ar(e))).filter((e=>null!==e));if(0===n.length)return;const s=n.map((e=>e.url)).filter(((e,t,n)=>e&&n.indexOf(e)===t)),i=t?await lr.getAllListsByUrl(s):[];for(const{button:e,type:t,url:s,title:a}of n){kr(e,t,a,Lr(s,i))}}function Lr(e,t){return-1!==t.findIndex((t=>t.url===e&&t.lists.length>0))}async function Sr(e,t=Ge.isAuthenticated){const n=Ar(e.target);null!==n&&(e.preventDefault(),t?async function({button:e,url:t,title:n}){if(e.classList.contains("is-loading"))return;e.classList.add("is-loading");try{!async function(e,t){const n=s.querySelector(".modal");if(n&&!n.querySelector(".page-actions-menu"))return!1;const i=s.createElement("div");i.classList.add("modal-content");const a=new is(i);let o=[];jn(fr(a,t,e,(()=>{!function(e){Er(s.body);const t=Array.from(s.querySelectorAll("#collections input:checked")).map((e=>e.id)),n=t.filter((t=>!e.includes(t))),i=e.filter((e=>!t.includes(e)));n.length>0&&0===i.length?Cr("collections","added"):0===n.length&&i.length>0?Cr("collections","removed",i):n.length>0&&i.length>0&&Cr("collections","updated")}(o.map((e=>e.listId)))})),i),o=await gr(i,e),a.show()}(t,n)}finally{e.classList.remove("is-loading")}}(n):async function(){const e=function(e,t,n="OK"){return Wn` <section class="modal-card is-shadowless-mobile padding-xs has-padding-large-tablet">
+		<h2 class="title is-3 margin-bottom-xs has-margin-right-small" id="modal-heading">${e}</h2>
+		<button
+			class="modal-close modal-card-close-button is-large is-sticky"
+			aria-label="${z}"
+		></button>
+		<div class="flex-grow-0 has-padding-none">
+			<p ?hidden="${!t}" id="modal-text" class="font-size-s has-padding-bottom-large">
+				${t}
+			</p>
+			<div class="buttons has-margin-bottom-none">
+				<button class="button is-primary is-small" type="submit" autofocus>${n}</button>
+				<button type="button" class="modal-close button is-small">${R}</button>
+			</div>
+		</div>
+	</section>`}(K,null,ve);(await yr(e)).submitted&&on()}())}function Ar(e){const t=e instanceof Element&&e.closest("button");if(!t)return null;const n=t.getAttribute("data-list-type");if("collection"!==n)return null;const i=t.getAttribute("data-list-item-url")||location.href,a=t.getAttribute("data-list-item-title")||s.title,o=or(i),r="true"===t.getAttribute("aria-pressed"),c=t.getAttribute("data-list-source")||"module";return{button:t,type:n,url:o,title:a,pressed:r,source:c}}function Cr(e,t="added",i=[]){const o=s.querySelectorAll("#collections input:checked"),r=function(e,t,s,i=n.location,o=a.data.userLocale){if(e=e.toLowerCase(),s&&"collections"!==t&&"training"!==t)throw new Error(`Detail url component is not supported in ${t} section.`);if("docs.microsoft.com"===i.hostname){let n;return n=t&&"overview"!==t?new URL(`/${o}/users/${e}/${t}${s?"/"+s:""}${i.search}`,i.origin):new URL(`/${o}/users/${e}/${i.search}`,i.origin),n}const r=new URL(`/${o}/${E?"learn-sandbox":"test"}/profile/profile`+i.search,i.origin);return r.searchParams.delete("username"),r.searchParams.delete("section"),r.searchParams.delete("detail"),r.searchParams.set("username",e),t&&"overview"!==t?(r.searchParams.set("section",t),s&&r.searchParams.set("detail",s)):r.searchParams.delete("section"),r}(Ge.userName,e,"removed"===t&&0!==i.length?1===i.length?i[0]:"":1===o.length?o.item(0).getAttribute("id"):"").href;let c;c="added"===t?(1!==o.length?'Saved to <a href="{url}" class="has-text-tertiary-invert text-decoration-underline">Collections</a>':'Saved to <a href="{url}" class="has-text-tertiary-invert text-decoration-underline">{collectionName}</a>'.replace("{collectionName}",Ne(o.item(0).getAttribute("name")))).replace("{url}",r):"removed"===t?(i.length>1?'Removed from <a href="{url}" class="has-text-tertiary-invert text-decoration-underline">Collections</a>':'Removed from <a href="{url}" class="has-text-tertiary-invert text-decoration-underline">{collectionName}</a>'.replace("{collectionName}",Ne(s.querySelector(`#collections input[id="${i[0]}"]`).getAttribute("name")))).replace("{url}",r):'<a href="{url}" class="has-text-tertiary-invert text-decoration-underline">Collections</a> Updated'.replace("{url}",r);const l=Wn` <div
+		class="has-background-dark-opacity has-text-tertiary-invert is-full-width"
+	>
+		<div class="uhf-container">
+			<div class="level has-padding-top-small has-padding-bottom-small">
+				<div
+					class="is-full-width level-item has-line-height-reset has-text-overlay-invert has-margin-top-small margin-right-xs has-margin-top-none-tablet has-margin-right-none-tablet"
+				>
+					<span
+						aria-hidden="true"
+						class="icon is-small is-rounded has-background-tertiary-invert has-text-tertiary ${Zn({"is-hidden":!1})}"
+					>
+						<span class="font-size-xs docon docon-check"></span>
+					</span>
+					<span class="message has-margin-left-small"> ${Kn(c)} </span>
+				</div>
+				<div class="level-right">
+					<button
+						data-dismiss
+						type="button"
+						class="dismiss delete is-large position-absolute position-relative-tablet top-0 right-0 margin-xxs margin-none-tablet"
+						aria-label="${"Dismiss alert"}"
+					>
+						<span class="docon docon-navigate-close" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>`,d=s.createElement("div");jn(l,d),new br(d).show()}!async function(){if(void 0===n.adobeTarget)return;const e=await n.adobeTarget.atRequestSucceeded;if(!e||!e.detail)return;const{analyticsDetails:t,responseTokens:s}=e.detail;if(t&&Wt({actionType:"A",behavior:12,content:{},pageTags:{tnta:t[0]&&t[0].payload?t[0].payload.tnta:""}}),s){const e=s.length;for(let t=0;t<e;t++)Wt({actionType:"A",behavior:12,content:{},pageTags:{at_activity_name:s[t]?s[t]["activity.name"]:"",at_exp_name:s[t]?s[t]["experience.name"]:"",at_activity_id:s[t]?s[t]["activity.id"]:"",at_exp_id:s[t]?s[t]["experience.id"]:""}})}}(),document.documentElement.classList.add("theme-light"),async function(){Js(),Ks(),async function(){await o;const e=s.querySelector("#headerAreaHolder > header"),[t,n]=await Promise.all([nr(),sr()]);jn(Wn` ${t} ${n} `,e),async function(){await Promise.all([Ws,Gs]),Fs()}()}()}(),function(){if(!q.userServices)return ni(),void o.then((()=>{const e=s.getElementById("docs-sign-in-container-item");e&&(e.hidden=!0)}));!async function(e,t,n){const s=()=>n.setAttribute("data-authenticated",e.isAuthenticated.toString());s(),e.subscribe(Fe,s),await t,n.setAttribute("data-auth-status-determined","true")}(Ge,si,s.documentElement),gs(s.documentElement),Ge.subscribe(Fe,(async()=>{await Promise.all([Vs,o]),Je(s.body,Ge)})),async function(e=(()=>{Ge.setAnonymous()})){if(!q.userServices)return Ge.setAnonymous(),Promise.resolve();const t=new Gt([en,tn,nn],e);await t.run()}().then(ni),si.then((async()=>{"standard"!==Ge.userType&&rs(Ge),Ge.isAuthenticated&&(await o,Zs())}))}(),function(){const e=pageContext.currentUser.username,t=s.createElement("style");s.head.appendChild(t),t.textContent=`\n\t\t.question-gravatar [href*="/${e}.html"] ~ .vote-widget .vote-up,\n\t\t.question-gravatar [href*="/${e}.html"] ~ .vote-widget .vote-down,\n\t\t.answer-gravatar [href*="/${e}.html"] ~ .vote-widget .vote-up,\n\t\t.answer-gravatar [href*="/${e}.html"] ~ .vote-widget .vote-down {\n\t\t\tdisplay: none !important;\n\t\t}\n\t`}(),function(){if("articles"===location.pathname.split("/")[1]){const e=s.createElement("style");e.textContent="#navigation-custom-widget { display: none; }",s.head.appendChild(e)}}(),function(){if(new URLSearchParams(location.search).has("enable-answer-hub-profile"))return;const e=_i(location.href);e?Ti(e,!1):addEventListener("click",(e=>{const t=e.target,n="follow"===t.getAttribute("command"),s=t instanceof Element&&t.closest("a");if(!s||n)return;const i=_i(s.href);i&&(e.preventDefault(),e.stopPropagation(),Ti(i,e.ctrlKey))}),!0)}(),window.addEventListener("click",(({target:e})=>{const t=e instanceof Element&&e.closest("[data-dismiss]");if(!t)return;const n=t.closest("[data-dismissable]");n&&ii(n)}),{passive:!0}),async function(e){if(!q.usabilla)return;const[t]=await Promise.all([Ot.then((e=>e.ids.getVisitorId())),o,kt]);if(void 0===(e=e||$o))throw new Error("Button ID is required");if(void 0!==$o&&$o!==e)throw new Error("Only one button allowed per page");if($o=e,xo)return;!function(e){function t(t,s){return s&&(s+=(/\?/.test(s)?"&":"?")+"lv=1"),e[t]||function(){var i=window,a=document,o=t,r=a.location.protocol,c="load",l=0;!function(){function t(){d.P(c),d.w=1,e[o]("_load")}e[o]=function(){function t(){return t.id=s,e[o].apply(t,arguments)}var n,s=++l;return n=this&&this!=i&&this.id||0,(d.s=d.s||[]).push([s,n,arguments]),t.then=function(e,n,i){var a=d.fh[s]=d.fh[s]||[],o=d.eh[s]=d.eh[s]||[],r=d.ph[s]=d.ph[s]||[];return e&&a.push(e),n&&o.push(n),i&&r.push(i),t},t};var d=e[o]._={};d.fh={},d.eh={},d.ph={},d.l=s?s.replace(/^\/\//,("https:"==r?r:"http:")+"//"):s,d.p={0:+new Date},d.P=function(e){d.p[e]=new Date-d.p[0]},d.w&&t(),i.addEventListener?i.addEventListener(c,t,!1):i.attachEvent("on"+c,t);var u=function(){function e(){return["<head></head><",t,' onload="var d=',f,";d.getElementsByTagName('head')[0].",r,"(d.",c,"('script')).",l,"='",d.l,"'\"></",t,">"].join("")}var t="body",s=a[t];if(!s)return setTimeout(u,100);d.P(1);var i,r="appendChild",c="createElement",l="src",h=a[c]("div"),m=h[r](a[c]("div")),p=a[c]("iframe"),f="document";h.style.display="none",s.insertBefore(h,s.firstChild).id=n+"-"+o,p.frameBorder="0",p.id=n+"-frame-"+o,/MSIE[ ]+6/.test(navigator.userAgent)&&(p[l]="javascript:false"),p.allowTransparency="true",m[r](p);try{p.contentWindow[f].open()}catch(e){d.domain=a.domain,i="javascript:var d="+f+".open();d.domain='"+a.domain+"';",p[l]=i+"void(0);"}try{var g=p.contentWindow[f];g.write(e()),g.close()}catch(t){p[l]=i+'d.write("'+e().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}d.P(2)};d.l&&setTimeout(u,0)}()}(),e[t].lv="1",e[t]}var n="lightningjs",s=window[n]=t(n);s.require=t,s.modules=e}({});const n=lightningjs.require("usabilla_live","https://w.usabilla.com/"+e+".js");n("hide"),wo.visitorId=t,n("data",{custom:wo}),xo=n,ko(n)}("66be21b280f6"),function(){const e=createUserPopOver;createUserPopOver=function(t){e(t);try{const e=$(t),n=e.qtip("api"),s=e.get(0),i=n.options.events.render;n.set("events.render",(async function(e,t){if("function"==typeof i&&i(e,t),s){const e=s.href;if(e){const t=_i(e);if(t&&t.username){const e=await nt(st(`${tt.profile.profiles}/${t.username}`));if(e.ok){const t=await e.json();t&&t.isMvp?n.get("content.text").find(".stats-wrapper").prepend($("<div>").addClass("ms-affiliation user-isMvp").text("Microsoft MVP").prepend($("<img>").attr("src","https://docs.microsoft.com/media/profile/mvp-status.svg"))):t&&t.isMicrosoftUser&&n.get("content.text").find(".stats-wrapper").prepend($("<div>").addClass("ms-affiliation user-isMicrosoftUser").text("Microsoft Employee"))}}}}}))}catch(e){}}}(),(()=>{const e=Array.from(document.styleSheets).filter((e=>e instanceof CSSStyleSheet&&null!==e.href&&/minerva\/.*pack\.css$/.test(e.href))).map((e=>e));for(const t of e)for(let e=0;e<t.cssRules.length;e++){const n=t.cssRules.item(e);n.type===CSSRule.STYLE_RULE&&-1!==n.selectorText.indexOf(".dropdown-menu")&&(n.selectorText=n.selectorText.replace(".dropdown-menu",".dropdown-menu:not(.box)"))}})(),o.then((()=>{document.addEventListener("click",(e=>{const t=e.target instanceof HTMLElement&&(e.target.closest(".preview-tab")||e.target.closest(".source-tab"));if(!t)return;e.stopPropagation();const n=t.closest(".answer-form-widget")||t.closest(".comment-form-container");t.classList.contains("preview-tab")?(n.querySelector(".wmd-panel.wmd-button-bar")?.setAttribute("hidden","true"),n.querySelector("form .hint-label.keyboard-hint")?.setAttribute("hidden","true")):(n.querySelector("form .hint-label.keyboard-hint")?.removeAttribute("hidden"),n.querySelector(".wmd-panel.wmd-button-bar")?.removeAttribute("hidden"))}))})),o.then((()=>{var e;setTimeout((()=>{!function(){let e="https://docs.microsoft.com";M.systemContent&&(e="");const t=`${location.origin}/${x[1]}/${x[2]}`,n=document.querySelector("#bottom"),s="isolated"===M.accessLevel?Wn`<span class="docons docon-external-link" aria-hidden="true"></span>`:"",i="isolated"===M.accessLevel?"Trademarks: "+ne:"",o="Privacy &amp; Cookies".replace("&amp;",""),r="isolated"===M.accessLevel?o+": "+ne:"",c=Wn`
+		<section class="has-default-focus is-hidden-interactive border-top margin-none">
+			<footer
+				id="footer"
+				data-bi-name="footer"
+				class="footer-layout uhf-container has-padding"
+				role="contentinfo"
+			>
+				<ul class="links" data-bi-name="footerlinks">
+					<li class="manage-cookies-holder" hidden></li>
+					<li>
+						<a data-mscc-ic="false" href="https://aka.ms/msftqafaq" data-bi-name="faq">
+							${"FAQ"}
+						</a>
+					</li>
+					<li>
+						<a
+							data-mscc-ic="false"
+							href="${t}/content/idea/post.html"
+							data-bi-name="feedback"
+						>
+							${"Feedback"}
+						</a>
+					</li>
+					<li>
+						<a
+							data-mscc-ic="false"
+							href="https://aka.ms/msftqacodeconduct"
+							data-bi-name="codeofconduct"
+						>
+							${"Code of Conduct"}
+						</a>
+					</li>
+					<li>
+						<a
+							data-mscc-ic="false"
+							href="${e}/${a.data.userLocale}/legal/termsofuse"
+							data-bi-name="termsofuse"
+						>
+							${"Terms of Use"}
+						</a>
+					</li>
+					<li>
+						<a
+							data-mscc-ic="false"
+							href="${e}/${a.data.userLocale}/teamblog/"
+							data-bi-name="bloglink"
+						>
+							${U}
+						</a>
+					</li>
+					<li>
+						<a
+							data-mscc-ic="false"
+							href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/"
+							data-bi-name="trademarks"
+							title="${i}"
+						>
+							${Ee} ${s}
+						</a>
+					</li>
+					<li>
+						<a
+							data-mscc-ic="false"
+							href="https://privacy.microsoft.com/en-US/privacystatement"
+							data-bi-name="privacyandcookies"
+							title="${r}"
+						>
+							${o} ${s}
+						</a>
+					</li>
+					<li>&copy; Microsoft ${(new Date).getFullYear()}</li>
+				</ul>
+			</footer>
+		</section>
+	`;jn(c,n)}(),At(),ir(),async function(){}(),It()}),10),function(){const e=document.querySelector("#submit-question");if(e)e.setAttribute("data-bi-name","submit-question")}(),wi(),o.then((()=>{const e=Array.from(document.querySelectorAll(".post-controls > .accept-answer"));for(const t of e){const e=t.previousSibling;e instanceof Text&&e.remove(),t.classList.add("btn"),t.parentElement.classList.add("hasAcceptAnswer")}})),function(){for(const e of Array.from(document.querySelectorAll(".dropdown, .post-tools"))){const t=e.querySelector("button.dropdown-toggle");t&&t.setAttribute("aria-haspopup","true"),e.querySelector("ul.dropdown-menu")?.removeAttribute("role");const n=Array.from(e.querySelectorAll("ul > li"));for(let e=0;e<n.length;++e){const t=n[e];if(!t.firstElementChild)continue;t.removeAttribute("role");const s=document.createElement("span");s.classList.add("visually-hidden");const i=ct();s.id=i,t.firstElementChild.setAttribute("aria-describedby",i),jn(Wn` ${e+1} of ${n.length} `,s),t.insertAdjacentElement("afterbegin",s)}}}(),o.then((()=>{const e=Array.from(document.querySelectorAll(".flash-message"));for(const t of e)t.removeAttribute("tabindex")})),o.then((()=>{const e=document.getElementById("moderationTabs");if(null!==e){e.removeAttribute("role");const t=Array.from(e.querySelectorAll("li"));for(const e of t)e.removeAttribute("role");const n=Array.from(e.querySelectorAll("a"));for(const e of n)e.removeAttribute("role"),e.removeAttribute("aria-selected"),e.removeAttribute("aria-label")}})),document.querySelectorAll("#deleteAllPostsCommand").forEach(((e,t)=>{t>0&&e.removeAttribute("id")})),o.then((()=>{const e=Array.from(document.querySelectorAll('.userlist > .user > [role="list"] > :not([role="listitem"])'));for(const t of e)t.setAttribute("role","listitem")})),function(){const e=document.querySelector("#fmask #body-label + .control-group > .controls");if(!e)return;const t=new MutationObserver((()=>{const n=Array.from(e.querySelectorAll(".wmd-button-elem"));if(0!==n.length){for(const e of n)e.setAttribute("role","button");t.disconnect()}}));t.observe(e,{childList:!0})}(),function(){const e=document.querySelector(".question-filter");if(!e)return;const t=document.createElement("button");t.classList.add("dropdown-toggle","button-to-link","title-drop-link"),t.id="filters-drop",t.setAttribute("data-toggle","dropdown");const n=Wn`<span class="title-drop"
+		><h1 class="h3 d-inline capitalize">All Questions</h1>
+		<i class="icon-chevron-down"></i
+	></span>`;jn(n,t),e.insertAdjacentElement("afterend",t),e.remove()}(),function(){const e=document.querySelector(".post-tools .dropdown-menu li a[command=viewIdeaStateHistoryCommand]");if(!e)return;const t=Wn` <button
+		class="ajax-command button-to-link"
+		data-status="none"
+		command="viewIdeaStateHistoryCommand"
+		data-process="no"
+	>
+		View Status History
+	</button>`;jn(t,e.parentElement),e.remove(),document.querySelector(".post-tools .dropdown-menu li button[command=viewIdeaStateHistoryCommand]").onclick=()=>{const e=new MutationObserver((()=>{const t=document.querySelector(".modal button");t&&(t.focus(),e.disconnect())}));e.observe(document.body,{childList:!0})}}(),(()=>{document.querySelector(".nav-links-container").hidden=!0;const e=document.getElementById("main-navbar");e&&(e.removeAttribute("role"),e.removeAttribute("aria-label"));const t=document.querySelector('#not-footer div[role="banner"]');t&&t.removeAttribute("role"),jn(yo("navbar-search"),document.querySelector(".search-wrapper"))})(),(()=>{const e=document.querySelector('.dropdown-menu > li > a[href="/answers/articles/create.html"]'),t=document.getElementById("admin-link"),n=document.getElementById("moderation-link");e&&(e.textContent="Create Q&A Article",Ni(e)),t&&(t.textContent="Q&A Admin",Ni(t)),n&&(n.textContent=`Q&A ${n.textContent}`,Ni(n)),document.querySelector(".nav-links").classList.add("hidden")})(),document.querySelectorAll('button[command="voteInList"]').forEach((e=>{e.removeAttribute("aria-atomic"),e.removeAttribute("aria-live")})),oi(),ki(),Array.from(s.querySelectorAll(".idea-list-item .counts")).forEach((e=>{e.classList.add("col-sm-4"),e.classList.remove("col-sm-5"),e.classList.remove("col-lg-3")})),function(){const e=Array.from(s.querySelectorAll(".wmd-textarea")),t=Array.from(s.querySelectorAll(".commentBox"));e.forEach((e=>e.classList.add("has-inner-focus"))),t.forEach((e=>e.classList.add("has-inner-focus")))}(),function(){const e=s.getElementById("middle");Ei(),new MutationObserver((()=>{Ei()})).observe(e,{childList:!0,subtree:!0})}(),s.querySelector("#not-footer").classList.add("has-default-focus"),document.addEventListener("keyup",(function(e){const t=e.target instanceof HTMLElement&&e.target.closest(".qtip")||e.target instanceof HTMLElement&&e.target.querySelector(".qtip")||document.querySelector('.qtip[style*="display: block"]');"Esc"!==e.key&&"Escape"!==e.key||!t||(t.style.display="none",t.setAttribute("aria-hidden","true"))})),function(){const e=document.querySelector(".ui-helper-hidden-accessible");null!==e&&e.removeAttribute("role")}(),ai(document.body),e=document.body,q.userServices?(Er(e),e.addEventListener("click",Sr)):Array.from(e.querySelectorAll("button[data-list-type]")).forEach((e=>e.hidden=!0)),async function(){if(Ge&&Ge.userName){const e=document.querySelector(".question-container .question .author-info>a>span");if(e&&e.innerText===Ge.userName){const e=document.querySelector(".answer-list .accepted-answer");if(e){const t=e.querySelector(".answer>.author-info>a>span");if(t&&t.innerText===Ge.userName)return;const n=await Eo;wo.ShowOpSurvey=!0,n("data",{custom:wo})}}}}(),co(),document.querySelectorAll("#recent-followers a.user").forEach((e=>{e.remove()})),function(){const e=document.querySelector('button[command="redirectQuestion"]');if(!e)return;const t=new MutationObserver((e=>{for(const t of e)for(const e of Array.from(t.addedNodes)){const t=e;if(t&&t.classList&&t.classList.contains("select2-container")&&t.querySelector('input[role="searchbox"]')){if(null===document.activeElement.querySelector(".select2-selection > #searchQuestion-container"))continue;const e=document.activeElement,n=t.querySelector('input[role="searchbox"]');n?.focus(),e.addEventListener("focus",(()=>{n?.focus()}))}}}));e.onclick=()=>{t.observe(document.body,{childList:!0,subtree:!0})}}()}))}();
+//# sourceMappingURL=index-forums.js.map
