@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to protect your Windows server from SYN flood? - Knowledgebase - QuickPacket</title>
+
+    <!-- Styling -->
+<link href="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/css.css" rel="stylesheet">
+<link href="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/all.css" rel="stylesheet">
+<link href="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/fontawesome-all.css" rel="stylesheet">
+<link href="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/custom.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript" async="" src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/ga.js"></script><script type="text/javascript">
+    var csrfToken = 'f79e680ba70ec4c68be7e5d1baab7c52e28dd668',
+        markdownGuide = 'Markdown Guide',
+        locale = 'en',
+        saved = 'saved',
+        saving = 'autosaving',
+        whmcsBaseUrl = "/billing",
+        requiredText = 'Required',
+        recaptchaSiteKey = "";
+</script>
+<script src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/scripts.js"></script>
+
+
+    <script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-157287501-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+
+
+
+</head>
+<body data-phone-cc-input="1">
+
+<script>
+$(document).ready(function() {
+
+    $(window).scroll(function () {
+        console.log($(window).scrollTop())
+      if ($(window).scrollTop() > 28) {
+        $('#scroll').addClass('navbar-scroll');
+      }
+      if ($(window).scrollTop() < 29) {
+        $('#scroll').removeClass('navbar-scroll');
+      }
+    });
+    });
+
+    
+    if ($('#back-to-top').length) {
+    var scrollTrigger = 100, // px
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').addClass('show');
+            } else {
+                $('#back-to-top').removeClass('show');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
+    });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    }); }
+</script>
+
+<nav id="scroll" class="animated fadeInDown navbar navbar-inverse navbar-fixed-top navbar-scroll">
+
+<!-- <div class="topnav">
+  <div class="container">
+
+      <div class="left">
+      Enterprise hosting solutions since 2004.
+      </div>
+
+      <div class="right">
+        <b><i class="fa fa-envelope" aria-hidden="true"></i></b> &nbsp;info@quickpacket.com
+      </div>
+
+
+  </div>
+</div> -->
+
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://quickpacket.com/"><img style="max-width: 170px !important; margin-top: -1px;" src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/logo.png" alt="QuickPacket"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+
+               <li menuitemname="Home" class="" id="Primary_Navbar-Home">
+        <a href="https://quickpacket.com/billing/index.php">
+                        Home
+                                </a>
+            </li>
+    <li menuitemname="Store" class="dropdown" id="Primary_Navbar-Store">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Store
+                        &nbsp;<b class="caret"></b>        </a>
+                    <ul class="dropdown-menu">
+                            <li menuitemname="Browse Products Services" id="Primary_Navbar-Store-Browse_Products_Services">
+                    <a href="https://quickpacket.com/billing/store">
+                                                Browse All
+                                            </a>
+                </li>
+                            <li menuitemname="Shop Divider 1" class="nav-divider" id="Primary_Navbar-Store-Shop_Divider_1">
+                    <a href="">
+                                                -----
+                                            </a>
+                </li>
+                            <li menuitemname="Dedicated Servers - Charlotte" id="Primary_Navbar-Store-Dedicated_Servers_-_Charlotte">
+                    <a href="https://quickpacket.com/billing/store/dedicated-servers-charlotte">
+                                                Dedicated Servers - Charlotte
+                                            </a>
+                </li>
+                            <li menuitemname="Dedicated Servers - Los Angeles" id="Primary_Navbar-Store-Dedicated_Servers_-_Los_Angeles">
+                    <a href="https://quickpacket.com/billing/store/dedicated-servers-los-angeles">
+                                                Dedicated Servers - Los Angeles
+                                            </a>
+                </li>
+                            <li menuitemname="Dedicated Servers - Chicago" id="Primary_Navbar-Store-Dedicated_Servers_-_Chicago">
+                    <a href="https://quickpacket.com/billing/store/dedicated-servers-chicago">
+                                                Dedicated Servers - Chicago
+                                            </a>
+                </li>
+                        </ul>
+            </li>
+    <li menuitemname="Announcements" class="" id="Primary_Navbar-Announcements">
+        <a href="https://quickpacket.com/billing/announcements">
+                        Announcements
+                                </a>
+            </li>
+    <li menuitemname="Knowledgebase" class="" id="Primary_Navbar-Knowledgebase">
+        <a href="https://quickpacket.com/billing/knowledgebase">
+                        Knowledgebase
+                                </a>
+            </li>
+    <li menuitemname="Network Status" class="" id="Primary_Navbar-Network_Status">
+        <a href="https://quickpacket.com/billing/serverstatus.php">
+                        Network Status
+                                </a>
+            </li>
+    <li menuitemname="Contact Us" class="" id="Primary_Navbar-Contact_Us">
+        <a href="https://quickpacket.com/billing/contact.php">
+                        Contact Us
+                                </a>
+            </li>
+
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+                <li menuitemname="Account" class="dropdown" id="Secondary_Navbar-Account">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Account
+                        &nbsp;<b class="caret"></b>        </a>
+                    <ul class="dropdown-menu">
+                            <li menuitemname="Login" id="Secondary_Navbar-Account-Login">
+                    <a href="https://quickpacket.com/billing/clientarea.php">
+                                                Login
+                                            </a>
+                </li>
+                            <li menuitemname="Divider" class="nav-divider" id="Secondary_Navbar-Account-Divider">
+                    <a href="">
+                                                -----
+                                            </a>
+                </li>
+                            <li menuitemname="Forgot Password?" id="Secondary_Navbar-Account-Forgot_Password?">
+                    <a href="https://quickpacket.com/billing/password/reset">
+                                                Forgot Password?
+                                            </a>
+                </li>
+                        </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+ 
+<br><br><br><br><br><br><br>
+
+
+
+<section style="margin-top: -28px;" id="header">
+    <div class="container">
+        <ul class="top-nav">
+                            <li>
+                    <a href="#" class="choose-language" data-toggle="popover" id="languageChooser" data-original-title="" title="">
+                        English
+                        <b class="caret"></b>
+                    </a>
+                    <div id="languageChooserContent" class="hidden">
+                        <ul>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=arabic">العربية</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=azerbaijani">Azerbaijani</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=catalan">Català</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=chinese">中文</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=croatian">Hrvatski</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=czech">Čeština</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=danish">Dansk</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=dutch">Nederlands</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=english">English</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=estonian">Estonian</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=farsi">Persian</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=french">Français</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=german">Deutsch</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=hebrew">עברית</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=hungarian">Magyar</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=italian">Italiano</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=macedonian">Macedonian</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=norwegian">Norwegian</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=portuguese-br">Português</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=portuguese-pt">Português</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=romanian">Română</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=russian">Русский</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=spanish">Español</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=swedish">Svenska</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=turkish">Türkçe</a>
+                                </li>
+                                                            <li>
+                                    <a href="https://quickpacket.com/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html?language=ukranian">Українська</a>
+                                </li>
+                                                    </ul>
+                    </div>
+                </li>
+                                        <li>
+                    <a href="https://quickpacket.com/billing/clientarea.php">Login</a>
+                </li>
+                                <li class="primary-action">
+                    <a href="https://quickpacket.com/billing/cart.php?a=view" class="btn">
+                        View Cart
+                    </a>
+                </li>
+                                </ul>
+
+    </div>
+</section>
+
+
+
+<section id="main-body">
+    <div class="container">
+        <div class="row">
+
+                                    <div class="col-md-9 pull-md-right">
+                    <div class="header-lined">
+    <h1>Knowledgebase</h1>
+    <ol class="breadcrumb">
+            <li>
+            <a href="https://quickpacket.com/billing">            Portal Home
+            </a>        </li>
+            <li>
+            <a href="https://quickpacket.com/billing/knowledgebase">            Knowledgebase
+            </a>        </li>
+            <li>
+            <a href="https://quickpacket.com/billing/knowledgebase/1/How-To">            How To
+            </a>        </li>
+            <li class="active">
+                        How to protect your Windows server from SYN flood?
+                    </li>
+    </ol>
+</div>
+                </div>
+                        <div class="col-md-3 pull-md-left sidebar">
+                    <div menuitemname="Support Knowledgebase Categories" class="panel panel-sidebar panel-sidebar hidden-sm hidden-xs">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fas fa-info"></i>&nbsp;                Categories
+                                <i class="fas fa-chevron-up panel-minimise pull-right"></i>
+            </h3>
+        </div>
+                            <div class="list-group">
+                                                            <a menuitemname="Support Knowledgebase Category 6" href="https://quickpacket.com/billing/knowledgebase/6/DirectAdmin" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_6">
+                            <span class="badge">6</span>                                                        <div class="truncate" title="DirectAdmin" data-toggle="tooltip" data-placement="bottom">DirectAdmin</div>
+                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 2" href="https://quickpacket.com/billing/knowledgebase/2/FAQ" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_2">
+                            <span class="badge">3</span>                                                        <div class="truncate" title="FAQ" data-toggle="tooltip" data-placement="bottom">FAQ</div>
+                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 1" href="https://quickpacket.com/billing/knowledgebase/1/How-To" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_1">
+                            <span class="badge">36</span>                                                        <div class="truncate" title="How To" data-toggle="tooltip" data-placement="bottom">How To</div>
+                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 5" href="https://quickpacket.com/billing/knowledgebase/5/Security" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_5">
+                            <span class="badge">1</span>                                                        <div class="truncate" title="Security" data-toggle="tooltip" data-placement="bottom">Security</div>
+                        </a>
+                                                </div>
+                    </div>
+                    <div class="panel hidden-lg hidden-md panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fas fa-info"></i>&nbsp;                    Categories
+                                    </h3>
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <select class="form-control" onchange="selectChangeNavigate(this)">
+                                                    <option menuitemname="Support Knowledgebase Category 6" value="/billing/knowledgebase/6/DirectAdmin" class="list-group-item" selected="selected">
+                                DirectAdmin
+                                (6)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 2" value="/billing/knowledgebase/2/FAQ" class="list-group-item">
+                                FAQ
+                                (3)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 1" value="/billing/knowledgebase/1/How-To" class="list-group-item">
+                                How To
+                                (36)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 5" value="/billing/knowledgebase/5/Security" class="list-group-item">
+                                Security
+                                (1)                            </option>
+                                            </select>
+                </form>
+            </div>
+                    </div>
+                </div>
+                <!-- Container for main page display content -->
+        <div class="col-md-9 pull-md-right main-content">
+            
+
+<div class="kb-article-title">
+    <a href="#" class="btn btn-link btn-print" onclick="window.print();return false"><i class="fas fa-print"></i></a>
+    <h2>How to protect your Windows server from SYN flood?</h2>
+</div>
+
+
+<div class="kb-article-content">
+    <p>(Is your server's network not living up to its potential? Order a
+ server from us with promo code PACKETS for 15% off your first invoice)<br><br><span style="color: #333333;">SYN
+ flooding attack protection of TCP/IP (SYNAttackProtect) for Windows 
+Servers was added as an optional security measure in Windows 2000. In 
+that OS version, network administrators can use a host of registry keys 
+to configure this security feature. In the Windows 2003 Service Pack 1 
+update however, SYN flooding attack protection was no longer optional. 
+It has been enabled by default and could not be disabled.</span><br><br></p>
+<ul>
+<li><span style="color: #333333;">Windows Server 2003 R2 – SYN flooding attack protection is enabled by default</span></li>
+<li><span style="color: #333333;">Windows Server 2008 – SYN flooding 
+attack protection is enabled by default but there are other registry 
+configurations independent sources recommend to catch spoofed traffic 
+that may slip from SYNAttackProtect:</span></li>
+</ul>
+<p><span style="text-decoration: underline; color: #333333;"><br><strong>IMPORTANT</strong></span></p>
+<ol>
+<li><span style="color: #333333;">Back up your server and registry settings before you begin with any registry edits.</span></li>
+<li><span style="color: #333333;">Test the changes in a non-production environment before you apply them on your production servers.</span></li>
+</ol>
+<p><br><span style="color: #333333;">To begin, open your registry editor and go to this registry path:</span></p>
+<p><span style="color: #333333;">HKLM\SYSTEM\CurrentControlSet\services\Tcpip\Parameters</span></p>
+<p><span style="color: #333333;">Change the values of the following data to set up the specified rules:</span><br><br></p>
+<table style="width: 98%;">
+<tbody>
+<tr>
+<td width="40%"><span style="color: #333333;">Rules</span></td>
+<td width="40%"><span style="color: #333333;">Value Name</span></td>
+<td width="10%"><span style="color: #333333;">Data Type</span></td>
+<td width="10%"><span style="color: #333333;">Set Value To</span></td>
+</tr>
+<tr>
+<td><span style="color: #333333;">To disable IP-source routed packets and stop them from being accepted</span></td>
+<td><span style="color: #333333;">DisableIPSourceRouting</span></td>
+<td><span style="color: #333333;">REG_DWORD</span></td>
+<td><span style="color: #333333;">2</span></td>
+</tr>
+<tr>
+<td><span style="color: #333333;">To disable all IP forwarding between interfaces</span></td>
+<td><span style="color: #333333;">IPEnableRouter</span></td>
+<td><span style="color: #333333;">REG_DWORD</span></td>
+<td><span style="color: #333333;">0</span></td>
+</tr>
+<tr>
+<td><span style="color: #333333;">To enable the SYN flooding attack protect function when three (3) half-open connections are detected</span></td>
+<td><span style="color: #333333;">SynAttackProtect</span></td>
+<td><span style="color: #333333;">REG_DWORD</span></td>
+<td><span style="color: #333333;">3</span></td>
+</tr>
+<tr>
+<td><span style="color: #333333;">To set any SYN/ACK handshake to time out at three (3) seconds and drop the connection at nine (9) seconds</span></td>
+<td><span style="color: #333333;">TcpMaxConnectResponseRetransmissions</span></td>
+<td><span style="color: #333333;">REG_DWORD</span></td>
+<td><span style="color: #333333;">1</span></td>
+</tr>
+<tr>
+<td><span style="color: #333333;">To&nbsp;limit&nbsp;the total number of half-open connections allowed by the system at any given time</span></td>
+<td><span style="color: #333333;">TcpMaxHalfOpen</span></td>
+<td><span style="color: #333333;">REG_DWORD</span></td>
+<td><span style="color: #333333;">500</span></td>
+</tr>
+<tr>
+<td><span style="color: #333333;">To&nbsp;fix&nbsp;the number of half-open connections allowed by the system at any given time</span></td>
+<td><span style="color: #333333;">TcpMaxHalfOpenRetried</span></td>
+<td><span style="color: #333333;">REG_DWORD</span></td>
+<td><span style="color: #333333;">400</span></td>
+</tr>
+</tbody>
+</table>
+<p><span style="color: #333333;">&nbsp;</span></p>
+<ul>
+<li><span style="color: #333333;">Windows Server 2008 R2 - To check if 
+the SYN flooding attack protection is running, check your Event Trace 
+Log (ETL) files and find the relevant TCP/IP entry. Use an elevated 
+command prompt to run the said trace log:</span></li>
+</ul>
+<p><span style="color: #333333;"><code>&nbsp; &nbsp; &nbsp;netsh trace start capture=yes provider=Microsoft-Windows-TCPIP level=0x05 tracefile=TCPIP.etl</code></span></p>
+<p><span style="color: #333333;">To stop the ETL trace, run:</span></p>
+<p><span style="color: #333333;"><code>&nbsp; &nbsp; &nbsp;netsh trace stop<br></code></span></p>
+</div>
+
+
+<ul class="kb-article-details">
+        <li><i class="fas fa-star"></i> 5 Users Found This Useful</li>
+</ul>
+<div class="clearfix"></div>
+
+<div class="kb-rate-article hidden-print">
+    <form action="/billing/knowledgebase/18/How-to-protect-your-Windows-server-from-SYN-flood.html" method="post">
+<input type="hidden" name="token" value="f79e680ba70ec4c68be7e5d1baab7c52e28dd668">
+        <input type="hidden" name="useful" value="vote">
+        Was this answer helpful?                    <button type="submit" name="vote" value="yes" class="btn btn-lg btn-link"><i class="far fa-thumbs-up"></i> Yes</button>
+            <button type="submit" name="vote" value="no" class="btn btn-lg btn-link"><i class="far fa-thumbs-down"></i> No</button>
+            </form>
+</div>
+
+    <div class="kb-also-read">
+        <h3>Related Articles</h3>
+        <div class="kbarticles">
+                            <div>
+                    <a href="https://quickpacket.com/billing/knowledgebase/3/How-to-create-VMs-on-XEN-Server.html">
+                        <i class="glyphicon glyphicon-file"></i> How to create VMs on XEN Server
+                    </a>
+                                        <p>To create virtual machines (VMs) with XenSerever you need Xen hypervisor installed on your server...</p>
+                </div>
+                            <div>
+                    <a href="https://quickpacket.com/billing/knowledgebase/4/How-to-resize-volumes-with-LVM.html">
+                        <i class="glyphicon glyphicon-file"></i> How to resize volumes with LVM
+                    </a>
+                                        <p>(Is your server not living up to its potential? Order a server from us with promo code PACKETS...</p>
+                </div>
+                            <div>
+                    <a href="https://quickpacket.com/billing/knowledgebase/5/How-to-restore-VPS-connectivity.html">
+                        <i class="glyphicon glyphicon-file"></i> How to restore VPS connectivity
+                    </a>
+                                        <p>(Is your server's network not living up to its potential? Order a server from us with promo code...</p>
+                </div>
+                            <div>
+                    <a href="https://quickpacket.com/billing/knowledgebase/7/How-to-fix-bnx2-fw-sync-timeout-reset-code-compatibility-issue-between-Dell-OMSA-6.5-and-Broadcom-driver.html">
+                        <i class="glyphicon glyphicon-file"></i> How to fix "bnx2: fw sync timeout, reset code" (compatibility issue between Dell OMSA 6.5 and Broadcom driver)
+                    </a>
+                                        <p>(Is your server not living up to its potential? Order a server from us with promo code PACKETS...</p>
+                </div>
+                            <div>
+                    <a href="https://quickpacket.com/billing/knowledgebase/9/How-to-reinstall-OS-using-IPMI-or-PXE-boot.html">
+                        <i class="glyphicon glyphicon-file"></i> How to reinstall OS using IPMI or PXE boot
+                    </a>
+                                        <p>(Is your server not living up to its potential? Order a server from us with promo code PACKETS...</p>
+                </div>
+                    </div>
+    </div>
+
+
+                </div><!-- /.main-content -->
+                                    <div class="col-md-3 pull-md-left sidebar sidebar-secondary">
+                            <div menuitemname="Support Knowledgebase Tag Cloud" class="panel panel-sidebar panel-sidebar">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fas fa-cloud"></i>&nbsp;                Tag Cloud
+                                <i class="fas fa-chevron-up panel-minimise pull-right"></i>
+            </h3>
+        </div>
+                    <div class="panel-body">
+                <a href="https://quickpacket.com/billing/knowledgebase/tag/centos" style="font-size:12px;">centos</a>
+<a href="https://quickpacket.com/billing/knowledgebase/tag/cpanel" style="font-size:12px;">cpanel</a>
+<a href="https://quickpacket.com/billing/knowledgebase/tag/directadmin" style="font-size:20px;">directadmin</a>
+<a href="https://quickpacket.com/billing/knowledgebase/tag/exim" style="font-size:12px;">exim</a>
+<a href="https://quickpacket.com/billing/knowledgebase/tag/IPMI" style="font-size:12px;">IPMI</a>
+<a href="https://quickpacket.com/billing/knowledgebase/tag/rainloop" style="font-size:12px;">rainloop</a>
+<a href="https://quickpacket.com/billing/knowledgebase/tag/Server-Management" style="font-size:12px;">Server Management</a>
+
+            </div>
+                            </div>
+        <div menuitemname="Support" class="panel panel-sidebar panel-sidebar">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="far fa-life-ring"></i>&nbsp;                Support
+                                <i class="fas fa-chevron-up panel-minimise pull-right"></i>
+            </h3>
+        </div>
+                            <div class="list-group">
+                                                            <a menuitemname="Support Tickets" href="https://quickpacket.com/billing/supporttickets.php" class="list-group-item" id="Secondary_Sidebar-Support-Support_Tickets">
+                                                        <i class="fas fa-ticket-alt fa-fw"></i>&nbsp;                            My Support Tickets
+                        </a>
+                                                                                <a menuitemname="Announcements" href="https://quickpacket.com/billing/announcements" class="list-group-item" id="Secondary_Sidebar-Support-Announcements">
+                                                        <i class="fas fa-list fa-fw"></i>&nbsp;                            Announcements
+                        </a>
+                                                                                <a menuitemname="Knowledgebase" href="https://quickpacket.com/billing/knowledgebase" class="list-group-item active" id="Secondary_Sidebar-Support-Knowledgebase">
+                                                        <i class="fas fa-info-circle fa-fw"></i>&nbsp;                            Knowledgebase
+                        </a>
+                                                                                <a menuitemname="Downloads" href="https://quickpacket.com/billing/download" class="list-group-item" id="Secondary_Sidebar-Support-Downloads">
+                                                        <i class="fas fa-download fa-fw"></i>&nbsp;                            Downloads
+                        </a>
+                                                                                <a menuitemname="Network Status" href="https://quickpacket.com/billing/serverstatus.php" class="list-group-item" id="Secondary_Sidebar-Support-Network_Status">
+                                                        <i class="fas fa-rocket fa-fw"></i>&nbsp;                            Network Status
+                        </a>
+                                                                                <a menuitemname="Open Ticket" href="https://quickpacket.com/billing/submitticket.php" class="list-group-item" id="Secondary_Sidebar-Support-Open_Ticket">
+                                                        <i class="fas fa-comments fa-fw"></i>&nbsp;                            Open Ticket
+                        </a>
+                                                </div>
+                    </div>
+                        </div>
+                            <div class="clearfix"></div>
+        </div>
+    </div>
+</section>
+
+<br><br>
+
+<div class="footer">
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col-md-4 col-md-offset-2">
+                 <h3>Services</h3>
+                 <li><a href="https://quickpacket.com/billing/cart.php"><img src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/dedicated.png">&nbsp; Dedicated Server</a></li>
+                 <li><a href="https://quickpacket.com/billing/submitticket.php?step=2&amp;deptid=2"><img src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/colocation.png">&nbsp; Colocation</a></li>
+                 
+            </div>
+
+            <div class="col-md-4">
+                 <h3>About QuickPacket</h3>
+                 <p>A humble company with the heart of a small business, and the staffing of a large one.
+                 We are able to meet your needs with personalized, always available support.  </p>
+
+                 <br>
+
+                <div class="social">
+                 <a href="https://www.facebook.com/quickpacket/"><img src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/fb.png"></a>
+                 <a href="https://twitter.com/quickpacket"><img src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/twitter.png"></a>
+                </div>
+                
+            </div>
+
+
+           
+        </div>
+        
+        <div class="copyright">
+         <p><a href="https://quickpacket.com/privacy.php">Privacy Policy</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://quickpacket.com/termsofservice.php">Terms of Service</a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="https://quickpacket.com/dmca.php">DMCA Notices</a> <br><br>
+         © 2020 QuickPacket.</p>
+         <img src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/logo.png">
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal system-modal fade" id="modalAjax" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-primary">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body panel-body">
+                Loading...
+            </div>
+            <div class="modal-footer panel-footer">
+                <div class="pull-left loader">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    Loading...
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary modal-submit">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="#" id="frmGeneratePassword" class="form-horizontal">
+    <div class="modal fade" id="modalGeneratePassword">
+        <div class="modal-dialog">
+            <div class="modal-content panel-primary">
+                <div class="modal-header panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">
+                        Generate Password
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger hidden" id="generatePwLengthError">
+                        Please enter a number between 8 and 64 for the password length
+                    </div>
+                    <div class="form-group">
+                        <label for="generatePwLength" class="col-sm-4 control-label">Password Length</label>
+                        <div class="col-sm-8">
+                            <input type="number" min="8" max="64" value="12" step="1" class="form-control input-inline input-inline-100" id="inputGeneratePasswordLength">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="generatePwOutput" class="col-sm-4 control-label">Generated Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputGeneratePasswordOutput">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <i class="fas fa-plus fa-fw"></i>
+                                Generate new password
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm copy-to-clipboard" data-clipboard-target="#inputGeneratePasswordOutput">
+                                <img src="How%20to%20protect%20your%20Windows%20server%20from%20SYN%20flood%20-%20Knowledgebase%20-%20QuickPacket_files/clippy.svg" alt="Copy to clipboard" width="15">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnGeneratePasswordInsert" data-clipboard-target="#inputGeneratePasswordOutput">
+                        Copy to clipboard and Insert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<script>mendeleyWebImporter = {
+  downloadPdfs(t,e) { return this._call('downloadPdfs', [t,e]); },
+  open() { return this._call('open', []); },
+  setLoginToken(t) { return this._call('setLoginToken', [t]); },
+  _call(methodName, methodArgs) {
+    const id = Math.random();
+    window.postMessage({ id, token: '0.6365899243258375', methodName, methodArgs }, 'https://quickpacket.com');
+    return new Promise(resolve => {
+      const listener = window.addEventListener('message', event => {
+        const data = event.data;
+        if (typeof data !== 'object' || !('result' in data) || data.id !== id) return;
+        window.removeEventListener('message', listener);
+        resolve(data.result);
+      });
+    });
+  }
+};</script></body></html>

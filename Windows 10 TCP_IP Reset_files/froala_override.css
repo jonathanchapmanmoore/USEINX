@@ -1,0 +1,7 @@
+.fr-view table td { padding: 5px; }
+.fr-view blockquote { border-left: solid 0 #000; color: #000; }
+.fr-view blockquote blockquote { border-left: solid 0 #000; color: #000; }
+.fr-view blockquote blockquote blockquote { border-left: solid 0 #000; color: #000; }
+.fr-view .fr-class-code { padding: 2px 5px; }
+.fr-view ul, .fr-view ol { list-style-position: unset; }
+.fr-element { z-index: 0; }
