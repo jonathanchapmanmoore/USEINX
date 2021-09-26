@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://pdhewaju.com.np/xmlrpc.php">
+	<title>[Step by Step] Installing and Configuring Office Online Server on Windows Server 2016 for Exchange 2016 – Aerrow</title>
+<meta name="robots" content="max-image-preview:large">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="dns-prefetch" href="https://c0.wp.com/">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com/">
+<link rel="alternate" type="application/rss+xml" title="Aerrow » Feed" href="https://pdhewaju.com.np/feed/">
+<link rel="alternate" type="application/rss+xml" title="Aerrow » Comments Feed" href="https://pdhewaju.com.np/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Aerrow » [Step by Step] Installing and Configuring Office Online Server on Windows Server 2016 for Exchange 2016 Comments Feed" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/pdhewaju.com.np\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.7.3"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="urvanov_syntax_highlighter-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/urvanov_syntax_highlighter.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-classic-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/classic.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-monaco-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/monaco.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/style.css" type="text/css" media="all">
+<style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel="stylesheet" id="mediaelement-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/mediaelementplayer-legacy.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-mediaelement-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/wp-mediaelement.css" type="text/css" media="all">
+<link rel="stylesheet" id="ribbon-lite-style-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/style_002.css" type="text/css" media="all">
+<style id="ribbon-lite-style-inline-css" type="text/css">
+
+        #site-header { background-image: url(''); }
+        #tabber .inside li .meta b,footer .widget li a:hover,.fn a,.reply a,#tabber .inside li div.info .entry-title a:hover, #navigation ul ul a:hover,.single_post a, a:hover, .sidebar.c-4-12 .textwidget a, #site-footer .textwidget a, #commentform a, #tabber .inside li a, .copyrights a:hover, a, .sidebar.c-4-12 a:hover, .top a:hover, footer .tagcloud a:hover { color: #EA141F; }
+
+        .nav-previous a:hover, .nav-next a:hover, #commentform input#submit, #searchform input[type='submit'], .home_menu_item, .primary-navigation a:hover, .post-date-ribbon, .currenttext, .pagination a:hover, .readMore a, .mts-subscribe input[type='submit'], .pagination .current, .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce-product-search input[type="submit"], .woocommerce a.button, .woocommerce-page a.button, .woocommerce button.button, .woocommerce-page button.button, .woocommerce input.button, .woocommerce-page input.button, .woocommerce #respond input#submit, .woocommerce-page #respond input#submit, .woocommerce #content input.button, .woocommerce-page #content input.button { background-color: #EA141F; }
+
+        .woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce-page nav.woocommerce-pagination ul li span.current, .woocommerce #content nav.woocommerce-pagination ul li span.current, .woocommerce-page #content nav.woocommerce-pagination ul li span.current, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce-page nav.woocommerce-pagination ul li a:hover, .woocommerce #content nav.woocommerce-pagination ul li a:hover, .woocommerce-page #content nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce-page nav.woocommerce-pagination ul li a:focus, .woocommerce #content nav.woocommerce-pagination ul li a:focus, .woocommerce-page #content nav.woocommerce-pagination ul li a:focus, .pagination .current, .tagcloud a { border-color: #EA141F; }
+        .corner { border-color: transparent transparent #EA141F transparent;}
+
+        .primary-navigation, footer, .readMore a:hover, #commentform input#submit:hover, .featured-thumbnail .latestPost-review-wrapper { background-color: #364956; }
+			
+</style>
+<link rel="stylesheet" id="theme-slug-fonts-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/jquery.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/jquery-migrate.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="urvanov_syntax_highlighter_js-js-extra">
+/* <![CDATA[ */
+var UrvanovSyntaxHighlighterSyntaxSettings = {"version":"2.8.23","is_admin":"0","ajaxurl":"https:\/\/pdhewaju.com.np\/wp-admin\/admin-ajax.php","prefix":"urvanov-syntax-highlighter-","setting":"urvanov-syntax-highlighter-setting","selected":"urvanov-syntax-highlighter-setting-selected","changed":"urvanov-syntax-highlighter-setting-changed","special":"urvanov-syntax-highlighter-setting-special","orig_value":"data-orig-value","debug":""};
+var UrvanovSyntaxHighlighterSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/urvanov_syntax_highlighter.js" id="urvanov_syntax_highlighter_js-js"></script>
+<script type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/customscripts.js" id="ribbon-lite-customscripts-js"></script>
+<link rel="https://api.w.org/" href="https://pdhewaju.com.np/wp-json/"><link rel="alternate" type="application/json" href="https://pdhewaju.com.np/wp-json/wp/v2/posts/2218"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://pdhewaju.com.np/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://pdhewaju.com.np/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.7.3">
+<link rel="canonical" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/">
+<link rel="shortlink" href="https://pdhewaju.com.np/?p=2218">
+<link rel="alternate" type="application/json+oembed" href="https://pdhewaju.com.np/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpdhewaju.com.np%2F2017%2F02%2F13%2Fstep-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://pdhewaju.com.np/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpdhewaju.com.np%2F2017%2F02%2F13%2Fstep-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016%2F&amp;format=xml">
+<meta name="generator" content="Site Kit by Google 1.38.0"><style type="text/css">img#wpstats{display:none}</style>
+		<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ebebeb; }
+</style>
+	<script async="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({"google_ad_client":"ca-pub-0546772649670812","enable_page_level_ads":true,"tag_partner":"site_kit"});</script></head>
+
+<body class="post-template-default single single-post postid-2218 single-format-standard custom-background">
+    <div class="main-container">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<header id="site-header" role="banner">
+			<div class="container clear">
+				<div class="site-branding">
+																	    <h2 id="logo" class="site-title" itemprop="headline">
+								<a href="https://pdhewaju.com.np/">Aerrow</a>
+							</h2><!-- END #logo -->
+							<div class="site-description">Learn to Share, Share to Grow</div>
+															</div><!-- .site-branding -->
+							</div>
+			<div class="primary-navigation">
+				<a href="#" id="pull" class="toggle-mobile-menu">Menu</a>
+				<div class="container clear">
+					<nav id="navigation" class="primary-navigation mobile-menu-wrapper" role="navigation">
+													<ul id="menu-primary" class="menu clearfix toggle-menu"><li id="menu-item-1686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1686"><a href="http://pdhewaju.com.np/">Home</a></li>
+<li id="menu-item-1408" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1408"><a href="https://pdhewaju.com.np/category/azure/">Azure</a></li>
+<li id="menu-item-1405" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1405"><a href="https://pdhewaju.com.np/category/active-directory/">Active Directory</a></li>
+<li id="menu-item-1407" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1407"><a href="https://pdhewaju.com.np/category/o365/">Office 365</a></li>
+<li id="menu-item-1406" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1406"><a href="https://pdhewaju.com.np/category/exchange/">Exchange</a></li>
+<li id="menu-item-2068" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2068"><a href="https://pdhewaju.com.np/category/msteams/">Microsoft Teams</a></li>
+</ul>											<div id="mobile-menu-overlay"></div></nav><!-- #site-navigation -->
+				</div>
+			<div id="mobile-menu-overlay"></div></div>
+		</header><!-- #masthead -->
+
+<div id="page" class="single">
+	<div class="content">
+		<!-- Start Article -->
+		<article class="article">		
+							<div id="post-2218" class="post post-2218 type-post status-publish format-standard hentry category-blog category-exchange tag-exchange-2016 tag-office-online-server tag-office-web-apps-server tag-oos-on-windows-server-2016 tag-wacdiscoveryendpoint">
+					<div class="single_post">
+					    <div class="post-date-ribbon"><div class="corner"></div>February 13, 2017</div>
+					    							<div class="breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#"><span typeof="v:Breadcrumb" class="root"><a rel="v:url" property="v:title" href="https://pdhewaju.com.np/">Home</a></span><span><i class="ribbon-icon icon-angle-double-right"></i></span><span typeof="v:Breadcrumb"><a href="https://pdhewaju.com.np/category/blog/" rel="v:url" property="v:title">Blog</a></span><span><i class="ribbon-icon icon-angle-double-right"></i></span><span><span>[Step by Step] Installing and Configuring Office Online Server on Windows Server 2016 for Exchange 2016</span></span></div>
+												<header>
+							<!-- Start Title -->
+							<h1 class="title single-title">[Step by Step] Installing and Configuring Office Online Server on Windows Server 2016 for Exchange 2016</h1>
+							<!-- End Title -->
+							<!-- Start Post Meta -->
+							<div class="post-info">
+								<span class="theauthor"><span><i class="ribbon-icon icon-users"></i></span>By&nbsp;<a href="https://pdhewaju.com.np/author/pdhewjau/" title="Posts by pdhewjau" rel="author">pdhewjau</a></span>
+								<span class="featured-cat"><span><i class="ribbon-icon icon-bookmark"></i></span><a href="https://pdhewaju.com.np/category/blog/" rel="category tag">Blog</a>, <a href="https://pdhewaju.com.np/category/exchange/" rel="category tag">Exchange</a></span>
+								<span class="thecomment"><span><i class="ribbon-icon icon-comment"></i></span>&nbsp;<a href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/#comments">18 Comments</a></span>
+							</div>
+							<!-- End Post Meta -->
+						</header>
+						<!-- Start Content -->
+						<div id="content" class="post-single-content box mark-links">
+							<!-- WordPress Ads Manager plugin by Crunchify.com - Top post Ad START --><div style="text-align:left;"><p><script data-ad-client="ca-pub-0546772649670812" async="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/adsbygoogle.js"></script>
+<!-- ad Responsive -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0546772649670812" data-ad-slot="4720488546" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p></div><!-- WordPress Ads Manager plugin by Crunchify.com - Top post Ad END --><p style="text-align: justify;">Office
+ Online Server (OOS) is successor of Office Web Apps Server (OWA), which
+ allows organizations to deliver browser-based versions of Word, 
+PowerPoint, Excel and OneNote, among other capabilities. Microsoft 
+recognizes that many organizations still value running server products 
+on-premises for a variety of reasons. Just want to update over here, 
+Office Web Apps Server is not supportable for Windows Server 2016.</p>
+<p style="text-align: justify;"><span id="more-2218"></span></p><!-- WordPress Ads Manager plugin by Crunchify.com - Middle post Ad START --><div style="text-align:left;"><p><script async="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/adsbygoogle.js"></script>
+<!-- ad Responsive -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0546772649670812" data-ad-slot="4720488546" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p></div><!-- WordPress Ads Manager plugin by Crunchify.com - Middle post Ad END -->
+<p style="text-align: justify;">OOS scales well for your enterprise 
+whether you have 100 employees or 100,000. The architecture enables one 
+OOS farm to serve multiple SharePoint, Exchange and Skype for Business 
+instances. OOS is designed to work with SharePoint Server 2016, Exchange
+ Server 2016 and Skype for Business Server 2015. It is also backwards 
+compatible with SharePoint Server 2013, Lync Server 2013&nbsp;and, in 
+some scenarios, with Exchange Server 2013. You can also integrate other 
+products with OOS through our public API.</p>
+<p style="text-align: justify;">Today, we are releasing our first significant update to Office Online Server that includes:</p>
+<ul>
+<li>
+<div style="text-align: justify;">Performance improvements to co-authoring in Word Online.</div>
+</li>
+<li>
+<div style="text-align: justify;">Support for embedded Power View sheets in Excel Online.</div>
+</li>
+<li>
+<div style="text-align: justify;">Improvements when working with tables in Word Online and PowerPoint Online, including better drag-and-drop support.</div>
+</li>
+<li>
+<div style="text-align: justify;">Support for showing spelling errors inline in the PowerPoint editor.</div>
+</li>
+<li>
+<div style="text-align: justify;">Improved picture resizing in Word Online.</div>
+</li>
+<li>
+<div style="text-align: justify;">Copy and paste improvements in PowerPoint Online.</div>
+</li>
+<li>
+<div style="text-align: justify;">Support for shapes in Excel Online viewer.</div>
+</li>
+<li>
+<div style="text-align: justify;">Significant improvements for users 
+that rely on assistive technologies—HTML markup updated to more fully 
+support W3C accessibility standards.</div>
+</li>
+</ul>
+<p style="text-align: justify;">So, the question will be how can I get Office Online Server. The answer would be you need to get download it from your <a href="https://go.microsoft.com/fwlink/?LinkID=195442">Volume License Service Center</a>. Customers with a Volume Licensing account can download Office Online Server from the <a href="https://www.microsoft.com/Licensing/servicecenter/default.aspx" target="_blank">Volume License Servicing Center</a> at no cost and will have view-only functionality, which includes PowerPoint sharing in Skype for Business.</p>
+<h3 style="text-align: justify;">Lab Environment:</h3>
+<p style="text-align: justify;">Here is the architecture I am using for my Lab environment of OOS installation and configuration for Exchange 2016</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep1.png" alt=""></p>
+<div>
+<table style="border-collapse: collapse;" border="0">
+<colgroup>
+<col style="width: 312px;">
+<col style="width: 168px;">
+<col style="width: 168px;"></colgroup>
+<tbody valign="top">
+<tr style="background: #4472c4;">
+<td style="padding-left: 7px; padding-right: 7px; border-top: solid #4472c4 0.5pt; border-left: solid #4472c4 0.5pt; border-bottom: solid #4472c4 0.5pt; border-right: none;"><span style="color: white;"><strong>Role</strong></span></td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: solid #4472c4 0.5pt; border-left: none; border-bottom: solid #4472c4 0.5pt; border-right: none;"><span style="color: white;"><strong>HostName</strong></span></td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: solid #4472c4 0.5pt; border-left: none; border-bottom: solid #4472c4 0.5pt; border-right: solid #4472c4 0.5pt;"><span style="color: white;"><strong>Server OS</strong></span></td>
+</tr>
+<tr style="background: #d9e2f3;">
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: solid #8eaadb 0.5pt; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;"><strong>Active Directory with Certificate Authority</strong></td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">WS2K16DC</td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">Windows Server 2016</td>
+</tr>
+<tr>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: solid #8eaadb 0.5pt; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;"><strong>Exchange Server 2016</strong></td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">WS2K16EXG</td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">Windows Server 2016</td>
+</tr>
+<tr style="background: #d9e2f3;">
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: solid #8eaadb 0.5pt; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;"><strong>Office Online Server</strong></td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">WS2K16OWA</td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">Windows Server 2016</td>
+</tr>
+<tr>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: solid #8eaadb 0.5pt; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;"><strong>Skype For Business 2015 (Standalone)</strong></td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">WS2K16SFB</td>
+<td style="padding-left: 7px; padding-right: 7px; border-top: none; border-left: none; border-bottom: solid #8eaadb 0.5pt; border-right: solid #8eaadb 0.5pt;">Windows Server 2016</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3><span style="font-size: 16pt; text-decoration: underline;"><strong>Installing Prerequisites:<br>
+</strong></span></h3>
+<p>Before installing the OOS, we need to install the pre-requisites. 
+Below is the Windows feature that are mandatory to install for the OOS 
+in Windows Server 2016.</p><!-- Urvanov Syntax Highlighter v2.8.23 -->
+
+		<div id="urvanov-syntax-highlighter-614fbe83a0f9a135992615" class="urvanov-syntax-highlighter-syntax crayon-theme-classic urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button urvanov-syntax-highlighter-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-plain-button" title="Toggle Plain Code"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-wrap-button crayon-pressed" title="Toggle Line Wrap"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-expand-button" title="Expand Code" style="display: none;"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-copy-button" title="Copy"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-popup-button" title="Open Code In New Window"><div class="urvanov-syntax-highlighter-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="urvanov-syntax-highlighter-plain-wrap"><textarea class="urvanov-syntax-highlighter-plain print-no" data-settings="dblclick" readonly="readonly" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">Install-WindowsFeature
+ Web-Server, Web-Mgmt-Tools, Web-Mgmt-Console, Web-WebServer, 
+Web-Common-Http, Web-Default-Doc, Web-Static-Content, Web-Performance, 
+Web-Stat-Compression, Web-Dyn-Compression, Web-Security, Web-Filtering, 
+Web-Windows-Auth, Web-App-Dev, Web-Net-Ext45, Web-Asp-Net45, 
+Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Includes, 
+Windows-Identity-Foundation</textarea></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-614fbe83a0f9a135992615-1" style="height: 75px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-614fbe83a0f9a135992615-1"><span class="crayon-v">Install</span><span class="crayon-o">-</span><span class="crayon-e">WindowsFeature </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Server</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Mgmt</span><span class="crayon-o">-</span><span class="crayon-v">Tools</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Mgmt</span><span class="crayon-o">-</span><span class="crayon-v">Console</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">WebServer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Common</span><span class="crayon-o">-</span><span class="crayon-v">Http</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-st">Default</span><span class="crayon-o">-</span><span class="crayon-v">Doc</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-m">Static</span><span class="crayon-o">-</span><span class="crayon-v">Content</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Performance</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Stat</span><span class="crayon-o">-</span><span class="crayon-v">Compression</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Dyn</span><span class="crayon-o">-</span><span class="crayon-v">Compression</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Security</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Filtering</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Windows</span><span class="crayon-o">-</span><span class="crayon-v">Auth</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">App</span><span class="crayon-o">-</span><span class="crayon-v">Dev</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Net</span><span class="crayon-o">-</span><span class="crayon-v">Ext45</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Asp</span><span class="crayon-o">-</span><span class="crayon-v">Net45</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">ISAPI</span><span class="crayon-o">-</span><span class="crayon-v">Ext</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">ISAPI</span><span class="crayon-o">-</span><span class="crayon-v">Filter</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Web</span><span class="crayon-o">-</span><span class="crayon-v">Includes</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Windows</span><span class="crayon-o">-</span><span class="crayon-v">Identity</span><span class="crayon-o">-</span><span class="crayon-v">Foundation</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep2.png" alt=""></p>
+<h3><span style="font-size: 16pt; text-decoration: underline;"><strong>&nbsp;Installing OOS:<br>
+</strong></span></h3>
+<p>After the installation of Windows Features, now it’s time to install the OOS. To install OOS mount the download DVD from &nbsp;<a href="https://go.microsoft.com/fwlink/?LinkID=195442">Volume License Service Center</a>, and execute it.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep3.png" alt=""></p>
+<p>Once the DVD is executed, it will prepare the necessary files that are required for the installation.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep4.png" alt=""></p>
+<p>Once the preparation of files is complete, Check on EULA and click on ‘Continue’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep5.png" alt=""></p>
+<p>On the ‘File Location’ provide the path where OOS is needed to be installed and click on ‘Install Now’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep6.png" alt=""></p>
+<p>It will take around 10-15 minutes depending upon the specs of hardware to get complete the installation.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep7.png" alt=""></p>
+<p>Once the installation is complete, click on ‘Close’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep8.png" alt=""></p>
+<h3><span style="font-size: 16pt; text-decoration: underline;"><strong>Configuring OOS:<br>
+</strong></span></h3>
+<p>Unlike other application, it was quite easy for us to install OOS. 
+Now the time is to configure it. Configuring OOS only contains the 
+management of the certificate. Hence if your machine is in the domain 
+and you just want the feature of OOS within your private intranet, it’s 
+okay to use Local Certificate Authority (CA). But if you want to use it 
+on the External organization too, you need to have public SSL. For my 
+demo lab, I just needed private certificate, hence created the one using
+ Local CA.</p>
+<p>To create the local certificate, Open IIS Manger-&gt; Expand your hostname and open ‘Server Certificates’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep9.png" alt=""></p>
+<p>On the ‘Server Certificates’ right side at Action Panel, click on ‘Create Domain Certificate’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep10.png" alt=""></p>
+<p>A new window will get open, Provide the detail of Certificate on this
+ window. The most important thing over here is, on the ‘Common Name’ you
+ need to provide FQDN of your server. Else the certificate will not be 
+valid and trusted. ( I have faced few problems year back with this 
+issues, so sharing my experience on it).</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep11.png" alt=""></p>
+<p>On ‘Online Certificate Authority’, Select the Certificate Authority 
+server and provide the ‘Friendly Name’ this could be anything and click 
+on ‘Finish’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep12.png" alt=""></p>
+<p>Now you can see your newly certificate on you ‘Server Certificates’.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep13.png" alt=""></p>
+<p>To Configure the OOS, we just need to assign the newly created certificate for the OOS Farm with below cmdlet.</p><!-- Urvanov Syntax Highlighter v2.8.23 -->
+
+		<div id="urvanov-syntax-highlighter-614fbe83a0fa4003735710" class="urvanov-syntax-highlighter-syntax crayon-theme-classic urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button urvanov-syntax-highlighter-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-plain-button" title="Toggle Plain Code"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-wrap-button crayon-pressed" title="Toggle Line Wrap"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-expand-button" title="Expand Code" style="display: none;"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-copy-button" title="Copy"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-popup-button" title="Open Code In New Window"><div class="urvanov-syntax-highlighter-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="urvanov-syntax-highlighter-plain-wrap"><textarea class="urvanov-syntax-highlighter-plain print-no" data-settings="dblclick" readonly="readonly" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">PS
+ C:\Users\Administrator&gt;New-OfficeWebAppsFarm -InternalURL 
+"https://WS2K16OWA.pdhewaju.com.np" -ExternalURL 
+"https://WS2K16OWA.pdhewaju.com.np" -CertificateName "OOS Cert"</textarea></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-614fbe83a0fa4003735710-1" style="height: 30px;">1</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-614fbe83a0fa4003735710-1"><span class="crayon-i">PS</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-o">:</span><span class="crayon-sy">\</span><span class="crayon-v">Users</span><span class="crayon-sy">\</span><span class="crayon-v">Administrator</span><span class="crayon-o">&gt;</span><span class="crayon-r">New</span><span class="crayon-o">-</span><span class="crayon-v">OfficeWebAppsFarm</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">InternalURL</span><span class="crayon-h"> </span><span class="crayon-s">"https://WS2K16OWA.pdhewaju.com.np"</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">ExternalURL</span><span class="crayon-h"> </span><span class="crayon-s">"https://WS2K16OWA.pdhewaju.com.np"</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">CertificateName</span><span class="crayon-h"> </span><span class="crayon-s">"OOS Cert"</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep14.png" alt=""></p>
+<p>And now our OOS Server is installed and configured completely to 
+integrate with other application like SharePoint, Exchange and Skype for
+ Business.</p>
+<h3><span style="font-size: 16pt; text-decoration: underline;"><strong>Configuring OOS for Exchange 2016:<br>
+</strong></span></h3>
+<p>Configuring OOS itself is not worth unless we integrate it with any 
+other application like SharePoint, Exchange and Skype for Business. Over
+ here I will sharing my knowledge on how we can integrate OOS with 
+Exchange 2016, also had share how we can troubleshoot few errors.</p>
+<p>To configure OOS for Exchange 2016, open Exchange PowerShell and run 
+below cmdlet to active WAC Discovery Endpoint. Basically, the link for 
+the WAC Discovery Endpoint will be ‘https://&lt;FQDN of 
+OOS&gt;/hosting/discovery’</p><!-- Urvanov Syntax Highlighter v2.8.23 -->
+
+		<div id="urvanov-syntax-highlighter-614fbe83a0fa8674580042" class="urvanov-syntax-highlighter-syntax crayon-theme-classic urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button urvanov-syntax-highlighter-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-plain-button" title="Toggle Plain Code"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-wrap-button crayon-pressed" title="Toggle Line Wrap"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-expand-button" title="Expand Code" style="display: none;"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-copy-button" title="Copy"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-popup-button" title="Open Code In New Window"><div class="urvanov-syntax-highlighter-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="urvanov-syntax-highlighter-plain-wrap"><textarea class="urvanov-syntax-highlighter-plain print-no" data-settings="dblclick" readonly="readonly" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">[PS]
+ C:\Windows\System32&gt;Set-MailboxServer WS2K16EXG 
+-WacDiscoveryEndpoint 
+"https://WS2K16OWA.pdhewaju.com.np/hosting/discovery"
+[PS] C:\Windows\System32&gt;Restart-WebAppPool MsExchangeOwaAppPool</textarea></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-614fbe83a0fa8674580042-1" style="height: 30px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-614fbe83a0fa8674580042-2" style="height: 15px;">2</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-614fbe83a0fa8674580042-1"><span class="crayon-sy">[</span><span class="crayon-v">PS</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-o">:</span><span class="crayon-sy">\</span><span class="crayon-v">Windows</span><span class="crayon-sy">\</span><span class="crayon-v">System32</span><span class="crayon-o">&gt;</span><span class="crayon-v">Set</span><span class="crayon-o">-</span><span class="crayon-e">MailboxServer </span><span class="crayon-v">WS2K16EXG</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">WacDiscoveryEndpoint</span><span class="crayon-h"> </span><span class="crayon-s">"https://WS2K16OWA.pdhewaju.com.np/hosting/discovery"</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-614fbe83a0fa8674580042-2"><span class="crayon-sy">[</span><span class="crayon-v">PS</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-o">:</span><span class="crayon-sy">\</span><span class="crayon-v">Windows</span><span class="crayon-sy">\</span><span class="crayon-v">System32</span><span class="crayon-o">&gt;</span><span class="crayon-v">Restart</span><span class="crayon-o">-</span><span class="crayon-e">WebAppPool </span><span class="crayon-v">MsExchangeOwaAppPool</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep15.png" alt=""></p>
+<p>After configuration of WAC Discovery Endpoint for the Mailboxes, we 
+need to configure it for the organization too. To configure WAC 
+Discovery Endpoint for the Organization use below cmdlet.</p><!-- Urvanov Syntax Highlighter v2.8.23 -->
+
+		<div id="urvanov-syntax-highlighter-614fbe83a0fab947694363" class="urvanov-syntax-highlighter-syntax crayon-theme-classic urvanov-syntax-highlighter-font-monaco urvanov-syntax-highlighter-os-pc print-yes notranslate urvanov-syntax-highlighter-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button urvanov-syntax-highlighter-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-plain-button" title="Toggle Plain Code"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-wrap-button crayon-pressed" title="Toggle Line Wrap"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-expand-button" title="Expand Code" style="display: none;"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-copy-button" title="Copy"><div class="urvanov-syntax-highlighter-button-icon"></div></div><div class="crayon-button urvanov-syntax-highlighter-popup-button" title="Open Code In New Window"><div class="urvanov-syntax-highlighter-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="urvanov-syntax-highlighter-plain-wrap"><textarea class="urvanov-syntax-highlighter-plain print-no" data-settings="dblclick" readonly="readonly" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">[PS] C:\Windows\System32&gt;Set-OrganizationConfig -WacDiscoveryEndpoint "https://WS2K16OWA.pdhewaju.com.np/hosting/discovery"
+[PS] C:\Windows\System32&gt;Restart-WebAppPool MsExchangeOwaAppPool</textarea></div>
+			<div class="urvanov-syntax-highlighter-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="urvanov-syntax-highlighter-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="urvanov-syntax-highlighter-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="urvanov-syntax-highlighter-614fbe83a0fab947694363-1" style="height: 30px;">1</div><div class="crayon-num crayon-striped-num" data-line="urvanov-syntax-highlighter-614fbe83a0fab947694363-2" style="height: 15px;">2</div></div>
+				</td>
+						<td class="urvanov-syntax-highlighter-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="urvanov-syntax-highlighter-614fbe83a0fab947694363-1"><span class="crayon-sy">[</span><span class="crayon-v">PS</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-o">:</span><span class="crayon-sy">\</span><span class="crayon-v">Windows</span><span class="crayon-sy">\</span><span class="crayon-v">System32</span><span class="crayon-o">&gt;</span><span class="crayon-v">Set</span><span class="crayon-o">-</span><span class="crayon-v">OrganizationConfig</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-i">WacDiscoveryEndpoint</span><span class="crayon-h"> </span><span class="crayon-s">"https://WS2K16OWA.pdhewaju.com.np/hosting/discovery"</span></div><div class="crayon-line crayon-striped-line" id="urvanov-syntax-highlighter-614fbe83a0fab947694363-2"><span class="crayon-sy">[</span><span class="crayon-v">PS</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-o">:</span><span class="crayon-sy">\</span><span class="crayon-v">Windows</span><span class="crayon-sy">\</span><span class="crayon-v">System32</span><span class="crayon-o">&gt;</span><span class="crayon-v">Restart</span><span class="crayon-o">-</span><span class="crayon-e">WebAppPool </span><span class="crayon-v">MsExchangeOwaAppPool</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep16.png" alt=""></p>
+<p>And it is all to bind the Office Online Server with Exchange Server 2016. Now let us move for the testing of the configuration.</p>
+<h3><span style="font-size: 16pt; text-decoration: underline;"><strong>Testing:<br>
+</strong></span></h3>
+<p>For the testing purpose, I have created two email address</p>
+<p><a href="mailto:demo@pdhewaju.com.np">demo@pdhewaju.com.np</a> &amp;</p>
+<p><a href="mailto:dm01@pdhewaju.com.np">dm01@pdhewaju.com.np</a></p>
+<p>Over here I have attached a Word Document on an email and send it to 
+the DM01 to check it. When I clicked on the dropdown of the attachment 
+document, I can see two options ‘View’ and ‘Download’. This means my 
+configuration is working.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep17.png" alt=""></p>
+<p>Once you click on ‘View’, you document will start to get open on Word Online which has been hosted by OOS Server.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep18.png" alt=""></p>
+<p>But sometime you might get this kind of error ‘Sorry, there was a 
+problem and we can’t open this document. If this happens again, try 
+opening the document in Microsoft Word.’&nbsp; To fix this error, get <a href="http://pdhewaju.com.np/2017/02/11/solvederror-sorry-there-was-a-problem-and-we-cant-open-this-document-with-office-online-on-exchange-outlook-web-apps/">to this blog</a> where I have posted the resolution for problem like this.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep19.png" alt=""></p>
+<p>If everything goes right, you will be able to read and edit the document.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep20.png" alt=""></p>
+<p>During the Edit of the document you might face this issue ‘Sorry, you
+ don’t have a license to edit document with Word Online. Please get in 
+touch with your helpdesk’. If this kind of error appears, please follow 
+the instruction on <a href="http://pdhewaju.com.np/2017/02/08/solvederror-sorry-dont-license-edit-documents-word-online-please-contact-administrator/">this blog</a> to resolve it.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep21.png" alt=""></p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep22.png" alt=""></p>
+<p>Similarly, you can edit and view other office documents too like PowerPoint and Excel.</p>
+<p><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/020717_0900_StepbyStep23.png" alt=""></p>
+<p>I hope this was the easy configuration for the integration of Office 
+Online Server with Exchange Server 2016. Please keep commenting for any 
+issue you do have on this scenario. <img draggable="false" role="img" class="emoji" alt="🙂" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/1f642.svg"></p>
+<!-- WordPress Ads Manager plugin by Crunchify.com - After post Ad START --><div style="text-align:left;"><p><script async="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/adsbygoogle.js"></script>
+<!-- ad Responsive -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0546772649670812" data-ad-slot="4720488546" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p></div><!-- WordPress Ads Manager plugin by Crunchify.com - After post Ad END -->																						<!-- Start Tags -->
+								<div class="tags"><span class="tagtext">Tags:</span><a href="https://pdhewaju.com.np/tag/exchange-2016/" rel="tag">Exchange 2016</a>, <a href="https://pdhewaju.com.np/tag/office-online-server/" rel="tag">Office Online Server</a>, <a href="https://pdhewaju.com.np/tag/office-web-apps-server/" rel="tag">Office Web Apps Server</a>, <a href="https://pdhewaju.com.np/tag/oos-on-windows-server-2016/" rel="tag">OOS on Windows Server 2016</a>, <a href="https://pdhewaju.com.np/tag/wacdiscoveryendpoint/" rel="tag">WacDiscoveryEndpoint</a></div>
+								<!-- End Tags -->
+													</div><!-- End Content -->
+							
+						    <!-- Start Related Posts -->
+							<div class="related-posts"><div class="postauthor-top"><h3>Related Posts</h3></div>								<article class="post excerpt  ">
+																			<a href="https://pdhewaju.com.np/2009/11/07/integrated-xp-on-windows-7/" title="Integrated XP on Windows 7…." id="featured-thumbnail">
+											<div class="featured-thumbnail">
+												<img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/nothumb-related.png" class="attachment-featured wp-post-image" alt="Integrated XP on Windows 7….">
+																							</div>
+											<header>
+												<h4 class="title front-view-title">Integrated XP on Windows 7….</h4>
+											</header>
+										</a>
+																	</article><!--.post.excerpt-->
+																								<article class="post excerpt  ">
+																			<a href="https://pdhewaju.com.np/2018/09/05/customizing-message-format-and-font-on-office-365/" title="Customizing Message format and font on Office 365" id="featured-thumbnail">
+											<div class="featured-thumbnail">
+												<img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/office-365_grande-200x125.png" class="attachment-ribbon-lite-related size-ribbon-lite-related wp-post-image" alt="" loading="lazy" title="" width="200" height="125">																							</div>
+											<header>
+												<h4 class="title front-view-title">Customizing Message format and font on Office 365</h4>
+											</header>
+										</a>
+																	</article><!--.post.excerpt-->
+																								<article class="post excerpt  last">
+																			<a href="https://pdhewaju.com.np/2010/03/25/transparency-gadget-for-windows-7/" title="Transparency Gadget for Windows 7" id="featured-thumbnail">
+											<div class="featured-thumbnail">
+												<img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/nothumb-related.png" class="attachment-featured wp-post-image" alt="Transparency Gadget for Windows 7">
+																							</div>
+											<header>
+												<h4 class="title front-view-title">Transparency Gadget for Windows 7</h4>
+											</header>
+										</a>
+																	</article><!--.post.excerpt-->
+																</div>							<!-- End Related Posts -->
+						  
+													<!-- Start Author Box -->
+							<div class="postauthor">
+								<h4>About Author</h4>
+								<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_004.jpg 2x" class="avatar avatar-85 photo" loading="lazy" width="85" height="85">								<h5>pdhewjau</h5>
+								<p>Prashant is a Microsoft MVP for Office Servers and Services. 
+He works as Technical Lead on Thakral One and a Microsoft Certified 
+Trainer for Windows Server, Exchange Server and office 365.</p>
+							</div>
+							<!-- End Author Box -->
+						  
+						
+<!-- You can start editing here. -->
+	<div id="comments">
+		<div class="total-comments">18 Comments</div>
+		<ol class="commentlist">
+			<div class="navigation">
+				<div class="alignleft"></div>
+				<div class="alignright"></div>
+			</div>
+					<li class="comment even thread-even depth-1" id="li-comment-5798">
+			<div id="comment-5798" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/9c536d4b9c2f9b311264a6f26fa8b6e8.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/9c536d4b9c2f9b311264a6f26fa8b6e8_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Qazi Sajjad Ahmed</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>I have followed these steps all went well but in last i observed
+ IIS Service is not starting on Office Online Server  giving error.</p>
+<p>Cannot start service W3SVC on computer’.’.</p>
+                    <time>November 8, 2017</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=5798#respond" data-commentid="5798" data-postid="2218" data-belowelement="comment-5798" data-respondelement="respond" data-replyto="Reply to Qazi Sajjad Ahmed" aria-label="Reply to Qazi Sajjad Ahmed">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-5799">
+			<div id="comment-5799" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/9c536d4b9c2f9b311264a6f26fa8b6e8.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/9c536d4b9c2f9b311264a6f26fa8b6e8_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Qazi Sajjad Ahmed</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>I have followed steps, IIS is not starting on my Office Online Server giving following error</p>
+<p>Cannot start service W3SVC on computer’.’.</p>
+                    <time>November 8, 2017</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=5799#respond" data-commentid="5799" data-postid="2218" data-belowelement="comment-5799" data-respondelement="respond" data-replyto="Reply to Qazi Sajjad Ahmed" aria-label="Reply to Qazi Sajjad Ahmed">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="li-comment-23498">
+			<div id="comment-23498" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/c67d44a7ffa17c3cc791d893a37f381a.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/c67d44a7ffa17c3cc791d893a37f381a_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">hery</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>hi Prashant,<br>
+i’m using win 2016 too. when i’m trying to run the command let section, 
+but it complaining about “inkandhandwritingservices” not isntalled or 
+enabled. </p>
+<p>looking around and seems everyone got this problem too. how did you 
+go through the command let for new-officewebappfarm without this error? </p>
+<p>thanks</p>
+                    <time>July 13, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=23498#respond" data-commentid="23498" data-postid="2218" data-belowelement="comment-23498" data-respondelement="respond" data-replyto="Reply to hery" aria-label="Reply to hery">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<ul class="children">
+		<li class="comment byuser comment-author-pdhewjau bypostauthor odd alt depth-2" id="li-comment-23678">
+			<div id="comment-23678" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_003.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">pdhewjau</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Hi Hery,<br>
+‘inkandhandwritingservices’ is a feature of windows Server, if there is a prompt for it, Add the feature from Server Manager.</p>
+                    <time>July 15, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=23678#respond" data-commentid="23678" data-postid="2218" data-belowelement="comment-23678" data-respondelement="respond" data-replyto="Reply to pdhewjau" aria-label="Reply to pdhewjau">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="li-comment-23799">
+			<div id="comment-23799" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/c67d44a7ffa17c3cc791d893a37f381a.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/c67d44a7ffa17c3cc791d893a37f381a_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">hery</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>hi pdhewjau<br>
+trying both cmdlet and gui, cannot install or enable it. it seems cannot
+ found the feature. so, how you did it as described in your article?</p>
+                    <time>July 16, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=23799#respond" data-commentid="23799" data-postid="2218" data-belowelement="comment-23799" data-respondelement="respond" data-replyto="Reply to hery" aria-label="Reply to hery">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<ul class="children">
+		<li class="comment byuser comment-author-pdhewjau bypostauthor odd alt depth-2" id="li-comment-23803">
+			<div id="comment-23803" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_003.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">pdhewjau</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Hi Hery,<br>
+Can you share us your error? and also windows version. As well, is this your dedicated machine to OOS or shared one.</p>
+                    <time>July 16, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=23803#respond" data-commentid="23803" data-postid="2218" data-belowelement="comment-23803" data-respondelement="respond" data-replyto="Reply to pdhewjau" aria-label="Reply to pdhewjau">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="li-comment-23906">
+			<div id="comment-23906" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/acd978680552881a833165333b591722.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/acd978680552881a833165333b591722_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Mark Sorrell</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Should the hosting/discovery site be prompting for credentials???  After presenting creds it works fine.  But – should it be?</p>
+                    <time>July 17, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=23906#respond" data-commentid="23906" data-postid="2218" data-belowelement="comment-23906" data-respondelement="respond" data-replyto="Reply to Mark Sorrell" aria-label="Reply to Mark Sorrell">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<ul class="children">
+		<li class="comment byuser comment-author-pdhewjau bypostauthor odd alt depth-2" id="li-comment-25081">
+			<div id="comment-25081" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_003.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">pdhewjau</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>I don’t think it should have been prompting for the credential. 
+Are you doing this on domain environment or out of domain. anyway if you
+ can add the OOS server on the Trusted site. this should work.</p>
+                    <time>July 25, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=25081#respond" data-commentid="25081" data-postid="2218" data-belowelement="comment-25081" data-respondelement="respond" data-replyto="Reply to pdhewjau" aria-label="Reply to pdhewjau">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="li-comment-31415">
+			<div id="comment-31415" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/b52e82c530e1599aa6eee2d5e6f5ccf9.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/b52e82c530e1599aa6eee2d5e6f5ccf9_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Andrew</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Hello<br>
+I wonder if you install Microsoft Office Online server and after you’ve 
+integrated it with Exchange, Sharepoint,… if it’s also shows when other 
+users are editing the same document as you…</p>
+                    <time>September 12, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=31415#respond" data-commentid="31415" data-postid="2218" data-belowelement="comment-31415" data-respondelement="respond" data-replyto="Reply to Andrew" aria-label="Reply to Andrew">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="li-comment-32921">
+			<div id="comment-32921" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/a0ef5bc65e90e1929af5e1bbff8fd9ac.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/a0ef5bc65e90e1929af5e1bbff8fd9ac_002.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Joel</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>good morning sir</p>
+<p>you could help me with the iso of office web server for educational 
+purposes, I ask you this favor motivated that the microsoft servers do 
+not allow the download of this app. Thank you.</p>
+                    <time>September 27, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=32921#respond" data-commentid="32921" data-postid="2218" data-belowelement="comment-32921" data-respondelement="respond" data-replyto="Reply to Joel" aria-label="Reply to Joel">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<ul class="children">
+		<li class="comment byuser comment-author-pdhewjau bypostauthor even depth-2" id="li-comment-32928">
+			<div id="comment-32928" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_003.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">pdhewjau</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Hi Joel,<br>
+unfortunately i cannot help you on this. But if you do have Volume Licensing portal, you can get download from it.</p>
+                    <time>September 27, 2018</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=32928#respond" data-commentid="32928" data-postid="2218" data-belowelement="comment-32928" data-respondelement="respond" data-replyto="Reply to pdhewjau" aria-label="Reply to pdhewjau">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-56801">
+			<div id="comment-56801" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/cb877b909bd3ad5bf7407d85fbbc7bab_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/cb877b909bd3ad5bf7407d85fbbc7bab.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Ram</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Hi,</p>
+<p>Will it work on Exchange 2019?  I tried OOS Nov 2018 with Exchange 
+2019.  Unable to view any documents.  Keeping same error as reported 
+above in your post (Sorry there was a problem and we can’t open the 
+document blah blah)</p>
+<p>I had used OOS before with Exchange 2016.  No such error before.</p>
+                    <time>January 4, 2019</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=56801#respond" data-commentid="56801" data-postid="2218" data-belowelement="comment-56801" data-respondelement="respond" data-replyto="Reply to Ram" aria-label="Reply to Ram">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<ul class="children">
+		<li class="comment byuser comment-author-pdhewjau bypostauthor even depth-2" id="li-comment-56877">
+			<div id="comment-56877" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/5dc70eded5e4721b1e79ceb900246f4c_003.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">pdhewjau</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Yes, it will…</p>
+                    <time>January 4, 2019</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=56877#respond" data-commentid="56877" data-postid="2218" data-belowelement="comment-56877" data-respondelement="respond" data-replyto="Reply to pdhewjau" aria-label="Reply to pdhewjau">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="li-comment-56987">
+			<div id="comment-56987" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/cb877b909bd3ad5bf7407d85fbbc7bab_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/cb877b909bd3ad5bf7407d85fbbc7bab.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Ram</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Unfortunately it is not working for me.  I tried the same 
+install process on Exchange 2016 and it works without any issue.  With 
+Exchange 2019 integration, I cannot view the documents.  Not sure, if it
+ is OOS or Exchange 2019 issue.  The OOS logs are very difficult to read
+ and understand.  Wish there was a easy way to figure out the problem 
+and fix the issue.</p>
+                    <time>January 4, 2019</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=56987#respond" data-commentid="56987" data-postid="2218" data-belowelement="comment-56987" data-respondelement="respond" data-replyto="Reply to Ram" aria-label="Reply to Ram">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="li-comment-70041">
+			<div id="comment-70041" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/bdc25d596cbcbf4c2886c942f67c58f2_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/bdc25d596cbcbf4c2886c942f67c58f2.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Boniphace</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Hi pdhewjau<br>
+I have installed successfully Office Online Server, following all prerequisite steps.<br>
+However, I encounter the “CertificateNotFound” error whenever I create the new farm.<br>
+Below is the result I get.</p>
+<p>PS C:\&gt; New-OfficeWebAppsFarm -InternalURL 
+“https://officeonline.bot.co.tz” -ExternalURL 
+“https://officeonline.thebank.co.tz” -CertificateName 
+“TheBankWildcard2018”</p>
+<p>New-OfficeWebAppsFarm : Office Online was unable to find the specified certificate.<br>
+At line:1 char:1<br>
++ New-OfficeWebAppsFarm -InternalURL “https://officeonline.thebank.co.tz” – …<br>
+    + CategoryInfo          : ObjectNotFound: (:) [New-OfficeWebAppsFarm], ArgumentException<br>
+    + FullyQualifiedErrorId : CertificateNotFound,Microsoft.Office.Web.Apps.Administration.NewFarmCommand<br>
+PS C:\&gt;</p>
+<p>The certificate is indeed installed. Below is the evidence:<br>
+PS C:\&gt; Get-ChildItem cert:\localmachine\My\ | FL FriendlyName,Subject,NotBefore,NotAfter<br>
+FriendlyName : TheBankWildcard2018<br>
+Subject      : CN=*.thebank.co.tz, O=THE BANK, L=Dar Es Salaam, S=Dar Es Salaam, C=TZ<br>
+NotBefore    : 12/18/2018 3:00:00 AM<br>
+NotAfter     : 12/28/2020 3:00:00 PM<br>
+PS C:\&gt;</p>
+<p>What is wrong, and how can I resolve this?<br>
+Thank you very much in advance.</p>
+                    <time>July 30, 2019</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=70041#respond" data-commentid="70041" data-postid="2218" data-belowelement="comment-70041" data-respondelement="respond" data-replyto="Reply to Boniphace" aria-label="Reply to Boniphace">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="li-comment-98983">
+			<div id="comment-98983" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/54896c8bcf68c18d72071d18b6eca179_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/54896c8bcf68c18d72071d18b6eca179.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person"><a href="http://www.driper.com/" rel="external nofollow ugc" class="url">Driper</a></span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Can I suggest you update this article to indicate that when you 
+deploy the OOS site it’s going to overwrite sites using the ports in 
+question? Given what I found online I am doing this on a single server 
+with Exchange, SharePoint and more (only a handful of users, more for my
+ learning) and it just went bang!!!</p>
+                    <time>January 18, 2020</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=98983#respond" data-commentid="98983" data-postid="2218" data-belowelement="comment-98983" data-respondelement="respond" data-replyto="Reply to Driper" aria-label="Reply to Driper">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="li-comment-209342">
+			<div id="comment-209342" style="position:relative;" itemscope="" itemtype="http://schema.org/UserComments">
+				<div class="comment-author vcard">
+					<img alt="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/fe21cbef4bf3463b44ddfc674eac845e_002.jpg" srcset="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/fe21cbef4bf3463b44ddfc674eac845e.jpg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70">					<div class="comment-metadata">
+                        <span class="fn" itemprop="creator" itemscope="" itemtype="http://schema.org/Person">Shashi</span>    					<span class="comment-meta">
+    						    					</span>
+					</div>
+				</div>
+								<div class="commentmetadata" itemprop="commentText">
+					<p>Installing &amp; configuring OOS server is good, so thanks for that&gt;<br>
+I’m trying to bind OOS for SharePoint 2019 configured for Forms Authentication, does it work?<br>
+I understand, Classic doesnt work, and cliams work, but nowhere it stated about Forms</p>
+                    <time>March 20, 2021</time>
+                    <span class="reply">
+                        <a rel="nofollow" class="comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/?replytocom=209342#respond" data-commentid="209342" data-postid="2218" data-belowelement="comment-209342" data-respondelement="respond" data-replyto="Reply to Shashi" aria-label="Reply to Shashi">Reply</a>                    </span>
+				</div>
+			</div>
+		</li>
+	<!-- #comment-## -->
+			<div class="navigation bottomnav">
+				<div class="alignleft"></div>
+				<div class="alignright"></div>
+			</div>
+		</ol>
+	</div>
+	<div id="commentsAdd">
+		<div id="respond" class="box m-t-6">
+				<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"></h3><h4><span>Add a Comment</span></h4> <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://pdhewaju.com.np/2017/02/13/step-step-installing-configuring-office-online-server-windows-server-2016-exchange-2016/#respond" style="display:none;">Cancel reply</a></small><form action="https://pdhewaju.com.np/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate=""><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment:<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea></p><p class="comment-form-author"><label for="author">Name:<span class="required">*</span></label><input id="author" name="author" type="text" size="30"></p>
+<p class="comment-form-email"><label for="email">Email Address:<span class="required">*</span></label><input id="email" name="email" type="text" size="30"></p>
+<p class="comment-form-url"><label for="url">Website:</label><input id="url" name="url" type="text" size="30"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"><label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Add Comment"> <input type="hidden" name="comment_post_ID" value="2218" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="223f1990d0"></p><textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100" style="display: none !important;"></textarea><input type="hidden" id="ak_js" name="ak_js" value="1632616100770"></form>	</div><!-- #respond -->
+	<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p>		</div>
+	</div>
+					</div>
+				</div>
+					</article>
+		<!-- End Article -->
+		<!-- Start Sidebar -->
+		
+<aside class="sidebar c-4-12">
+	<div id="sidebars" class="sidebar">
+		<div class="sidebar_list">
+			<div id="search-2" class="widget widget_search"><form method="get" id="searchform" class="search-form" action="https://pdhewaju.com.np" _lpchecked="1">
+	<fieldset>
+		<input type="text" name="s" id="s" value="Search this site..." onblur="if (this.value == '') {this.value = 'Search this site...';}" onfocus="if (this.value == 'Search this site...') {this.value = '';}">
+		<input type="submit" value="Search">
+	</fieldset>
+</form>
+</div><div id="text-2" class="widget widget_text">			<div class="textwidget"><script type="text/javascript" id="clustrmaps" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/map_v2.js"></script></div>
+		</div>
+		<div id="recent-posts-2" class="widget widget_recent_entries">
+		<h3 class="widget-title">Recent Posts</h3>
+		<ul>
+											<li>
+					<a href="https://pdhewaju.com.np/2021/05/31/configuring-teams-webinar-to-everyone/">Configuring Teams Webinar to Everyone</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2021/05/30/configuring-teams-powershell/">Configuring Teams PowerShell</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2021/05/28/the-mvp-challenge-microsoft-365-challenge/">The MVP Challenge- Microsoft 365 Challenge</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/08/14/restrict-guest-access-permission-in-azure-active-directory/">Restrict Guest Access Permission in Azure Active Directory</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/08/07/azure-ad-my-sign-ins-activity-report/">Azure AD My Sign-Ins Activity Report</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/07/23/turn-on-new-calling-and-meeting-experience-in-ms-teams/">Turn on New Calling and Meeting Experience in MS Teams</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/04/18/microsoft-teams-custom-backgrounds/">Microsoft Teams Custom Backgrounds</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/03/25/microsoft-teams-guest-access/">Microsoft Teams Guest Access</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/03/03/customizable-recipient-limits-in-office-365/">Customizable Recipient Limits in Office 365</a>
+									</li>
+											<li>
+					<a href="https://pdhewaju.com.np/2020/02/20/new-office-apps-for-everyone/">New Office Apps for Everyone!!!</a>
+									</li>
+					</ul>
+
+		</div><div id="text-6" class="widget widget_text">			<div class="textwidget"><script async="" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/adsbygoogle.js"></script>
+<!-- ad Responsive -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0546772649670812" data-ad-slot="4720488546" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div>		</div>
+	</div><!--sidebars-->
+</aside>		<!-- End Sidebar -->
+	</div>
+</div>
+	<footer id="site-footer" role="contentinfo">
+		<!--start copyrights-->
+<div class="copyrights">
+    <div class="container">
+        <div class="row" id="copyright-note">
+            <span><a href="https://pdhewaju.com.np/" title="Learn to Share, Share to Grow">Aerrow</a> Copyright © 2021.</span>
+            <div class="top">
+                Theme by <a href="http://mythemeshop.com/">MyThemeShop</a>.                <a href="#top" class="toplink">Back to Top ↑</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end copyrights-->
+	</footer><!-- #site-footer -->
+<script type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/comment-reply.js" id="comment-reply-js"></script>
+<script type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/wp-embed.js" id="wp-embed-js"></script>
+<script defer="defer" type="text/javascript" src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/form.js" id="akismet-form-js"></script>
+<script src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/e-202138.js" defer="defer"></script>
+<script>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:10.0',blog:'173465537',post:'2218',tz:'5.75',srv:'pdhewaju.com.np'} ]);
+	_stq.push([ 'clickTrackerInit', '173465537', '2218' ]);
+</script>
+
+
+
+</div><img src="[Step%20by%20Step]%20Installing%20and%20Configuring%20Office%20Online%20Server%20on%20Windows%20Server%202016%20for%20Exchange%202016%20%E2%80%93%20Aerrow_files/g.gif" alt=":)" id="wpstats" width="6" height="5"></body></html>
