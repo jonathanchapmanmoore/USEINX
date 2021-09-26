@@ -1,0 +1,4043 @@
+<!DOCTYPE html>
+<html class="v2" dir="ltr" lang="en"><head>
+<link href="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/1667664774-css_bundle_v2.css" rel="stylesheet" type="text/css">
+<meta content="width=1100" name="viewport">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="blogger" name="generator">
+<link href="https://terenceluk.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Terence Luk - Atom" href="https://terenceluk.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Terence Luk - RSS" href="https://terenceluk.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Terence Luk - Atom" href="https://www.blogger.com/feeds/2228947945609574437/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Terence Luk - Atom" href="https://terenceluk.blogspot.com/feeds/4570738915258835041/comments/default">
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/403901366-ieretrofit.js"></script>
+<![endif]-->
+<link href="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEj.png" rel="image_src">
+<meta content="http://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html" property="og:url">
+<meta content="Deploying Office Online Server 2019 on Windows Server 2016 for Skype for Business Server 2019" property="og:title">
+<meta content="As some of you may know, the Office Online Server is the updated replacement for Office Web Apps Server to enable PowerPoint presentation sh..." property="og:description">
+<meta content="https://lh3.googleusercontent.com/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEjFq_NLqMtqjDqKTwUM87Nz7Kf3k-gC82a7ZXIYDr1INZVWtzopl-vDPMarBQ27iZQg__v93teBErsNKOmsQWR5S7JLYC-vR8EB_v0wsv9AgKP3lnDaQIQEmTEMA2pLgeyzjffWFIkqBbo2wyYm9ZFOoyh3kh9ZtrVIcgKfyPMaFJHOPVgmQ98BokK6h4ObN4klhSrgKNcF5n-H6QfXisjy13qirPQADrlCqmU3bGE7lG8GJMLKJCvGha72lGxx0lEAknWdERYt7xr9zdQ5ExLAHbyruBa_FuAvyJ-KVdsPlKTFpSKmBxwcfx3LQH-B5dsikzZkRYudYFL5zVrRcJnDyQ-_QEFlVtdfCJUqrO6stpi1McRVsNZP3FK9CMy3Hoa6hEoWxFpuYzeVaZrVMgKuSVsqiV1axETA61kFI1ctfYwC_6A3xEtVlQKqi_yml13WjPwzP1HEv-dLOC2x0TC1jLXQVXafOWREXvbmzGuLu2sVWWrVMhXp3o7ya4vvSSR0mMfFS-QSBuO5XEwJXvIQZNcspLTlGlZ_RuALJyMiB0brwao-HV_78O_7hEL1z0DhBx0NVP6qw0sUBjOM5i5oXCPqKLGyNJotWeM=w1200-h630-p-k-no-nu" property="og:image">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Terence Luk: Deploying Office Online Server 2019 on Windows Server 2016 for Skype for Business Server 2019</title>
+<style id="page-skin-1" type="text/css"><!--
+/*-----------------------------------------------
+Blogger Template Style
+Name:     Picture Window
+Designer: Blogger
+URL:      www.blogger.com
+----------------------------------------------- */
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 15px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #333333;
+background: #111111 url(//themes.googleusercontent.com/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa) repeat-x fixed top center;
+}
+html body .region-inner {
+min-width: 0;
+max-width: 100%;
+width: auto;
+}
+.content-outer {
+font-size: 90%;
+}
+a:link {
+text-decoration:none;
+color: #336699;
+}
+a:visited {
+text-decoration:none;
+color: #6699cc;
+}
+a:hover {
+text-decoration:underline;
+color: #33aaff;
+}
+.content-outer {
+background: transparent none repeat scroll top left;
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .15);
+box-shadow: 0 0 0 rgba(0, 0, 0, .15);
+margin: 20px auto;
+}
+.content-inner {
+padding: 0;
+}
+/* Header
+----------------------------------------------- */
+.header-outer {
+background: transparent none repeat-x scroll top left;
+_background-image: none;
+color: #ffffff;
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+.Header img, .Header #header-inner {
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+.header-inner .Header .titlewrapper,
+.header-inner .Header .descriptionwrapper {
+padding-left: 0;
+padding-right: 0;
+}
+.Header h1 {
+font: normal normal 36px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.Header h1 a {
+color: #ffffff;
+}
+.Header .description {
+font-size: 130%;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner {
+margin: .5em 20px 0;
+padding: 0;
+}
+.tabs-inner .section {
+margin: 0;
+}
+.tabs-inner .widget ul {
+padding: 0;
+background: transparent none repeat scroll bottom;
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+.tabs-inner .widget li {
+border: none;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .5em 1em;
+margin-right: .25em;
+color: #ffffff;
+font: normal normal 15px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+-moz-border-radius: 10px 10px 0 0;
+-webkit-border-top-left-radius: 10px;
+-webkit-border-top-right-radius: 10px;
+-goog-ms-border-radius: 10px 10px 0 0;
+border-radius: 10px 10px 0 0;
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/black50.png) repeat scroll top left;
+border-right: 1px solid transparent;
+}
+.tabs-inner .widget li:first-child a {
+padding-left: 1.25em;
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-bottomleft: 0;
+-webkit-border-top-left-radius: 10px;
+-webkit-border-bottom-left-radius: 0;
+-goog-ms-border-top-left-radius: 10px;
+-goog-ms-border-bottom-left-radius: 0;
+border-top-left-radius: 10px;
+border-bottom-left-radius: 0;
+}
+.tabs-inner .widget li.selected a,
+.tabs-inner .widget li a:hover {
+position: relative;
+z-index: 1;
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/white80.png) repeat scroll bottom;
+color: #336699;
+-moz-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+font: bold normal 13px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+text-transform: uppercase;
+color: #888888;
+margin: .5em 0;
+}
+/* Main
+----------------------------------------------- */
+.main-outer {
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/white80.png) repeat scroll top left;
+-moz-border-radius: 20px 20px 0 0;
+-webkit-border-top-left-radius: 20px;
+-webkit-border-top-right-radius: 20px;
+-webkit-border-bottom-left-radius: 0;
+-webkit-border-bottom-right-radius: 0;
+-goog-ms-border-radius: 20px 20px 0 0;
+border-radius: 20px 20px 0 0;
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+}
+.main-inner {
+padding: 15px 20px 20px;
+}
+.main-inner .column-center-inner {
+padding: 0 0;
+}
+.main-inner .column-left-inner {
+padding-left: 0;
+}
+.main-inner .column-right-inner {
+padding-right: 0;
+}
+/* Posts
+----------------------------------------------- */
+h3.post-title {
+margin: 0;
+font: normal normal 18px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+}
+.comments h4 {
+margin: 1em 0 0;
+font: normal normal 18px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+}
+.date-header span {
+color: #333333;
+}
+.post-outer {
+background-color: #ffffff;
+border: solid 1px #dddddd;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+-goog-ms-border-radius: 5px;
+padding: 15px 20px;
+margin: 0 -20px 20px;
+}
+.post-body {
+line-height: 1.4;
+font-size: 110%;
+position: relative;
+}
+.post-header {
+margin: 0 0 1.5em;
+color: #999999;
+line-height: 1.6;
+}
+.post-footer {
+margin: .5em 0 0;
+color: #999999;
+line-height: 1.6;
+}
+#blog-pager {
+font-size: 140%
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: dashed 1px #ccc;
+border-top: dashed 1px rgba(128, 128, 128, .5);
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #33aaff;
+border-bottom: 1px solid #33aaff;
+}
+.comments .continue {
+border-top: 2px solid #33aaff;
+}
+/* Widgets
+----------------------------------------------- */
+.widget ul, .widget #ArchiveList ul.flat {
+padding: 0;
+list-style: none;
+}
+.widget ul li, .widget #ArchiveList ul.flat li {
+border-top: dashed 1px #ccc;
+border-top: dashed 1px rgba(128, 128, 128, .5);
+}
+.widget ul li:first-child, .widget #ArchiveList ul.flat li:first-child {
+border-top: none;
+}
+.widget .post-body ul {
+list-style: disc;
+}
+.widget .post-body ul li {
+border: none;
+}
+/* Footer
+----------------------------------------------- */
+.footer-outer {
+color:#cccccc;
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/black50.png) repeat scroll top left;
+-moz-border-radius: 0 0 20px 20px;
+-webkit-border-top-left-radius: 0;
+-webkit-border-top-right-radius: 0;
+-webkit-border-bottom-left-radius: 20px;
+-webkit-border-bottom-right-radius: 20px;
+-goog-ms-border-radius: 0 0 20px 20px;
+border-radius: 0 0 20px 20px;
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+}
+.footer-inner {
+padding: 10px 20px 20px;
+}
+.footer-outer a {
+color: #99ccee;
+}
+.footer-outer a:visited {
+color: #77aaee;
+}
+.footer-outer a:hover {
+color: #33aaff;
+}
+.footer-outer .widget h2 {
+color: #aaaaaa;
+}
+/* Mobile
+----------------------------------------------- */
+html body.mobile {
+height: auto;
+}
+html body.mobile {
+min-height: 480px;
+background-size: 100% auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+html .mobile .mobile-date-outer, html .mobile .blog-pager {
+border-bottom: none;
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/white80.png) repeat scroll top left;
+margin-bottom: 10px;
+}
+.mobile .date-outer {
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/white80.png) repeat scroll top left;
+}
+.mobile .header-outer, .mobile .main-outer,
+.mobile .post-outer, .mobile .footer-outer {
+-moz-border-radius: 0;
+-webkit-border-radius: 0;
+-goog-ms-border-radius: 0;
+border-radius: 0;
+}
+.mobile .content-outer,
+.mobile .main-outer,
+.mobile .post-outer {
+background: inherit;
+border: none;
+}
+.mobile .content-outer {
+font-size: 100%;
+}
+.mobile-link-button {
+background-color: #336699;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile-index-contents {
+color: #333333;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background: transparent url(https://resources.blogblog.com/blogblog/data/1kt/transparent/white80.png) repeat scroll bottom;
+color: #336699;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid transparent;
+}
+
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body {
+min-width: 1000px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 1000px;
+max-width: 1000px;
+_width: 1000px;
+}
+.main-inner .columns {
+padding-left: 0px;
+padding-right: 270px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0px;
+right: 270px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0px") -
+parseInt("270px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0px;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 270px;
+}
+.main-inner .column-left-outer {
+width: 0px;
+right: 100%;
+margin-left: -0px;
+}
+.main-inner .column-right-outer {
+width: 270px;
+margin-right: -270px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+body#layout div.add_widget {
+padding: 8px;
+}
+body#layout div.add_widget a {
+margin-left: 32px;
+}
+--></style>
+<style>
+    body {background-image:url(\/\/themes.googleusercontent.com\/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa);}
+    
+@media (max-width: 200px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa&options=w200);}}
+@media (max-width: 400px) and (min-width: 201px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa&options=w400);}}
+@media (max-width: 800px) and (min-width: 401px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa&options=w800);}}
+@media (max-width: 1200px) and (min-width: 801px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa&options=w1200);}}
+/* Last tag covers anything over one higher than the previous max-size cap. */
+@media (min-width: 1201px) { body {background-image:url(\/\/themes.googleusercontent.com\/image?id=1OACCYOE0-eoTRTfsBuX1NMN9nz599ufI1Jh0CggPFA_sK80AGkIr8pLtYRpNUKPmwtEa&options=w1600);}}
+  </style>
+<link href="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/authorization.css" media="all" onload="if(media!='all')media='all'" rel="stylesheet"><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2228947945609574437&amp;zx=d703d241-98b2-428d-a5be-b37fcb3de7bf' rel='stylesheet'/></noscript>
+<meta name="google-adsense-platform-account" content="ca-host-pub-1556223355139109">
+<meta name="google-adsense-platform-domain" content="blogspot.com">
+
+<!-- data-ad-client=ca-pub-3544545854604654 -->
+
+<script src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/cbgapi.loaded_2" async=""></script><script type="text/javascript" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/google_top_exp.js"></script><style>.gc-bubbleDefault{table-layout:auto!important}.gc-bubbleDefault,.gc-reset{background-color:transparent!important;text-align:left;padding:0!important;margin:0!important;border:0!important}.pls-bubbleTop{border-bottom:1px solid #ccc!important}.pls-contentLeft,.pls-topTail,.pls-vertShimLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif)!important}.pls-topTail{background-repeat:repeat-x!important;background-position:bottom!important}.pls-vertShim{background-color:#fff!important;text-align:right}.tbl-grey .pls-vertShim{background-color:#f5f5f5!important}.pls-vertShimLeft{background-repeat:repeat-y!important;background-position:100%!important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2!important}.pls-contentWrap{background-color:#fff!important;position:relative!important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:100%;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png)!important;background-repeat:repeat-y!important}.pls-dropBL,.pls-dropBottom,.pls-dropRight,.pls-dropTR .pls-dropBR,.pls-tailleft,.pls-vert,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png)!important;background-repeat:repeat-x!important;width:100%}.pls-topLeft{text-align:right}.pls-topLeft,.pls-topRight{background:inherit!important;vertical-align:bottom}.pls-topRight{text-align:left}.pls-bottomLeft{background:inherit!important;text-align:right}.pls-bottomRight{background:inherit!important;text-align:left;vertical-align:top}.pls-tailbottom,.pls-tailleft,.pls-tailright,.pls-tailtop{display:none;position:relative}.pls-dropBL,.pls-dropBR,.pls-dropTR,.pls-tailbottom,.pls-tailleft,.pls-tailright,.pls-tailtop{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png)!important;background-repeat:no-repeat}.tbl-grey .pls-dropBL,.tbl-grey .pls-dropBR,.tbl-grey .pls-dropTR,.tbl-grey .pls-tailbottom,.tbl-grey .pls-tailleft,.tbl-grey .pls-tailright,.tbl-grey .pls-tailtop{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite-grey.png)!important}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-tailbottom,.pls-topLeft img,.pls-topRight img{vertical-align:bottom}.bubbleDropTR,.pls-bottomLeft,.pls-bottomLeft img,.pls-dropBottom img,.pls-dropBottomL img,.pls-dropBottomR img{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacerbottom,.pls-spacerleft,.pls-spacerright,.pls-spacertop{position:static!important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0}</style><script async="" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/lazy.js"></script></head>
+<body class=" variant-open">
+<div class="navbar section" id="navbar" name="Navbar"><div class="widget Navbar" data-version="1" id="Navbar1"><script src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/cbgapi.loaded_1" async=""></script><script src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/cbgapi.loaded_0" async=""></script><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" id="navbar-iframe" name="navbar-iframe" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/navbar.htm" width="100%" frameborder="0"></iframe></div>
+<script type="text/javascript" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+      gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          gapi.iframes.getContext().openChild({
+              url: 'https://www.blogger.com/navbar.g?targetBlogID\x3d2228947945609574437\x26blogName\x3dTerence+Luk\x26publishMode\x3dPUBLISH_MODE_BLOGSPOT\x26navbarType\x3dLIGHT\x26layoutType\x3dLAYOUTS\x26searchRoot\x3dhttps://terenceluk.blogspot.com/search\x26blogLocale\x3den\x26v\x3d2\x26homepageUrl\x3dhttps://terenceluk.blogspot.com/\x26targetPostID\x3d4570738915258835041\x26blogPostOrPageUrl\x3dhttps://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html\x26vt\x3d8335584083698927133',
+              where: document.getElementById("navbar-iframe-container"),
+              id: "navbar-iframe"
+          });
+        }
+      });
+    </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div class="body-fauxcolumns">
+<div class="fauxcolumn-outer body-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content">
+<div class="content-fauxcolumns">
+<div class="fauxcolumn-outer content-fauxcolumn-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<div class="content-outer">
+<div class="content-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left content-fauxborder-left">
+<div class="fauxborder-right content-fauxborder-right"></div>
+<div class="content-inner">
+<header>
+<div class="header-outer">
+<div class="header-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left header-fauxborder-left">
+<div class="fauxborder-right header-fauxborder-right"></div>
+<div class="region-inner header-inner">
+<div class="header section" id="header" name="Header"><div class="widget Header" data-version="1" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="https://terenceluk.blogspot.com/">
+Terence Luk
+</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>Tackling the daily challenges of technology... one project at a time.</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="header-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</header>
+<div class="tabs-outer">
+<div class="tabs-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left tabs-fauxborder-left">
+<div class="fauxborder-right tabs-fauxborder-right"></div>
+<div class="region-inner tabs-inner">
+<div class="tabs section" id="crosscol" name="Cross-Column"><div class="widget PageList" data-version="1" id="PageList1">
+<h2>Pages</h2>
+<div class="widget-content">
+<ul>
+<li>
+<a href="https://terenceluk.blogspot.com/">Blog</a>
+</li>
+</ul>
+<div class="clear"></div>
+</div>
+</div></div>
+<div class="tabs no-items section" id="crosscol-overflow" name="Cross-Column 2"></div>
+</div>
+</div>
+<div class="tabs-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="main-outer">
+<div class="main-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left main-fauxborder-left">
+<div class="fauxborder-right main-fauxborder-right"></div>
+<div class="region-inner main-inner">
+<div class="columns fauxcolumns">
+<div class="fauxcolumn-outer fauxcolumn-center-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-left-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<div class="fauxcolumn-outer fauxcolumn-right-outer">
+<div class="cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left">
+<div class="fauxborder-right"></div>
+<div class="fauxcolumn-inner">
+</div>
+</div>
+<div class="cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class="columns-inner">
+<div class="column-center-outer">
+<div class="column-center-inner">
+<div class="main section" id="main" name="Main"><div class="widget Blog" data-version="1" id="Blog1">
+<div class="blog-posts hfeed">
+
+          <div class="date-outer">
+        
+<h2 class="date-header"><span>Monday, April 8, 2019</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry uncustomized-post-template" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<meta content="https://lh3.googleusercontent.com/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEjFq_NLqMtqjDqKTwUM87Nz7Kf3k-gC82a7ZXIYDr1INZVWtzopl-vDPMarBQ27iZQg__v93teBErsNKOmsQWR5S7JLYC-vR8EB_v0wsv9AgKP3lnDaQIQEmTEMA2pLgeyzjffWFIkqBbo2wyYm9ZFOoyh3kh9ZtrVIcgKfyPMaFJHOPVgmQ98BokK6h4ObN4klhSrgKNcF5n-H6QfXisjy13qirPQADrlCqmU3bGE7lG8GJMLKJCvGha72lGxx0lEAknWdERYt7xr9zdQ5ExLAHbyruBa_FuAvyJ-KVdsPlKTFpSKmBxwcfx3LQH-B5dsikzZkRYudYFL5zVrRcJnDyQ-_QEFlVtdfCJUqrO6stpi1McRVsNZP3FK9CMy3Hoa6hEoWxFpuYzeVaZrVMgKuSVsqiV1axETA61kFI1ctfYwC_6A3xEtVlQKqi_yml13WjPwzP1HEv-dLOC2x0TC1jLXQVXafOWREXvbmzGuLu2sVWWrVMhXp3o7ya4vvSSR0mMfFS-QSBuO5XEwJXvIQZNcspLTlGlZ_RuALJyMiB0brwao-HV_78O_7hEL1z0DhBx0NVP6qw0sUBjOM5i5oXCPqKLGyNJotWeM=w1139-h883-no" itemprop="image_url">
+<meta content="2228947945609574437" itemprop="blogId">
+<meta content="4570738915258835041" itemprop="postId">
+<a name="4570738915258835041"></a>
+<h3 class="post-title entry-title" itemprop="name">
+Deploying Office Online Server 2019 on Windows Server 2016 for Skype for Business Server 2019
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-4570738915258835041" itemprop="description articleBody">
+<p>As some of you may know, the Office Online Server is the updated 
+replacement for Office Web Apps Server to enable PowerPoint presentation
+ sharing and I’ve recently had the opportunity to deploy Skype for 
+Business Server 2019 and thought I’d write a quick post demonstrating 
+the deployment process.</p><p>The following is the guide I used for the deployment:</p><p><strong>Deploy Office Online Server</strong><br><a title="https://docs.microsoft.com/en-us/officeonlineserver/deploy-office-online-server" href="https://docs.microsoft.com/en-us/officeonlineserver/deploy-office-online-server">https://docs.microsoft.com/en-us/officeonlineserver/deploy-office-online-server</a></p><p>One
+ of the common questions I’ve been asked in the past for the Office Web 
+Apps server was where do you actually download it because it was once 
+publicly available but Microsoft changed that and now requires it to be 
+obtain from portals such as the <strong>Microsoft Volume Licensing Service Center</strong> under, where most people probably would never look, the <strong>Office</strong> <strong>Professional Plus</strong> product.</p><p><a href="https://lh3.googleusercontent.com/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEjFq_NLqMtqjDqKTwUM87Nz7Kf3k-gC82a7ZXIYDr1INZVWtzopl-vDPMarBQ27iZQg__v93teBErsNKOmsQWR5S7JLYC-vR8EB_v0wsv9AgKP3lnDaQIQEmTEMA2pLgeyzjffWFIkqBbo2wyYm9ZFOoyh3kh9ZtrVIcgKfyPMaFJHOPVgmQ98BokK6h4ObN4klhSrgKNcF5n-H6QfXisjy13qirPQADrlCqmU3bGE7lG8GJMLKJCvGha72lGxx0lEAknWdERYt7xr9zdQ5ExLAHbyruBa_FuAvyJ-KVdsPlKTFpSKmBxwcfx3LQH-B5dsikzZkRYudYFL5zVrRcJnDyQ-_QEFlVtdfCJUqrO6stpi1McRVsNZP3FK9CMy3Hoa6hEoWxFpuYzeVaZrVMgKuSVsqiV1axETA61kFI1ctfYwC_6A3xEtVlQKqi_yml13WjPwzP1HEv-dLOC2x0TC1jLXQVXafOWREXvbmzGuLu2sVWWrVMhXp3o7ya4vvSSR0mMfFS-QSBuO5XEwJXvIQZNcspLTlGlZ_RuALJyMiB0brwao-HV_78O_7hEL1z0DhBx0NVP6qw0sUBjOM5i5oXCPqKLGyNJotWeM=w1139-h883-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEj.png" width="594" height="461"></a></p><p><a href="https://lh3.googleusercontent.com/BHzDPu5-FvBP6TxLc5MQ415hPl24__BU1KHimeFaO3qbsfPIFzIEpIs3YPhnn8qu3VqU0vi7tz-KmA096PGorZQJBv5YECApvOmhRaVytoa7DNsoIr1K6eorxx8Qp1k44_J7r9WeXP4RzT-f6RerhDGctL3sA41a7mWAbwN1byVDm2NZgQcQ333I_5tQzUPRZftkxXXywwJ_BBcplSFAoZVTcJwHAYtvjWuW0XECNJmz7s0dw4iWMmABfzuL8eclqN1LaW2OajBr4knd5dFiN8iL-gx9ytAN300_Cnl9SEpYXsunD3ct38r_F-mF5QUNdR4yDzmstgk7laI2UPCVfJo9XNQPGmfJ_I1nAS1HL-UDd0mUl947OxcLGkk3BPyRL-A-9m73YgIc9auvK8qxf6IoTr47yGGObLHU7VtxE0PuF81kDY8tSTr8gny0nbV1oSvhVV0MTe5cRG9jfC2jzqiZQIVcnAqud8t_Ltt9qTTlTt3bv-zGG7H7-mkhm591zdmsGCwyiDvNLzBZALssEmx1g4g9HTfVBTmYIYsul3H3pq4eakCiOi-4wPgHX8ocANEVxU3Sn-dfXbPGbhRr9EcLMQe3G3z0EdBIL0hbdJhZLxl8ayJR1VYcjyzlNIuviFtBrukDAeGVIIm5wdJpWCVSdctqECOd=w1033-h785-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/BHzDPu5-FvBP6TxLc5MQ415hPl24__BU1KHimeFaO3qbsfPIFzIEpIs3YPhn.png" width="584" height="445"></a></p><p><strong><u><font size="4">Prerequisites</font></u></strong></p><p>With
+ the Office Online Server installation package downloaded, begin with 
+installing the server roles and features with the following PowerShell 
+cmdlet:</p><p><strong>Add-WindowsFeature 
+Web-Server,Web-Mgmt-Tools,Web-Mgmt-Console,Web-WebServer,Web-Common-Http,Web-Default-Doc,Web-Static-Content,Web-Performance,Web-Stat-Compression,Web-Dyn-Compression,Web-Security,Web-Filtering,Web-Windows-Auth,Web-App-Dev,Web-Net-Ext45,Web-Asp-Net45,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Includes,NET-Framework-Features,NET-Framework-45-Features,NET-Framework-Core,NET-Framework-45-Core,NET-HTTP-Activation,NET-Non-HTTP-Activ,NET-WCF-HTTP-Activation45,Windows-Identity-Foundation,Server-Media-Foundation</strong></p><p><a href="https://lh3.googleusercontent.com/brirl4ZO-NbC_KszTGjkidwdgFtqMUQJaId1o-vgCstrEFvuvs5IVhJIi43ORAfS5DqZ9OVqYQO2krajb2dwsSAI4jaWtpSxVSXQ6PrDEXXmBh97BnonzbBNd6je2jncH9m_j7cEFMGJWCtEdiO02BbH2aSMhi6hGospP26MAreLgEA_h33KqMkVU57RVBmwFD_ma-2xqx8NFD2EM6TQKhDy2sYdUxrGPRkm6kZR6dMkMRd9oopIMk0vBZfn7oDZGJsUw4Bv9_eBqEiCbsr3UxnwTfVQmcYVDZgf5F2CGs1Vf_LZbynIXHDfPR5K5VBXzhNUpCellaY81mx-A8XTk-cOiSGeypFfS2qXF42N-95SREZAb1HRMrzkVW4c-oFvQGhxzXgloRVwb58bMOVQa97aV55z8QYC6hCMXl6khEH8gGEELGU3jFo-kJVNJ6090RwphM_0usNEdfN9qxeykKOoLDetA3FtfxkHYcloPV-9JYTyfgr1U0FFoxgiK3kfJDTsmGLR8DUw1dtu0elVgSVQYFMqp4uGyIVFcQAewI2HtXo5fr1oxQC3mtSOEPftKLtUkFFn_6Yi3rSKvrSuGUwM5VEsYFb2JhE7BEbKL7dDLh5FyLgBq7DGbvx2K3PcxP25COuuJ1A9qF4aRSSvglzV7OXeTwUY=w1338-h259-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/brirl4ZO-NbC_KszTGjkidwdgFtqMUQJaId1o-vgCstrEFvuvs5IVhJIi43O.png" width="604" height="117"></a></p><p><a href="https://lh3.googleusercontent.com/GBJkVS-bLXC85SWp6ZLZvD30MdIDTXIrYOcUg4nxZ667SpVfipCgb5LX0zUzKl5HvxlhItutoyJGmZl3tFLhLiYPsxM9k22KJRXEMOshUX_bcBE9XWgNJhRbU85F_G9JquKANdgh8Hj0hhZRhiazAA_y3i_zLZ7VP8OVPytQMVK7eE_6eM9jO33CuYNThDWQXls76KRurAOMj6tR1t0a1zN-FVundUf9IjHgfvCr74L5vLT_V4RlP6zmGtothm9O32BwVpDZ9z6buaRGz75qZ5z0vMnukY3BElCFkb5jSP0i7yv7bsKPjG3MKReI2h1cJLK1YbMI_Em0_f9dOXI0oqyg2Y8jsWtajKMLz3T9aUwp7GzL5bpdvRMUtlHCw4mlZBGFIroMxR8GlnMZNNjGjzyrRq7nrnXNTrUapGkwobvg6-c0MT32OuxTsNc4BTtgj_6AQ0H8q2FGdbrI75ByWnv3MsZKQfZGcO6t3mg1HNNpHveWFR1h6zdlRVUGW6Ww6jxatRHWVmPGSZICBCDoypM1kfmBvm_1LROeHRTDcFnTV8W7EVqYieNKAGPdNqIDJ7aWT6yUNdR_T_zktdHdXAuqyCws09hCIevOkCZceQk3tpVMgSZIrsocgBGkj3oGzZT6pVgym1L6HOJOCPajZZYlje6HzEv1=w1338-h277-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/GBJkVS-bLXC85SWp6ZLZvD30MdIDTXIrYOcUg4nxZ667SpVfipCgb5LX0zUz.png" width="603" height="124"></a></p><p>Download the following packages and install it onto the Windows Server 2016 server:</p><p><strong>.NET Framework 4.5.2</strong><br><a title="https://go.microsoft.com/fwlink/p/?LinkId=510096" href="https://go.microsoft.com/fwlink/p/?LinkId=510096">https://go.microsoft.com/fwlink/p/?LinkId=510096</a></p><p>Windows
+ Server 2016 already has this package so attempting to install it as the
+ deployment guide suggests will indicate it is already installed.</p><p><a href="https://lh3.googleusercontent.com/-Sgy5Gwimb0zOzcTkA_tCQmFttUYd0VuTLtTQ5TC7veg43h-oBKif3bCE9qyVEpSVYCvNJDd0wSnqrX7kgpv34YnzsMNyW1pxe8SDgH5fpTWD3g93ZXLYR_Wn3P9BLKrzmT8Bq-HWxF8q8KvNUO4NHLSA7ZW8wCYrXM8aZTZXWUX7y0eFo3gxwra3bFBMX3ZPeJdMLQcQYFP-HNeAQlWAlG67NZSeQGC2FSUHKs1l_4PmRQmM3Ijb4zO9P5UunZ-PnPQQo9ZtGT1cQdhje4DopnS3KE3khwjZ27oGigmiPlTxH1zXk9pXFhhfQXG16WizaYb_B2cT3CGg5rsbSeDRXJZIfCUThDTf4QU98aw2SyRp6xRetfz0-iedfcYkaYuR-RzpeQsNlUPwJcs3RxwkVZJiUqsvf2HFAdB9-iS8ZfbloNhA9Ei05tEkdW_WiZXyV2puniD9J0RiET2OuwFEEABbjncFaWNcpJdhRyi06DFQLlBc7PIkW7BXD9xompqVFWTtqgShdOlzRe0hHy9xxBkFmIXomClnK5XUNJmEeHRLVk3YQRFAVaHttb_E_ePLl9XfNlXDSvatLd3_3XV_veCaplxRKZcoHG0hH1bwxwaist7MrZd1cS81xDevR7RV0CkuVZcGnjlk-RV3hSOxJK_DA2CKrcY=w1338-h389-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/-Sgy5Gwimb0zOzcTkA_tCQmFttUYd0VuTLtTQ5TC7veg43h-oBKif3bCE9qy.png" width="586" height="170"></a></p><p><a href="https://lh3.googleusercontent.com/Lw1Je4WJxhfdeXQTByzwGa1Tj8mGuc8czEt1G9goqbH0MVVMeJuzImcIA9Ck3fmSEs97ZDUCtbbEBfziTIdWwnSZOcBfv-TlN3p502wgZfx6WERWMWG-JH3GsauYmzQjUvm5J20FndFRfPoboKae9KnSOewC7hmOiBMFosQh-Nu0e9eucoUJzXD5LdmSUErd7_RXtx35M3YYNVVhTBiLM3ojgyhlGGgr_ctVwbftcjJIJ_Cgv0r-rmtFGpxcgQJ9ny4C7CgNWv2mgveX0Dtt2JZteEJDD_hfa__-i9Sj6HwoyaLTDAZrjDWIzoBx20ylH5DDU3hlOopO_y6zPJs4Y8jOyx2ZQAnfrmlO0oAIy33nhPtNaPGKk_Ew4rlx0jnlj0JS9lL3xu0KhoRIP5H7Tw9YO7muAPDiPyGeg2SChjH8wBcUNfRol8zSUAbjsefwSvIB6F-LjKuGLpXh3BkRS6pBQRgn7E4JoUWZQr84XGP_O7-ofjI-qFUD63E_03SnldK30L9Pz0u7VrQk0gzeislPMl_TCDS7z3d00uERR0hH1nV1eAy4P54ZJxjmnJ0Db2jzdN7fr98-kvcWIiuBQP2Bp1HSC_HG9j3iXKrIK7NX6hqEXdLGcai3XkdFauiS-TzgdsQyI6OM0NWdgXZhSka10YRXB1Ah=w664-h588-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/Lw1Je4WJxhfdeXQTByzwGa1Tj8mGuc8czEt1G9goqbH0MVVMeJuzImcIA9Ck.png" width="305" height="270"></a></p><p><strong>
+Visual C++ Redistributable Packages for Visual Studio 2013</strong><br><a title="https://www.microsoft.com/download/details.aspx?id=40784" href="https://www.microsoft.com/download/details.aspx?id=40784">https://www.microsoft.com/download/details.aspx?id=40784</a></p><p><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/SnRRmLnVypN--L0urWF0UrDbAHLF7iuWQSWDrb-K9_fIau4dTIvCf-Eto0Z-.png" width="579" height="168"></p><p><a href="https://lh3.googleusercontent.com/ovTOA19TRGppphsclw8HrVDYHUCBcJpttjEHX2pGVuViiMhHwFZ6iitjimL6hJM2bY1yEse2M5KJ44EJHYpG8f8tzX0H49tw9BxhHY8NWv-R6zVPgwGJ0CQ04oisNIif2eX30Wq8k4OnFmuYEsEwLDqWFhTFPxmJb4BbuCr7wz27ounLbp22I6ybxCCoiwJIfJJazbeoKBK4AX6YP8XJsm0jqgpKc2L1slElnApImTJJvszM_9unMeoew5vb_SptUxE__xwNvxIjBooEjLw3nmb7G9RdJ8IvXqjY4-1NJSPCoVpNt9RfHVyJkCnB6ChGZVI5sYrWXQvIoy8RAHj5x2gipmBKJKHY6k-IhKdPH9ewCtXF32LF5JxJLKz80Q0Dj3LEJUgipzwcem6eMGotDu2C6l-h6dFHMdESQqdoRtGdTQI8yT6NMxtDBdEDQuqIJKpig1t34I2pFJYluuyh13hbjOvvIlSIYyraF20Bz5t9sQrY8Bj8nZloPbQoO6YevGrLCRDGdzxN_7Cx6pCOjIkQMC6-2uMnzkNTe4fKV2pjJc3FP-2-2_9_ZQDUq82-IkGpFYWwPDLk5F8tOCejOi7_I6E0nr4RLuOAQzbHxTYNetSMYg1TxrWH-eoQ6JcSnHiyEgMKWs8dgdoCbAnBuKlgZif9pjRb=w600-h372-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/ovTOA19TRGppphsclw8HrVDYHUCBcJpttjEHX2pGVuViiMhHwFZ6iitjimL6.png" width="396" height="246"></a></p><p><strong>
+Visual C++ Redistributable for Visual Studio 2015</strong><br><a title="https://go.microsoft.com/fwlink/p/?LinkId=620071" href="https://go.microsoft.com/fwlink/p/?LinkId=620071">https://go.microsoft.com/fwlink/p/?LinkId=620071</a></p><p>This package also appears to already exist on a Windows Server 2016 server so the installation will fail.</p><p><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/Ed-7bAT20aWjr7nsn2dNgrhdKc95r_Q9n6hct5jVXV9AV8blN5b3ijPmYpri.png" width="381" height="236"></p><p><a href="https://lh3.googleusercontent.com/eySZOnSdRUEe9B2ru46TTsbrK1eBbJhE8r34QIIS8o3b0ikuCq5ITJo9Elz_xkvwDAlvDH9oXPKencbcPbioa4LxxEeEF5E5Ei9rhBL0aWISypvcelZISfRq5nno6TcANrSdQ0HqGTbXJlQBNTaK8dewfgpYXH9WuuJMcXabm5z8Ym4G_I9BJoO2UEXRcl4ZfEMYA-NCwp_u_PfpZpCJ2Guu2H5MlpyNHUVWfJHLZ4jSoPN750wj9oZLAuw9HhmzntxbTa2YuY4V40-OspB3-9qEFA-MA-IZWIhEsi9H2gCEmHXVFnQMqeiPcgrdjShta9m6r5ufyKZakNv2Dq1RT3nC8U61Nb8w5xFmc5N6duUq9NUWSQafZK-F2eaiHuPVT1oS_HRH2mGKHt2nnqYWC4vqxXZVFqLBBp9iFput2lKn4R2AAAWvkUQDULjSarOJC_VFFx3N87AWh52C97sF7Z_24cgyeZwVI9FTYKkkDil2UkE9DdG3Kvtm4Fr4ARXSYvaAqT22dISaqpUylJEzNnU-Tn9_wehwcy6E2v1PoBfIQmoma9n9o0Q8tkB5Tg8t9VyBQVuijrgmHV0k16YDIY5CeDX0S6BvvXhWjAuMNmCKwR14owv0Bo4jouRRZzPJMP9HGUhBsJMnK67AitU0Ht7o92wUwUqn=w481-h298-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/eySZOnSdRUEe9B2ru46TTsbrK1eBbJhE8r34QIIS8o3b0ikuCq5ITJo9Elz_.png" width="378" height="234"></a></p><p><strong>Microsoft.IdentityModel.Extention.dll</strong><br><a title="https://go.microsoft.com/fwlink/p/?LinkId=620072" href="https://go.microsoft.com/fwlink/p/?LinkId=620072">https://go.microsoft.com/fwlink/p/?LinkId=620072</a></p><p><a href="https://lh3.googleusercontent.com/kgjbwfaxQaEwd59V1bHTGj-R7XRZcu5V124YGcxt1bcZe64qGT4H_7_3q-WpZHCqqBcK43OAA3MUNCE0s6EoZXhRPxJR_lO4Bwrv-sWUld2RgjpMJefRU06yy0TTMggKLKymgwCiFn6YTuR9CmoNbGj-7aqKhpJRJ4Z3ZVUoIgColq7uQDFGJ_31bmB6BYEyKcF_Uv4CwH467Tf9Hgl2Yuw3wjrGBCy7hHZ4aHrnH-_22RJnUOqcx54YaQXGc_QaVHdAxUM44vFthCl5kEMQCQBQwy-PZ74LnCajDpWjW9gXoQByCPHOJJMSDKSRq50abwizYEESF6DJT-t16nsdNohr1RAqYhy-dUKQvkf3qSBdclwE0wMgKr40DGqzfcjXcnv4Yc1aOPhBpjoz9OJnHsObt4cDLEBffvRiZH5hyGPGStx9dIUAkQSIIVzKbUQDiyEeT-efKbFpb4cchEFDVrECP8g-oPQljZjJuRo7ebz1Ege_rchd0aQnBhDOu6gCNDE2GNELOpuyAh-B-bXv4Dmahv5kd0UV9CKYZejfNLbnr4wU_6voD8c3Dmx1ih5QJOIdNd1jq73yn5L1k_tzSDFquX0p_HSOY-msHT9nkfB3CNDTq0LGwxUu7cH7-jwZsAgiMfHy_SJfbrUpHEYwzFWCNe2uloWI=w1338-h359-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/kgjbwfaxQaEwd59V1bHTGj-R7XRZcu5V124YGcxt1bcZe64qGT4H_7_3q-Wp.png" width="576" height="154"></a></p><p><a href="https://lh3.googleusercontent.com/dmwuhKc-9DK9PBY21A9BB58KMBRznejDPolDKJA89ZBXqpNA5TMX2YOt0cBA4VPYQVtoasG_qmxeq-G6m6RP_p_uxc1OzcdRDcXEdkmUnuqA8Ky3Ein2pnSy7Aqlni8G0Bcx6SoxRFvdEmDzlRsdAP5JIPbLwPReRfcO6BOOHB835ov3R2m1buAgrmXZqaaRpWFKcmMhQSwnqNEOpsKy5ofvWEpIJTA9S1f_8vb6exi0vm0yrd-JpvSZthawCImOkJdRGjpCUx5Yx89W54oVeV-Y14dQ5Dw6gzhBld4WYIti-wAG_9eDgseBZte3NIv80HeZ4K6lWi9Uiemu2bnC04PH1jGgodBoBSzy_AyeNNLgtsaCxa4-_vZ_ULaI8pyHy91VssqTCC4E4BFdwoSdFUtxQ6q7acyAxduLa9ZPYqoDLs429QtU0Oax6ojs0HCyzlGfi6OyvcXMgFGWwUF9SdyoiqIerKXPvjo1SdCAaFLU_dt8Tm9aWDn4FOrCSkleovYij9oSik6j9Ok4pf850-EE1TzDWmw9k9dep_7gMROMYGET163DZt6msVIASz2FDeQM7j8NBBr_8fIJ9z4DZdrbcBj43f8pRVrE4u6M34KnhX6ElboV_uvLlR_Tw1bJOeFTGVBeswjezKSVBLFvkO1PjAAxQB84=w618-h483-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/dmwuhKc-9DK9PBY21A9BB58KMBRznejDPolDKJA89ZBXqpNA5TMX2YOt0cBA.png" width="368" height="288"></a></p><p><a href="https://lh3.googleusercontent.com/cUnVg_iSnY2fRJbhzH6Lwh-5SHmxHVwyV5Ga9yLPCIDT5PibZuQNtTZCcO-fgGRlGGbf6G2ExiMIjlhvwk9uqGPi5YJ13lvGoNEi3lmYlj43rkQWOwOTS-kFBErPop_LWwC3g_tZaEqdzr8HvwmEntuJIkaj-6zSUvdKdxg1zNrROj9d8jxUC2ctv3dR4AD9uJ3eyG8cDqH-alp_FUktroCTV5YZ2GnUZ2Rzhffv0KkI2WI2SjSVlGTXVcijtf1FYzx7KqmewWGrsnACCqRvXUO8L2soFNHrjKCY3UcAmL0Uzk_1OXR1hx_YVrw7uvyR5u8cG9SlnUvwxbUQY7xyhIilzQO1qfdjtcHa4l7DPyFgKhIARs9AzpIc5VBKDhJqdqDuCkQEUE3cD-S0QWuQjUHRfviWZcUQT32TqXQ3KSingdtSxgMqdEwtP2zPMgZvcJUsL8V4fhOh15YR0BuL3CEO2-Xwh6m0MtQY7nVtTuft4OpuIegc9ygjgNC8XmITEV-bjH6te7davWxgHf_Kwd7RScXgcJSs2si7FETbUjiBTaZYDRZMVuzf8v2HBZFCWSVKNzxYRiW_Tu9tH4EqLySKu2e4M5zMZI_pk14BuwE2542gWYAyaFQhWn6p9GEf1PpB4K2iSKN7rg1-3c4RLXcX8wWeaCYq=w618-h483-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/cUnVg_iSnY2fRJbhzH6Lwh-5SHmxHVwyV5Ga9yLPCIDT5PibZuQNtTZCcO-f.png" width="368" height="288"></a></p><p><strong><u><font size="4">Installing Office Online Server</font></u></strong></p><p>Launch the Office Online Server installation by executing <strong>setup.exe</strong>:</p><p><a href="https://lh3.googleusercontent.com/pce521t0gDSvBbIBtUs9LvJjGRQPJJKUnrq9wAwK88iblhrMSRq7LufTua_BuwICqp4XA8yGUe7USFd6cFGxanhXa0USp3ZACYKJJS5RKTFx-bK5wSmFHqN_DsjZq2tMHhE0r-Yr99uNvmOLhinPwv1Fri0Sy-051tbnoDTKXfd4pm_Ujq1iKuhY9OtbU1u7cCrCDKo7NAAgIRpbQ_fOKJOsxHK30YdAyownNUm1lqKS2lRZkGs2LaBZUcbtxOICA0XdBKIpsraGbM0Gq9lgdvMmn0Gv6-zOvJQ9hENMv3cSjxH2EJm55-YPu25Jlv07g_xqCCT0MxL2D2LB5P70emsSxsx5u_GTmeF2DUB0ryJXLGMqCWQEnAIZdHusbAoJw4VCLMFQh-KluffpEq9m2jfaw7qL9gdf1CFokyynuv9qF3Hq3bpe99ICuuYT-KWZ6cBqv8kBGTAv-k3nI0D1dfS6LihoTqnmH6ejNoa2vgc_SwbXgzSz6MKUfaYWR1REqukUZIpS7_ycHTdNDMWh-BlnWm2prFvR7IiF8XOtIcx_0EYsae5NfFtr4XxkQw2DELPDv2kjJY1Fm79znhRyjxK-Tk8DCmPEr6zml3_m9V3pUHLxoIQbHJYMzetn9WCfpb4c6iR_iK66-NQlIRh90xLylVjm9jAi=w1148-h520-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/pce521t0gDSvBbIBtUs9LvJjGRQPJJKUnrq9wAwK88iblhrMSRq7LufTua_B.png" width="576" height="261"></a></p><p>Install the application:</p><p><a href="https://lh3.googleusercontent.com/x99FqJ8V82mp2fCwxF0Cz7p0yW2wi2JpgVc6yTvlZP4GSrtAkGgIHitVe3ulznLYBfz3WjxtOh1_vbVE1_DlvQoN2TVXpy5lTZmy0EVKFKooULsnXnBKYTSWmV2grGJO3I9VVrQ7hVBeJ2EM4CyJigYcRru_SAV-pXvjB_lUVygq4ttBPiZ10eFBPRYz4R8_BztQ_Kvoulp1MnSaavjhPHOYoJMJaa4CdXvv4dz2NaODQ_b-QpkdoM8R0NpSRpiIgqe6NdQJmCC6-dCGuBFd1z1Q8VB242OBHUV4H_hx4bco_Alcn_cURrnzNPlTnYU3G9ADbnAuk9Ap_aVvlUdcXIEZHwBjgMS51BMiKvoOp6fMK3qw6ZjuxGAme2OK7vny2_JTZJWz-VTSkFjFQWRp11L621yrTXIkJrmhu0hlL97D9VWNhTq8cRV4L7JDOreWFbbWmPYkKYAt43BHtJsbtp8kAWtnWgnbZvYkN_E1fAJJKhUBekq42szKQ8Jn3G_hew6wzQGaG-7Gy4SCvbmOXFJRRGDtdnRNg5I_qC9aWC2YbXYAV9KyZKWnfX5D9jZ77Bx82c3ZnKqYbpupHoA4o6zQ8Sa6wIROYxDkJniHtllR22r0Im_RdtxogNcYCKm7GMEEiO7WMN8VqQZuCpaf1Nda_nabRUcT=w765-h702-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/x99FqJ8V82mp2fCwxF0Cz7p0yW2wi2JpgVc6yTvlZP4GSrtAkGgIHitVe3ul.png" width="503" height="462"></a></p><p><a href="https://lh3.googleusercontent.com/oy_tr-JyXjl3FHf3RBz1UtCGUf0QbkcEo48Ajm4OTOSy5R1eO7QJdO7Gsxp-ayHxA4a0TLp0UtEYdbDPXEhEbrzk8_ZPzY7U5PnwXB4r42nD7Sp1Li8_UIayJHEPK8nSYYKE5uNcVNpQbkxFb_B1yrZ_pdJeXkO7yHAOZl-OATVg35SlOVcP8URa7BMnSxaBdZgx8QZnPz7xROsmEHU8QmMQfbGA-3bMJcV0piBO7r5GPNNLep9wXAQ_Utnytw1rgVQSQARj3RYWBdZlTK21sIOzO7UJuH8A9TEkv9Tczl_PWDY0J0n9FRQxuXbxzvtsHaZ6hCRgOXq0A9X6KfqDQyWQPLdNs4NlrbAbmeI1DV_D3-7w07-yH-ilJWA8k3cxT6rAwaUBnAqJrpIBqYxkubsay2fyJAVr8xtoMd4Ef_0A9HIzFjSinW-RWZTE5Vr9qfcvJ09VZ9bopfxWh81YzeBRwsIg_W27acfof1_5_ZSd5iW9JWgLWrjqiHhZV4IxvcEyO_b7yGsrkGvAsm4Pjv9Y3TFoDCUGDCAfB-G5QOD224H-Dg3Aom_x9nrVnySE029crCkoieZDQ0mSZid_JInMmY3VOSKvhyVmDzRKiXmshjaewJa-LPYXKhIP2TgcfSXKhSPEiLXQ8sLpZ7Nafgx4srwaP_JL=w765-h702-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/oy_tr-JyXjl3FHf3RBz1UtCGUf0QbkcEo48Ajm4OTOSy5R1eO7QJdO7Gsxp-.png" width="502" height="461"></a></p><p><a href="https://lh3.googleusercontent.com/Kvh8nWNevD5uH3OAPVl6YeT2q6wUOyX_kwysXNcSwU3jmN5GHqP2Uvrr_Y4vWhTcujFVg4aJ3YL7qM1iDZVZncsp3fXrVqQcG8gZZlbH6FOGUZyL3bzHiWtuFG94vXohqCcXn9RzS062k3TtBDT2JOGwVo5Lu55jVQnX7d26HItlWBEHxsuFR3YvBs8__IkrxzY53N-_lGxLL5tOuwKx8qfnE_9WVKNGdWOgN9Qa6oKvyyfsaMAScpk5DoO_8R1xy1YaMwmZAhaagmBkAgaukezFu-dx5ojURuS96MuK5i5eUN4yl272GVR7BxgtijgBeSwdmygw1hDZwO1xh6aQeLL2xaaH33VS27CTH3gwB-xvTpBLjO0M9sQzyJwA3Afgfa9atSTW9FGdZJogl5rnJbRmIBL7tzBuK57g0uQpJfgUD5LY5NoIg7MXdZHLUj8KMSmESbC3rPwc33nTham3gAqX19X2k82DPqI1muBFZkdwXZFRrZEyAUy4qtdnK_BuTbdtDjFFFqFAbjf_iSye1tcv5XHGCW5zBuPBK2zccPSUEbJCAX9Vuo_sKcfCE7MO9N_qN8B65-hJtVQ8MyhuBJ-2rMIDdtYsMpo8Vlzpj6SxkbgZg8TbpXzsbqO1Nq_IWxzrdaHZMg4e0sCKTGplqkfwV1NKlpgd=w1338-h615-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/Kvh8nWNevD5uH3OAPVl6YeT2q6wUOyX_kwysXNcSwU3jmN5GHqP2Uvrr_Y4v.png" width="573" height="263"></a></p><p><a href="https://lh3.googleusercontent.com/nl5KnFi0AznN642sNOhE5VnhIyW-vFSVt5oz1K_iKcBHY7manexSksDEE94wzc0Qmpiwc718wMrIRh8_EXwdRe9Qm2Tzo7dVMgishK_FeD7chbQ57ZdD4AolWf8kW21TbG45b_akOtE1bgEgE07LBIgh52CunXhsS6wXqc_tbDngbwc2aWSQsnN3LQawPnj8DOdjzCG5_h5UhIBWKHBcegUb1wThZJghyCkJy3DaLhfj4_Mb0uv_rtNu38H_d-Bz7i2t6eI-uqjobGUuBcPD5-TWBoNgPNg_QEoklXEpXujgXpOOvDEPaUPV5M4lM-f35uBaOuwX3-8NvLeEMtJVHUU9GCB4S9HNLw7HQcCmcJzjnDcnplrFyb9vbuIodoNuhPQ1BeNcgwZP43gVZQWMhZgGxmcO_2Euog7SEKTzo3IWmoh1CktexvEweagcgTxfA_tLrig77jC_j-asoVObe9jH01z79Tx8z7ysL1bGQLebDIxnFg5yKpbjubx6JnExI7r_Xi3JmoTIK26Ip4BEMWyZArW-qKasHAwNGbvhmg95m__u-oMrCiCu70DIx1UPZ01xEX1iS8fhL7woZwyCTB4crIWYEiKHMkRbzxtC9zkEh2k55HSlh0zdgiLP8dY4ETBQ2FCMFE_PXgb7lmm6i0vcijnmKnD7=w765-h702-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/nl5KnFi0AznN642sNOhE5VnhIyW-vFSVt5oz1K_iKcBHY7manexSksDEE94w.png" width="494" height="454"></a></p><p><strong><u><font size="4">Import Certificate for Office Online Server</font></u></strong></p><p>Proceed
+ by importing the certificate that will be used for the Office Online 
+Server and make a note of the friendly name as you will need to 
+reference that later:</p><p><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/UzCOhaooi4kPEKVuDIcDYONYCMrm1-ahWKOFIQ6GqsSHBlV5YgHlSh6FLO3V.png" width="587" height="135"></p><p><strong><u><font size="4">Create Office Online Server (Office Web Apps) Farm</font></u></strong></p><p>The
+ command for creating the Office Online Server farm is the same as the 
+one previously used for Office Web Apps.&nbsp; Execute the following 
+cmdlet while customizing the appropriate parameters:</p><p><strong>New-OfficeWebAppsFarm -InternalUrl "https://<font color="#ff0000">oos.domain.com</font>" -ExternalUrl "https://<font color="#ff0000">oos.domain.com</font>" -CertificateName "<font color="#ff0000">OOS Certificate Friendly Name</font>"</strong></p><p>Note that I prefer to use the same URL for both external and internal URLs.</p><p><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/m_3_SqPKV8VIKUW8trAvSRpgvkxrACUJNmzfofofP84YUR1OHP2e214mk3ni.png" width="521" height="465"></p><p>You should be able to navigate to the following URL and receive a similar output once the cmdlet has successfully completed:</p><p><a href="https://oos.domain.com/hosting/discovery"><strong>https://oos.domain.com/hosting/discovery</strong></a></p><p><a href="https://lh3.googleusercontent.com/J42Iwo4jXhiAL7c2igJn_80-1SFw56C9tTaZWJ_EWpwzN68hvTMRqrBJV-UZqcPAOEwpql126C0SmHt6XkYV4VMd2saA9yNNcAzIVhFJJcCZoU42SXqp3DuXu6Hbqcp-DIwkrKNH3R6-ckvXa7koXX_U63S3JOM4DXd_f98LSilj_eyVPyewlMLJS7pslkBTRQ204lsPOifxX8IqF_4xo87L5lAD4Dpxn9KCcXJfds6ZXR9YjirlH7BWJDgS1_sGp6nCC-nH435veztCmek4XB2D8t_QhUgl9cQFAVG6NFtgtf-SdeBxtnmPCUJGS6OMqgHW_HT_mb-VOK6fD8N0M_7IozF4aGoeybNmwWTDbHzirWmeGi7Vv0EM3-dDR700JLENJMduAX-WirbOKA8eYvAlX0YgBX9SmR-Et7uXqwJIqxrfr51f3nT-hLD9w71xrfkpa_75eYQEDl_K1l8M6DaLWmzWcZXbNfFWbAKgI7hj88fbPCNAx9dRAdk79n1y8m6-Qr-ZPiATJHHni41sy02LbHWzm4qfj4-u0d-KRTPbbgVMunnfEc6-EG41JppTxDJAKXST_GF4Rk5m3rVXiBJxHQPzX6ZiQEDjcU7lw-J5vtca917upYTmWOVinKwjumAPUKRBFOVdsuB9b5pO4hdrHmUP09U6=w1020-h785-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/J42Iwo4jXhiAL7c2igJn_80-1SFw56C9tTaZWJ_EWpwzN68hvTMRqrBJV-UZ.png" width="516" height="398"></a></p><p><strong><u><font size="4">Creating and Assigning Office Web Apps Server in Skype for Business Server 2019</font></u></strong></p><p>Launch the Skype for Business Server 2019 <strong>Topology builder</strong>, navigate to <strong>Shared</strong> <strong>Components</strong> &gt; <strong>Office Web Apps Server</strong> then right click and select <strong>New Office Web Apps</strong> <strong>Server</strong>…:</p><p><a href="https://lh3.googleusercontent.com/vmYFMlhhMLYlGxO8kNWen7_gBaqUOScTG9WHJX1nF0jRbWorbaw93pNneubkkCBZUMMlJewDsaL7syTdURBUWzvhnd89DA36_R_obHYxzKMZlHoOuPj47s55LIbDW-ELALQDNRvekAT9T55kXmMeXKfYc5A_wHF3pQdC2Y1ABkYzdCqw0QEc78z1WVdlDSe0O9Ej7TGb2XLnJvkUSQXa6WivEcYdgiLJj495EjFhb1JuaVPuEXpCisz5koZj6GNNnuttG6X7KtFjgNJ0ETXLN3dpPuOH71ns236aTVT9dA5pjdtvY2Z0ihTTZ4QlfBnfIoHrXLSl9Fe_jdUUEwwuMUR6ZooGZRzagZaoR6OhD0Fli3te9TxRYDiOvo1n_L3bV0GKP-eri__1IlJwoe5lzwsQZPqsNIfCg7X9Sh-FmLV3FKKwUiZ03cpsDicjSKdOz1rRuwaQgHNxwyL2WtAuPjSwUaIGztl6QacoPMjpN9jHsc-gP98xE_vN8FiF2Jl5wdg9o8_xDQ10vKi7KBSnfAr1o_WZZ61GV3Fgfd2UcIN_RCiIEL6u57b9hi1CYdoNUt5cNlzX5LGl3cU8IifzagshdQeg2-VM8HbFMB6mQteWZDJpQYZ6yswUWUzUfASEbgqHcU-joBhJIJE710QHekaw9pXjgXQz=w636-h555-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/vmYFMlhhMLYlGxO8kNWen7_gBaqUOScTG9WHJX1nF0jRbWorbaw93pNneubk.png" width="388" height="339"></a></p><p>Enter the URL into the <strong>Office Web Apps Server FQDN</strong> and the field for <strong>Office Web Apps Server discovery URL</strong> will automatically be filled:</p><p><a href="https://lh3.googleusercontent.com/hnur6-nGDIfY1lPtJ_i36VfLVNr3o1V7UokwNXKQpRAXZS2JelTHiAV6gfAEM7FLVBk3pRoRWeYfoBE_VGKxvb3KLpE6nxyCZi9l_fxV4KG6I1QzjP3o-kn5l-AVN3660S3bTp0HkhxU-IebuqdmlyYY5wwLZiQsEwwN3SdtU_A5HkfhFAjxzajY9IUly6pMqhFzXNVx3jvBrEb0JOiPF2T3dNWR1isqqDBx6ihakbgD5wViHik_0W-plt_xetD-bEOoVcBBCrEzlI8TwPkNpJLWhv9l5YLl-vy6oHLSjFmTphAhkSq5K6P7zgVEDynA86URHol4gaB0tGz-JWFohk8ImuNplHsWqJaLlUAywpowVTvs4isAjGliPvC6LdEotndWy7BhBqUBxDeFzvFS4CR1kBYIc3Dc26ZfHCKT3FqOudFrl87wN2-eFMLuyN_b376KphCy2ym-SbhxOH_Ocal78lToZLFfQ1QeNyn1iXxhvnR9vmbM7xiNQl3dl7UAbzzI55leb3lkbRGjTTtuLtZyKBPJCWPL8eEbNbgNCgwhTusUm3RUIy7LfnYXfPXr-mXnd2KA-na-G3kdXa4vs0VuZlGn59dDLtvsUMqxcnf1rszL-uzsEp1QjHJfVl3W38aUemQKe-ffT2vm4Ld5fC8gSMiX-BdF=w484-h320-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/hnur6-nGDIfY1lPtJ_i36VfLVNr3o1V7UokwNXKQpRAXZS2JelTHiAV6gfAE.png" width="384" height="254"></a></p><p>You should see the new <strong>Office Web Apps Servers</strong> object created:</p><p><a href="https://lh3.googleusercontent.com/0B3zDAUf3SBlY0Yg7_zQa-hwzEfrcUyt1jL6GBFopm_iSRlrnY3bYNxIfT4Er-m4jeyZ9WhES1jCWp8hVCIaMLxT8h2xEp48q27pM0XB9iNEGiTQ-_cZreRp-0Eew2tTKNBjwVb5GX5m1kPcZ98za-lKZsZ8CgM_qDCEbfAZKS8BLxIURmom0kQglF_cWtQ7xrycHYgP2pdFd5ADtEbgg-KxGALDwv53yWyd-ry7fexAHPWzG0C_JmcurglnHmgoYh5rQldBrKL9fkxDX5dk-w-MApe4ofekM8l1bppJJ1bcdsENJJJ9vpbv28hfvtc24gzlBbismwWdfogniNpijvPYeCLk5XNPit6CT_idkHu4g_t2jZ9jp-Evfkx4jgKYtqTtyVdFhCEwaMR8FBkH5FkGfmDj2siJPnU9XzoMq5tDCoGSkT6Pr-Hh_bQA9gCgY3ucn3cTFx_sTfaqPF8YXd6RajCv-ZYn_M4HwnGDpLoYsnJW6wEpHvtke_fSKjNQDTFShatC_m-ob-128wPAIRAok3pnxpaQKUCCOg7rJ1KMYYPtwHAe9AoTdtFjbi1nVtWTlcgcj86WKE_dUfuEp9g573Y_mBE9VESid1Dc11qB4HBiIVA4PpPfzwjROA0vw0Vz4zroiowhbV7idUkHLxN9o6mE-Grt=w397-h502-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/0B3zDAUf3SBlY0Yg7_zQa-hwzEfrcUyt1jL6GBFopm_iSRlrnY3bYNxIfT4E.png" width="335" height="424"></a></p><p>Assign the new <strong>Office Web Apps Server</strong> object to the Skype for Business server:</p><p><a href="https://lh3.googleusercontent.com/AB9SJhTIYNI-wPE-oBTrjI2b3VqoQz-kuUKDCLjwDCHhb86kSFoUDZOIBkqX61F1uY4YcqCLNrX4s4gy4uQiJpPPhALVVQ3y9t2wdQ_OI1lFiDgWxiP4BWQCVQABNPXcMwchdQY8PFDMpK4H8l6x6MHrUCH5k1RqazalfbnnAWYsINrslrquKI2bXTpB8jazcx9er4MsXpdSBun9ErsDHalpBExH506r1AWiIhZ1KZ1-Y7onSe4d2ocvWbaseHsyG0ReC0MOf7OB1--LRP7PERvM5beHwWwQFELxWFkWjTIpCUixg5D-W58qSG6CUUBpVusFmrOwsRv6D54tETlrqw9OiVvYktoxe1hNueT5U5IqVmnSnNN0nuzpvBwXFiUT7lFnMW05xYuG3r6WgtY9Yy9hJFR4xglzepz7HRsbHHbZ2fZzkpeyzNs4hLmZlMyVwJAYr7LoilUPYmHTw1cWKYsSKs41l86_7zFLPsCaUnT8Q8uwfE13WflAAtjloeXfc36DoW-qdrf_EWOHz54hBLWTMXThdbyr7VT23RUqjTeXn-S0DVMCIdqAnhb9Zwm8KZxmb5mbd_U2pqD3EhAAxsimGpgbaDCw2LQ1NsgHcgJGkGN22tpVaO28Mn036353oD3FcJ2EX8z5yao7njQv92RQ38IOEAjF=w1338-h517-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/AB9SJhTIYNI-wPE-oBTrjI2b3VqoQz-kuUKDCLjwDCHhb86kSFoUDZOIBkqX.png" width="585" height="225"></a></p><p>Proceed to publish the topology:</p><p><a href="https://lh3.googleusercontent.com/JPNqECSXzSP-Hja4Zy9WJL0hkn23JDK4fdOIQBStFggoCghgBi7wgL4AWrWJBqDg6UqgsJsXYEh36gG5ENIQoDLhvmlGOAzlAfrBtVttENmAop-IpQFawhHnyyR18e8Y4RZ24__-s9lEt-LjmVPd0tb_OuaHwFWE7W5S5mQSvXJTzBsqvnpnP12acSIMMPuS72inmNp-xZ8sOJGPSzM1hsgF5JpZlR3r1WweMSWt87GpW7G2d6LaNR-I6B0x9Gwo9KiEgGfNWZD0xm6aGPRAGJ2tj12qyVGHDETlOMOANQrpemi6qcuFzHM57hrPV0BNHwCYaR7LP_tqNLc8MEaDWwVy9B7hE7hxl1v0q0MEyiP9fBIMlTRq515K1maeWe7Rv0LEcNTgBUPt6LTtvK3BqwvgQz6x3YemhxAJPW-rp2ArRs7__Xn1GawStmlbwLixFLSsDaorSyoxACR_fh3GVa3SUnkU06aW0eKkkHNDtvY5IBwfwqRjfrDCvbo78EdWN5GC2Xl7oZvl-2jty8yNvSOO6E4ukPwLTGi1TAsPAXjnlGgnTcUs8sajplS8KUZk-Mr40We_MAOLKgVau6Ir5pssaPsTllK3bPOD8itdwuIQMBzPMBrd-wD1vzSP-MlI4O4uzVtGZPCrTkBkbEcoKk6NSLES-I_z=w734-h580-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/JPNqECSXzSP-Hja4Zy9WJL0hkn23JDK4fdOIQBStFggoCghgBi7wgL4AWrWJ.png" width="535" height="423"></a></p><p><a href="https://lh3.googleusercontent.com/9fpSAqQDac71zZme9q6w7u3hHBWhEgFZyVC1d9rL1zbJV9ieE-xYx1EYYtjDUHGBq4oV2TH7pkbYyUmrn6tsE1QAJYo9mv_7SxDldB9_HNWyExNe83RV9JzR_aabwrvXZDYkYdTddBqW5ltsot__5nPhiQcpJwge0QY-Tp7oOW0RMs6uvjQm3taCoklmiAEWka4xrDL-Rd9m779aMbtcZQFau251b7gKUioSIL_CcBPPbnrnGc7Ka7PrAb5-ekShFvPwloE4QT6obW_OIPC0aJa5jW2PoSgfoKlP_YuLT-mPJQ7I9p4DEhTuwOcjnMLfhJr0eu49qgzaGIteaUOFNyAl9lZH4jjwHFImV0fKvp4a5uXDG2m-_YM4wJhr4nWp1I_6kZwc329qfWrlCy2K6FyNXE93YDrLhzz5fu-jqQ3L2wjTeMbmioeMcUMGE2QYeEyxlPKoWjFNYiXhHj1xfPuQsV_SgnrBbzY0iL66ZqdsmTpzhJnab-YBu1RSCZNAHnSdqzsaQ1KGQHXl_JrtyqgNiY_jbsEjlFcOT5TYuptaiFsFBt7PqA2XeJv3onOqc3fmbM7xAFAomtvbSCVJjSBhbNyQ9vDJrvDmjBqWHsWLIFlk8F8zBdNI93qWXn4BbmBHVPm51bWABbfpMJ3XK0bk05_Shy5U=w734-h580-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/9fpSAqQDac71zZme9q6w7u3hHBWhEgFZyVC1d9rL1zbJV9ieE-xYx1EYYtjD.png" width="535" height="423"></a></p><p></p><p>You should see the following event logged on the Skype for Business server’s <strong>Lync Server</strong> logs after a few minutes:</p><p><strong>Log Name</strong>: Lync Server</p><p><strong>Source</strong>: LS Data MCU</p><p><strong>Event ID</strong>: 41032</p><p><strong>Level</strong>: Information</p><p><strong><em>Web Conferencing Server Office Web Apps Server (WAC) discovery has succeeded</em></strong></p><strong><em>
+</em></strong><p><strong><em>Office Web Apps Server internal presenter page: _https://oos.contoso.com/m/Presenter.aspx?a=0&amp;e=true&amp;<br>
+Office Web Apps Server internal attendee page: _https://oos.contoso.com/m/ParticipantFrame.aspx?a=0&amp;e=true&amp;<br>
+Office Web Apps Server external presenter page: _https://oos.contoso.com/m/Presenter.aspx?a=0&amp;e=true&amp;<br>
+Office Web Apps Server external attendee page: _https://oos.contoso.com/m/ParticipantFrame.aspx?a=0&amp;e=true&amp;</em></strong><br>
+</p><a href="https://lh3.googleusercontent.com/t5lNGbAvmBKtFm3xLI89eI8-zDtkntgSpxyztRXn0Een5aZJZkQGK3iBGZR6msawodD42UpDpI-r1eFxnCgTUI6C0uBbTsOG3SP4DDrKr0lc6r7Pv9CVM7_6TKUrLxXGAkCxnGHFEOCtlTswT0vPOVqFlaQLnJUbilJ7Gq5z66aMWTq99irNiXxfZsTcOGhWv86tAG0rfNDpqpoNgzD7i7g3mL4Wf5YHjWaNd4Q8lE8BOlyuGp-UjO19gq3i2wk-cu1gv1-GJ6Y-NNvJCd16FWMchRP51rDVL4PRkZ9jKcPsDJLxQqdSyKxsARDMZt8Ibl2thKmTvzaS-YB2U_WFCsU69xrtt2tUmo7YBKYpG4WrcFpcfLNxWtNBo_-43KHZy3vai_bFsZ-yq381WaGaJsp85dXZaZ2PnX5oAZv2a-Jw5JviPta6NCc7H7_Cxsxs9GHfRUKfNJigTyWMxML4HXXUByHLlkE4PdE1T0CQnpoKEtA4OaCqQC_U8zLP3XjZB-IEV72CF9UoodoUoEYFPceAO6B86xbeBbXSs0L_X5wU4sR1QyD4__VOdi48UBJKXqNahmiYQnkzenlRdcg5i9oPuq6VJrdzCL2clALHImL32eCrnmyHc9MIueqqzrP7igVAN7gP8va0jQeJV-oDk4RwvtmCl90B=w1338-h719-no"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/t5lNGbAvmBKtFm3xLI89eI8-zDtkntgSpxyztRXn0Een5aZJZkQGK3iBGZR6.png" width="583" height="313"></a><p></p>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+Posted by
+<span class="fn" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+<meta content="https://www.blogger.com/profile/02612575579652280306" itemprop="url">
+<a class="g-profile" href="https://www.blogger.com/profile/02612575579652280306" rel="author" title="author profile" data-gapiscan="true" data-onload="true" data-gapiattached="true">
+<span itemprop="name">Terence Luk</span>
+</a>
+</span>
+</span>
+<span class="post-timestamp">
+at
+<meta content="http://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html" itemprop="url">
+<a class="timestamp-link" href="https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html" rel="bookmark" title="permanent link"><abbr class="published" itemprop="datePublished" title="2019-04-08T07:13:00-04:00">7:13 AM</abbr></a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-control blog-admin pid-1290483020">
+<a href="https://www.blogger.com/post-edit.g?blogID=2228947945609574437&amp;postID=4570738915258835041&amp;from=pencil" title="Edit Post">
+<img alt="" class="icon-action" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/icon18_edit_allbkg.gif" width="18" height="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="https://www.blogger.com/share-post.g?blogID=2228947945609574437&amp;postID=4570738915258835041&amp;target=email" target="_blank" title="Email This"><span class="share-button-link-text">Email This</span></a><a class="goog-inline-block share-button sb-blog" href="https://www.blogger.com/share-post.g?blogID=2228947945609574437&amp;postID=4570738915258835041&amp;target=blog" onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target="_blank" title="BlogThis!"><span class="share-button-link-text">BlogThis!</span></a><a class="goog-inline-block share-button sb-twitter" href="https://www.blogger.com/share-post.g?blogID=2228947945609574437&amp;postID=4570738915258835041&amp;target=twitter" target="_blank" title="Share to Twitter"><span class="share-button-link-text">Share to Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="https://www.blogger.com/share-post.g?blogID=2228947945609574437&amp;postID=4570738915258835041&amp;target=facebook" onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target="_blank" title="Share to Facebook"><span class="share-button-link-text">Share to Facebook</span></a><a class="goog-inline-block share-button sb-pinterest" href="https://www.blogger.com/share-post.g?blogID=2228947945609574437&amp;postID=4570738915258835041&amp;target=pinterest" target="_blank" title="Share to Pinterest"><span class="share-button-link-text">Share to Pinterest</span></a>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="post-labels">
+Labels:
+<a href="https://terenceluk.blogspot.com/search/label/Microsoft" rel="tag">Microsoft</a>,
+<a href="https://terenceluk.blogspot.com/search/label/Office%20Online%20Server" rel="tag">Office Online Server</a>,
+<a href="https://terenceluk.blogspot.com/search/label/Office%20Online%20Server%202019" rel="tag">Office Online Server 2019</a>,
+<a href="https://terenceluk.blogspot.com/search/label/Skype%20for%20Business%20Server%202019" rel="tag">Skype for Business Server 2019</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class="post-location">
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>3 comments:</h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="avatar-comment-indent" id="comments-block">
+<dt class="comment-author " id="c732815820271033197">
+<a name="c732815820271033197"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="https://www.blogger.com/profile/16875179303889507930" target="" rel="nofollow" onclick="" class="avatar-hovercard" id="av-732815820271033197-16875179303889507930"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/blogger_logo_round_35.png" alt="" title="Yuvarajan" width="35" height="35">
+
+</a></span></div>
+<a href="https://www.blogger.com/profile/16875179303889507930" rel="nofollow">Yuvarajan</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-732815820271033197">
+<p>
+I've tried downloading the setup file but it is not listed in the Volume licensing service center, where do I need to get it?
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html?showComment=1563443938218#c732815820271033197" title="comment permalink">
+July 18, 2019 at 5:58 AM
+</a>
+<span class="item-control blog-admin pid-850260680">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=2228947945609574437&amp;postID=732815820271033197" title="Delete Comment">
+<img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c5403961148118941785">
+<a name="c5403961148118941785"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="https://www.blogger.com/profile/00211793254016987208" target="" rel="nofollow" onclick="" class="avatar-hovercard" id="av-5403961148118941785-00211793254016987208"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/blogger_logo_round_35.png" alt="" title="Unknown" width="35" height="35">
+
+</a></span></div>
+<a href="https://www.blogger.com/profile/00211793254016987208" rel="nofollow">Unknown</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-5403961148118941785">
+<p>
+I love your posts. However, the sad thing is all of your pictures are unable to display.
+</p>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html?showComment=1572479665423#c5403961148118941785" title="comment permalink">
+October 30, 2019 at 7:54 PM
+</a>
+<span class="item-control blog-admin pid-1098822382">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=2228947945609574437&amp;postID=5403961148118941785" title="Delete Comment">
+<img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+<dt class="comment-author " id="c6073995382637148291">
+<a name="c6073995382637148291"></a>
+<div class="avatar-image-container avatar-stock"><span dir="ltr"><a href="https://www.blogger.com/profile/04343433375363454055" target="" rel="nofollow" onclick="" class="avatar-hovercard" id="av-6073995382637148291-04343433375363454055"><img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/blogger_logo_round_35.png" alt="" title="Nicole" width="35" height="35">
+
+</a></span></div>
+<a href="https://www.blogger.com/profile/04343433375363454055" rel="nofollow">Nicole</a>
+said...
+</dt>
+<dd class="comment-body" id="Blog1_cmt-6073995382637148291">
+<span class="deleted-comment">This comment has been removed by a blog administrator.</span>
+</dd>
+<dd class="comment-footer">
+<span class="comment-timestamp">
+<a href="https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html?showComment=1611500501933#c6073995382637148291" title="comment permalink">
+January 24, 2021 at 10:01 AM
+</a>
+<span class="item-control blog-admin ">
+<a class="comment-delete" href="https://www.blogger.com/delete-comment.g?blogID=2228947945609574437&amp;postID=6073995382637148291" title="Delete Comment">
+<img src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/icon_delete13.gif">
+</a>
+</span>
+</span>
+</dd>
+</dl>
+</div>
+<p class="comment-footer">
+<a href="https://www.blogger.com/comment.g?blogID=2228947945609574437&amp;postID=4570738915258835041" onclick="">Post a Comment</a>
+</p>
+</div>
+</div>
+
+        </div></div>
+      
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="https://terenceluk.blogspot.com/2019/04/build-document-for-dell-wyse-7020-thin.html" id="Blog1_blog-pager-newer-link" title="Newer Post">Newer Post</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="https://terenceluk.blogspot.com/2019/04/skype-for-business-server-2019-edge.html" id="Blog1_blog-pager-older-link" title="Older Post">Older Post</a>
+</span>
+<a class="home-link" href="https://terenceluk.blogspot.com/">Home</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Subscribe to:
+<a class="feed-link" href="https://terenceluk.blogspot.com/feeds/4570738915258835041/comments/default" target="_blank" type="application/atom+xml">Post Comments (Atom)</a>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class="column-left-outer">
+<div class="column-left-inner">
+<aside>
+</aside>
+</div>
+</div>
+<div class="column-right-outer">
+<div class="column-right-inner">
+<aside>
+<div class="sidebar section" id="sidebar-right-1"><div class="widget Image" data-version="1" id="Image1">
+<h2>Terence Luk</h2>
+<div class="widget-content">
+<a href="https://bm.linkedin.com/in/terenceluk">
+<img alt="Terence Luk" id="Image1_img" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/CitrixSynergyHeadShot-touched-resized-cropped-tiny.jpg" width="150" height="166">
+</a>
+<br>
+</div>
+<div class="clear"></div>
+</div><div class="widget BlogSearch" data-version="1" id="BlogSearch1">
+<h2 class="title">Search My Blog</h2>
+<div class="widget-content">
+<div id="BlogSearch1_form">
+<form action="https://terenceluk.blogspot.com/search" class="gsc-search-box" target="_top">
+<table class="gsc-search-box" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gsc-input">
+<input autocomplete="off" class="gsc-input" name="q" size="10" title="search" type="text">
+</td>
+<td class="gsc-search-button">
+<input class="gsc-search-button" title="search" type="submit" value="Search">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+</div>
+<div class="clear"></div>
+</div><div class="widget LinkList" data-version="1" id="LinkList1">
+<h2>My Pages</h2>
+<div class="widget-content">
+<ul>
+<li><a href="http://twitter.com/terran0925">My Twitter</a></li>
+<li><a href="http://ca.linkedin.com/in/terenceluk">My Linkedin Profile</a></li>
+<li><a href="http://www.flickr.com/photos/terenceluk/">My Flickr Page</a></li>
+</ul>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogArchive" data-version="1" id="BlogArchive1">
+<h2>Blog Archive</h2>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/">
+2021
+</a>
+<span class="post-count" dir="ltr">(47)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(11)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2021/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/">
+2020
+</a>
+<span class="post-count" dir="ltr">(74)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(10)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(16)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2020/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+
+        ▼&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2019/">
+2019
+</a>
+<span class="post-count" dir="ltr">(46)</span>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">
+
+        ▼&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2019/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(19)</span>
+<ul class="posts">
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-rebalance-vmware-horizon.html">Attempting to rebalance VMware Horizon View linked...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/deploying-skype-for-business-server.html">Deploying Skype for Business Server 2019 Archiving...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/running-remote-connectivity-analyzer.html">Running Remote Connectivity Analyzer against Excha...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/vmware-horizon-view-virtual-desktop-in.html">VMware Horizon View virtual desktop in “agent unre...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-send-email-with.html">Attempting to send an email with attachment in Out...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-execute-exchange.html">Attempting to execute Exchange PowerShell cmdlets ...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/remotely-terminating-remote-session-on.html">Remotely terminating a remote session on a Citrix ...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-upgrade-microsoft.html">Attempting to upgrade Microsoft Exchange Server 20...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-enable-user-for-unified.html">Attempting to enable a user for Unified Messaging ...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-launch-netscaler.html">Attempting to launch a NetScaler published Citrix ...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/deleting-stuck-vmware-horizon-view-vms.html">Deleting stuck VMware Horizon View VMs with viewdb...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/build-document-for-dell-wyse-7020-thin.html">Build document for Dell Wyse 7020 thin client with...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html">Deploying Office Online Server 2019 on Windows Ser...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/skype-for-business-server-2019-edge.html">Skype for Business Server 2019 Edge server fails t...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-move-user-from-skype-for.html">Attempting to move a user from a Skype for Busines...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/kemp-load-balanced-exchange-server-2019.html">KEMP load balanced Exchange Server 2019 ActiveSync...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/installing-net-framework-471-on-windows_4.html">Installing .NET Framework 4.7.1 on Windows Server ...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/installing-net-framework-471-on-windows.html">Installing .NET Framework 4.7.1 on Windows Server ...</a></li>
+<li><a href="https://terenceluk.blogspot.com/2019/04/attempting-to-upgrade-exchange-server.html">Attempting to upgrade Exchange Server 2016 from CU...</a></li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2019/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(19)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2019/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2019/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/">
+2018
+</a>
+<span class="post-count" dir="ltr">(63)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(10)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(14)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2018/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/">
+2017
+</a>
+<span class="post-count" dir="ltr">(66)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2017/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(20)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/">
+2016
+</a>
+<span class="post-count" dir="ltr">(78)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(11)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2016/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(14)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/">
+2015
+</a>
+<span class="post-count" dir="ltr">(78)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(10)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(11)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(11)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(14)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2015/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/">
+2014
+</a>
+<span class="post-count" dir="ltr">(103)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(18)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(11)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(19)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2014/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(16)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/">
+2013
+</a>
+<span class="post-count" dir="ltr">(170)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(12)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(16)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(17)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(7)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(17)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(24)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(31)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2013/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(18)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/">
+2012
+</a>
+<span class="post-count" dir="ltr">(203)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(16)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(22)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(12)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(23)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(32)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(36)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2012/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(31)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/">
+2011
+</a>
+<span class="post-count" dir="ltr">(229)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(17)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(20)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(20)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(17)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/06/">
+June
+</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/05/">
+May
+</a>
+<span class="post-count" dir="ltr">(14)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/04/">
+April
+</a>
+<span class="post-count" dir="ltr">(15)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/03/">
+March
+</a>
+<span class="post-count" dir="ltr">(22)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/02/">
+February
+</a>
+<span class="post-count" dir="ltr">(44)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2011/01/">
+January
+</a>
+<span class="post-count" dir="ltr">(50)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/">
+2010
+</a>
+<span class="post-count" dir="ltr">(194)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/12/">
+December
+</a>
+<span class="post-count" dir="ltr">(42)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/11/">
+November
+</a>
+<span class="post-count" dir="ltr">(35)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/10/">
+October
+</a>
+<span class="post-count" dir="ltr">(21)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/09/">
+September
+</a>
+<span class="post-count" dir="ltr">(18)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/08/">
+August
+</a>
+<span class="post-count" dir="ltr">(29)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+        ►&nbsp;
+      
+</span>
+</a>
+<a class="post-count-link" href="https://terenceluk.blogspot.com/2010/07/">
+July
+</a>
+<span class="post-count" dir="ltr">(49)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</div><div class="widget PopularPosts" data-version="1" id="PopularPosts1">
+<h2>My Popular Posts</h2>
+<div class="widget-content popular-posts">
+<ul>
+<li>
+<a href="https://terenceluk.blogspot.com/2013/02/forcing-lync-2013-client-to-download.html">Forcing Lync 2013 client to download address book</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2010/07/vcenter-virtual-center-service-fails-to.html">vCenter / Virtual Center Service fails to start with event ID: 1000, 7024, 7001, 18456</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2012/06/changing-citrix-xenapp-farm-to-use-port.html">Changing a Citrix XenApp farm to use port 8080 for the XML service port</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2017/09/adding-san-subject-alternative-name.html">Adding
+ SAN (Subject Alternative Name” into “Additional Attributes” field on a 
+Microsoft Certificate Authority certificate request form does not 
+generate a certificate with a SAN entry</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2011/01/step-by-step-instructions-for.html">Step-by-Step instructions for uninstalling a Microsoft Lync Server 2010 Enterprise Pool</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2011/08/unable-to-open-exchange-server-2010s.html">Unable
+ to open Exchange Server 2010’s Exchange Management Console with the 
+error: “The attempt to connect to http://exchange.domain.com/PowerShell 
+using "Kerberos" authentication failed: Connecting to remote server 
+failed...”</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2012/10/automating-optimizations-in-citrixs.html">Automating optimizations in Citrix’s Windows 7 Optimization Guide</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2013/09/enabling-tls-for-exchange-server-2010.html">Enabling TLS for Exchange Server 2010</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2014/10/how-to-define-remote-desktop-services.html">How to define a Remote Desktop Services License server for XenApp / XenDesktop 7.x Windows Server 2012 application server</a>
+</li>
+<li>
+<a href="https://terenceluk.blogspot.com/2012/02/new-windows-server-2008-r2-enterprise.html">A
+ new Windows Server 2008 R2 Enterprise Root Certificate Authority throws
+ the error: “No certificate templates could be found. You do not have 
+permission to request a certificate from this CA, or an error occurred 
+while accessing the Active Directory.” when you try to request a 
+certificate through the web enrollment webpage</a>
+</li>
+</ul>
+<div class="clear"></div>
+</div>
+</div><div class="widget Label" data-version="1" id="Label1">
+<h2>Labels</h2>
+<div class="widget-content list-label-widget-content">
+<ul>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/2FA">2FA</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/AAD">AAD</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Active%20Directory">Active Directory</a>
+<span dir="ltr">(103)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Active%20Directory%20Federation%20Services">Active Directory Federation Services</a>
+<span dir="ltr">(13)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/AD%20Connect">AD Connect</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/AD%20FS">AD FS</a>
+<span dir="ltr">(21)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/ADFS">ADFS</a>
+<span dir="ltr">(20)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Adobe">Adobe</a>
+<span dir="ltr">(8)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Adobe%20Reader">Adobe Reader</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/AirWatch">AirWatch</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Always%20On%20Availability%20Group">Always On Availability Group</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/App%20Service">App Service</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/App%20Volumes">App Volumes</a>
+<span dir="ltr">(7)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/AppStack">AppStack</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Atlassian">Atlassian</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Atlassian%20Cloud">Atlassian Cloud</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Availability%20Zones">Availability Zones</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Avaya">Avaya</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure">Azure</a>
+<span dir="ltr">(48)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Active%20Directory">Azure Active Directory</a>
+<span dir="ltr">(16)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20AD">Azure AD</a>
+<span dir="ltr">(27)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20AD%20Connect">Azure AD Connect</a>
+<span dir="ltr">(6)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20AD%20Password%20Protection">Azure AD Password Protection</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Conditional%20Access">Azure Conditional Access</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Conditional%20Access%20Policy">Azure Conditional Access Policy</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Disk%20Encryption">Azure Disk Encryption</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20DNS">Azure DNS</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Files">Azure Files</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Key%20Vault">Azure Key Vault</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Migrate">Azure Migrate</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Privileged%20Identity%20Management">Azure Privileged Identity Management</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20RBAC">Azure RBAC</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20RBAC%20Roles">Azure RBAC Roles</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Resource%20Graph%20Explorer">Azure Resource Graph Explorer</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Site%20Recovery">Azure Site Recovery</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20Subscription">Azure Subscription</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Azure%20VM">Azure VM</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Backup%20Exec%202010">Backup Exec 2010</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/BES">BES</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/CA">CA</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Capacity%20Planner">Capacity Planner</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Certificate">Certificate</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Certificate%20Authority">Certificate Authority</a>
+<span dir="ltr">(9)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Cisco">Cisco</a>
+<span dir="ltr">(89)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix">Citrix</a>
+<span dir="ltr">(264)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20ADC">Citrix ADC</a>
+<span dir="ltr">(17)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Cloud">Citrix Cloud</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Command%20Center">Citrix Command Center</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Director">Citrix Director</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20FAS">Citrix FAS</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Federated%20Authentication%20Service">Citrix Federated Authentication Service</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Licensing">Citrix Licensing</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20NetScaler">Citrix NetScaler</a>
+<span dir="ltr">(10)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20ShareFile">Citrix ShareFile</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Virtual%20Apps%20and%20Desktops">Citrix Virtual Apps and Desktops</a>
+<span dir="ltr">(13)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Citrix%20Workspace">Citrix Workspace</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Cloud">Cloud</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/CMK">CMK</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Conditional%20Access">Conditional Access</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/CSP">CSP</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/CSVDE">CSVDE</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Cylance">Cylance</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Dell">Dell</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/DirSync">DirSync</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/DUO">DUO</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Edge%20Chromium">Edge Chromium</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Encryption">Encryption</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/ESXi">ESXi</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%202003">Exchange 2003</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%202007">Exchange 2007</a>
+<span dir="ltr">(47)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%202010">Exchange 2010</a>
+<span dir="ltr">(108)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%202013">Exchange 2013</a>
+<span dir="ltr">(64)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%202016">Exchange 2016</a>
+<span dir="ltr">(56)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%202019">Exchange 2019</a>
+<span dir="ltr">(20)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Exchange%20Online">Exchange Online</a>
+<span dir="ltr">(7)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Federated%20Authentication%20Service">Federated Authentication Service</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/FIM">FIM</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/FIM2010R2">FIM2010R2</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Forefront%20Identity%20Manager%202010%20R2">Forefront Identity Manager 2010 R2</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/FortiGate">FortiGate</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/FortiOS">FortiOS</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Fusion-io">Fusion-io</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/GitHub">GitHub</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/GPO">GPO</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Graph%20API">Graph API</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Group%20Policy">Group Policy</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Horizon%20View">Horizon View</a>
+<span dir="ltr">(38)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/HP">HP</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/iDP">iDP</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/IE11">IE11</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/IIS">IIS</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Internet%20Explorer">Internet Explorer</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/ioVDI">ioVDI</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/ISA%2FTMG">ISA/TMG</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/KEMP">KEMP</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/KMS">KMS</a>
+<span dir="ltr">(12)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Lync">Lync</a>
+<span dir="ltr">(157)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Mac">Mac</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Management%20Groups">Management Groups</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/MFA">MFA</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Microsoft">Microsoft</a>
+<span dir="ltr">(560)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Microsoft%20Dynamics%20CRM%20Server%202016">Microsoft Dynamics CRM Server 2016</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Microsoft%20Teams">Microsoft Teams</a>
+<span dir="ltr">(14)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Migration">Migration</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/MOSS%202007">MOSS 2007</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/MSOnline">MSOnline</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/NetApp">NetApp</a>
+<span dir="ltr">(10)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/NetScaler">NetScaler</a>
+<span dir="ltr">(77)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Network%20Policy%20Server">Network Policy Server</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/NPS">NPS</a>
+<span dir="ltr">(6)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Nutanix">Nutanix</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/O365">O365</a>
+<span dir="ltr">(10)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/OCS%202007%20R1">OCS 2007 R1</a>
+<span dir="ltr">(19)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/OCS%202007%20R2">OCS 2007 R2</a>
+<span dir="ltr">(60)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Office%202016">Office 2016</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Office%20365">Office 365</a>
+<span dir="ltr">(31)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Office%20Online%20Server">Office Online Server</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Office%20Online%20Server%202019">Office Online Server 2019</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/OneDrive">OneDrive</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Outlook%202010">Outlook 2010</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Outlook%202013">Outlook 2013</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Outlook%202016">Outlook 2016</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Outlook%20on%20the%20web">Outlook on the web</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/OVA">OVA</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/P2V">P2V</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/PIM">PIM</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/PMK">PMK</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Point-to-Site%20VPN">Point-to-Site VPN</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/PowerCLI">PowerCLI</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/PowerShell">PowerShell</a>
+<span dir="ltr">(39)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Private%20Endpoints">Private Endpoints</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Privileged%20Identity%20Management">Privileged Identity Management</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Proximity%20Placement%20Group">Proximity Placement Group</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/RADIUS">RADIUS</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/RBAC">RBAC</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/RCC">RCC</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/RDS">RDS</a>
+<span dir="ltr">(6)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/RDSH">RDSH</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Recovery%20Services%20Vault">Recovery Services Vault</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Remote%20Desktop%20Services">Remote Desktop Services</a>
+<span dir="ltr">(8)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Remote%20Desktop%20Session%20Host">Remote Desktop Session Host</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/RemoteApp">RemoteApp</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Riverbed">Riverbed</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SAML">SAML</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SanDisk">SanDisk</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SanDisk%20ioVDI">SanDisk ioVDI</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Scripting">Scripting</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SecurEnvoy">SecurEnvoy</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Server%202012">Server 2012</a>
+<span dir="ltr">(6)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Server%202019">Server 2019</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Server-side%20Encryption">Server-side Encryption</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Service%20Endpoints">Service Endpoints</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SfB">SfB</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/ShareFile">ShareFile</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SharePoint">SharePoint</a>
+<span dir="ltr">(6)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SharePoint%20Online">SharePoint Online</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Site%20Recovery%20Manager">Site Recovery Manager</a>
+<span dir="ltr">(6)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Site-to-Site%20VPN">Site-to-Site VPN</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Skype">Skype</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Skype%20for%20Business">Skype for Business</a>
+<span dir="ltr">(30)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Skype%20for%20Business%20Online">Skype for Business Online</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Skype%20for%20Business%20Server%202019">Skype for Business Server 2019</a>
+<span dir="ltr">(7)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SmartSIP">SmartSIP</a>
+<span dir="ltr">(8)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Sophos">Sophos</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SQL">SQL</a>
+<span dir="ltr">(16)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SQL%20Server%202019">SQL Server 2019</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SQL%20Server%20AlwaysOn">SQL Server AlwaysOn</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SRM">SRM</a>
+<span dir="ltr">(16)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/SSE">SSE</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/StoreFront">StoreFront</a>
+<span dir="ltr">(13)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Subscriptions">Subscriptions</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Symantec">Symantec</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Teams">Teams</a>
+<span dir="ltr">(14)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Tenant">Tenant</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Thin%20Client">Thin Client</a>
+<span dir="ltr">(8)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/UAG">UAG</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/UCS">UCS</a>
+<span dir="ltr">(69)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Unified%20Access%20Gateway">Unified Access Gateway</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Unified%20Communications">Unified Communications</a>
+<span dir="ltr">(19)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Unified%20Computing%20System">Unified Computing System</a>
+<span dir="ltr">(69)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Unified%20Messaging">Unified Messaging</a>
+<span dir="ltr">(37)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VBA">VBA</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/vCenter">vCenter</a>
+<span dir="ltr">(13)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VDI">VDI</a>
+<span dir="ltr">(17)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VDP">VDP</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Veeam">Veeam</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/View">View</a>
+<span dir="ltr">(113)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/View%20Composer">View Composer</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Virtual%20Desktops">Virtual Desktops</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Virtual%20Machines">Virtual Machines</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Virtual%20Networks">Virtual Networks</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VMware">VMware</a>
+<span dir="ltr">(350)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VMware%20App%20Volumes">VMware App Volumes</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VMware%20Horizon%20View">VMware Horizon View</a>
+<span dir="ltr">(25)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VMware%20vCenter%20Operations%20Manager">VMware vCenter Operations Manager</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VNet">VNet</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VNet%20Peering">VNet Peering</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VPN%20Gateway">VPN Gateway</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/VPX">VPX</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/vRealize%20Operations%20for%20Horizon">vRealize Operations for Horizon</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/vSphere">vSphere</a>
+<span dir="ltr">(18)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/vSphere%20Data%20Protection">vSphere Data Protection</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/vSphere%20PowerCLI">vSphere PowerCLI</a>
+<span dir="ltr">(2)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/vSphere%20Replication%20Appliance">vSphere Replication Appliance</a>
+<span dir="ltr">(4)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/WDM">WDM</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/WDS">WDS</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Web%20Application%20Proxy">Web Application Proxy</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Windows">Windows</a>
+<span dir="ltr">(118)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Windows%2010">Windows 10</a>
+<span dir="ltr">(10)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Windows%20Server%202019">Windows Server 2019</a>
+<span dir="ltr">(5)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Windows%20Virtual%20Desktop">Windows Virtual Desktop</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Wireless">Wireless</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Workspace%20ONE">Workspace ONE</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/WVD">WVD</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Wyse">Wyse</a>
+<span dir="ltr">(9)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Wyse%20Device%20Manager">Wyse Device Manager</a>
+<span dir="ltr">(1)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/XenApp">XenApp</a>
+<span dir="ltr">(110)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/XenDesktop">XenDesktop</a>
+<span dir="ltr">(154)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Zero%20Client">Zero Client</a>
+<span dir="ltr">(3)</span>
+</li>
+<li>
+<a dir="ltr" href="https://terenceluk.blogspot.com/search/label/Zoom">Zoom</a>
+<span dir="ltr">(2)</span>
+</li>
+</ul>
+<div class="clear"></div>
+</div>
+</div><div class="widget BlogList" data-version="1" id="BlogList1">
+<h2 class="title">My Blog List</h2>
+<div class="widget-content">
+<div class="blog-list-container" id="BlogList1_container">
+<ul id="BlogList1_blogs">
+<li style="display: block;">
+<div class="blog-icon">
+<img data-lateloadsrc="https://lh3.googleusercontent.com/proxy/ITOTjxxnzb_S8-ZQjikm3e79izUoj3mJPswObprX3RCeQWcuzUNDidOYGa4muYwmTShwWQlcrGxy6_hAicly=s0-d" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/ITOTjxxnzb_S8-ZQjikm3e79izUoj3mJPswObprX3RCeQWcuzUNDidOYGa4m.ico" width="16" height="16">
+</div>
+<div class="blog-content">
+<div class="blog-title">
+<a href="http://markhickson.blogspot.com/" target="_blank">
+Mark Hickson</a>
+</div>
+<div class="item-content">
+<span class="item-title">
+<a href="http://markhickson.blogspot.com/2012/09/microsoft-canada-is-hiring.html" target="_blank">
+Microsoft Canada is hiring!
+</a>
+</span>
+<div class="item-time">
+8 years ago
+</div>
+</div>
+</div>
+<div style="clear: both;"></div>
+</li>
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+</div><div class="widget Followers" data-version="1" id="Followers1">
+<h2 class="title">Followers</h2>
+<div class="widget-content">
+<div id="Followers1-wrapper">
+<div style="margin-right:2px;">
+<div><script type="text/javascript" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/plusone.js" gapi_processed="true"></script>
+<div id="followers-iframe-container"><iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="" tabindex="0" vspace="0" id="I0_1632615262621" name="I0_1632615262621" src="https://www.blogger.com/followers.g?blogID=2228947945609574437&amp;colors=Cgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaByMzMzMzMzMiByMzMzY2OTkqC3RyYW5zcGFyZW50MgcjODg4ODg4OgcjMzMzMzMzQgcjMzM2Njk5SgcjMDAwMDAwUgcjMzM2Njk5Wgt0cmFuc3BhcmVudA%3D%3D&amp;pageSize=21&amp;postID=4570738915258835041&amp;origin=https://terenceluk.blogspot.com/&amp;usegapi=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en_US.2lM46t9-YIo.O%2Fam%3DAQ%2Fd%3D1%2Frs%3DAGLTcCOhwmvF7Fsri7fVyVVvLH1eaFC1jg%2Fm%3D__features__#id=I0_1632615262621&amp;_gfid=I0_1632615262621&amp;parent=https%3A%2F%2Fterenceluk.blogspot.com&amp;pfname=&amp;rpctoken=30949493" width="100%" height="247" frameborder="0"></iframe></div>
+<script type="text/javascript">
+    window.followersIframe = null;
+    function followersIframeOpen(url) {
+      gapi.load("gapi.iframes", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          window.followersIframe = gapi.iframes.getContext().openChild({
+            url: url,
+            where: document.getElementById("followers-iframe-container"),
+            messageHandlersFilter: gapi.iframes.CROSS_ORIGIN_IFRAMES_FILTER,
+            messageHandlers: {
+              '_ready': function(obj) {
+                window.followersIframe.getIframeEl().height = obj.height;
+              },
+              'reset': function() {
+                window.followersIframe.close();
+                followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d2228947945609574437\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaByMzMzMzMzMiByMzMzY2OTkqC3RyYW5zcGFyZW50MgcjODg4ODg4OgcjMzMzMzMzQgcjMzM2Njk5SgcjMDAwMDAwUgcjMzM2Njk5Wgt0cmFuc3BhcmVudA%3D%3D\x26pageSize\x3d21\x26postID\x3d4570738915258835041\x26origin\x3dhttps://terenceluk.blogspot.com/");
+              },
+              'open': function(url) {
+                window.followersIframe.close();
+                followersIframeOpen(url);
+              },
+              'blogger-ping': function() {
+              }
+            }
+          });
+        }
+      });
+    }
+    followersIframeOpen("https://www.blogger.com/followers.g?blogID\x3d2228947945609574437\x26colors\x3dCgt0cmFuc3BhcmVudBILdHJhbnNwYXJlbnQaByMzMzMzMzMiByMzMzY2OTkqC3RyYW5zcGFyZW50MgcjODg4ODg4OgcjMzMzMzMzQgcjMzM2Njk5SgcjMDAwMDAwUgcjMzM2Njk5Wgt0cmFuc3BhcmVudA%3D%3D\x26pageSize\x3d21\x26postID\x3d4570738915258835041\x26origin\x3dhttps://terenceluk.blogspot.com/");
+  </script></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</div><div class="widget Stats" data-version="1" id="Stats1">
+<h2>Total Pageviews</h2>
+<div class="widget-content">
+<div id="Stats1_content" style="">
+<span class="counter-wrapper graph-counter-wrapper" id="Stats1_totalCount">
+<span class="digit stage-0"><strong>9</strong><span class="blind-plate"></span></span><span class="digit stage-0"><strong>0</strong><span class="blind-plate"></span></span><span class="digit stage-0"><strong>1</strong><span class="blind-plate"></span></span><span class="digit stage-0"><strong>2</strong><span class="blind-plate"></span></span><span class="digit stage-0"><strong>2</strong><span class="blind-plate"></span></span><span class="digit stage-0"><strong>4</strong><span class="blind-plate"></span></span><span class="digit stage-0"><strong>7</strong><span class="blind-plate"></span></span></span>
+<div class="clear"></div>
+</div>
+</div>
+</div></div>
+<table class="section-columns columns-2" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="sidebar no-items section" id="sidebar-right-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="sidebar no-items section" id="sidebar-right-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sidebar no-items section" id="sidebar-right-3"></div>
+</aside>
+</div>
+</div>
+</div>
+<div style="clear: both"></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class="main-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+<footer>
+<div class="footer-outer">
+<div class="footer-cap-top cap-top">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+<div class="fauxborder-left footer-fauxborder-left">
+<div class="fauxborder-right footer-fauxborder-right"></div>
+<div class="region-inner footer-inner">
+<div class="foot no-items section" id="footer-1"></div>
+<table class="section-columns columns-2" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td class="first columns-cell">
+<div class="foot no-items section" id="footer-2-1"></div>
+</td>
+<td class="columns-cell">
+<div class="foot no-items section" id="footer-2-2"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class="foot section" id="footer-3" name="Footer"><div class="widget Attribution" data-version="1" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Picture Window theme. Powered by <a href="https://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+</div></div>
+</div>
+</div>
+<div class="footer-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class="content-cap-bottom cap-bottom">
+<div class="cap-left"></div>
+<div class="cap-right"></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+
+<script type="text/javascript" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/1527282520-widgets.js"></script>
+<script type="text/javascript">
+window['__wavt'] = 'AOuZoY5iAKJKJAWwQbtVjNKjOaZYxPz0Tw:1632615229757';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d2228947945609574437','//terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html','2228947945609574437');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '2228947945609574437', 'title': 'Terence Luk', 'url': 'https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html', 'canonicalUrl': 'http://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html', 'homepageUrl': 'https://terenceluk.blogspot.com/', 'searchUrl': 'https://terenceluk.blogspot.com/search', 'canonicalHomepageUrl': 'http://terenceluk.blogspot.com/', 'blogspotFaviconUrl': 'https://terenceluk.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Terence Luk - Atom\x22 href\x3d\x22https://terenceluk.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Terence Luk - RSS\x22 href\x3d\x22https://terenceluk.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Terence Luk - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/2228947945609574437/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Terence Luk - Atom\x22 href\x3d\x22https://terenceluk.blogspot.com/feeds/4570738915258835041/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-3544545854604654', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': false, 'adsenseAutoAds': false, 'ieCssRetrofitLinks': '\x3c!--[if IE]\x3e\x3cscript type\x3d\x22text/javascript\x22 src\x3d\x22https://www.blogger.com/static/v1/jsbin/403901366-ieretrofit.js\x22\x3e\x3c/script\x3e\n\x3c![endif]--\x3e', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/597c4434690a0a14', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'disableGComments': true, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'Twitter', 'key': 'twitter', 'shareMessage': 'Share to Twitter', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '4570738915258835041', 'postImageThumbnailUrl': 'https://lh3.googleusercontent.com/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEjFq_NLqMtqjDqKTwUM87Nz7Kf3k-gC82a7ZXIYDr1INZVWtzopl-vDPMarBQ27iZQg__v93teBErsNKOmsQWR5S7JLYC-vR8EB_v0wsv9AgKP3lnDaQIQEmTEMA2pLgeyzjffWFIkqBbo2wyYm9ZFOoyh3kh9ZtrVIcgKfyPMaFJHOPVgmQ98BokK6h4ObN4klhSrgKNcF5n-H6QfXisjy13qirPQADrlCqmU3bGE7lG8GJMLKJCvGha72lGxx0lEAknWdERYt7xr9zdQ5ExLAHbyruBa_FuAvyJ-KVdsPlKTFpSKmBxwcfx3LQH-B5dsikzZkRYudYFL5zVrRcJnDyQ-_QEFlVtdfCJUqrO6stpi1McRVsNZP3FK9CMy3Hoa6hEoWxFpuYzeVaZrVMgKuSVsqiV1axETA61kFI1ctfYwC_6A3xEtVlQKqi_yml13WjPwzP1HEv-dLOC2x0TC1jLXQVXafOWREXvbmzGuLu2sVWWrVMhXp3o7ya4vvSSR0mMfFS-QSBuO5XEwJXvIQZNcspLTlGlZ_RuALJyMiB0brwao-HV_78O_7hEL1z0DhBx0NVP6qw0sUBjOM5i5oXCPqKLGyNJotWeM\x3ds72-w1139-c-h883-no', 'postImageUrl': 'https://lh3.googleusercontent.com/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEjFq_NLqMtqjDqKTwUM87Nz7Kf3k-gC82a7ZXIYDr1INZVWtzopl-vDPMarBQ27iZQg__v93teBErsNKOmsQWR5S7JLYC-vR8EB_v0wsv9AgKP3lnDaQIQEmTEMA2pLgeyzjffWFIkqBbo2wyYm9ZFOoyh3kh9ZtrVIcgKfyPMaFJHOPVgmQ98BokK6h4ObN4klhSrgKNcF5n-H6QfXisjy13qirPQADrlCqmU3bGE7lG8GJMLKJCvGha72lGxx0lEAknWdERYt7xr9zdQ5ExLAHbyruBa_FuAvyJ-KVdsPlKTFpSKmBxwcfx3LQH-B5dsikzZkRYudYFL5zVrRcJnDyQ-_QEFlVtdfCJUqrO6stpi1McRVsNZP3FK9CMy3Hoa6hEoWxFpuYzeVaZrVMgKuSVsqiV1axETA61kFI1ctfYwC_6A3xEtVlQKqi_yml13WjPwzP1HEv-dLOC2x0TC1jLXQVXafOWREXvbmzGuLu2sVWWrVMhXp3o7ya4vvSSR0mMfFS-QSBuO5XEwJXvIQZNcspLTlGlZ_RuALJyMiB0brwao-HV_78O_7hEL1z0DhBx0NVP6qw0sUBjOM5i5oXCPqKLGyNJotWeM\x3dw1139-h883-no', 'pageName': 'Deploying Office Online Server 2019 on Windows Server 2016 for Skype for Business Server 2019', 'pageTitle': 'Terence Luk: Deploying Office Online Server 2019 on Windows Server 2016 for Skype for Business Server 2019'}}, {'name': 'features', 'data': {'sharing_get_link_dialog': 'true', 'sharing_native': 'false'}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'Picture Window', 'localizedName': 'Picture Window', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': false, 'variant': 'open', 'variantId': 'open'}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Deploying Office Online Server 2019 on Windows Server 2016 for Skype for Business Server 2019', 'description': 'As some of you may know, the Office Online Server is the updated replacement for Office Web Apps Server to enable PowerPoint presentation sh...', 'featuredImage': 'https://lh3.googleusercontent.com/olQcu245FA6St2Wz0srcrUIL4pqSaPP2HT4W7pfLJBbiJEePXdkrLQag_IEjFq_NLqMtqjDqKTwUM87Nz7Kf3k-gC82a7ZXIYDr1INZVWtzopl-vDPMarBQ27iZQg__v93teBErsNKOmsQWR5S7JLYC-vR8EB_v0wsv9AgKP3lnDaQIQEmTEMA2pLgeyzjffWFIkqBbo2wyYm9ZFOoyh3kh9ZtrVIcgKfyPMaFJHOPVgmQ98BokK6h4ObN4klhSrgKNcF5n-H6QfXisjy13qirPQADrlCqmU3bGE7lG8GJMLKJCvGha72lGxx0lEAknWdERYt7xr9zdQ5ExLAHbyruBa_FuAvyJ-KVdsPlKTFpSKmBxwcfx3LQH-B5dsikzZkRYudYFL5zVrRcJnDyQ-_QEFlVtdfCJUqrO6stpi1McRVsNZP3FK9CMy3Hoa6hEoWxFpuYzeVaZrVMgKuSVsqiV1axETA61kFI1ctfYwC_6A3xEtVlQKqi_yml13WjPwzP1HEv-dLOC2x0TC1jLXQVXafOWREXvbmzGuLu2sVWWrVMhXp3o7ya4vvSSR0mMfFS-QSBuO5XEwJXvIQZNcspLTlGlZ_RuALJyMiB0brwao-HV_78O_7hEL1z0DhBx0NVP6qw0sUBjOM5i5oXCPqKLGyNJotWeM\x3dw1139-h883-no', 'url': 'https://terenceluk.blogspot.com/2019/04/deploying-office-online-server-2019-on.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 4570738915258835041}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'crosscol', document.getElementById('PageList1'), {'title': 'Pages', 'links': [{'isCurrentPage': false, 'href': 'https://terenceluk.blogspot.com/', 'title': 'Blog'}], 'mobile': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/3766451658-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/4076883957-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ImageView', new _WidgetInfo('Image1', 'sidebar-right-1', document.getElementById('Image1'), {'resize': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogSearchView', new _WidgetInfo('BlogSearch1', 'sidebar-right-1', document.getElementById('BlogSearch1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebar-right-1', document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar-right-1', document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading\x26hellip;'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PopularPostsView', new _WidgetInfo('PopularPosts1', 'sidebar-right-1', document.getElementById('PopularPosts1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar-right-1', document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogListView', new _WidgetInfo('BlogList1', 'sidebar-right-1', document.getElementById('BlogList1'), {'numItemsToShow': 0, 'totalItems': 1}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebar-right-1', document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_StatsView', new _WidgetInfo('Stats1', 'sidebar-right-1', document.getElementById('Stats1'), {'title': 'Total Pageviews', 'showGraphicalCounter': true, 'showAnimatedCounter': true, 'showSparkline': false, 'statsUrl': '//terenceluk.blogspot.com/b/stats?style\x3dWHITE_TRANSPARENT\x26timeRange\x3dALL_TIME\x26token\x3dAPq4FmAAIqqV6_qo6-Ho6m5OlGQ7Lpq2zOUzFpnqCCAykHZr1v-h-P_1ZvKbGiM1ARNSeupGq6I00wFKdxcfFgw-qVf91St7lA'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', document.getElementById('Attribution1'), {}, 'displayModeFull'));
+</script>
+
+<link type="text/css" rel="stylesheet" href="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/4076883957-lightbox_bundle.css"><script type="text/javascript" src="Terence%20Luk%20Deploying%20Office%20Online%20Server%202019%20on%20Windows%20Server%202016%20for%20Skype%20for%20Business%20Server%202019_files/3766451658-lbx.js"></script></body></html>
